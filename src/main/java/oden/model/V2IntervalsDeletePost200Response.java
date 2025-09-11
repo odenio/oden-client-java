@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * V2IntervalsDeletePost200Response
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-11T21:54:58.815514129Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-11T22:07:53.872216835Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class V2IntervalsDeletePost200Response {
   public static final String SERIALIZED_NAME_NUM_DELETED = "num_deleted";
   @SerializedName(SERIALIZED_NAME_NUM_DELETED)

@@ -49,7 +49,7 @@ import oden.JSON;
 /**
  * Metadata associated with a batch interval
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-11T21:54:58.815514129Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-09-11T22:07:53.872216835Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class BatchMetadata {
   public static final String SERIALIZED_NAME_RUN = "run";
   @SerializedName(SERIALIZED_NAME_RUN)
