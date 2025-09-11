@@ -1,0 +1,3378 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: support@oden.io
+    name: Oden Support
+    url: https://oden.io/contact/
+  description: |
+    The Oden Private Partner API exposes RESTful API endpoints for clients to get, create and update data on the Oden Platform.
+
+    The API is based on the OpenAPI 3.0 specification.
+    ### Current Version
+    The URL, and host, for the current version is [https://api.oden.app/v2](https://api.oden.app/v2).
+
+    ### Oden's Data Model
+    - **Organization**: This represents the Organization registered as an Oden customer. An organization has an associated collection of users, factories, lines, etc. This is the entity a specific authentication token is associated with.
+    - **Asset** or **Machinegroup**: Assets, or machinegroups, are collections of machines, which may either be a **Factory** or a **Line**:
+      - **Factory**: Factories are collections of lines, representing a particular manufacturing location.
+        - **Line**: Lines are collections of machines, often representing a particular production line. Lines may also have **Products** mapped to them, indicating what is currently being manufactured by the specific line.
+          - **Machine**: Machines are the physical machines that make up a line
+    - **Product**: Products capture what entities a manufacturer produces
+    - **Interval**: An interval is a period of time that takes place on a manufacturing line and expresses some business concern. It's Oden's way of making metrics aggregatable, traceable, and relatable to a manufacturer.
+      - **Run**: A run is a production interval that labels a period of production as being work on some single product
+      - **Batch**: A batch is a production interval that represents a portion of a particular run
+      - **State**: A state is an interval that tracks the availability or utilization of a line
+        - **State Category**: A state category describes what state a line is in - such as ex. uptime, downtime, scrapping, etc.
+        - **State Reason**: A state reason describes why a line is in a particular state - such as "maintenance" being a reason for the category "downtime".
+      - **Custom**: A custom interval can track any other type of interval-based data a manufacturer might want to analyze. These are created on a per-factory basis.
+    - **Target**: Targets specify values and upper/lower thresholds for metrics when specific products are running on specific lines
+    - **Scrap/Yield**: Scrap/yield output specifies amount of produced product on a line during either a run or batch interval. Oden will categorize all output as either scrap or yield - as specified by the Scrap Yield Schema for a given factory. If you have other categories, like rework/blocked/off-grade, you must choose between categorizing those amounts as either good or bad production by specifying as scrap or yield. Clients may also add scrap codes (i.e., reasons) to a given Scrap Yield Data entry.
+      - **Scrap Code**: A scrap code is a code that explains the reason for a scrap/yield raw data input - such as "Rework"
+    - **Quality Test**: Quality Tests are results of quality assurance tests done on site, and uploaded to Oden. They may be attached to a single Batch or Run.
+    - **Metric**: Known in factories as "tags", metrics are the raw data that is collected by Oden from the machines and devices on the factory floor.
+    - **Metric Group**: Metric groups are metrics that represent the same thing across different lines. They provide common display names for tags and allow labeling groups of tags as measuring key types of data like performance or production.
+
+    ### Best Practices
+    Under the current implementation, the Oden API does not rate limit requests from clients.
+
+    However, rate limiting will be introduced in the near future and it is recommended that users design their API
+    clients to not exceed a request rate of **one per second**.
+
+    ### Schema
+    All v2 API access is over HTTPS and accessed from https://api.oden.app/v2
+    All data is sent and received as JSON.
+
+    API requests with duplicate keys will process only the data for the first key detected and ignore the rest, so it's not recommended. Batching multiple messages in this way is currently not possible.
+      - Example of duplicate key in JSON: {"raw_data":{"scrap":"10","scrap":"100"}}
+
+    All timestamps are returned in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format:
+
+      `YYYY-MM-DDTHH:MM:SSZ`
+
+    All durations are returned in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format with the largest unit of time being the hour:
+
+       `PT[n]H[n]M[n]S`
+
+    All timestamps sent to the API in POST requests should be in ISO 8601 format.
+    ### HTTP Verbs
+    The ONLY HTTP call type (sometimes called *verb* or *method*) used within Oden's API is **POST**.
+    There are three actions supported via a **POST**; call, search, set, and delete, together supporting CRUD operations;
+      - **search** requests are used to search for and *read* objects in the Oden Platform
+          - All Oden Objects may be uniquely identified by some combination of, or a single, parameter.
+            - Ex a `line` my be identified by either:
+              - `id`
+              - `name` AND `factory`
+      - **set** requests are used to *create* or *update* objects
+      - **delete** requests are used to *delete* objects. If a delete endpoint is not yet implemented for a given object, users may choose to update the values of a specific entity to null or 0 values.
+
+    ### URI Components
+    All endpoints may be accessed with the URI pattern:
+    `https://api.oden.app/v2/{object}/{action}`
+
+    Where:
+      - `object` is the name of the object being requested:
+           - `factory`, `quality_test`, `interval`, `line`, etc...
+      - `action` is the name of the action being requested
+        - `search` , `set` , `delete`
+
+    e.g. `https://api.oden.app/v2/factory/search`
+
+    # Authentication
+    Clients can authenticate through the v2 API using a Token provided by Oden. Tokens are opaque strings similar to
+    [Bearer](https://swagger.io/docs/specification/authentication/bearer-authentication/) tokens that the client must
+    pass in the [HTTP Authorization request header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) in every request.
+    The syntax is as follows:
+
+    `Authorization: <type> <credentials>`
+
+    Where \<type\> is "Token" and \<credentials\> is the Token string. For example:
+
+    `Authorization: Token tokenStringProvidedByOden`
+
+    Authenticating with an invalid Token will return `401 Unauthorized Error`.
+
+    Authenticating with a Token that is not authorized to read requested data will return `403 Forbidden Error`.
+
+    Some endpoints may require requests to be broken out by machinegroup (i.e., line or factory) and the number of
+    requests would scale accordingly. This multiplicity should be taken into consideration when deciding on the
+    frequency the API client makes requests to the Oden endpoints.
+
+    To authenticate in this [UI](https://api.oden.app/v2/ui/), click the Lock icon, and copy/paste the token into the Authorize box.
+  title: Oden API
+  version: 2.0.0
+servers:
+- description: Oden API server
+  url: https://api.oden.app
+security:
+- APIKeyAuth: []
+paths:
+  /v2/line/search:
+    post:
+      description: |
+        Search for specific Line by any Line identifier. Either:
+        - `id`
+        - `match: unique` or omit
+
+        OR
+        - `factory`
+          - `name` or `id`
+        - line `name`
+        - `match: unique` or omit
+
+        Search for all Lines for a given Factory:
+        - `factory`
+          - `name` or `id`
+        - `match: all`
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search for all lines of a factory:
+                summary: Search for all lines of a factory
+                value:
+                  match: all
+                  factory:
+                    name: Factory A
+              Search for line by name at a factory:
+                summary: Search for line by name at a specific factory
+                value:
+                  match: unique
+                  name: Line 01
+                  factory:
+                    name: Factory A
+              Search for line by secondary name:
+                summary: Search for line by secondary name
+                value:
+                  match: unique
+                  secondary_name: Line 01 Secondary
+                  factory:
+                    name: Factory A
+            schema:
+              $ref: "#/components/schemas/Line"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Line"
+                type: array
+          description: A list of lines.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      tags:
+      - Machine Groups
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/factory/search:
+    post:
+      description: |
+        Search for a specific Factory by a unique indentifier:
+        - `name`
+        - `match: unique` or omit
+
+        OR
+
+        - `id`
+        - `match: unique` or omit
+
+        Search for all factories:
+        - `match: all`
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search factory by name:
+                summary: Search for factory by name
+                value:
+                  name: Factory A
+              Search factory by secondary name:
+                summary: Search for factory by secondary name
+                value:
+                  secondary_name: Factory A Secondary
+                  match: unique
+              Search for all factories:
+                summary: Search for all factories
+                value:
+                  match: all
+            schema:
+              $ref: "#/components/schemas/Factory"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Factory"
+                type: array
+          description: A list of factories.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Machine Groups
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/metric_group/search:
+    post:
+      description: |
+        Search for a specific Metric Group:
+
+        - `name`
+        - `match: unique` or omit
+
+        OR
+
+        - `id`
+        - `match: unique` or omit
+
+        Search for all Metric Groups:
+        - `match: all`
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search for all metric groups:
+                summary: Search for all metric groups
+                value:
+                  match: all
+            schema:
+              $ref: "#/components/schemas/MetricGroup"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MetricGroup"
+                type: array
+          description: A list of metric groups.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Metric Groups
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/product/search:
+    post:
+      description: |
+        Search for specific Product:
+        - `name`
+        - `match: unique` or omit
+
+        OR
+
+        - `id`
+        - `match: unique` or omit
+
+        May be used to confirm a Product exists or to get a Product `id` if `name` is known, or `name` if `id` is known.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Product"
+                type: array
+          description: A list of products.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+      tags:
+      - Products
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/product/set:
+    post:
+      description: |
+        To **create** a new Product, include `name`, and omit `id` field.
+
+        To **update** an existing Product, include the `id` of the existing product the updated `name`.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              create:
+                summary: Create a product.
+                value:
+                  name: product name
+              update:
+                summary: Update existing product by providing the product ID.
+                value:
+                  name: updated product name
+                  id: 0012ab4d-1234-123a-8c76-6ea2344be6df
+            schema:
+              $ref: "#/components/schemas/Product"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+      tags:
+      - Products
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/product/delete:
+    post:
+      description: |
+        Delete a Product by unique identifier:
+        - `name`
+        - `match: unique` or omit
+
+        OR
+
+        - `id`
+        - `match: unique` or omit
+
+        A deleted Product will not show up in Product searches or dropdowns, but associated Intervals will still exist.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              delete by product id:
+                summary: Delete product by product id.
+                value:
+                  id: 0012ab4d-1234-123a-8c76-6ea2344be6df
+              delete by product name:
+                summary: Delete product by product name.
+                value:
+                  name: EX0PRODNAME
+            schema:
+              $ref: "#/components/schemas/Product"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Products
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/product_mapping/search:
+    post:
+      description: |
+        Searches for Product Mappings.
+
+        May be used to confirm a Product Mapping exists.
+
+        Much like `product/search`, may be used to get `name`s of line or product from `id`s,
+        or `id`s from `name`s.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              match by product ID and line ID:
+                summary: Match product mapping with given product and line ID.
+                value:
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  product:
+                    id: b5da7b1f-3c16-5084-a5da-95b2eba5a4db
+              match by product name and line name+factory:
+                summary: Match product mapping with given product and line name  -
+                  alternative example.
+                value:
+                  line:
+                    name: Line 01
+                    factory:
+                      id: e32d004e-ce8b-40bf-bbc1-14fd907d2f47
+                  product:
+                    name: 2AFBCA5E
+              match all by line:
+                summary: Match all product mappings for a given line
+                value:
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  match: all
+            schema:
+              $ref: "#/components/schemas/ProductMapping"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProductMapping"
+                type: array
+          description: A list of product mappings.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+      tags:
+      - Product Mappings
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/product_mapping/set:
+    post:
+      description: |
+        Map a Product to a Line - implying this Line can produce, or is producing this Product.
+
+        If the supplied Product doesn't exist, it will be created.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              set by product ID and line ID:
+                summary: Set product mapping with given product and line ID.
+                value:
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  product:
+                    id: b5da7b1f-3c16-5084-a5da-95b2eba5a4db
+              set by product name and line name+factory:
+                summary: Set product mapping with given product and line name  - alternative
+                  example.
+                value:
+                  line:
+                    name: Line 01
+                    factory:
+                      id: e32d004e-ce8b-40bf-bbc1-14fd907d2f47
+                  product:
+                    name: 2AFBCA5E
+            schema:
+              $ref: "#/components/schemas/ProductMapping"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Product Mappings
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/product_attribute/search:
+    post:
+      description: |
+        Searches for Product Attributes
+
+        Product attributes may be searched by ID, product, or, display_name - in that order.
+
+        If an ID is supplied, it will be used to search for a Product Attribute, and display_name, product will be ignored.
+
+        If a product is supplied (and no ID), it will be used to search for a Product Attribute, and display_name will be ignored.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              match by product:
+                summary: Match product mapping with given product.
+                value:
+                  product:
+                    id: b5da7b1f-3c16-5084-a5da-95b2eba5a4db
+              match by attribute display_name:
+                summary: Match product mapping with given product attribute display_name.
+                value:
+                  display_name: Cable Color
+            schema:
+              $ref: "#/components/schemas/ProductAttribute"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProductAttribute"
+                type: array
+          description: A list of product attributes - potentially with products and
+            values.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+      tags:
+      - Product Attributes
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/product_attribute/set:
+    post:
+      description: |
+        Set a Product Attribute for a Product.
+
+        If the supplied Product Attribute doesn't exist, it will be created.
+
+        If the supplied Product Attribute Value doesn't exist, it will be created.
+
+        If the supplied Product Attribute Value is already set for the Product, it will be updated.
+
+        If the supplied Product Attribute Value is not set for the Product, it will be added.
+
+        Supplied Product must exist already.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              set by product ID, attribute name and attribute display_name:
+                summary: Set product attribute with given product and attribute display_name.
+                value:
+                  product:
+                    id: b5da7b1f-3c16-5084-a5da-95b2eba5a4db
+                  display_name: Cable Color
+                  name: cable_color
+                  value: Red
+              set by product name, attribute name and attribute display_name:
+                summary: Set product attribute with given product and attribute display_name.
+                value:
+                  product:
+                    name: 2AFBCA5E
+                  display_name: Cable Color
+                  name: cable_color
+                  value: Red
+            schema:
+              $ref: "#/components/schemas/ProductAttribute"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ProductAttribute"
+                type: array
+          description: A list of product attributes - potentially with products and
+            values.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+      tags:
+      - Product Attributes
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/target/search:
+    post:
+      description: |
+        Search for a Target by `line`, `metric_group`, and `product`. For each of these inputs, any of
+        their unique indentifiers (as described in their `search` endpoint) may be used. See examples.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search by for target product, line, and metric group:
+                summary: "Search for target by metric group, line, product"
+                value:
+                  line:
+                    id: 0012ab4d-1234-123a-8c76-6ea2344be6df
+                  metric_group:
+                    name: metric group name
+                  product:
+                    id: 0012ab4d-1234-123a-8c76-6ea2344be6df
+            schema:
+              $ref: "#/components/schemas/Target"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Target"
+                type: array
+          description: A list of targets.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Targets
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/target/set:
+    post:
+      description: |
+        Create or update a Target.
+
+        First the endpoint will search for a Target by `metric_group`, `product`, and `line`:
+        - If the target does not exist a new target is created.
+        - If the product or its mapping to the given line does not exist, they will be created.
+        - If a target exists but with different parameters, it will be updated.
+        - If the target exists with all the same parameters nothing is done.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              set by product, line, and metric group:
+                summary: "Set target by metric group, line, product - each must be\
+                  \ a valid search params."
+                value:
+                  line:
+                    id: 0012ab4d-1234-123a-8c76-6ea2344be6df
+                  metric_group:
+                    name: metric group name
+                  product:
+                    id: 0012ab4d-1234-123a-8c76-6ea2344be6df
+                  lsl: 100.0
+                  target_value: 200
+                  usl: 300.55
+              set by product, line, and metric group II:
+                summary: "Set target by metric group, line, product - alternative\
+                  \ example."
+                value:
+                  line:
+                    name: line name (name only also requires factory)
+                    factory:
+                      id: 0012ab4d-1234-123a-8c76-6ea9904be6df
+                  metric_group:
+                    id: 0012ab4d-1234-123a-8c76-6ea9904be6df
+                  product:
+                    name: product name
+                  lsl: 1
+                  target_value: 2
+                  usl: 3
+            schema:
+              $ref: "#/components/schemas/Target"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Target"
+          description: Updated target.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Targets
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/interval/search:
+    post:
+      description: |
+        Searches for intervals by `type`, `line` and other optional parameters:
+
+        - `id` (for a specific Interval)
+        - `match: unique` or omit
+
+        OR
+
+        - `match : last` for the most recent Interval of the given type on the given line
+
+        OR
+
+        - `start_time` and `end_time` (for a range of Intervals over a period of time)
+        - `match: all` for more than one result
+
+        OR
+
+        - match all intervals for all lines in a given factory
+
+        AND/OR
+
+        - `name` (only for Intervals with a matching name)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search for states on a line over a time period:
+                summary: Search for states on a line over a time period
+                value:
+                  type:
+                    name: STATE
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  start_time: 2021-04-04T08:00:04Z
+                  end_time: 2021-04-10T08:00:04Z
+                  match: all
+              Search for an custom interval type interval:
+                summary: Search for an operator id type interval
+                value:
+                  id: 1809d88adf0
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  type:
+                    name: operator id
+              Search for states on all lines in a given factory:
+                summary: Search for states on all lines in a given factory
+                value:
+                  type:
+                    name: STATE
+                  line:
+                    factory:
+                      name: Factory A
+                    match: all
+                  start_time: 2021-04-04T08:00:04Z
+                  end_time: 2021-04-10T08:00:04Z
+                  match: all
+            schema:
+              $ref: "#/components/schemas/Interval"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Interval"
+                type: array
+          description: A list of intervals.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/interval/set:
+    post:
+      description: |
+        Create or update an Interval.
+
+        Must include `line` and `type`. `match` must be omitted, `unique` or `last`
+
+         - If `id` is not supplied, a new Interval will be created.
+
+         - If `id` is supplied, existing Interval will be updated. This interval's start time can be modified using `start_time` field.
+
+        To update a specific interval supply the `id` of that interval.
+
+        If the interval exists with all the same parameters nothing is done.
+
+        To update the most recent Interval of a given `type` on a `line` one may use `match: last` and omit `id`
+
+        For `RUN` type: if `product` and/or `product_mapping` does not exist a new one will be created. Further a `target`
+        may be set by adding a `target` to the metadata field. The `line` and `product` for this target will be the same as the interval.
+
+        Please see examples for more specific information.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create a Run, full schema:
+                summary: Create a Run
+                value:
+                  type:
+                    name: RUN
+                  name: example_run
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                    name: Line 01
+                    factory:
+                      id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                      name: Factory A
+                  start_time: 2021-04-04T08:00:04Z
+                  metadata:
+                    product:
+                      name: Example Product
+              Create a Run, full schema, with target:
+                summary: Create a Run with a target
+                value:
+                  type:
+                    name: RUN
+                  name: example_run
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                    name: Line 01
+                    factory:
+                      id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                      name: Factory A
+                  start_time: 2021-04-04T08:00:04Z
+                  metadata:
+                    product:
+                      name: Example Product
+                    target:
+                      lsl: 1
+                      target_value: 2
+                      usl: 3
+                      metric_group:
+                        name: metric group name
+              Create a Run, UUIDs only:
+                summary: Create a Run - uuids only
+                value:
+                  type:
+                    name: RUN
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  metadata:
+                    product:
+                      id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  start_time: 2021-04-04T08:00:04Z
+              Create a Run, names only:
+                summary: Create a Run - names only
+                value:
+                  type:
+                    name: RUN
+                  line:
+                    name: Line 01
+                    factory:
+                      name: Factory A
+                  metadata:
+                    product:
+                      name: Example Product
+                  start_time: 2021-04-04T08:00:04Z
+              Create a Batch:
+                summary: Create a Batch
+                value:
+                  type:
+                    name: BATCH
+                  name: example_batch
+                  line:
+                    name: Line 01
+                    factory:
+                      name: Factory A
+                  start_time: 2021-04-04T08:00:04Z
+              Update a custom interval type interval:
+                summary: Update an operator id type interval
+                value:
+                  id: 1809d88adf0
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  name: updated_operator_id
+                  type:
+                    name: operator id
+              Create a Run with a corresponding deletion example:
+                summary: Create a Run with a corresponding deletion example
+                value:
+                  type:
+                    name: RUN
+                  name: deletable_run
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  start_time: 2021-04-04T08:00:04Z
+                  metadata:
+                    product:
+                      name: Example Product
+              Create a State with a corresponding deletion example:
+                summary: Create a State with a corresponding delete example
+                value:
+                  type:
+                    name: STATE
+                  name: deletable_state
+                  line:
+                    id: 4787d6fb-f01e-405b-a38d-db23e32fa0d1
+                  start_time: 2021-04-04T08:00:04Z
+                  metadata:
+                    category:
+                      name: Planned Downtime
+                    reason:
+                      name: Preventive Maintenance
+              Create a Batch with a corresponding deletion example:
+                summary: Create a Batch with a corresponding deletion example
+                value:
+                  type:
+                    name: BATCH
+                  name: deletable_batch
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  start_time: 2021-04-04T08:00:04Z
+            schema:
+              $ref: "#/components/schemas/Interval"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Set interval:
+                  value:
+                    type:
+                      id: 6f996655-4a3e-4b55-8121-724a4d14ca08
+                    line:
+                      id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                    name: example_interval
+                    start_time: 2022-06-01T08:20:04Z
+              schema:
+                $ref: "#/components/schemas/Interval"
+          description: Updated interval.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/interval/delete:
+    post:
+      description: |
+        Delete an interval by `type`, `line`, and `id`
+
+        **Note:** The `id` must be obtained from either:
+        - The response when creating an interval via `/v2/interval/set`
+        - Searching for intervals via `/v2/interval/search`
+
+        The examples below use placeholder IDs - replace with actual IDs from your system.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Delete a Run interval by ID:
+                summary: Delete a Run interval by ID (replace with actual ID)
+                value:
+                  id: <REPLACE_WITH_ACTUAL_RUN_UUID>
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  type:
+                    name: RUN
+              Delete a State interval by ID:
+                summary: Delete a State type interval by ID (replace with actual ID)
+                value:
+                  id: <REPLACE_WITH_ACTUAL_STATE_ID>
+                  line:
+                    id: 4787d6fb-f01e-405b-a38d-db23e32fa0d1
+                  type:
+                    name: STATE
+              Delete a Batch interval by ID:
+                summary: Delete a Batch type interval by ID (replace with actual ID)
+                value:
+                  id: <REPLACE_WITH_ACTUAL_BATCH_UUID>
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  type:
+                    name: BATCH
+              Delete a custom interval:
+                summary: Delete an "operator id" type interval
+                value:
+                  id: 1809d88adf0
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  type:
+                    name: operator id
+            schema:
+              $ref: "#/components/schemas/Interval"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Interval"
+                type: array
+          description: A list containing the deleted interval.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/intervals/set:
+    post:
+      description: |
+        Create (Does not update) a group of custom intervals, for the same `type` and `line`.
+        Line and type do not need to be included in each individual interval, just once at the top level.
+
+        Limitations:
+        - Cannot excees 2500 intervals per request.
+        - Will not write over other intervals
+        - Does not support "batch", "run", or "state" interval types.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create a set of intervals:
+                summary: Create a set of intervals
+                value:
+                  type:
+                    name: operator id
+                  line:
+                    name: Line 01
+                    factory:
+                      name: Factory A
+                  intervals:
+                  - start_time: 2021-04-04T08:00:04Z
+                    end_time: 2021-04-04T08:30:04Z
+                    name: Example Value
+                  - start_time: 2021-04-04T09:00:04Z
+                    end_time: 2021-04-04T09:30:04Z
+                    name: Example Value 2
+            schema:
+              $ref: "#/components/schemas/IntervalBulkCreate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_intervals_set_post_200_response"
+          description: A list containing any intervals found but not created.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/intervals/delete:
+    post:
+      description: |
+        Delete a group of intervals by a single `type` and a single `line`, between `start_time` and `end_time`. Returns a list of intervals that were not deleted, and the number of intervals deleted.
+
+        Limitations:
+        - Cannot exceed 15,000 intervals per request, or 30 days worth of data.
+        - Currently does not support "batch" or "run" interval types.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Delete a set of intervals:
+                summary: Delete a set of intervals in range
+                value:
+                  line:
+                    name: Line 01
+                    factory:
+                      name: Factory A
+                  type:
+                    name: operator id
+                  start_time: 2021-04-04T08:00:04Z
+                  end_time: 2021-04-10T08:00:04Z
+            schema:
+              $ref: "#/components/schemas/IntervalBulkDelete"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_intervals_delete_post_200_response"
+          description: A list containing any intervals found but not deleted.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/interval_type/search:
+    post:
+      description: |
+        Search for Interval Types by `name`, `id`, `factory` or just `match: all` to return all Interval Types associated with the your organization.
+        Basic Interval Types -- `RUN`, `BATCH`, and `STATE` -- are associated with every factory in Oden's system.
+        Custom Interval Types may be created by users, are set on a per factory basis, and may only describe Intervals on Lines associated with that Factory.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search for all interval types:
+                summary: Search for all interval types.
+                value:
+                  match: all
+              Search for interval type by name:
+                summary: Search for all interval types.
+                value:
+                  name: operator id
+                  match: unique
+            schema:
+              $ref: "#/components/schemas/IntervalType"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/IntervalType"
+                type: array
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/scrap_yield/search:
+    post:
+      description: |
+        Searches for scrap/yield records for a given Interval
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search for scrap yield data by interval:
+                summary: Search for scrap yield data by interval.
+                value:
+                  interval:
+                    id: 178b9a1ec20
+                    line:
+                      name: Line 01
+                      factory:
+                        name: Factory A
+                    type:
+                      name: BATCH
+                  data:
+                    match: ALL
+            schema:
+              $ref: "#/components/schemas/_v2_scrap_yield_search_post_request"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Scrap/Yield Data
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/scrap_yield/set:
+    post:
+      description: |
+        Uploads scrap or yield raw data.
+
+        Notes:
+
+        - If `id` is provided the existing Scrap/Yield record will be updated.
+
+        - If `id` is omitted a new Scrap/Yield record will be created.
+
+        - The scrap yield for an interval is an aggregate of all scrap yield raw data records associated with that interval
+            - Therefore, multiple scrap yield records can exist for a single interval, each contributing to the "aggregate" (i.e. sum total) scrap/yield of that interval
+
+        - Changing an aggregate can be done by either adding another record with an offset, or updating an existing record.
+            - Example: If you have 3 scrap records in an interval: 50 50 50 = 150 and want to make the aggregate 100 for a given interval, either update one of the existing scrap records from 50 -> 0, or add a new one with value -50
+
+        - Duplicate keys should be avoided, see Schema docs above for details.
+      parameters:
+      - description: |
+          Optional pattern type to use for matching:
+          - `exact` for exact match
+          - `contains` for the string to be contained in the query
+          - `regex` to match based on a regular expression
+        explode: true
+        in: query
+        name: pattern
+        required: false
+        schema:
+          default: exact
+          enum:
+          - exact
+          - contains
+          - regex
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create new scrap/yield record:
+                summary: Create new scrap/yield record.
+                value:
+                  data:
+                    raw_data:
+                      scrap: 100
+                      yield: 50
+                    timestamp: 2022-06-15T08:00:00Z
+                  interval:
+                    id: 178b9a1ec20
+                    line:
+                      name: Line 01
+                      factory:
+                        name: Factory A
+                    type:
+                      name: BATCH
+              Update existing scrap/yield record:
+                summary: Update scrap/yield record.
+                value:
+                  data:
+                    id: a4356a39-212b-4846-aa1d-08f4a5d3c296
+                    raw_data:
+                      scrap: 100
+                      yield: 50
+                    timestamp: 2022-06-15T08:00:00Z
+                  interval:
+                    id: 178b9a1ec20
+                    line:
+                      name: Line 01
+                      factory:
+                        name: Factory A
+                    type:
+                      name: BATCH
+            schema:
+              $ref: "#/components/schemas/_v2_scrap_yield_set_post_request"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Scrap/Yield Data
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/scrap_yield/delete:
+    post:
+      description: |
+        Deletes Scrap Yield record by ID and line
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Delete scrap yield record by id and line:
+                summary: Delete scrap yield record.
+                value:
+                  data:
+                    id: 16a8fa1f-ba0a-4040-81c9-ac4dd054bdbb
+                  interval:
+                    line:
+                      name: Line 01
+                      factory:
+                        name: Factory A
+            schema:
+              $ref: "#/components/schemas/_v2_scrap_yield_search_post_request"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Scrap/Yield Data
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/quality_test/set:
+    post:
+      description: |
+        Create or update a Quality Test record:
+        - To update `id` must be supplied. Only the supplied fields will be updated, the rest will remain unchanged.
+        - If `id` is not supplied, a new `quality_test_record` will be created.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create quality test record:
+                summary: Create quality test record.
+                value:
+                  interval:
+                    id: 178a61c0f00
+                    line:
+                      factory:
+                        id: e32d004e-ce8b-40bf-bbc1-14fd907d2f47
+                      name: Line 01
+                    type:
+                      id: e07da9a8-f2fd-480c-a315-d4c84fcac08c
+                      name: BATCH
+                  quality_schema:
+                    id: "66"
+                  raw_data:
+                    fdr: test string 3
+                    impedance: 6.789
+                    test_length: 10
+                    test_rl: test string
+                  timestamp: 2022-02-18T16:28:04Z
+            schema:
+              $ref: "#/components/schemas/QualityTest"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Quality Test
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/quality_test/search:
+    post:
+      description: |
+        Searches for Quality Test[s] by:
+
+        - `id`
+
+        OR
+
+        - `interval` (of type `RUN` or `BATCH`)
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Search quality test by id:
+                summary: Use test ID to identify quality test.
+                value:
+                  id: 16a8fa1f-ba0a-4040-81c9-ac4dd054bdbb
+                  match: unique
+              Search quality test by interval:
+                summary: Use BATCH interval to identify quality tests.
+                value:
+                  interval:
+                    name: example-batch-interval
+                    line:
+                      name: Line 01
+                      factory:
+                        name: Factory A
+                    type:
+                      name: BATCH
+                  match: all
+            schema:
+              $ref: "#/components/schemas/QualityTest"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Quality Test
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/quality_test/delete:
+    post:
+      description: |
+        Searches for uniqueQuality Test by:
+
+        - `id`
+
+        OR
+
+        - `interval` (of type `RUN` or `BATCH`)*
+
+        *This only work if there is a single quality test record for the interval.
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Delete quality test by id:
+                summary: Use test ID to identify quality test.
+                value:
+                  id: 16a8fa1f-ba0a-4040-81c9-ac4dd054bdbb
+                  match: unique
+            schema:
+              $ref: "#/components/schemas/QualityTest"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Quality Test
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/quality_tests/delete:
+    post:
+      description: |
+        Bulk deletes quality tests, either:
+        - All quality tests on a given `line` whose `timsetamp` is between `start_time` and `end_time`
+        OR
+        - All quality tests whose `id` is supplied
+
+        It will do one or the other, with a bias for `id`'s if both are supplied.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/_v2_quality_tests_delete_post_request"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Quality Test
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/quality_schema/search:
+    post:
+      description: |
+        Searches for Quality Schema[s] by:
+
+        - `factory`
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Get all quality schemas for Factory A:
+                summary: Get all quality schemas for Factory A.
+                value:
+                  factory:
+                    name: Factory A
+            schema:
+              $ref: "#/components/schemas/QualitySchema"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+      tags:
+      - Quality Test
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/oql/query:
+    post:
+      description: |
+        Run an OQL (Oden Query Language) query.
+
+        For reference on writing OQL queries, see:
+
+        [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql)
+      parameters:
+      - description: |
+          Format of the response. Can be `json`, `jsonextended` or `csv`. If unspecified, defaults to `jsonextended`.
+        explode: true
+        in: query
+        name: format
+        required: false
+        schema:
+          default: json
+          enum:
+          - json
+          - jsonextended
+          - csv
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OQLQuery"
+        required: true
+      responses:
+        "200":
+          description: Successful response
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Too many requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      tags:
+      - OQL
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+components:
+  parameters:
+    FormatParam:
+      description: |
+        Format of the response. Can be `json`, `jsonextended` or `csv`. If unspecified, defaults to `jsonextended`.
+      explode: true
+      in: query
+      name: format
+      required: false
+      schema:
+        default: json
+        enum:
+        - json
+        - jsonextended
+        - csv
+        type: string
+      style: form
+    PatternParam:
+      description: |
+        Optional pattern type to use for matching:
+        - `exact` for exact match
+        - `contains` for the string to be contained in the query
+        - `regex` to match based on a regular expression
+      explode: true
+      in: query
+      name: pattern
+      required: false
+      schema:
+        default: exact
+        enum:
+        - exact
+        - contains
+        - regex
+        type: string
+      style: form
+  responses:
+    NotUniqueError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/_v2_line_search_post_409_response"
+      description: |
+        A {match: "unique"} was requested, but multiple entities matched the search parameters.
+    InternalError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/_v2_line_search_post_500_response"
+      description: |
+        An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+    UnauthorizedError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GenericError"
+      description: User has provided either no credentials or invalid credentials
+    ForbiddenError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GenericError"
+      description: |
+        User has provided valid credentials but is not authorized to access the entity
+    NotFoundError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GenericError"
+      description: Entity not found
+    UnimplementedError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GenericError"
+      description: Endpoint is not yet implemented
+    TooManyRequestsError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GenericError"
+      description: Too many requests
+    ParameterError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/_v2_line_search_post_400_response"
+      description: An error occurred regarding one of the input parameters
+  schemas:
+    Match:
+      default: unique
+      description: |
+        Describes which item(s) to match when searching for an entity:
+        - `unique` (default): will return an error if the search object matches multiple entities
+        - `all`: will return every item that matches search entity
+        - `last`: will return the most recent object, where applicable
+        - `first`: will return the least recent object, where applicable
+      enum:
+      - first
+      - last
+      - unique
+      - all
+      type: string
+    Factory:
+      description: An entity representing a factory.
+      example:
+        timezone: timezone
+        name: name
+        match: unique
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        secondary_name: secondary_name
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        secondary_name:
+          nullable: true
+          type: string
+        timezone:
+          type: string
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    Line:
+      description: An entity representing a single line of production.
+      example:
+        factory:
+          timezone: timezone
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        name: name
+        match: null
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        secondary_name: secondary_name
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        secondary_name:
+          type: string
+        factory:
+          $ref: "#/components/schemas/Factory"
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    Product:
+      description: An entity representing a product
+      example:
+        name: name
+        match: unique
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    ProductMapping:
+      description: |
+        An entity representing a product/line mapping. Mappings are simple 1:1 relationships, and as such cannot be modified, only created.
+      example:
+        product:
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        line:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: null
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        match: unique
+      properties:
+        product:
+          $ref: "#/components/schemas/Product"
+        line:
+          $ref: "#/components/schemas/Line"
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    ProductAttribute:
+      description: |
+        An entity representing an attribute of a product such as a color or material
+      example:
+        product:
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        match: unique
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        display_name: display_name
+        value: value
+        rule_based: true
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        display_name:
+          type: string
+        value:
+          type: string
+        product:
+          $ref: "#/components/schemas/Product"
+        rule_based:
+          type: boolean
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    StateCategory:
+      description: "An entity representing a state category. During search, ID will\
+        \ take precedence over name."
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      type: object
+    StateReason:
+      description: "An entity representing a state reason. During search, ID will\
+        \ take precedence over name."
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      type: object
+    Target:
+      description: "An object representing a performance target for a line, product,\
+        \ and metric group."
+      example:
+        metric_group:
+          unit_kind_of_quantity: unit_kind_of_quantity
+          name: name
+          match: unique
+          description: description
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        product:
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        lsl: 6.027456183070403
+        target_value: 0.8008281904610115
+        line:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: null
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        match: unique
+        usl: 1.4658129805029452
+      properties:
+        metric_group:
+          $ref: "#/components/schemas/MetricGroup"
+        product:
+          $ref: "#/components/schemas/Product"
+        line:
+          $ref: "#/components/schemas/Line"
+        target_value:
+          format: double
+          type: number
+        lsl:
+          format: double
+          type: number
+        usl:
+          format: double
+          type: number
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    Interval:
+      description: An object representing an interval of time on a line and associated
+        metadata.
+      example:
+        start_time: 2000-01-23T04:56:07.000+00:00
+        metadata:
+          run: null
+        line:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: null
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        name: name
+        end_time: 2000-01-23T04:56:07.000+00:00
+        match: null
+        id: id
+        type:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          type: string
+        type:
+          $ref: "#/components/schemas/IntervalType"
+        name:
+          type: string
+        line:
+          $ref: "#/components/schemas/Line"
+        start_time:
+          format: date-time
+          type: string
+        end_time:
+          format: date-time
+          type: string
+        metadata:
+          $ref: "#/components/schemas/Interval_metadata"
+        match:
+          $ref: "#/components/schemas/Match"
+      required:
+      - line
+      - type
+      type: object
+    IntervalType:
+      description: An object representing a interval type.
+      example:
+        factory:
+          timezone: timezone
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        name: name
+        match: unique
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+        factory:
+          $ref: "#/components/schemas/Factory"
+        name:
+          type: string
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    IntervalBulkCreate:
+      description: A set of intervals to create
+      example:
+        intervals:
+        - start_time: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            run: null
+          line:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: null
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          end_time: 2000-01-23T04:56:07.000+00:00
+          match: null
+          id: id
+          type:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - start_time: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            run: null
+          line:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: null
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          end_time: 2000-01-23T04:56:07.000+00:00
+          match: null
+          id: id
+          type:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        line:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: null
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        type:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        type:
+          $ref: "#/components/schemas/IntervalType"
+        line:
+          $ref: "#/components/schemas/Line"
+        intervals:
+          items:
+            $ref: "#/components/schemas/Interval"
+          type: array
+      type: object
+    IntervalBulkDelete:
+      description: A range of intervals to delete
+      example:
+        start_time: 2000-01-23T04:56:07.000+00:00
+        line:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: null
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        end_time: 2000-01-23T04:56:07.000+00:00
+        type:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hard_delete: true
+      properties:
+        type:
+          $ref: "#/components/schemas/IntervalType"
+        line:
+          $ref: "#/components/schemas/Line"
+        start_time:
+          format: date-time
+          type: string
+        end_time:
+          format: date-time
+          type: string
+        hard_delete:
+          default: true
+          type: boolean
+      type: object
+    BatchMetadata:
+      additionalProperties: true
+      description: Metadata associated with a batch interval
+      example:
+        run: null
+      properties:
+        run:
+          $ref: "#/components/schemas/Interval"
+      type: object
+    RunMetadata:
+      additionalProperties: true
+      description: Metadata associated with a run interval
+      properties:
+        product:
+          $ref: "#/components/schemas/Product"
+        target:
+          $ref: "#/components/schemas/Target"
+      type: object
+    StateMetadata:
+      additionalProperties: true
+      description: Metadata associated with a state interval
+      properties:
+        reason:
+          $ref: "#/components/schemas/StateReason"
+        comment:
+          type: string
+        category:
+          $ref: "#/components/schemas/StateCategory"
+      type: object
+    Unit:
+      description: |
+        A Unit describes a unit of measurement.
+      properties:
+        id:
+          type: integer
+        symbol:
+          type: string
+        name:
+          type: string
+        kind_of_quantity:
+          type: string
+      type: object
+    ScrapYieldSchema:
+      description: |
+        Scrap yield schema represents a factory's scrap/yield data ingestion configuration.
+      properties:
+        id:
+          format: uuid
+          type: string
+        factory:
+          $ref: "#/components/schemas/Factory"
+        scrap_conversion_factor:
+          format: double
+          type: number
+        scrap_unit:
+          $ref: "#/components/schemas/Unit"
+        yield_conversion_factor:
+          format: double
+          type: number
+        yield_unit:
+          $ref: "#/components/schemas/Unit"
+      type: object
+    ScrapYieldData:
+      description: |
+        An object representing scrap and yield data for a line for a particular run or batch interval. Data can be sent unstructured in the `raw_data` field as long as we have a scrap/yield schema for the factory.
+      properties:
+        raw_data:
+          format: json
+          type: string
+        id:
+          format: uuid
+          type: string
+        schema:
+          $ref: "#/components/schemas/ScrapYieldSchema"
+        timestamp:
+          format: date-time
+          nullable: true
+          type: string
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    QualityTest:
+      description: |
+        An object representing a QA test for a line for a particular run or batch interval.
+      example:
+        quality_schema:
+          schema: schema
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          match: unique
+          description: description
+          id: "23"
+        match: null
+        interval:
+          start_time: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            run: null
+          line:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: null
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          end_time: 2000-01-23T04:56:07.000+00:00
+          match: null
+          id: id
+          type:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        raw_data: "{}"
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uuid
+          type: string
+        raw_data:
+          type: object
+        timestamp:
+          format: date-time
+          type: string
+        interval:
+          $ref: "#/components/schemas/Interval"
+        quality_schema:
+          $ref: "#/components/schemas/QualitySchema"
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    QualitySchema:
+      description: |
+        A schema for quality tests. Note: the id is currently implemented as a string, but that string should be a stringified integer.
+      example:
+        schema: schema
+        factory:
+          timezone: timezone
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        match: unique
+        description: description
+        id: "23"
+      properties:
+        id:
+          example: "23"
+          type: string
+        factory:
+          $ref: "#/components/schemas/Factory"
+        schema:
+          format: json
+          type: string
+        description:
+          type: string
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    MetricGroup:
+      description: "An object representing a metric group; a grouping of like metrics\
+        \ across lines, factories."
+      example:
+        unit_kind_of_quantity: unit_kind_of_quantity
+        name: name
+        match: unique
+        description: description
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        id:
+          format: uuid
+          type: string
+        unit_kind_of_quantity:
+          type: string
+        match:
+          $ref: "#/components/schemas/Match"
+      type: object
+    OQLQuery:
+      description: An object representing an OQL query.
+      example:
+        query: query
+      properties:
+        query:
+          type: string
+      required:
+      - query
+      type: object
+    GenericError:
+      example:
+        retryable: true
+        error: error
+      properties:
+        error:
+          type: string
+        retryable:
+          type: boolean
+      required:
+      - error
+      - retryable
+      type: object
+    _v2_line_search_post_400_response:
+      example:
+        retryable: true
+        name: name
+        error: error
+      properties:
+        error:
+          type: string
+        name:
+          type: string
+        retryable:
+          type: boolean
+      required:
+      - error
+      - name
+      - retryable
+      type: object
+    _v2_line_search_post_409_response:
+      example:
+        retryable: true
+        entity_name: entity_name
+        num_matches: 0
+        error: error
+      properties:
+        entity_name:
+          type: string
+        num_matches:
+          type: integer
+        error:
+          type: string
+        retryable:
+          type: boolean
+      required:
+      - entity_name
+      - error
+      - num_matches
+      - retryable
+      type: object
+    _v2_line_search_post_500_response:
+      example:
+        retryable: true
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        error: error
+      properties:
+        error:
+          type: string
+        retryable:
+          type: boolean
+        id:
+          format: uuid
+          type: string
+      required:
+      - error
+      - id
+      - retryable
+      type: object
+    _v2_intervals_set_post_200_response:
+      example:
+        interval_ids:
+        - interval_ids
+        - interval_ids
+      properties:
+        interval_ids:
+          items:
+            type: string
+          type: array
+      type: object
+    _v2_intervals_delete_post_200_response:
+      example:
+        num_deleted: 0
+        failed_intervals:
+        - failed_intervals
+        - failed_intervals
+      properties:
+        num_deleted:
+          type: integer
+        failed_intervals:
+          items:
+            type: string
+          type: array
+      type: object
+    _v2_scrap_yield_search_post_request:
+      properties:
+        data:
+          $ref: "#/components/schemas/ScrapYieldData"
+        interval:
+          $ref: "#/components/schemas/Interval"
+      required:
+      - interval
+      type: object
+    _v2_scrap_yield_set_post_request:
+      properties:
+        data:
+          $ref: "#/components/schemas/ScrapYieldData"
+        interval:
+          $ref: "#/components/schemas/Interval"
+      required:
+      - data
+      - interval
+      type: object
+    _v2_quality_tests_delete_post_request:
+      properties:
+        ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+        line:
+          $ref: "#/components/schemas/Line"
+        start_time:
+          format: date-time
+          type: string
+        end_time:
+          format: date-time
+          type: string
+      type: object
+    Interval_metadata:
+      description: |
+        Metadata about this interval, such as the associated run or the state category. Will differ based on the type of interval.
+      oneOf:
+      - $ref: "#/components/schemas/BatchMetadata"
+      - $ref: "#/components/schemas/RunMetadata"
+      - $ref: "#/components/schemas/StateMetadata"
+      - type: object
+  securitySchemes:
+    APIKeyAuth:
+      description: Prefix the value with \"Token\" to indicate the custom authorization
+        type
+      in: header
+      name: Authorization
+      type: apiKey
+
