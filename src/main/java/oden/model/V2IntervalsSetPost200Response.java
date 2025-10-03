@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * V2IntervalsSetPost200Response
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:24:57.937424084Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:36:32.429490336Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class V2IntervalsSetPost200Response {
   public static final String SERIALIZED_NAME_INTERVAL_IDS = "interval_ids";
   @SerializedName(SERIALIZED_NAME_INTERVAL_IDS)

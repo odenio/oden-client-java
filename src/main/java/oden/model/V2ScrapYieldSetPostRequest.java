@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * V2ScrapYieldSetPostRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:24:57.937424084Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:36:32.429490336Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class V2ScrapYieldSetPostRequest {
   public static final String SERIALIZED_NAME_DATA = "data";
   @SerializedName(SERIALIZED_NAME_DATA)

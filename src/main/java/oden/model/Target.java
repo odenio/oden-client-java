@@ -52,7 +52,7 @@ import oden.JSON;
 /**
  * An object representing a performance target for a line, product, and metric group.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:24:57.937424084Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:36:32.429490336Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class Target {
   public static final String SERIALIZED_NAME_METRIC_GROUP = "metric_group";
   @SerializedName(SERIALIZED_NAME_METRIC_GROUP)
