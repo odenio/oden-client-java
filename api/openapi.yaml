@@ -1367,14 +1367,16 @@ paths:
               examples:
                 Set interval:
                   value:
-                    type:
+                  - type:
                       id: 6f996655-4a3e-4b55-8121-724a4d14ca08
                     line:
                       id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
                     name: example_interval
                     start_time: 2022-06-01T08:20:04Z
               schema:
-                $ref: "#/components/schemas/Interval"
+                items:
+                  $ref: "#/components/schemas/Interval"
+                type: array
           description: Updated interval.
         "409":
           content:

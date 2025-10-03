@@ -469,7 +469,7 @@ public class IntervalsApi {
      * 
      * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
      * @param interval  (required)
-     * @return Interval
+     * @return List&lt;Interval&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -483,8 +483,8 @@ public class IntervalsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public Interval v2IntervalSetPost(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        ApiResponse<Interval> localVarResp = v2IntervalSetPostWithHttpInfo(interval);
+    public List<Interval> v2IntervalSetPost(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        ApiResponse<List<Interval>> localVarResp = v2IntervalSetPostWithHttpInfo(interval);
         return localVarResp.getData();
     }
 
@@ -492,7 +492,7 @@ public class IntervalsApi {
      * 
      * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
      * @param interval  (required)
-     * @return ApiResponse&lt;Interval&gt;
+     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -506,9 +506,9 @@ public class IntervalsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Interval> v2IntervalSetPostWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
+    public ApiResponse<List<Interval>> v2IntervalSetPostWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
         okhttp3.Call localVarCall = v2IntervalSetPostValidateBeforeCall(interval, null);
-        Type localVarReturnType = new TypeToken<Interval>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -531,10 +531,10 @@ public class IntervalsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalSetPostAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<Interval> _callback) throws ApiException {
+    public okhttp3.Call v2IntervalSetPostAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = v2IntervalSetPostValidateBeforeCall(interval, _callback);
-        Type localVarReturnType = new TypeToken<Interval>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

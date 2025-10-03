@@ -166,7 +166,7 @@ public class Example {
 
 <a id="v2IntervalSetPost"></a>
 # **v2IntervalSetPost**
-> Interval v2IntervalSetPost(interval)
+> List&lt;Interval&gt; v2IntervalSetPost(interval)
 
 
 
@@ -196,7 +196,7 @@ public class Example {
     IntervalsApi apiInstance = new IntervalsApi(defaultClient);
     Interval interval = new Interval(); // Interval | 
     try {
-      Interval result = apiInstance.v2IntervalSetPost(interval);
+      List<Interval> result = apiInstance.v2IntervalSetPost(interval);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling IntervalsApi#v2IntervalSetPost");
@@ -217,7 +217,7 @@ public class Example {
 
 ### Return type
 
-[**Interval**](Interval.md)
+[**List&lt;Interval&gt;**](Interval.md)
 
 ### Authorization
 
