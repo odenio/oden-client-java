@@ -121,7 +121,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Target.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Unit.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsDeletePost200Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsSetPost200Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost400Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost409Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost500Response.CustomTypeAdapterFactory());

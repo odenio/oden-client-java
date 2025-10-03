@@ -2,7 +2,7 @@
 
 Oden API
 - API version: 2.0.0
-  - Build date: 2025-10-03T04:36:32.429490336Z[Etc/UTC]
+  - Build date: 2025-10-03T04:40:39.880700757Z[Etc/UTC]
   - Generator version: 7.15.0
 
 The Oden Private Partner API exposes RESTful API endpoints for clients to get, create and update data on the Oden Platform.
@@ -273,7 +273,6 @@ Class | Method | HTTP request | Description
  - [Target](docs/Target.md)
  - [Unit](docs/Unit.md)
  - [V2IntervalsDeletePost200Response](docs/V2IntervalsDeletePost200Response.md)
- - [V2IntervalsSetPost200Response](docs/V2IntervalsSetPost200Response.md)
  - [V2LineSearchPost400Response](docs/V2LineSearchPost400Response.md)
  - [V2LineSearchPost409Response](docs/V2LineSearchPost409Response.md)
  - [V2LineSearchPost500Response](docs/V2LineSearchPost500Response.md)

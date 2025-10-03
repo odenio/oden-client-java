@@ -33,7 +33,6 @@ import oden.model.IntervalBulkCreate;
 import oden.model.IntervalBulkDelete;
 import oden.model.IntervalType;
 import oden.model.V2IntervalsDeletePost200Response;
-import oden.model.V2IntervalsSetPost200Response;
 import oden.model.V2LineSearchPost400Response;
 import oden.model.V2LineSearchPost409Response;
 import oden.model.V2LineSearchPost500Response;
@@ -854,7 +853,7 @@ public class IntervalsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing any intervals found but not created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -924,13 +923,13 @@ public class IntervalsApi {
      * 
      * Create (Does not update) a group of custom intervals, for the same &#x60;type&#x60; and &#x60;line&#x60;. Line and type do not need to be included in each individual interval, just once at the top level.  Limitations: - Cannot excees 2500 intervals per request. - Will not write over other intervals - Does not support \&quot;batch\&quot;, \&quot;run\&quot;, or \&quot;state\&quot; interval types. 
      * @param intervalBulkCreate  (required)
-     * @return V2IntervalsSetPost200Response
+     * @return List&lt;String&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing any intervals found but not created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -940,8 +939,8 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public V2IntervalsSetPost200Response v2IntervalsSetPost(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
-        ApiResponse<V2IntervalsSetPost200Response> localVarResp = v2IntervalsSetPostWithHttpInfo(intervalBulkCreate);
+    public List<String> v2IntervalsSetPost(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
+        ApiResponse<List<String>> localVarResp = v2IntervalsSetPostWithHttpInfo(intervalBulkCreate);
         return localVarResp.getData();
     }
 
@@ -949,13 +948,13 @@ public class IntervalsApi {
      * 
      * Create (Does not update) a group of custom intervals, for the same &#x60;type&#x60; and &#x60;line&#x60;. Line and type do not need to be included in each individual interval, just once at the top level.  Limitations: - Cannot excees 2500 intervals per request. - Will not write over other intervals - Does not support \&quot;batch\&quot;, \&quot;run\&quot;, or \&quot;state\&quot; interval types. 
      * @param intervalBulkCreate  (required)
-     * @return ApiResponse&lt;V2IntervalsSetPost200Response&gt;
+     * @return ApiResponse&lt;List&lt;String&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing any intervals found but not created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -965,9 +964,9 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<V2IntervalsSetPost200Response> v2IntervalsSetPostWithHttpInfo(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
+    public ApiResponse<List<String>> v2IntervalsSetPostWithHttpInfo(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
         okhttp3.Call localVarCall = v2IntervalsSetPostValidateBeforeCall(intervalBulkCreate, null);
-        Type localVarReturnType = new TypeToken<V2IntervalsSetPost200Response>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
@@ -982,7 +981,7 @@ public class IntervalsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing any intervals found but not created. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -992,10 +991,10 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalsSetPostAsync(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback<V2IntervalsSetPost200Response> _callback) throws ApiException {
+    public okhttp3.Call v2IntervalsSetPostAsync(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback<List<String>> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = v2IntervalsSetPostValidateBeforeCall(intervalBulkCreate, _callback);
-        Type localVarReturnType = new TypeToken<V2IntervalsSetPost200Response>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

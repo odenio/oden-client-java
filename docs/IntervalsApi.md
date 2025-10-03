@@ -391,7 +391,7 @@ public class Example {
 
 <a id="v2IntervalsSetPost"></a>
 # **v2IntervalsSetPost**
-> V2IntervalsSetPost200Response v2IntervalsSetPost(intervalBulkCreate)
+> List&lt;String&gt; v2IntervalsSetPost(intervalBulkCreate)
 
 
 
@@ -421,7 +421,7 @@ public class Example {
     IntervalsApi apiInstance = new IntervalsApi(defaultClient);
     IntervalBulkCreate intervalBulkCreate = new IntervalBulkCreate(); // IntervalBulkCreate | 
     try {
-      V2IntervalsSetPost200Response result = apiInstance.v2IntervalsSetPost(intervalBulkCreate);
+      List<String> result = apiInstance.v2IntervalsSetPost(intervalBulkCreate);
       System.out.println(result);
     } catch (ApiException e) {
       System.err.println("Exception when calling IntervalsApi#v2IntervalsSetPost");
@@ -442,7 +442,7 @@ public class Example {
 
 ### Return type
 
-[**V2IntervalsSetPost200Response**](V2IntervalsSetPost200Response.md)
+**List&lt;String&gt;**
 
 ### Authorization
 
@@ -456,7 +456,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list containing any intervals found but not created. |  -  |
+| **200** | A list of created interval IDs. |  -  |
 | **400** | An error occurred regarding one of the input parameters |  -  |
 | **401** | User has provided either no credentials or invalid credentials |  -  |
 | **403** | User has provided valid credentials but is not authorized to access the entity  |  -  |

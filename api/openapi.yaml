@@ -1561,8 +1561,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_intervals_set_post_200_response"
-          description: A list containing any intervals found but not created.
+                items:
+                  type: string
+                type: array
+          description: A list of created interval IDs.
         "400":
           content:
             application/json:
@@ -3301,17 +3303,6 @@ components:
       - error
       - id
       - retryable
-      type: object
-    _v2_intervals_set_post_200_response:
-      example:
-        interval_ids:
-        - interval_ids
-        - interval_ids
-      properties:
-        interval_ids:
-          items:
-            type: string
-          type: array
       type: object
     _v2_intervals_delete_post_200_response:
       example:

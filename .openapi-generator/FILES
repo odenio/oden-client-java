@@ -41,7 +41,6 @@ docs/Target.md
 docs/TargetsApi.md
 docs/Unit.md
 docs/V2IntervalsDeletePost200Response.md
-docs/V2IntervalsSetPost200Response.md
 docs/V2LineSearchPost400Response.md
 docs/V2LineSearchPost409Response.md
 docs/V2LineSearchPost500Response.md
@@ -111,7 +110,6 @@ src/main/java/oden/model/StateReason.java
 src/main/java/oden/model/Target.java
 src/main/java/oden/model/Unit.java
 src/main/java/oden/model/V2IntervalsDeletePost200Response.java
-src/main/java/oden/model/V2IntervalsSetPost200Response.java
 src/main/java/oden/model/V2LineSearchPost400Response.java
 src/main/java/oden/model/V2LineSearchPost409Response.java
 src/main/java/oden/model/V2LineSearchPost500Response.java
