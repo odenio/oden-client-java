@@ -48,7 +48,7 @@ import oden.JSON;
 /**
  * A Unit describes a unit of measurement. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:40:39.880700757Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T07:47:46.408594425Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class Unit {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

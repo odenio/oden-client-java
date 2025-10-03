@@ -48,7 +48,7 @@ import oden.JSON;
 /**
  * V2LineSearchPost409Response
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T04:40:39.880700757Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T07:47:46.408594425Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class V2LineSearchPost409Response {
   public static final String SERIALIZED_NAME_ENTITY_NAME = "entity_name";
   @SerializedName(SERIALIZED_NAME_ENTITY_NAME)
