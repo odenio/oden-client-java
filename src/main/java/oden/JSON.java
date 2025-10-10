@@ -61,6 +61,19 @@ public class JSON {
     @SuppressWarnings("unchecked")
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
+                .registerTypeSelector(oden.model.IntervalMetadata.class, new TypeSelector<oden.model.IntervalMetadata>() {
+                    @Override
+                    public Class<? extends oden.model.IntervalMetadata> getClassForElement(JsonElement readElement) {
+                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
+                        classByDiscriminatorValue.put("batch", oden.model.BatchMetadata.class);
+                        classByDiscriminatorValue.put("custom", oden.model.CustomMetadata.class);
+                        classByDiscriminatorValue.put("run", oden.model.RunMetadata.class);
+                        classByDiscriminatorValue.put("state", oden.model.StateMetadata.class);
+                        classByDiscriminatorValue.put("Interval_metadata", oden.model.IntervalMetadata.class);
+                        return getClassByDiscriminator(classByDiscriminatorValue,
+                                getDiscriminatorValue(readElement, "metadata_type"));
+                    }
+          })
         ;
         GsonBuilder builder = fireBuilder.createGsonBuilder();
         return builder;
@@ -97,6 +110,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
         gsonBuilder.registerTypeAdapterFactory(new oden.model.BatchMetadata.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.CustomMetadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Factory.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.GenericError.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Interval.CustomTypeAdapterFactory());

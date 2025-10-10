@@ -50,8 +50,63 @@ import oden.JSON;
 /**
  * Metadata associated with a run interval
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T07:47:46.408594425Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class RunMetadata {
+  /**
+   * Gets or Sets metadataType
+   */
+  @JsonAdapter(MetadataTypeEnum.Adapter.class)
+  public enum MetadataTypeEnum {
+    RUN("run");
+
+    private String value;
+
+    MetadataTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static MetadataTypeEnum fromValue(String value) {
+      for (MetadataTypeEnum b : MetadataTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<MetadataTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final MetadataTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public MetadataTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return MetadataTypeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
+  @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nonnull
+  private MetadataTypeEnum metadataType;
+
   public static final String SERIALIZED_NAME_PRODUCT = "product";
   @SerializedName(SERIALIZED_NAME_PRODUCT)
   @javax.annotation.Nullable
@@ -64,6 +119,25 @@ public class RunMetadata {
 
   public RunMetadata() {
   }
+
+  public RunMetadata metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
+    return this;
+  }
+
+  /**
+   * Get metadataType
+   * @return metadataType
+   */
+  @javax.annotation.Nonnull
+  public MetadataTypeEnum getMetadataType() {
+    return metadataType;
+  }
+
+  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
+  }
+
 
   public RunMetadata product(@javax.annotation.Nullable Product product) {
     this.product = product;
@@ -157,20 +231,22 @@ public class RunMetadata {
       return false;
     }
     RunMetadata runMetadata = (RunMetadata) o;
-    return Objects.equals(this.product, runMetadata.product) &&
+    return Objects.equals(this.metadataType, runMetadata.metadataType) &&
+        Objects.equals(this.product, runMetadata.product) &&
         Objects.equals(this.target, runMetadata.target)&&
         Objects.equals(this.additionalProperties, runMetadata.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(product, target, additionalProperties);
+    return Objects.hash(metadataType, product, target, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class RunMetadata {\n");
+    sb.append("    metadataType: ").append(toIndentedString(metadataType)).append("\n");
     sb.append("    product: ").append(toIndentedString(product)).append("\n");
     sb.append("    target: ").append(toIndentedString(target)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -195,10 +271,10 @@ public class RunMetadata {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("product", "target"));
+    openapiFields = new HashSet<String>(Arrays.asList("metadata_type", "product", "target"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(0);
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
   }
 
   /**
@@ -213,7 +289,19 @@ public class RunMetadata {
           throw new IllegalArgumentException(String.format("The required field(s) %s in RunMetadata is not found in the empty JSON string", RunMetadata.openapiRequiredFields.toString()));
         }
       }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : RunMetadata.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
+      }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       // validate the optional field `product`
       if (jsonObj.get("product") != null && !jsonObj.get("product").isJsonNull()) {
         Product.validateJsonElement(jsonObj.get("product"));

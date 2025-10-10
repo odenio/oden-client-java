@@ -1,15 +1,14 @@
 
 
-# BatchMetadata
+# CustomMetadata
 
-Metadata associated with a batch interval
+Metadata associated with a custom interval type
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  |
-|**run** | [**Interval**](Interval.md) |  |  [optional] |
 
 
 
@@ -17,7 +16,7 @@ Metadata associated with a batch interval
 
 | Name | Value |
 |---- | -----|
-| BATCH | &quot;batch&quot; |
+| CUSTOM | &quot;custom&quot; |
 
 
 

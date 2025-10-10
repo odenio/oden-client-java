@@ -6,6 +6,7 @@ api/openapi.yaml
 build.gradle
 build.sbt
 docs/BatchMetadata.md
+docs/CustomMetadata.md
 docs/Factory.md
 docs/GenericError.md
 docs/Interval.md
@@ -85,6 +86,7 @@ src/main/java/oden/auth/HttpBasicAuth.java
 src/main/java/oden/auth/HttpBearerAuth.java
 src/main/java/oden/model/AbstractOpenApiSchema.java
 src/main/java/oden/model/BatchMetadata.java
+src/main/java/oden/model/CustomMetadata.java
 src/main/java/oden/model/Factory.java
 src/main/java/oden/model/GenericError.java
 src/main/java/oden/model/Interval.java
@@ -116,3 +118,4 @@ src/main/java/oden/model/V2LineSearchPost500Response.java
 src/main/java/oden/model/V2QualityTestsDeletePostRequest.java
 src/main/java/oden/model/V2ScrapYieldSearchPostRequest.java
 src/main/java/oden/model/V2ScrapYieldSetPostRequest.java
+src/test/java/oden/model/CustomMetadataTest.java

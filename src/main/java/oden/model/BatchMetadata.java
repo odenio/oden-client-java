@@ -49,8 +49,63 @@ import oden.JSON;
 /**
  * Metadata associated with a batch interval
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T07:47:46.408594425Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class BatchMetadata {
+  /**
+   * Gets or Sets metadataType
+   */
+  @JsonAdapter(MetadataTypeEnum.Adapter.class)
+  public enum MetadataTypeEnum {
+    BATCH("batch");
+
+    private String value;
+
+    MetadataTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static MetadataTypeEnum fromValue(String value) {
+      for (MetadataTypeEnum b : MetadataTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<MetadataTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final MetadataTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public MetadataTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return MetadataTypeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
+  @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nonnull
+  private MetadataTypeEnum metadataType;
+
   public static final String SERIALIZED_NAME_RUN = "run";
   @SerializedName(SERIALIZED_NAME_RUN)
   @javax.annotation.Nullable
@@ -58,6 +113,25 @@ public class BatchMetadata {
 
   public BatchMetadata() {
   }
+
+  public BatchMetadata metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
+    return this;
+  }
+
+  /**
+   * Get metadataType
+   * @return metadataType
+   */
+  @javax.annotation.Nonnull
+  public MetadataTypeEnum getMetadataType() {
+    return metadataType;
+  }
+
+  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
+  }
+
 
   public BatchMetadata run(@javax.annotation.Nullable Interval run) {
     this.run = run;
@@ -132,19 +206,21 @@ public class BatchMetadata {
       return false;
     }
     BatchMetadata batchMetadata = (BatchMetadata) o;
-    return Objects.equals(this.run, batchMetadata.run)&&
+    return Objects.equals(this.metadataType, batchMetadata.metadataType) &&
+        Objects.equals(this.run, batchMetadata.run)&&
         Objects.equals(this.additionalProperties, batchMetadata.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(run, additionalProperties);
+    return Objects.hash(metadataType, run, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class BatchMetadata {\n");
+    sb.append("    metadataType: ").append(toIndentedString(metadataType)).append("\n");
     sb.append("    run: ").append(toIndentedString(run)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -168,10 +244,10 @@ public class BatchMetadata {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("run"));
+    openapiFields = new HashSet<String>(Arrays.asList("metadata_type", "run"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(0);
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
   }
 
   /**
@@ -186,7 +262,19 @@ public class BatchMetadata {
           throw new IllegalArgumentException(String.format("The required field(s) %s in BatchMetadata is not found in the empty JSON string", BatchMetadata.openapiRequiredFields.toString()));
         }
       }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : BatchMetadata.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
+      }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       // validate the optional field `run`
       if (jsonObj.get("run") != null && !jsonObj.get("run").isJsonNull()) {
         Interval.validateJsonElement(jsonObj.get("run"));

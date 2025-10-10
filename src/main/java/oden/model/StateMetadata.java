@@ -50,8 +50,63 @@ import oden.JSON;
 /**
  * Metadata associated with a state interval
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T07:47:46.408594425Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class StateMetadata {
+  /**
+   * Gets or Sets metadataType
+   */
+  @JsonAdapter(MetadataTypeEnum.Adapter.class)
+  public enum MetadataTypeEnum {
+    STATE("state");
+
+    private String value;
+
+    MetadataTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static MetadataTypeEnum fromValue(String value) {
+      for (MetadataTypeEnum b : MetadataTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<MetadataTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final MetadataTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public MetadataTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return MetadataTypeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
+  }
+
+  public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
+  @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nonnull
+  private MetadataTypeEnum metadataType;
+
   public static final String SERIALIZED_NAME_REASON = "reason";
   @SerializedName(SERIALIZED_NAME_REASON)
   @javax.annotation.Nullable
@@ -69,6 +124,25 @@ public class StateMetadata {
 
   public StateMetadata() {
   }
+
+  public StateMetadata metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
+    return this;
+  }
+
+  /**
+   * Get metadataType
+   * @return metadataType
+   */
+  @javax.annotation.Nonnull
+  public MetadataTypeEnum getMetadataType() {
+    return metadataType;
+  }
+
+  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
+  }
+
 
   public StateMetadata reason(@javax.annotation.Nullable StateReason reason) {
     this.reason = reason;
@@ -181,7 +255,8 @@ public class StateMetadata {
       return false;
     }
     StateMetadata stateMetadata = (StateMetadata) o;
-    return Objects.equals(this.reason, stateMetadata.reason) &&
+    return Objects.equals(this.metadataType, stateMetadata.metadataType) &&
+        Objects.equals(this.reason, stateMetadata.reason) &&
         Objects.equals(this.comment, stateMetadata.comment) &&
         Objects.equals(this.category, stateMetadata.category)&&
         Objects.equals(this.additionalProperties, stateMetadata.additionalProperties);
@@ -189,13 +264,14 @@ public class StateMetadata {
 
   @Override
   public int hashCode() {
-    return Objects.hash(reason, comment, category, additionalProperties);
+    return Objects.hash(metadataType, reason, comment, category, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class StateMetadata {\n");
+    sb.append("    metadataType: ").append(toIndentedString(metadataType)).append("\n");
     sb.append("    reason: ").append(toIndentedString(reason)).append("\n");
     sb.append("    comment: ").append(toIndentedString(comment)).append("\n");
     sb.append("    category: ").append(toIndentedString(category)).append("\n");
@@ -221,10 +297,10 @@ public class StateMetadata {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("reason", "comment", "category"));
+    openapiFields = new HashSet<String>(Arrays.asList("metadata_type", "reason", "comment", "category"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(0);
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
   }
 
   /**
@@ -239,7 +315,19 @@ public class StateMetadata {
           throw new IllegalArgumentException(String.format("The required field(s) %s in StateMetadata is not found in the empty JSON string", StateMetadata.openapiRequiredFields.toString()));
         }
       }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : StateMetadata.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
+      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
+      }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       // validate the optional field `reason`
       if (jsonObj.get("reason") != null && !jsonObj.get("reason").isJsonNull()) {
         StateReason.validateJsonElement(jsonObj.get("reason"));

@@ -2825,6 +2825,7 @@ components:
       example:
         start_time: 2000-01-23T04:56:07.000+00:00
         metadata:
+          metadata_type: batch
           run: null
         line:
           factory:
@@ -2903,6 +2904,7 @@ components:
         intervals:
         - start_time: 2000-01-23T04:56:07.000+00:00
           metadata:
+            metadata_type: batch
             run: null
           line:
             factory:
@@ -2931,6 +2933,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - start_time: 2000-01-23T04:56:07.000+00:00
           metadata:
+            metadata_type: batch
             run: null
           line:
             factory:
@@ -3034,30 +3037,60 @@ components:
       additionalProperties: true
       description: Metadata associated with a batch interval
       example:
+        metadata_type: batch
         run: null
       properties:
+        metadata_type:
+          enum:
+          - batch
+          type: string
         run:
           $ref: "#/components/schemas/Interval"
+      required:
+      - metadata_type
       type: object
     RunMetadata:
       additionalProperties: true
       description: Metadata associated with a run interval
       properties:
+        metadata_type:
+          enum:
+          - run
+          type: string
         product:
           $ref: "#/components/schemas/Product"
         target:
           $ref: "#/components/schemas/Target"
+      required:
+      - metadata_type
       type: object
     StateMetadata:
       additionalProperties: true
       description: Metadata associated with a state interval
       properties:
+        metadata_type:
+          enum:
+          - state
+          type: string
         reason:
           $ref: "#/components/schemas/StateReason"
         comment:
           type: string
         category:
           $ref: "#/components/schemas/StateCategory"
+      required:
+      - metadata_type
+      type: object
+    CustomMetadata:
+      additionalProperties: true
+      description: Metadata associated with a custom interval type
+      properties:
+        metadata_type:
+          enum:
+          - custom
+          type: string
+      required:
+      - metadata_type
       type: object
     Unit:
       description: |
@@ -3130,6 +3163,7 @@ components:
         interval:
           start_time: 2000-01-23T04:56:07.000+00:00
           metadata:
+            metadata_type: batch
             run: null
           line:
             factory:
@@ -3356,11 +3390,18 @@ components:
     Interval_metadata:
       description: |
         Metadata about this interval, such as the associated run or the state category. Will differ based on the type of interval.
+      discriminator:
+        mapping:
+          batch: "#/components/schemas/BatchMetadata"
+          run: "#/components/schemas/RunMetadata"
+          state: "#/components/schemas/StateMetadata"
+          custom: "#/components/schemas/CustomMetadata"
+        propertyName: metadata_type
       oneOf:
       - $ref: "#/components/schemas/BatchMetadata"
       - $ref: "#/components/schemas/RunMetadata"
       - $ref: "#/components/schemas/StateMetadata"
-      - type: object
+      - $ref: "#/components/schemas/CustomMetadata"
   securitySchemes:
     APIKeyAuth:
       description: Prefix the value with \"Token\" to indicate the custom authorization

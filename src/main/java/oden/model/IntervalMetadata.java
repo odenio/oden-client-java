@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import oden.model.BatchMetadata;
+import oden.model.CustomMetadata;
 import oden.model.Interval;
 import oden.model.Product;
 import oden.model.RunMetadata;
@@ -65,7 +66,7 @@ import com.google.gson.JsonParseException;
 
 import oden.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-03T07:47:46.408594425Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class IntervalMetadata extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(IntervalMetadata.class.getName());
 
@@ -80,7 +81,7 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
             final TypeAdapter<BatchMetadata> adapterBatchMetadata = gson.getDelegateAdapter(this, TypeToken.get(BatchMetadata.class));
             final TypeAdapter<RunMetadata> adapterRunMetadata = gson.getDelegateAdapter(this, TypeToken.get(RunMetadata.class));
             final TypeAdapter<StateMetadata> adapterStateMetadata = gson.getDelegateAdapter(this, TypeToken.get(StateMetadata.class));
-            final TypeAdapter<Object> adapterObject = gson.getDelegateAdapter(this, TypeToken.get(Object.class));
+            final TypeAdapter<CustomMetadata> adapterCustomMetadata = gson.getDelegateAdapter(this, TypeToken.get(CustomMetadata.class));
 
             return (TypeAdapter<T>) new TypeAdapter<IntervalMetadata>() {
                 @Override
@@ -108,13 +109,13 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
                         elementAdapter.write(out, element);
                         return;
                     }
-                    // check if the actual instance is of the type `Object`
-                    if (value.getActualInstance() instanceof Object) {
-                        JsonPrimitive primitive = adapterObject.toJsonTree((Object)value.getActualInstance()).getAsJsonPrimitive();
-                        elementAdapter.write(out, primitive);
+                    // check if the actual instance is of the type `CustomMetadata`
+                    if (value.getActualInstance() instanceof CustomMetadata) {
+                        JsonElement element = adapterCustomMetadata.toJsonTree((CustomMetadata)value.getActualInstance());
+                        elementAdapter.write(out, element);
                         return;
                     }
-                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: BatchMetadata, Object, RunMetadata, StateMetadata");
+                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: BatchMetadata, CustomMetadata, RunMetadata, StateMetadata");
                 }
 
                 @Override
@@ -162,19 +163,17 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
                         errorMessages.add(String.format("Deserialization for StateMetadata failed with `%s`.", e.getMessage()));
                         log.log(Level.FINER, "Input data does not match schema 'StateMetadata'", e);
                     }
-                    // deserialize Object
+                    // deserialize CustomMetadata
                     try {
                         // validate the JSON object to see if any exception is thrown
-                        if (!jsonElement.getAsJsonPrimitive().isNumber()) {
-                            throw new IllegalArgumentException(String.format("Expected json element to be of type Number in the JSON string but got `%s`", jsonElement.toString()));
-                        }
-                        actualAdapter = adapterObject;
+                        CustomMetadata.validateJsonElement(jsonElement);
+                        actualAdapter = adapterCustomMetadata;
                         match++;
-                        log.log(Level.FINER, "Input data matches schema 'Object'");
+                        log.log(Level.FINER, "Input data matches schema 'CustomMetadata'");
                     } catch (Exception e) {
                         // deserialization failed, continue
-                        errorMessages.add(String.format("Deserialization for Object failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'Object'", e);
+                        errorMessages.add(String.format("Deserialization for CustomMetadata failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'CustomMetadata'", e);
                     }
 
                     if (match == 1) {
@@ -205,7 +204,7 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
         schemas.put("BatchMetadata", BatchMetadata.class);
         schemas.put("RunMetadata", RunMetadata.class);
         schemas.put("StateMetadata", StateMetadata.class);
-        schemas.put("Object", Object.class);
+        schemas.put("CustomMetadata", CustomMetadata.class);
     }
 
     @Override
@@ -216,7 +215,7 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * BatchMetadata, Object, RunMetadata, StateMetadata
+     * BatchMetadata, CustomMetadata, RunMetadata, StateMetadata
      *
      * It could be an instance of the 'oneOf' schemas.
      */
@@ -237,19 +236,19 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
             return;
         }
 
-        if (instance instanceof Object) {
+        if (instance instanceof CustomMetadata) {
             super.setActualInstance(instance);
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be BatchMetadata, Object, RunMetadata, StateMetadata");
+        throw new RuntimeException("Invalid instance type. Must be BatchMetadata, CustomMetadata, RunMetadata, StateMetadata");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * BatchMetadata, Object, RunMetadata, StateMetadata
+     * BatchMetadata, CustomMetadata, RunMetadata, StateMetadata
      *
-     * @return The actual instance (BatchMetadata, Object, RunMetadata, StateMetadata)
+     * @return The actual instance (BatchMetadata, CustomMetadata, RunMetadata, StateMetadata)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -291,14 +290,14 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
     }
 
     /**
-     * Get the actual instance of `Object`. If the actual instance is not `Object`,
+     * Get the actual instance of `CustomMetadata`. If the actual instance is not `CustomMetadata`,
      * the ClassCastException will be thrown.
      *
-     * @return The actual instance of `Object`
-     * @throws ClassCastException if the instance is not `Object`
+     * @return The actual instance of `CustomMetadata`
+     * @throws ClassCastException if the instance is not `CustomMetadata`
      */
-    public Object getObject() throws ClassCastException {
-        return (Object)super.getActualInstance();
+    public CustomMetadata getCustomMetadata() throws ClassCastException {
+        return (CustomMetadata)super.getActualInstance();
     }
 
     /**
@@ -335,18 +334,16 @@ public class IntervalMetadata extends AbstractOpenApiSchema {
             errorMessages.add(String.format("Deserialization for StateMetadata failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
-        // validate the json string with Object
+        // validate the json string with CustomMetadata
         try {
-            if (!jsonElement.getAsJsonPrimitive().isNumber()) {
-                throw new IllegalArgumentException(String.format("Expected json element to be of type Number in the JSON string but got `%s`", jsonElement.toString()));
-            }
+            CustomMetadata.validateJsonElement(jsonElement);
             validCount++;
         } catch (Exception e) {
-            errorMessages.add(String.format("Deserialization for Object failed with `%s`.", e.getMessage()));
+            errorMessages.add(String.format("Deserialization for CustomMetadata failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
         if (validCount != 1) {
-            throw new IOException(String.format("The JSON string is invalid for IntervalMetadata with oneOf schemas: BatchMetadata, Object, RunMetadata, StateMetadata. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
+            throw new IOException(String.format("The JSON string is invalid for IntervalMetadata with oneOf schemas: BatchMetadata, CustomMetadata, RunMetadata, StateMetadata. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
         }
     }
 

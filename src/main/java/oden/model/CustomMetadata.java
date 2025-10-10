@@ -46,84 +46,130 @@ import java.util.Set;
 import oden.JSON;
 
 /**
- * V2LineSearchPost400Response
+ * Metadata associated with a custom interval type
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
-public class V2LineSearchPost400Response {
-  public static final String SERIALIZED_NAME_ERROR = "error";
-  @SerializedName(SERIALIZED_NAME_ERROR)
-  @javax.annotation.Nonnull
-  private String error;
+public class CustomMetadata {
+  /**
+   * Gets or Sets metadataType
+   */
+  @JsonAdapter(MetadataTypeEnum.Adapter.class)
+  public enum MetadataTypeEnum {
+    CUSTOM("custom");
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  @javax.annotation.Nonnull
-  private String name;
+    private String value;
 
-  public static final String SERIALIZED_NAME_RETRYABLE = "retryable";
-  @SerializedName(SERIALIZED_NAME_RETRYABLE)
-  @javax.annotation.Nonnull
-  private Boolean retryable;
+    MetadataTypeEnum(String value) {
+      this.value = value;
+    }
 
-  public V2LineSearchPost400Response() {
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static MetadataTypeEnum fromValue(String value) {
+      for (MetadataTypeEnum b : MetadataTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<MetadataTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final MetadataTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public MetadataTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return MetadataTypeEnum.fromValue(value);
+      }
+    }
+
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+      String value = jsonElement.getAsString();
+      MetadataTypeEnum.fromValue(value);
+    }
   }
 
-  public V2LineSearchPost400Response error(@javax.annotation.Nonnull String error) {
-    this.error = error;
+  public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
+  @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
+  @javax.annotation.Nonnull
+  private MetadataTypeEnum metadataType;
+
+  public CustomMetadata() {
+  }
+
+  public CustomMetadata metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
     return this;
   }
 
   /**
-   * Get error
-   * @return error
+   * Get metadataType
+   * @return metadataType
    */
   @javax.annotation.Nonnull
-  public String getError() {
-    return error;
+  public MetadataTypeEnum getMetadataType() {
+    return metadataType;
   }
 
-  public void setError(@javax.annotation.Nonnull String error) {
-    this.error = error;
+  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+    this.metadataType = metadataType;
   }
 
+  /**
+   * A container for additional, undeclared properties.
+   * This is a holder for any undeclared properties as specified with
+   * the 'additionalProperties' keyword in the OAS document.
+   */
+  private Map<String, Object> additionalProperties;
 
-  public V2LineSearchPost400Response name(@javax.annotation.Nonnull String name) {
-    this.name = name;
+  /**
+   * Set the additional (undeclared) property with the specified name and value.
+   * If the property does not already exist, create it otherwise replace it.
+   *
+   * @param key name of the property
+   * @param value value of the property
+   * @return the CustomMetadata instance itself
+   */
+  public CustomMetadata putAdditionalProperty(String key, Object value) {
+    if (this.additionalProperties == null) {
+        this.additionalProperties = new HashMap<String, Object>();
+    }
+    this.additionalProperties.put(key, value);
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Return the additional (undeclared) property.
+   *
+   * @return a map of objects
    */
-  @javax.annotation.Nonnull
-  public String getName() {
-    return name;
-  }
-
-  public void setName(@javax.annotation.Nonnull String name) {
-    this.name = name;
-  }
-
-
-  public V2LineSearchPost400Response retryable(@javax.annotation.Nonnull Boolean retryable) {
-    this.retryable = retryable;
-    return this;
+  public Map<String, Object> getAdditionalProperties() {
+    return additionalProperties;
   }
 
   /**
-   * Get retryable
-   * @return retryable
+   * Return the additional (undeclared) property with the specified name.
+   *
+   * @param key name of the property
+   * @return an object
    */
-  @javax.annotation.Nonnull
-  public Boolean getRetryable() {
-    return retryable;
+  public Object getAdditionalProperty(String key) {
+    if (this.additionalProperties == null) {
+        return null;
+    }
+    return this.additionalProperties.get(key);
   }
-
-  public void setRetryable(@javax.annotation.Nonnull Boolean retryable) {
-    this.retryable = retryable;
-  }
-
 
 
   @Override
@@ -134,24 +180,22 @@ public class V2LineSearchPost400Response {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    V2LineSearchPost400Response v2LineSearchPost400Response = (V2LineSearchPost400Response) o;
-    return Objects.equals(this.error, v2LineSearchPost400Response.error) &&
-        Objects.equals(this.name, v2LineSearchPost400Response.name) &&
-        Objects.equals(this.retryable, v2LineSearchPost400Response.retryable);
+    CustomMetadata customMetadata = (CustomMetadata) o;
+    return Objects.equals(this.metadataType, customMetadata.metadataType)&&
+        Objects.equals(this.additionalProperties, customMetadata.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(error, name, retryable);
+    return Objects.hash(metadataType, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class V2LineSearchPost400Response {\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    retryable: ").append(toIndentedString(retryable)).append("\n");
+    sb.append("class CustomMetadata {\n");
+    sb.append("    metadataType: ").append(toIndentedString(metadataType)).append("\n");
+    sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -173,71 +217,105 @@ public class V2LineSearchPost400Response {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("error", "name", "retryable"));
+    openapiFields = new HashSet<String>(Arrays.asList("metadata_type"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("error", "name", "retryable"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
   }
 
   /**
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to V2LineSearchPost400Response
+   * @throws IOException if the JSON Element is invalid with respect to CustomMetadata
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!V2LineSearchPost400Response.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in V2LineSearchPost400Response is not found in the empty JSON string", V2LineSearchPost400Response.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!V2LineSearchPost400Response.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `V2LineSearchPost400Response` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!CustomMetadata.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in CustomMetadata is not found in the empty JSON string", CustomMetadata.openapiRequiredFields.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : V2LineSearchPost400Response.openapiRequiredFields) {
+      for (String requiredField : CustomMetadata.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("error").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
+      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!V2LineSearchPost400Response.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'V2LineSearchPost400Response' and its subtypes
+       if (!CustomMetadata.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'CustomMetadata' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<V2LineSearchPost400Response> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(V2LineSearchPost400Response.class));
+       final TypeAdapter<CustomMetadata> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(CustomMetadata.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<V2LineSearchPost400Response>() {
+       return (TypeAdapter<T>) new TypeAdapter<CustomMetadata>() {
            @Override
-           public void write(JsonWriter out, V2LineSearchPost400Response value) throws IOException {
+           public void write(JsonWriter out, CustomMetadata value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
+             obj.remove("additionalProperties");
+             // serialize additional properties
+             if (value.getAdditionalProperties() != null) {
+               for (Map.Entry<String, Object> entry : value.getAdditionalProperties().entrySet()) {
+                 if (entry.getValue() instanceof String)
+                   obj.addProperty(entry.getKey(), (String) entry.getValue());
+                 else if (entry.getValue() instanceof Number)
+                   obj.addProperty(entry.getKey(), (Number) entry.getValue());
+                 else if (entry.getValue() instanceof Boolean)
+                   obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
+                 else if (entry.getValue() instanceof Character)
+                   obj.addProperty(entry.getKey(), (Character) entry.getValue());
+                 else {
+                   JsonElement jsonElement = gson.toJsonTree(entry.getValue());
+                   if (jsonElement.isJsonArray()) {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonArray());
+                   } else {
+                     obj.add(entry.getKey(), jsonElement.getAsJsonObject());
+                   }
+                 }
+               }
+             }
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public V2LineSearchPost400Response read(JsonReader in) throws IOException {
+           public CustomMetadata read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
+             JsonObject jsonObj = jsonElement.getAsJsonObject();
+             // store additional fields in the deserialized instance
+             CustomMetadata instance = thisAdapter.fromJsonTree(jsonObj);
+             for (Map.Entry<String, JsonElement> entry : jsonObj.entrySet()) {
+               if (!openapiFields.contains(entry.getKey())) {
+                 if (entry.getValue().isJsonPrimitive()) { // primitive type
+                   if (entry.getValue().getAsJsonPrimitive().isString())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsString());
+                   else if (entry.getValue().getAsJsonPrimitive().isNumber())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsNumber());
+                   else if (entry.getValue().getAsJsonPrimitive().isBoolean())
+                     instance.putAdditionalProperty(entry.getKey(), entry.getValue().getAsBoolean());
+                   else
+                     throw new IllegalArgumentException(String.format("The field `%s` has unknown primitive type. Value: %s", entry.getKey(), entry.getValue().toString()));
+                 } else if (entry.getValue().isJsonArray()) {
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), List.class));
+                 } else { // JSON object
+                     instance.putAdditionalProperty(entry.getKey(), gson.fromJson(entry.getValue(), HashMap.class));
+                 }
+               }
+             }
+             return instance;
            }
 
        }.nullSafe();
@@ -245,18 +323,18 @@ public class V2LineSearchPost400Response {
   }
 
   /**
-   * Create an instance of V2LineSearchPost400Response given an JSON string
+   * Create an instance of CustomMetadata given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of V2LineSearchPost400Response
-   * @throws IOException if the JSON string is invalid with respect to V2LineSearchPost400Response
+   * @return An instance of CustomMetadata
+   * @throws IOException if the JSON string is invalid with respect to CustomMetadata
    */
-  public static V2LineSearchPost400Response fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, V2LineSearchPost400Response.class);
+  public static CustomMetadata fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, CustomMetadata.class);
   }
 
   /**
-   * Convert an instance of V2LineSearchPost400Response to an JSON string
+   * Convert an instance of CustomMetadata to an JSON string
    *
    * @return JSON string
    */

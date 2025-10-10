@@ -11,65 +11,38 @@
  */
 
 
-package oden.auth;
+package oden.model;
 
-import oden.ApiException;
-import oden.Pair;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import java.net.URI;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Supplier;
+/**
+ * Model tests for CustomMetadata
+ */
+public class CustomMetadataTest {
+    private final CustomMetadata model = new CustomMetadata();
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
-public class HttpBearerAuth implements Authentication {
-  private final String scheme;
-  private Supplier<String> tokenSupplier;
-
-  public HttpBearerAuth(String scheme) {
-    this.scheme = scheme;
-  }
-
-  /**
-   * Gets the token, which together with the scheme, will be sent as the value of the Authorization header.
-   *
-   * @return The bearer token
-   */
-  public String getBearerToken() {
-    return tokenSupplier.get();
-  }
-
-  /**
-   * Sets the token, which together with the scheme, will be sent as the value of the Authorization header.
-   *
-   * @param bearerToken The bearer token to send in the Authorization header
-   */
-  public void setBearerToken(String bearerToken) {
-    this.tokenSupplier = () -> bearerToken;
-  }
-
-  /**
-   * Sets the supplier of tokens, which together with the scheme, will be sent as the value of the Authorization header.
-   *
-   * @param tokenSupplier The supplier of bearer tokens to send in the Authorization header
-   */
-  public void setBearerToken(Supplier<String> tokenSupplier) {
-    this.tokenSupplier = tokenSupplier;
-  }
-
-  @Override
-  public void applyToParams(List<Pair> queryParams, Map<String, String> headerParams, Map<String, String> cookieParams,
-                            String payload, String method, URI uri) throws ApiException {
-    String bearerToken = Optional.ofNullable(tokenSupplier).map(Supplier::get).orElse(null);
-    if (bearerToken == null) {
-      return;
+    /**
+     * Model tests for CustomMetadata
+     */
+    @Test
+    public void testCustomMetadata() {
+        // TODO: test CustomMetadata
     }
 
-    headerParams.put("Authorization", (scheme != null ? upperCaseBearer(scheme) + " " : "") + bearerToken);
-  }
+    /**
+     * Test the property 'metadataType'
+     */
+    @Test
+    public void metadataTypeTest() {
+        // TODO: test metadataType
+    }
 
-  private static String upperCaseBearer(String scheme) {
-    return ("bearer".equalsIgnoreCase(scheme)) ? "Bearer" : scheme;
-  }
 }
