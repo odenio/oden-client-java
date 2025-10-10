@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * Metadata associated with a run interval
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T20:09:13.799125834Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class RunMetadata {
   /**
    * Gets or Sets metadataType
@@ -104,7 +104,7 @@ public class RunMetadata {
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private MetadataTypeEnum metadataType;
 
   public static final String SERIALIZED_NAME_PRODUCT = "product";
@@ -120,23 +120,22 @@ public class RunMetadata {
   public RunMetadata() {
   }
 
-  public RunMetadata metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+  public RunMetadata(
+     MetadataTypeEnum metadataType
+  ) {
+    this();
     this.metadataType = metadataType;
-    return this;
   }
 
   /**
    * Get metadataType
    * @return metadataType
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
 
-  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
-    this.metadataType = metadataType;
-  }
 
 
   public RunMetadata product(@javax.annotation.Nullable Product product) {
@@ -274,7 +273,7 @@ public class RunMetadata {
     openapiFields = new HashSet<String>(Arrays.asList("metadata_type", "product", "target"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
+    openapiRequiredFields = new HashSet<String>(0);
   }
 
   /**
@@ -289,19 +288,14 @@ public class RunMetadata {
           throw new IllegalArgumentException(String.format("The required field(s) %s in RunMetadata is not found in the empty JSON string", RunMetadata.openapiRequiredFields.toString()));
         }
       }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : RunMetadata.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
+      if ((jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) && !jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
-      // validate the required field `metadata_type`
-      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
+      // validate the optional field `metadata_type`
+      if (jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) {
+        MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
+      }
       // validate the optional field `product`
       if (jsonObj.get("product") != null && !jsonObj.get("product").isJsonNull()) {
         Product.validateJsonElement(jsonObj.get("product"));

@@ -8,7 +8,7 @@ Metadata about this interval, such as the associated run or the state category. 
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  |
+|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  [optional] [readonly] |
 |**run** | [**Interval**](Interval.md) |  |  [optional] |
 |**product** | [**Product**](Product.md) |  |  [optional] |
 |**target** | [**Target**](Target.md) |  |  [optional] |

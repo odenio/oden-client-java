@@ -8,7 +8,7 @@ Metadata associated with a batch interval
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  |
+|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  [optional] [readonly] |
 |**run** | [**Interval**](Interval.md) |  |  [optional] |
 
 

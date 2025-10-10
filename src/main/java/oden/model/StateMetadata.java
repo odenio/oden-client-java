@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * Metadata associated with a state interval
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T20:09:13.799125834Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class StateMetadata {
   /**
    * Gets or Sets metadataType
@@ -104,7 +104,7 @@ public class StateMetadata {
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private MetadataTypeEnum metadataType;
 
   public static final String SERIALIZED_NAME_REASON = "reason";
@@ -125,23 +125,22 @@ public class StateMetadata {
   public StateMetadata() {
   }
 
-  public StateMetadata metadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
+  public StateMetadata(
+     MetadataTypeEnum metadataType
+  ) {
+    this();
     this.metadataType = metadataType;
-    return this;
   }
 
   /**
    * Get metadataType
    * @return metadataType
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
 
-  public void setMetadataType(@javax.annotation.Nonnull MetadataTypeEnum metadataType) {
-    this.metadataType = metadataType;
-  }
 
 
   public StateMetadata reason(@javax.annotation.Nullable StateReason reason) {
@@ -300,7 +299,7 @@ public class StateMetadata {
     openapiFields = new HashSet<String>(Arrays.asList("metadata_type", "reason", "comment", "category"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
+    openapiRequiredFields = new HashSet<String>(0);
   }
 
   /**
@@ -315,19 +314,14 @@ public class StateMetadata {
           throw new IllegalArgumentException(String.format("The required field(s) %s in StateMetadata is not found in the empty JSON string", StateMetadata.openapiRequiredFields.toString()));
         }
       }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : StateMetadata.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
+      if ((jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) && !jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
-      // validate the required field `metadata_type`
-      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
+      // validate the optional field `metadata_type`
+      if (jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) {
+        MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
+      }
       // validate the optional field `reason`
       if (jsonObj.get("reason") != null && !jsonObj.get("reason").isJsonNull()) {
         StateReason.validateJsonElement(jsonObj.get("reason"));

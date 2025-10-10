@@ -8,7 +8,7 @@ Metadata associated with a state interval
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  |
+|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  [optional] [readonly] |
 |**reason** | [**StateReason**](StateReason.md) |  |  [optional] |
 |**comment** | **String** |  |  [optional] |
 |**category** | [**StateCategory**](StateCategory.md) |  |  [optional] |

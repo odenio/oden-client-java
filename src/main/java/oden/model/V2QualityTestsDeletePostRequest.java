@@ -53,7 +53,7 @@ import oden.JSON;
 /**
  * V2QualityTestsDeletePostRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T17:06:23.777927006Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T20:09:13.799125834Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class V2QualityTestsDeletePostRequest {
   public static final String SERIALIZED_NAME_IDS = "ids";
   @SerializedName(SERIALIZED_NAME_IDS)

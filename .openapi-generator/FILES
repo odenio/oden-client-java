@@ -118,4 +118,3 @@ src/main/java/oden/model/V2LineSearchPost500Response.java
 src/main/java/oden/model/V2QualityTestsDeletePostRequest.java
 src/main/java/oden/model/V2ScrapYieldSearchPostRequest.java
 src/main/java/oden/model/V2ScrapYieldSetPostRequest.java
-src/test/java/oden/model/CustomMetadataTest.java
