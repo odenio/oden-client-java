@@ -51,7 +51,7 @@ import oden.JSON;
 /**
  * An entity representing a product/line mapping. Mappings are simple 1:1 relationships, and as such cannot be modified, only created. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T20:09:13.799125834Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T21:23:12.785593097Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class ProductMapping {
   public static final String SERIALIZED_NAME_PRODUCT = "product";
   @SerializedName(SERIALIZED_NAME_PRODUCT)

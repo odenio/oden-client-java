@@ -53,7 +53,7 @@ import oden.JSON;
 /**
  * A set of intervals to create
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T20:09:13.799125834Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-10T21:23:12.785593097Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class IntervalBulkCreate {
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
