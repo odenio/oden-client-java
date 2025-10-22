@@ -2,7 +2,7 @@
 
 Oden API
 - API version: 2.0.0
-  - Build date: 2025-10-22T01:38:18.751269043Z[Etc/UTC]
+  - Build date: 2025-10-22T02:05:12.729237221Z[Etc/UTC]
   - Generator version: 7.15.0
 
 The Oden Private Partner API exposes RESTful API endpoints for clients to get, create and update data on the Oden Platform.
