@@ -116,6 +116,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Interval.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalBulkCreate.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalBulkDelete.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalBulkUpdate.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalMetadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Line.CustomTypeAdapterFactory());
@@ -135,6 +136,8 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Target.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Unit.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsDeletePost200Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsUpdatePost200Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsUpdatePost200ResponseFailedIntervalsInner.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost400Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost409Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost500Response.CustomTypeAdapterFactory());

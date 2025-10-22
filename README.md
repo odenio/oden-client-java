@@ -2,7 +2,7 @@
 
 Oden API
 - API version: 2.0.0
-  - Build date: 2025-10-10T21:23:12.785593097Z[Etc/UTC]
+  - Build date: 2025-10-22T01:06:09.372964678Z[Etc/UTC]
   - Generator version: 7.15.0
 
 The Oden Private Partner API exposes RESTful API endpoints for clients to get, create and update data on the Oden Platform.
@@ -220,8 +220,10 @@ Class | Method | HTTP request | Description
 *IntervalsApi* | [**v2IntervalSearchPost**](docs/IntervalsApi.md#v2IntervalSearchPost) | **POST** /v2/interval/search | 
 *IntervalsApi* | [**v2IntervalSetPost**](docs/IntervalsApi.md#v2IntervalSetPost) | **POST** /v2/interval/set | 
 *IntervalsApi* | [**v2IntervalTypeSearchPost**](docs/IntervalsApi.md#v2IntervalTypeSearchPost) | **POST** /v2/interval_type/search | 
+*IntervalsApi* | [**v2IntervalUpdatePost**](docs/IntervalsApi.md#v2IntervalUpdatePost) | **POST** /v2/interval/update | 
 *IntervalsApi* | [**v2IntervalsDeletePost**](docs/IntervalsApi.md#v2IntervalsDeletePost) | **POST** /v2/intervals/delete | 
 *IntervalsApi* | [**v2IntervalsSetPost**](docs/IntervalsApi.md#v2IntervalsSetPost) | **POST** /v2/intervals/set | 
+*IntervalsApi* | [**v2IntervalsUpdatePost**](docs/IntervalsApi.md#v2IntervalsUpdatePost) | **POST** /v2/intervals/update | 
 *MachineGroupsApi* | [**v2FactorySearchPost**](docs/MachineGroupsApi.md#v2FactorySearchPost) | **POST** /v2/factory/search | 
 *MachineGroupsApi* | [**v2LineSearchPost**](docs/MachineGroupsApi.md#v2LineSearchPost) | **POST** /v2/line/search | 
 *MetricGroupsApi* | [**v2MetricGroupSearchPost**](docs/MetricGroupsApi.md#v2MetricGroupSearchPost) | **POST** /v2/metric_group/search | 
@@ -254,6 +256,7 @@ Class | Method | HTTP request | Description
  - [Interval](docs/Interval.md)
  - [IntervalBulkCreate](docs/IntervalBulkCreate.md)
  - [IntervalBulkDelete](docs/IntervalBulkDelete.md)
+ - [IntervalBulkUpdate](docs/IntervalBulkUpdate.md)
  - [IntervalMetadata](docs/IntervalMetadata.md)
  - [IntervalType](docs/IntervalType.md)
  - [Line](docs/Line.md)
@@ -274,6 +277,8 @@ Class | Method | HTTP request | Description
  - [Target](docs/Target.md)
  - [Unit](docs/Unit.md)
  - [V2IntervalsDeletePost200Response](docs/V2IntervalsDeletePost200Response.md)
+ - [V2IntervalsUpdatePost200Response](docs/V2IntervalsUpdatePost200Response.md)
+ - [V2IntervalsUpdatePost200ResponseFailedIntervalsInner](docs/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.md)
  - [V2LineSearchPost400Response](docs/V2LineSearchPost400Response.md)
  - [V2LineSearchPost409Response](docs/V2LineSearchPost409Response.md)
  - [V2LineSearchPost500Response](docs/V2LineSearchPost500Response.md)

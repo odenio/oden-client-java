@@ -20,10 +20,12 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.UUID;
-import oden.model.Match;
-import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.List;
+import oden.model.Interval;
+import oden.model.IntervalType;
+import oden.model.Line;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,130 +51,90 @@ import java.util.Set;
 import oden.JSON;
 
 /**
- * An entity representing a factory.
+ * A set of intervals to update
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-22T01:06:09.372964678Z[Etc/UTC]", comments = "Generator version: 7.15.0")
-public class Factory {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+public class IntervalBulkUpdate {
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private UUID id;
+  private IntervalType type;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String SERIALIZED_NAME_LINE = "line";
+  @SerializedName(SERIALIZED_NAME_LINE)
   @javax.annotation.Nullable
-  private String name;
+  private Line line;
 
-  public static final String SERIALIZED_NAME_SECONDARY_NAME = "secondary_name";
-  @SerializedName(SERIALIZED_NAME_SECONDARY_NAME)
+  public static final String SERIALIZED_NAME_INTERVALS = "intervals";
+  @SerializedName(SERIALIZED_NAME_INTERVALS)
   @javax.annotation.Nullable
-  private String secondaryName;
+  private List<Interval> intervals = new ArrayList<>();
 
-  public static final String SERIALIZED_NAME_TIMEZONE = "timezone";
-  @SerializedName(SERIALIZED_NAME_TIMEZONE)
-  @javax.annotation.Nullable
-  private String timezone;
-
-  public static final String SERIALIZED_NAME_MATCH = "match";
-  @SerializedName(SERIALIZED_NAME_MATCH)
-  @javax.annotation.Nullable
-  private Match match = Match.UNIQUE;
-
-  public Factory() {
+  public IntervalBulkUpdate() {
   }
 
-  public Factory id(@javax.annotation.Nullable UUID id) {
-    this.id = id;
+  public IntervalBulkUpdate type(@javax.annotation.Nullable IntervalType type) {
+    this.type = type;
     return this;
   }
 
   /**
-   * Get id
-   * @return id
+   * Get type
+   * @return type
    */
   @javax.annotation.Nullable
-  public UUID getId() {
-    return id;
+  public IntervalType getType() {
+    return type;
   }
 
-  public void setId(@javax.annotation.Nullable UUID id) {
-    this.id = id;
+  public void setType(@javax.annotation.Nullable IntervalType type) {
+    this.type = type;
   }
 
 
-  public Factory name(@javax.annotation.Nullable String name) {
-    this.name = name;
+  public IntervalBulkUpdate line(@javax.annotation.Nullable Line line) {
+    this.line = line;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get line
+   * @return line
    */
   @javax.annotation.Nullable
-  public String getName() {
-    return name;
+  public Line getLine() {
+    return line;
   }
 
-  public void setName(@javax.annotation.Nullable String name) {
-    this.name = name;
+  public void setLine(@javax.annotation.Nullable Line line) {
+    this.line = line;
   }
 
 
-  public Factory secondaryName(@javax.annotation.Nullable String secondaryName) {
-    this.secondaryName = secondaryName;
+  public IntervalBulkUpdate intervals(@javax.annotation.Nullable List<Interval> intervals) {
+    this.intervals = intervals;
+    return this;
+  }
+
+  public IntervalBulkUpdate addIntervalsItem(Interval intervalsItem) {
+    if (this.intervals == null) {
+      this.intervals = new ArrayList<>();
+    }
+    this.intervals.add(intervalsItem);
     return this;
   }
 
   /**
-   * Get secondaryName
-   * @return secondaryName
+   * Get intervals
+   * @return intervals
    */
   @javax.annotation.Nullable
-  public String getSecondaryName() {
-    return secondaryName;
+  public List<Interval> getIntervals() {
+    return intervals;
   }
 
-  public void setSecondaryName(@javax.annotation.Nullable String secondaryName) {
-    this.secondaryName = secondaryName;
-  }
-
-
-  public Factory timezone(@javax.annotation.Nullable String timezone) {
-    this.timezone = timezone;
-    return this;
-  }
-
-  /**
-   * Get timezone
-   * @return timezone
-   */
-  @javax.annotation.Nullable
-  public String getTimezone() {
-    return timezone;
-  }
-
-  public void setTimezone(@javax.annotation.Nullable String timezone) {
-    this.timezone = timezone;
-  }
-
-
-  public Factory match(@javax.annotation.Nullable Match match) {
-    this.match = match;
-    return this;
-  }
-
-  /**
-   * Get match
-   * @return match
-   */
-  @javax.annotation.Nullable
-  public Match getMatch() {
-    return match;
-  }
-
-  public void setMatch(@javax.annotation.Nullable Match match) {
-    this.match = match;
+  public void setIntervals(@javax.annotation.Nullable List<Interval> intervals) {
+    this.intervals = intervals;
   }
 
 
@@ -185,39 +147,24 @@ public class Factory {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Factory factory = (Factory) o;
-    return Objects.equals(this.id, factory.id) &&
-        Objects.equals(this.name, factory.name) &&
-        Objects.equals(this.secondaryName, factory.secondaryName) &&
-        Objects.equals(this.timezone, factory.timezone) &&
-        Objects.equals(this.match, factory.match);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+    IntervalBulkUpdate intervalBulkUpdate = (IntervalBulkUpdate) o;
+    return Objects.equals(this.type, intervalBulkUpdate.type) &&
+        Objects.equals(this.line, intervalBulkUpdate.line) &&
+        Objects.equals(this.intervals, intervalBulkUpdate.intervals);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, secondaryName, timezone, match);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(type, line, intervals);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Factory {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    secondaryName: ").append(toIndentedString(secondaryName)).append("\n");
-    sb.append("    timezone: ").append(toIndentedString(timezone)).append("\n");
-    sb.append("    match: ").append(toIndentedString(match)).append("\n");
+    sb.append("class IntervalBulkUpdate {\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    line: ").append(toIndentedString(line)).append("\n");
+    sb.append("    intervals: ").append(toIndentedString(intervals)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -239,7 +186,7 @@ public class Factory {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("id", "name", "secondary_name", "timezone", "match"));
+    openapiFields = new HashSet<String>(Arrays.asList("type", "line", "intervals"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -249,38 +196,44 @@ public class Factory {
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to Factory
+   * @throws IOException if the JSON Element is invalid with respect to IntervalBulkUpdate
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!Factory.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in Factory is not found in the empty JSON string", Factory.openapiRequiredFields.toString()));
+        if (!IntervalBulkUpdate.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in IntervalBulkUpdate is not found in the empty JSON string", IntervalBulkUpdate.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!Factory.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `Factory` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!IntervalBulkUpdate.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `IntervalBulkUpdate` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      // validate the optional field `type`
+      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
+        IntervalType.validateJsonElement(jsonObj.get("type"));
       }
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      // validate the optional field `line`
+      if (jsonObj.get("line") != null && !jsonObj.get("line").isJsonNull()) {
+        Line.validateJsonElement(jsonObj.get("line"));
       }
-      if ((jsonObj.get("secondary_name") != null && !jsonObj.get("secondary_name").isJsonNull()) && !jsonObj.get("secondary_name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `secondary_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("secondary_name").toString()));
-      }
-      if ((jsonObj.get("timezone") != null && !jsonObj.get("timezone").isJsonNull()) && !jsonObj.get("timezone").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `timezone` to be a primitive type in the JSON string but got `%s`", jsonObj.get("timezone").toString()));
-      }
-      // validate the optional field `match`
-      if (jsonObj.get("match") != null && !jsonObj.get("match").isJsonNull()) {
-        Match.validateJsonElement(jsonObj.get("match"));
+      if (jsonObj.get("intervals") != null && !jsonObj.get("intervals").isJsonNull()) {
+        JsonArray jsonArrayintervals = jsonObj.getAsJsonArray("intervals");
+        if (jsonArrayintervals != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("intervals").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `intervals` to be an array in the JSON string but got `%s`", jsonObj.get("intervals").toString()));
+          }
+
+          // validate the optional field `intervals` (array)
+          for (int i = 0; i < jsonArrayintervals.size(); i++) {
+            Interval.validateJsonElement(jsonArrayintervals.get(i));
+          };
+        }
       }
   }
 
@@ -288,22 +241,22 @@ public class Factory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!Factory.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'Factory' and its subtypes
+       if (!IntervalBulkUpdate.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'IntervalBulkUpdate' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<Factory> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(Factory.class));
+       final TypeAdapter<IntervalBulkUpdate> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(IntervalBulkUpdate.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<Factory>() {
+       return (TypeAdapter<T>) new TypeAdapter<IntervalBulkUpdate>() {
            @Override
-           public void write(JsonWriter out, Factory value) throws IOException {
+           public void write(JsonWriter out, IntervalBulkUpdate value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public Factory read(JsonReader in) throws IOException {
+           public IntervalBulkUpdate read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -314,18 +267,18 @@ public class Factory {
   }
 
   /**
-   * Create an instance of Factory given an JSON string
+   * Create an instance of IntervalBulkUpdate given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of Factory
-   * @throws IOException if the JSON string is invalid with respect to Factory
+   * @return An instance of IntervalBulkUpdate
+   * @throws IOException if the JSON string is invalid with respect to IntervalBulkUpdate
    */
-  public static Factory fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, Factory.class);
+  public static IntervalBulkUpdate fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, IntervalBulkUpdate.class);
   }
 
   /**
-   * Convert an instance of Factory to an JSON string
+   * Convert an instance of IntervalBulkUpdate to an JSON string
    *
    * @return JSON string
    */

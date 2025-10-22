@@ -8,8 +8,10 @@ All URIs are relative to *https://api.oden.app*
 | [**v2IntervalSearchPost**](IntervalsApi.md#v2IntervalSearchPost) | **POST** /v2/interval/search |  |
 | [**v2IntervalSetPost**](IntervalsApi.md#v2IntervalSetPost) | **POST** /v2/interval/set |  |
 | [**v2IntervalTypeSearchPost**](IntervalsApi.md#v2IntervalTypeSearchPost) | **POST** /v2/interval_type/search |  |
+| [**v2IntervalUpdatePost**](IntervalsApi.md#v2IntervalUpdatePost) | **POST** /v2/interval/update |  |
 | [**v2IntervalsDeletePost**](IntervalsApi.md#v2IntervalsDeletePost) | **POST** /v2/intervals/delete |  |
 | [**v2IntervalsSetPost**](IntervalsApi.md#v2IntervalsSetPost) | **POST** /v2/intervals/set |  |
+| [**v2IntervalsUpdatePost**](IntervalsApi.md#v2IntervalsUpdatePost) | **POST** /v2/intervals/update |  |
 
 
 <a id="v2IntervalDeletePost"></a>
@@ -313,6 +315,82 @@ public class Example {
 | **400** | An error occurred regarding one of the input parameters |  -  |
 | **404** | Entity not found |  -  |
 
+<a id="v2IntervalUpdatePost"></a>
+# **v2IntervalUpdatePost**
+> List&lt;Interval&gt; v2IntervalUpdatePost(interval)
+
+
+
+Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
+
+### Example
+```java
+// Import classes:
+import oden.ApiClient;
+import oden.ApiException;
+import oden.Configuration;
+import oden.auth.*;
+import oden.models.*;
+import oden.api.IntervalsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.oden.app");
+    
+    // Configure API key authorization: APIKeyAuth
+    ApiKeyAuth APIKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("APIKeyAuth");
+    APIKeyAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //APIKeyAuth.setApiKeyPrefix("Token");
+
+    IntervalsApi apiInstance = new IntervalsApi(defaultClient);
+    Interval interval = new Interval(); // Interval | 
+    try {
+      List<Interval> result = apiInstance.v2IntervalUpdatePost(interval);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling IntervalsApi#v2IntervalUpdatePost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **interval** | [**Interval**](Interval.md)|  | |
+
+### Return type
+
+[**List&lt;Interval&gt;**](Interval.md)
+
+### Authorization
+
+[APIKeyAuth](../README.md#APIKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Updated interval. |  -  |
+| **400** | An error occurred regarding one of the input parameters |  -  |
+| **401** | User has provided either no credentials or invalid credentials |  -  |
+| **403** | User has provided valid credentials but is not authorized to access the entity  |  -  |
+| **404** | Entity not found |  -  |
+| **409** | A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  |  -  |
+| **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
+| **501** | Endpoint is not yet implemented |  -  |
+
 <a id="v2IntervalsDeletePost"></a>
 # **v2IntervalsDeletePost**
 > V2IntervalsDeletePost200Response v2IntervalsDeletePost(intervalBulkDelete)
@@ -461,6 +539,81 @@ public class Example {
 | **401** | User has provided either no credentials or invalid credentials |  -  |
 | **403** | User has provided valid credentials but is not authorized to access the entity  |  -  |
 | **404** | Entity not found |  -  |
+| **409** | A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  |  -  |
+| **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
+| **501** | Endpoint is not yet implemented |  -  |
+
+<a id="v2IntervalsUpdatePost"></a>
+# **v2IntervalsUpdatePost**
+> V2IntervalsUpdatePost200Response v2IntervalsUpdatePost(intervalBulkUpdate)
+
+
+
+Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.  Each interval in the &#x60;intervals&#x60; array must include an &#x60;id&#x60; that references an existing interval.  Updatable fields for each interval: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  The endpoint will attempt to update all intervals and return information about successes and failures: - Successfully updated intervals are returned in the response - Failed intervals are listed with their IDs and error reasons  Limitations: - Cannot exceed 2500 intervals per request - All intervals must be of the same &#x60;type&#x60; and on the same &#x60;line&#x60;  **Note:** Interval IDs must be obtained from either: - The response when creating intervals via &#x60;/v2/interval/set&#x60; or &#x60;/v2/intervals/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
+
+### Example
+```java
+// Import classes:
+import oden.ApiClient;
+import oden.ApiException;
+import oden.Configuration;
+import oden.auth.*;
+import oden.models.*;
+import oden.api.IntervalsApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://api.oden.app");
+    
+    // Configure API key authorization: APIKeyAuth
+    ApiKeyAuth APIKeyAuth = (ApiKeyAuth) defaultClient.getAuthentication("APIKeyAuth");
+    APIKeyAuth.setApiKey("YOUR API KEY");
+    // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+    //APIKeyAuth.setApiKeyPrefix("Token");
+
+    IntervalsApi apiInstance = new IntervalsApi(defaultClient);
+    IntervalBulkUpdate intervalBulkUpdate = new IntervalBulkUpdate(); // IntervalBulkUpdate | 
+    try {
+      V2IntervalsUpdatePost200Response result = apiInstance.v2IntervalsUpdatePost(intervalBulkUpdate);
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling IntervalsApi#v2IntervalsUpdatePost");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **intervalBulkUpdate** | [**IntervalBulkUpdate**](IntervalBulkUpdate.md)|  | |
+
+### Return type
+
+[**V2IntervalsUpdatePost200Response**](V2IntervalsUpdatePost200Response.md)
+
+### Authorization
+
+[APIKeyAuth](../README.md#APIKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Response containing successfully updated intervals and any failures that occurred. |  -  |
+| **400** | An error occurred regarding one of the input parameters |  -  |
+| **401** | User has provided either no credentials or invalid credentials |  -  |
+| **403** | User has provided valid credentials but is not authorized to access the entity  |  -  |
 | **409** | A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  |  -  |
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
 | **501** | Endpoint is not yet implemented |  -  |

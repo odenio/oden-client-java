@@ -1415,6 +1415,271 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v2/interval/update:
+    post:
+      description: |
+        Update an existing Interval. This endpoint only updates intervals and will not create new ones.
+
+        Must include `line`, `type`, and `id`. The `id` must reference an existing interval.
+
+        This interval's properties can be modified using the following fields:
+        - `name`: Update the interval name
+        - `start_time`: Modify the start time
+        - `end_time`: Modify the end time
+        - `metadata`: Update metadata (product, target, category, reason, etc.)
+
+        If the interval does not exist, a 404 error will be returned.
+
+        **Note:** The `id` must be obtained from either:
+        - The response when creating an interval via `/v2/interval/set`
+        - Searching for intervals via `/v2/interval/search`
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Update a Run interval's product:
+                summary: Update a Run interval with a new product
+                value:
+                  id: 178b9a1ec20
+                  type:
+                    name: RUN
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  metadata:
+                    product:
+                      name: Updated Product
+              Update a Run interval with target:
+                summary: Update a Run interval with a new target
+                value:
+                  id: 178b9a1ec20
+                  type:
+                    name: RUN
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  metadata:
+                    product:
+                      name: Example Product
+                    target:
+                      lsl: 1
+                      target_value: 2
+                      usl: 3
+                      metric_group:
+                        name: metric group name
+              Update a custom interval:
+                summary: Update a custom interval type's name and time
+                value:
+                  id: 1809d88adf0
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  name: updated_operator_id
+                  type:
+                    name: operator id
+                  start_time: 2021-04-04T09:00:04Z
+              Update a State interval:
+                summary: Update a State interval's category and reason
+                value:
+                  id: 178a61c0f00
+                  type:
+                    name: STATE
+                  line:
+                    id: 4787d6fb-f01e-405b-a38d-db23e32fa0d1
+                  metadata:
+                    category:
+                      name: Unplanned Downtime
+                    reason:
+                      name: Equipment Failure
+              Update a Batch interval:
+                summary: Update a Batch interval's name
+                value:
+                  id: 178b9a1ec20
+                  type:
+                    name: BATCH
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  name: updated_batch_name
+            schema:
+              $ref: "#/components/schemas/Interval"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Interval"
+                type: array
+          description: Updated interval.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/intervals/update:
+    post:
+      description: |
+        Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.
+
+        Each interval in the `intervals` array must include an `id` that references an existing interval.
+
+        Updatable fields for each interval:
+        - `name`: Update the interval name
+        - `start_time`: Modify the start time
+        - `end_time`: Modify the end time
+        - `metadata`: Update metadata (product, target, category, reason, etc.)
+
+        The endpoint will attempt to update all intervals and return information about successes and failures:
+        - Successfully updated intervals are returned in the response
+        - Failed intervals are listed with their IDs and error reasons
+
+        Limitations:
+        - Cannot exceed 2500 intervals per request
+        - All intervals must be of the same `type` and on the same `line`
+
+        **Note:** Interval IDs must be obtained from either:
+        - The response when creating intervals via `/v2/interval/set` or `/v2/intervals/set`
+        - Searching for intervals via `/v2/interval/search`
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Update multiple custom intervals:
+                summary: Update a set of custom intervals
+                value:
+                  type:
+                    name: operator id
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  intervals:
+                  - id: 1809d88adf0
+                    name: updated_operator_1
+                    start_time: 2021-04-04T08:00:04Z
+                    end_time: 2021-04-04T08:30:04Z
+                  - id: 1809d88adf1
+                    name: updated_operator_2
+                    start_time: 2021-04-04T09:00:04Z
+                    end_time: 2021-04-04T09:30:04Z
+              Update multiple State intervals:
+                summary: Update multiple State intervals with new categories
+                value:
+                  type:
+                    name: STATE
+                  line:
+                    name: Line 01
+                    factory:
+                      name: Factory A
+                  intervals:
+                  - id: 178a61c0f00
+                    metadata:
+                      category:
+                        name: Unplanned Downtime
+                      reason:
+                        name: Equipment Failure
+                  - id: 178a61c0f01
+                    metadata:
+                      category:
+                        name: Planned Downtime
+                      reason:
+                        name: Preventive Maintenance
+            schema:
+              $ref: "#/components/schemas/IntervalBulkUpdate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_intervals_update_post_200_response"
+          description: Response containing successfully updated intervals and any
+            failures that occurred.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /v2/interval/delete:
     post:
       description: |
@@ -2991,6 +3256,99 @@ components:
             $ref: "#/components/schemas/Interval"
           type: array
       type: object
+    IntervalBulkUpdate:
+      description: A set of intervals to update
+      example:
+        intervals:
+        - start_time: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            metadata_type: batch
+            run: null
+          line:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: null
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          end_time: 2000-01-23T04:56:07.000+00:00
+          match: null
+          id: id
+          type:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - start_time: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            metadata_type: batch
+            run: null
+          line:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: null
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          end_time: 2000-01-23T04:56:07.000+00:00
+          match: null
+          id: id
+          type:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        line:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: null
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondary_name: secondary_name
+        type:
+          factory:
+            timezone: timezone
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          match: unique
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        type:
+          $ref: "#/components/schemas/IntervalType"
+        line:
+          $ref: "#/components/schemas/Line"
+        intervals:
+          items:
+            $ref: "#/components/schemas/Interval"
+          type: array
+      type: object
     IntervalBulkDelete:
       description: A range of intervals to delete
       example:
@@ -3337,6 +3695,98 @@ components:
       - error
       - id
       - retryable
+      type: object
+    _v2_intervals_update_post_200_response_failed_intervals_inner:
+      example:
+        id: id
+        error: error
+      properties:
+        id:
+          type: string
+        error:
+          type: string
+      type: object
+    _v2_intervals_update_post_200_response:
+      example:
+        updated_intervals:
+        - start_time: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            metadata_type: batch
+            run: null
+          line:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: null
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          end_time: 2000-01-23T04:56:07.000+00:00
+          match: null
+          id: id
+          type:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - start_time: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            metadata_type: batch
+            run: null
+          line:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: null
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            secondary_name: secondary_name
+          name: name
+          end_time: 2000-01-23T04:56:07.000+00:00
+          match: null
+          id: id
+          type:
+            factory:
+              timezone: timezone
+              name: name
+              match: unique
+              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              secondary_name: secondary_name
+            name: name
+            match: unique
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        failed_intervals:
+        - id: id
+          error: error
+        - id: id
+          error: error
+        num_failed: 6
+        num_updated: 0
+      properties:
+        num_updated:
+          type: integer
+        updated_intervals:
+          items:
+            $ref: "#/components/schemas/Interval"
+          type: array
+        num_failed:
+          type: integer
+        failed_intervals:
+          items:
+            $ref: "#/components/schemas/_v2_intervals_update_post_200_response_failed_intervals_inner"
+          type: array
       type: object
     _v2_intervals_delete_post_200_response:
       example:

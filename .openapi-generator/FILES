@@ -12,6 +12,7 @@ docs/GenericError.md
 docs/Interval.md
 docs/IntervalBulkCreate.md
 docs/IntervalBulkDelete.md
+docs/IntervalBulkUpdate.md
 docs/IntervalMetadata.md
 docs/IntervalType.md
 docs/IntervalsApi.md
@@ -42,6 +43,8 @@ docs/Target.md
 docs/TargetsApi.md
 docs/Unit.md
 docs/V2IntervalsDeletePost200Response.md
+docs/V2IntervalsUpdatePost200Response.md
+docs/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.md
 docs/V2LineSearchPost400Response.md
 docs/V2LineSearchPost409Response.md
 docs/V2LineSearchPost500Response.md
@@ -92,6 +95,7 @@ src/main/java/oden/model/GenericError.java
 src/main/java/oden/model/Interval.java
 src/main/java/oden/model/IntervalBulkCreate.java
 src/main/java/oden/model/IntervalBulkDelete.java
+src/main/java/oden/model/IntervalBulkUpdate.java
 src/main/java/oden/model/IntervalMetadata.java
 src/main/java/oden/model/IntervalType.java
 src/main/java/oden/model/Line.java
@@ -112,9 +116,14 @@ src/main/java/oden/model/StateReason.java
 src/main/java/oden/model/Target.java
 src/main/java/oden/model/Unit.java
 src/main/java/oden/model/V2IntervalsDeletePost200Response.java
+src/main/java/oden/model/V2IntervalsUpdatePost200Response.java
+src/main/java/oden/model/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.java
 src/main/java/oden/model/V2LineSearchPost400Response.java
 src/main/java/oden/model/V2LineSearchPost409Response.java
 src/main/java/oden/model/V2LineSearchPost500Response.java
 src/main/java/oden/model/V2QualityTestsDeletePostRequest.java
 src/main/java/oden/model/V2ScrapYieldSearchPostRequest.java
 src/main/java/oden/model/V2ScrapYieldSetPostRequest.java
+src/test/java/oden/model/IntervalBulkUpdateTest.java
+src/test/java/oden/model/V2IntervalsUpdatePost200ResponseFailedIntervalsInnerTest.java
+src/test/java/oden/model/V2IntervalsUpdatePost200ResponseTest.java
