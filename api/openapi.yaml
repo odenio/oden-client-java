@@ -1559,127 +1559,6 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
-  /v2/intervals/update:
-    post:
-      description: |
-        Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.
-
-        Each interval in the `intervals` array must include an `id` that references an existing interval.
-
-        Updatable fields for each interval:
-        - `name`: Update the interval name
-        - `start_time`: Modify the start time
-        - `end_time`: Modify the end time
-        - `metadata`: Update metadata (product, target, category, reason, etc.)
-
-        The endpoint will attempt to update all intervals and return information about successes and failures:
-        - Successfully updated intervals are returned in the response
-        - Failed intervals are listed with their IDs and error reasons
-
-        Limitations:
-        - Cannot exceed 2500 intervals per request
-        - All intervals must be of the same `type` and on the same `line`
-
-        **Note:** Interval IDs must be obtained from either:
-        - The response when creating intervals via `/v2/interval/set` or `/v2/intervals/set`
-        - Searching for intervals via `/v2/interval/search`
-      requestBody:
-        content:
-          application/json:
-            examples:
-              Update multiple custom intervals:
-                summary: Update a set of custom intervals
-                value:
-                  type:
-                    name: operator id
-                  line:
-                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
-                  intervals:
-                  - id: 1809d88adf0
-                    name: updated_operator_1
-                    start_time: 2021-04-04T08:00:04Z
-                    end_time: 2021-04-04T08:30:04Z
-                  - id: 1809d88adf1
-                    name: updated_operator_2
-                    start_time: 2021-04-04T09:00:04Z
-                    end_time: 2021-04-04T09:30:04Z
-              Update multiple State intervals:
-                summary: Update multiple State intervals with new categories
-                value:
-                  type:
-                    name: STATE
-                  line:
-                    name: Line 01
-                    factory:
-                      name: Factory A
-                  intervals:
-                  - id: 178a61c0f00
-                    metadata:
-                      category:
-                        name: Unplanned Downtime
-                      reason:
-                        name: Equipment Failure
-                  - id: 178a61c0f01
-                    metadata:
-                      category:
-                        name: Planned Downtime
-                      reason:
-                        name: Preventive Maintenance
-            schema:
-              $ref: "#/components/schemas/IntervalBulkUpdate"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/_v2_intervals_update_post_200_response"
-          description: Response containing successfully updated intervals and any
-            failures that occurred.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
-          description: An error occurred regarding one of the input parameters
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericError"
-          description: User has provided either no credentials or invalid credentials
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericError"
-          description: |
-            User has provided valid credentials but is not authorized to access the entity
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
-          description: |
-            A {match: "unique"} was requested, but multiple entities matched the search parameters.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
-          description: |
-            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
-        "501":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenericError"
-          description: Endpoint is not yet implemented
-      tags:
-      - Intervals
-      x-content-type: application/json
-      x-accepts:
-      - application/json
   /v2/interval/delete:
     post:
       description: |
@@ -1855,6 +1734,127 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+          description: |
+            A {match: "unique"} was requested, but multiple entities matched the search parameters.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/intervals/update:
+    post:
+      description: |
+        Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.
+
+        Each interval in the `intervals` array must include an `id` that references an existing interval.
+
+        Updatable fields for each interval:
+        - `name`: Update the interval name
+        - `start_time`: Modify the start time
+        - `end_time`: Modify the end time
+        - `metadata`: Update metadata (product, target, category, reason, etc.)
+
+        The endpoint will attempt to update all intervals and return information about successes and failures:
+        - Successfully updated intervals are returned in the response
+        - Failed intervals are listed with their IDs and error reasons
+
+        Limitations:
+        - Cannot exceed 2500 intervals per request
+        - All intervals must be of the same `type` and on the same `line`
+
+        **Note:** Interval IDs must be obtained from either:
+        - The response when creating intervals via `/v2/interval/set` or `/v2/intervals/set`
+        - Searching for intervals via `/v2/interval/search`
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Update multiple custom intervals:
+                summary: Update a set of custom intervals
+                value:
+                  type:
+                    name: operator id
+                  line:
+                    id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  intervals:
+                  - id: 1809d88adf0
+                    name: updated_operator_1
+                    start_time: 2021-04-04T08:00:04Z
+                    end_time: 2021-04-04T08:30:04Z
+                  - id: 1809d88adf1
+                    name: updated_operator_2
+                    start_time: 2021-04-04T09:00:04Z
+                    end_time: 2021-04-04T09:30:04Z
+              Update multiple State intervals:
+                summary: Update multiple State intervals with new categories
+                value:
+                  type:
+                    name: STATE
+                  line:
+                    name: Line 01
+                    factory:
+                      name: Factory A
+                  intervals:
+                  - id: 178a61c0f00
+                    metadata:
+                      category:
+                        name: Unplanned Downtime
+                      reason:
+                        name: Equipment Failure
+                  - id: 178a61c0f01
+                    metadata:
+                      category:
+                        name: Planned Downtime
+                      reason:
+                        name: Preventive Maintenance
+            schema:
+              $ref: "#/components/schemas/IntervalBulkUpdate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_intervals_update_post_200_response"
+          description: Response containing successfully updated intervals and any
+            failures that occurred.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
         "409":
           content:
             application/json:

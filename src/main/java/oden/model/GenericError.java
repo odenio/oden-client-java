@@ -48,7 +48,7 @@ import oden.JSON;
 /**
  * GenericError
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-22T01:06:09.372964678Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-22T01:38:18.751269043Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class GenericError {
   public static final String SERIALIZED_NAME_ERROR = "error";
   @SerializedName(SERIALIZED_NAME_ERROR)

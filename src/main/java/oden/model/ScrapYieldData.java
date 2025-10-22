@@ -53,7 +53,7 @@ import oden.JSON;
 /**
  * An object representing scrap and yield data for a line for a particular run or batch interval. Data can be sent unstructured in the &#x60;raw_data&#x60; field as long as we have a scrap/yield schema for the factory. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-22T01:06:09.372964678Z[Etc/UTC]", comments = "Generator version: 7.15.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-10-22T01:38:18.751269043Z[Etc/UTC]", comments = "Generator version: 7.15.0")
 public class ScrapYieldData {
   public static final String SERIALIZED_NAME_RAW_DATA = "raw_data";
   @SerializedName(SERIALIZED_NAME_RAW_DATA)

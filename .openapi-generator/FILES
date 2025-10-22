@@ -124,6 +124,3 @@ src/main/java/oden/model/V2LineSearchPost500Response.java
 src/main/java/oden/model/V2QualityTestsDeletePostRequest.java
 src/main/java/oden/model/V2ScrapYieldSearchPostRequest.java
 src/main/java/oden/model/V2ScrapYieldSetPostRequest.java
-src/test/java/oden/model/IntervalBulkUpdateTest.java
-src/test/java/oden/model/V2IntervalsUpdatePost200ResponseFailedIntervalsInnerTest.java
-src/test/java/oden/model/V2IntervalsUpdatePost200ResponseTest.java
