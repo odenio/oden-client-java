@@ -13,226 +13,106 @@
 
 package oden.model;
 
-import java.util.Objects;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
-import oden.JSON;
+import java.util.UUID;
+import oden.model.Line;
+import oden.model.Match;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
- * GenericError
+ * Model tests for MaintenanceWorkOrder
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-03-23T21:09:56.743448132Z[Etc/UTC]", comments = "Generator version: 7.20.0")
-public class GenericError {
-  public static final String SERIALIZED_NAME_ERROR = "error";
-  @SerializedName(SERIALIZED_NAME_ERROR)
-  @javax.annotation.Nonnull
-  private String error;
+public class MaintenanceWorkOrderTest {
+    private final MaintenanceWorkOrder model = new MaintenanceWorkOrder();
 
-  public static final String SERIALIZED_NAME_RETRYABLE = "retryable";
-  @SerializedName(SERIALIZED_NAME_RETRYABLE)
-  @javax.annotation.Nonnull
-  private Boolean retryable;
-
-  public GenericError() {
-  }
-
-  public GenericError error(@javax.annotation.Nonnull String error) {
-    this.error = error;
-    return this;
-  }
-
-  /**
-   * Get error
-   * @return error
-   */
-  @javax.annotation.Nonnull
-  public String getError() {
-    return error;
-  }
-
-  public void setError(@javax.annotation.Nonnull String error) {
-    this.error = error;
-  }
-
-
-  public GenericError retryable(@javax.annotation.Nonnull Boolean retryable) {
-    this.retryable = retryable;
-    return this;
-  }
-
-  /**
-   * Get retryable
-   * @return retryable
-   */
-  @javax.annotation.Nonnull
-  public Boolean getRetryable() {
-    return retryable;
-  }
-
-  public void setRetryable(@javax.annotation.Nonnull Boolean retryable) {
-    this.retryable = retryable;
-  }
-
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    /**
+     * Model tests for MaintenanceWorkOrder
+     */
+    @Test
+    public void testMaintenanceWorkOrder() {
+        // TODO: test MaintenanceWorkOrder
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    /**
+     * Test the property 'id'
+     */
+    @Test
+    public void idTest() {
+        // TODO: test id
     }
-    GenericError genericError = (GenericError) o;
-    return Objects.equals(this.error, genericError.error) &&
-        Objects.equals(this.retryable, genericError.retryable);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(error, retryable);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class GenericError {\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
-    sb.append("    retryable: ").append(toIndentedString(retryable)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    /**
+     * Test the property 'name'
+     */
+    @Test
+    public void nameTest() {
+        // TODO: test name
     }
-    return o.toString().replace("\n", "\n    ");
-  }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("error", "retryable"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("error", "retryable"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to GenericError
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!GenericError.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in GenericError is not found in the empty JSON string", GenericError.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!GenericError.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `GenericError` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : GenericError.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("error").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!GenericError.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'GenericError' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<GenericError> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(GenericError.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<GenericError>() {
-           @Override
-           public void write(JsonWriter out, GenericError value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public GenericError read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
+    /**
+     * Test the property 'description'
+     */
+    @Test
+    public void descriptionTest() {
+        // TODO: test description
     }
-  }
 
-  /**
-   * Create an instance of GenericError given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of GenericError
-   * @throws IOException if the JSON string is invalid with respect to GenericError
-   */
-  public static GenericError fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, GenericError.class);
-  }
+    /**
+     * Test the property 'externalId'
+     */
+    @Test
+    public void externalIdTest() {
+        // TODO: test externalId
+    }
 
-  /**
-   * Convert an instance of GenericError to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
+    /**
+     * Test the property 'line'
+     */
+    @Test
+    public void lineTest() {
+        // TODO: test line
+    }
+
+    /**
+     * Test the property 'startedAt'
+     */
+    @Test
+    public void startedAtTest() {
+        // TODO: test startedAt
+    }
+
+    /**
+     * Test the property 'completedAt'
+     */
+    @Test
+    public void completedAtTest() {
+        // TODO: test completedAt
+    }
+
+    /**
+     * Test the property 'metadata'
+     */
+    @Test
+    public void metadataTest() {
+        // TODO: test metadata
+    }
+
+    /**
+     * Test the property 'match'
+     */
+    @Test
+    public void matchTest() {
+        // TODO: test match
+    }
+
 }
-

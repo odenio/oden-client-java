@@ -246,7 +246,7 @@ public class Example {
 
 
 
-Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, &#x60;factory&#x60; or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are associated with every factory in Oden&#39;s system. Custom Interval Types may be created by users, are set on a per factory basis, and may only describe Intervals on Lines associated with that Factory. 
+Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
 
 ### Example
 ```java

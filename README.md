@@ -2,8 +2,8 @@
 
 Oden API
 - API version: 2.0.0
-  - Build date: 2025-10-22T02:05:12.729237221Z[Etc/UTC]
-  - Generator version: 7.15.0
+  - Build date: 2026-03-23T21:09:56.743448132Z[Etc/UTC]
+  - Generator version: 7.20.0
 
 The Oden Private Partner API exposes RESTful API endpoints for clients to get, create and update data on the Oden Platform.
 
@@ -31,6 +31,7 @@ The URL, and host, for the current version is [https://api.oden.app/v2](https://
 - **Quality Test**: Quality Tests are results of quality assurance tests done on site, and uploaded to Oden. They may be attached to a single Batch or Run.
 - **Metric**: Known in factories as \"tags\", metrics are the raw data that is collected by Oden from the machines and devices on the factory floor.
 - **Metric Group**: Metric groups are metrics that represent the same thing across different lines. They provide common display names for tags and allow labeling groups of tags as measuring key types of data like performance or production.
+- **Maintenance Work Order**: A maintenance work order can be used to track work orders maintained in MaintainX and associate them with an Oden line. 
 
 ### Best Practices
 Under the current implementation, the Oden API does not rate limit requests from clients.
@@ -226,6 +227,9 @@ Class | Method | HTTP request | Description
 *IntervalsApi* | [**v2IntervalsUpdatePost**](docs/IntervalsApi.md#v2IntervalsUpdatePost) | **POST** /v2/intervals/update | 
 *MachineGroupsApi* | [**v2FactorySearchPost**](docs/MachineGroupsApi.md#v2FactorySearchPost) | **POST** /v2/factory/search | 
 *MachineGroupsApi* | [**v2LineSearchPost**](docs/MachineGroupsApi.md#v2LineSearchPost) | **POST** /v2/line/search | 
+*MaintenanceWorkOrdersApi* | [**v2MaintenanceWorkOrderDeletePost**](docs/MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderDeletePost) | **POST** /v2/maintenance_work_order/delete | 
+*MaintenanceWorkOrdersApi* | [**v2MaintenanceWorkOrderSearchPost**](docs/MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderSearchPost) | **POST** /v2/maintenance_work_order/search | 
+*MaintenanceWorkOrdersApi* | [**v2MaintenanceWorkOrderSetPost**](docs/MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderSetPost) | **POST** /v2/maintenance_work_order/set | 
 *MetricGroupsApi* | [**v2MetricGroupSearchPost**](docs/MetricGroupsApi.md#v2MetricGroupSearchPost) | **POST** /v2/metric_group/search | 
 *OqlApi* | [**v2OqlQueryPost**](docs/OqlApi.md#v2OqlQueryPost) | **POST** /v2/oql/query | 
 *ProductAttributesApi* | [**v2ProductAttributeSearchPost**](docs/ProductAttributesApi.md#v2ProductAttributeSearchPost) | **POST** /v2/product_attribute/search | 
@@ -260,6 +264,7 @@ Class | Method | HTTP request | Description
  - [IntervalMetadata](docs/IntervalMetadata.md)
  - [IntervalType](docs/IntervalType.md)
  - [Line](docs/Line.md)
+ - [MaintenanceWorkOrder](docs/MaintenanceWorkOrder.md)
  - [Match](docs/Match.md)
  - [MetricGroup](docs/MetricGroup.md)
  - [OQLQuery](docs/OQLQuery.md)
@@ -282,6 +287,7 @@ Class | Method | HTTP request | Description
  - [V2LineSearchPost400Response](docs/V2LineSearchPost400Response.md)
  - [V2LineSearchPost409Response](docs/V2LineSearchPost409Response.md)
  - [V2LineSearchPost500Response](docs/V2LineSearchPost500Response.md)
+ - [V2MaintenanceWorkOrderSearchPostRequest](docs/V2MaintenanceWorkOrderSearchPostRequest.md)
  - [V2QualityTestsDeletePostRequest](docs/V2QualityTestsDeletePostRequest.md)
  - [V2ScrapYieldSearchPostRequest](docs/V2ScrapYieldSearchPostRequest.md)
  - [V2ScrapYieldSetPostRequest](docs/V2ScrapYieldSetPostRequest.md)

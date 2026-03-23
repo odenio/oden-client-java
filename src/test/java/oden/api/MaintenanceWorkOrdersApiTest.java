@@ -11,157 +11,65 @@
  */
 
 
-package oden;
+package oden.api;
 
-import java.util.Map;
+import oden.ApiException;
+import oden.model.GenericError;
+import oden.model.MaintenanceWorkOrder;
+import oden.model.V2LineSearchPost400Response;
+import oden.model.V2LineSearchPost409Response;
+import oden.model.V2LineSearchPost500Response;
+import oden.model.V2MaintenanceWorkOrderSearchPostRequest;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 /**
- * <p>ApiException class.</p>
+ * API tests for MaintenanceWorkOrdersApi
  */
-@SuppressWarnings("serial")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-03-23T21:09:56.743448132Z[Etc/UTC]", comments = "Generator version: 7.20.0")
-public class ApiException extends Exception {
-    private static final long serialVersionUID = 1L;
+@Disabled
+public class MaintenanceWorkOrdersApiTest {
 
-    private int code = 0;
-    private Map<String, List<String>> responseHeaders = null;
-    private String responseBody = null;
+    private final MaintenanceWorkOrdersApi api = new MaintenanceWorkOrdersApi();
 
     /**
-     * <p>Constructor for ApiException.</p>
-     */
-    public ApiException() {}
-
-    /**
-     * <p>Constructor for ApiException.</p>
+     * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
      *
-     * @param throwable a {@link java.lang.Throwable} object
+     * @throws ApiException if the Api call fails
      */
-    public ApiException(Throwable throwable) {
-        super(throwable);
+    @Test
+    public void v2MaintenanceWorkOrderDeletePostTest() throws ApiException {
+        MaintenanceWorkOrder maintenanceWorkOrder = null;
+        List<MaintenanceWorkOrder> response = api.v2MaintenanceWorkOrderDeletePost(maintenanceWorkOrder);
+        // TODO: test validations
     }
 
     /**
-     * <p>Constructor for ApiException.</p>
+     * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
      *
-     * @param message the error message
+     * @throws ApiException if the Api call fails
      */
-    public ApiException(String message) {
-        super(message);
+    @Test
+    public void v2MaintenanceWorkOrderSearchPostTest() throws ApiException {
+        V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest = null;
+        List<MaintenanceWorkOrder> response = api.v2MaintenanceWorkOrderSearchPost(v2MaintenanceWorkOrderSearchPostRequest);
+        // TODO: test validations
     }
 
     /**
-     * <p>Constructor for ApiException.</p>
+     * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
      *
-     * @param message the error message
-     * @param throwable a {@link java.lang.Throwable} object
-     * @param code HTTP status code
-     * @param responseHeaders a {@link java.util.Map} of HTTP response headers
-     * @param responseBody the response body
+     * @throws ApiException if the Api call fails
      */
-    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        super(message, throwable);
-        this.code = code;
-        this.responseHeaders = responseHeaders;
-        this.responseBody = responseBody;
+    @Test
+    public void v2MaintenanceWorkOrderSetPostTest() throws ApiException {
+        MaintenanceWorkOrder maintenanceWorkOrder = null;
+        MaintenanceWorkOrder response = api.v2MaintenanceWorkOrderSetPost(maintenanceWorkOrder);
+        // TODO: test validations
     }
 
-    /**
-     * <p>Constructor for ApiException.</p>
-     *
-     * @param message the error message
-     * @param code HTTP status code
-     * @param responseHeaders a {@link java.util.Map} of HTTP response headers
-     * @param responseBody the response body
-     */
-    public ApiException(String message, int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        this(message, (Throwable) null, code, responseHeaders, responseBody);
-    }
-
-    /**
-     * <p>Constructor for ApiException.</p>
-     *
-     * @param message the error message
-     * @param throwable a {@link java.lang.Throwable} object
-     * @param code HTTP status code
-     * @param responseHeaders a {@link java.util.Map} of HTTP response headers
-     */
-    public ApiException(String message, Throwable throwable, int code, Map<String, List<String>> responseHeaders) {
-        this(message, throwable, code, responseHeaders, null);
-    }
-
-    /**
-     * <p>Constructor for ApiException.</p>
-     *
-     * @param code HTTP status code
-     * @param responseHeaders a {@link java.util.Map} of HTTP response headers
-     * @param responseBody the response body
-     */
-    public ApiException(int code, Map<String, List<String>> responseHeaders, String responseBody) {
-        this("Response Code: " + code + " Response Body: " + responseBody, (Throwable) null, code, responseHeaders, responseBody);
-    }
-
-    /**
-     * <p>Constructor for ApiException.</p>
-     *
-     * @param code HTTP status code
-     * @param message a {@link java.lang.String} object
-     */
-    public ApiException(int code, String message) {
-        super(message);
-        this.code = code;
-    }
-
-    /**
-     * <p>Constructor for ApiException.</p>
-     *
-     * @param code HTTP status code
-     * @param message the error message
-     * @param responseHeaders a {@link java.util.Map} of HTTP response headers
-     * @param responseBody the response body
-     */
-    public ApiException(int code, String message, Map<String, List<String>> responseHeaders, String responseBody) {
-        this(code, message);
-        this.responseHeaders = responseHeaders;
-        this.responseBody = responseBody;
-    }
-
-    /**
-     * Get the HTTP status code.
-     *
-     * @return HTTP status code
-     */
-    public int getCode() {
-        return code;
-    }
-
-    /**
-     * Get the HTTP response headers.
-     *
-     * @return A map of list of string
-     */
-    public Map<String, List<String>> getResponseHeaders() {
-        return responseHeaders;
-    }
-
-    /**
-     * Get the HTTP response body.
-     *
-     * @return Response body in the form of string
-     */
-    public String getResponseBody() {
-        return responseBody;
-    }
-
-    /**
-     * Get the exception message including HTTP response data.
-     *
-     * @return The exception message
-     */
-    public String getMessage() {
-        return String.format(java.util.Locale.ROOT, "Message: %s%nHTTP response code: %s%nHTTP response body: %s%nHTTP response headers: %s",
-                super.getMessage(), this.getCode(), this.getResponseBody(), this.getResponseHeaders());
-    }
 }

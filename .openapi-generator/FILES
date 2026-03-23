@@ -18,6 +18,8 @@ docs/IntervalType.md
 docs/IntervalsApi.md
 docs/Line.md
 docs/MachineGroupsApi.md
+docs/MaintenanceWorkOrder.md
+docs/MaintenanceWorkOrdersApi.md
 docs/Match.md
 docs/MetricGroup.md
 docs/MetricGroupsApi.md
@@ -48,6 +50,7 @@ docs/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.md
 docs/V2LineSearchPost400Response.md
 docs/V2LineSearchPost409Response.md
 docs/V2LineSearchPost500Response.md
+docs/V2MaintenanceWorkOrderSearchPostRequest.md
 docs/V2QualityTestsDeletePostRequest.md
 docs/V2ScrapYieldSearchPostRequest.md
 docs/V2ScrapYieldSetPostRequest.md
@@ -75,6 +78,7 @@ src/main/java/oden/ServerVariable.java
 src/main/java/oden/StringUtil.java
 src/main/java/oden/api/IntervalsApi.java
 src/main/java/oden/api/MachineGroupsApi.java
+src/main/java/oden/api/MaintenanceWorkOrdersApi.java
 src/main/java/oden/api/MetricGroupsApi.java
 src/main/java/oden/api/OqlApi.java
 src/main/java/oden/api/ProductAttributesApi.java
@@ -99,6 +103,7 @@ src/main/java/oden/model/IntervalBulkUpdate.java
 src/main/java/oden/model/IntervalMetadata.java
 src/main/java/oden/model/IntervalType.java
 src/main/java/oden/model/Line.java
+src/main/java/oden/model/MaintenanceWorkOrder.java
 src/main/java/oden/model/Match.java
 src/main/java/oden/model/MetricGroup.java
 src/main/java/oden/model/OQLQuery.java
@@ -121,6 +126,10 @@ src/main/java/oden/model/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.ja
 src/main/java/oden/model/V2LineSearchPost400Response.java
 src/main/java/oden/model/V2LineSearchPost409Response.java
 src/main/java/oden/model/V2LineSearchPost500Response.java
+src/main/java/oden/model/V2MaintenanceWorkOrderSearchPostRequest.java
 src/main/java/oden/model/V2QualityTestsDeletePostRequest.java
 src/main/java/oden/model/V2ScrapYieldSearchPostRequest.java
 src/main/java/oden/model/V2ScrapYieldSetPostRequest.java
+src/test/java/oden/api/MaintenanceWorkOrdersApiTest.java
+src/test/java/oden/model/MaintenanceWorkOrderTest.java
+src/test/java/oden/model/V2MaintenanceWorkOrderSearchPostRequestTest.java

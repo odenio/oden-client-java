@@ -20,9 +20,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
-import oden.model.Interval;
-import oden.model.ScrapYieldData;
+import java.util.UUID;
+import oden.model.Line;
+import oden.model.Match;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,58 +50,154 @@ import java.util.Set;
 import oden.JSON;
 
 /**
- * V2ScrapYieldSearchPostRequest
+ * V2MaintenanceWorkOrderSearchPostRequest
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-03-23T21:09:56.743448132Z[Etc/UTC]", comments = "Generator version: 7.20.0")
-public class V2ScrapYieldSearchPostRequest {
-  public static final String SERIALIZED_NAME_DATA = "data";
-  @SerializedName(SERIALIZED_NAME_DATA)
+public class V2MaintenanceWorkOrderSearchPostRequest {
+  public static final String SERIALIZED_NAME_ID = "id";
+  @SerializedName(SERIALIZED_NAME_ID)
   @javax.annotation.Nullable
-  private ScrapYieldData data;
+  private UUID id;
 
-  public static final String SERIALIZED_NAME_INTERVAL = "interval";
-  @SerializedName(SERIALIZED_NAME_INTERVAL)
-  @javax.annotation.Nonnull
-  private Interval interval;
+  public static final String SERIALIZED_NAME_EXTERNAL_ID = "external_id";
+  @SerializedName(SERIALIZED_NAME_EXTERNAL_ID)
+  @javax.annotation.Nullable
+  private String externalId;
 
-  public V2ScrapYieldSearchPostRequest() {
+  public static final String SERIALIZED_NAME_LINE = "line";
+  @SerializedName(SERIALIZED_NAME_LINE)
+  @javax.annotation.Nullable
+  private Line line;
+
+  public static final String SERIALIZED_NAME_START_TIME = "start_time";
+  @SerializedName(SERIALIZED_NAME_START_TIME)
+  @javax.annotation.Nullable
+  private OffsetDateTime startTime;
+
+  public static final String SERIALIZED_NAME_END_TIME = "end_time";
+  @SerializedName(SERIALIZED_NAME_END_TIME)
+  @javax.annotation.Nullable
+  private OffsetDateTime endTime;
+
+  public static final String SERIALIZED_NAME_MATCH = "match";
+  @SerializedName(SERIALIZED_NAME_MATCH)
+  @javax.annotation.Nullable
+  private Match match = Match.UNIQUE;
+
+  public V2MaintenanceWorkOrderSearchPostRequest() {
   }
 
-  public V2ScrapYieldSearchPostRequest data(@javax.annotation.Nullable ScrapYieldData data) {
-    this.data = data;
+  public V2MaintenanceWorkOrderSearchPostRequest id(@javax.annotation.Nullable UUID id) {
+    this.id = id;
     return this;
   }
 
   /**
-   * Get data
-   * @return data
+   * Get id
+   * @return id
    */
   @javax.annotation.Nullable
-  public ScrapYieldData getData() {
-    return data;
+  public UUID getId() {
+    return id;
   }
 
-  public void setData(@javax.annotation.Nullable ScrapYieldData data) {
-    this.data = data;
+  public void setId(@javax.annotation.Nullable UUID id) {
+    this.id = id;
   }
 
 
-  public V2ScrapYieldSearchPostRequest interval(@javax.annotation.Nonnull Interval interval) {
-    this.interval = interval;
+  public V2MaintenanceWorkOrderSearchPostRequest externalId(@javax.annotation.Nullable String externalId) {
+    this.externalId = externalId;
     return this;
   }
 
   /**
-   * Get interval
-   * @return interval
+   * Get externalId
+   * @return externalId
    */
-  @javax.annotation.Nonnull
-  public Interval getInterval() {
-    return interval;
+  @javax.annotation.Nullable
+  public String getExternalId() {
+    return externalId;
   }
 
-  public void setInterval(@javax.annotation.Nonnull Interval interval) {
-    this.interval = interval;
+  public void setExternalId(@javax.annotation.Nullable String externalId) {
+    this.externalId = externalId;
+  }
+
+
+  public V2MaintenanceWorkOrderSearchPostRequest line(@javax.annotation.Nullable Line line) {
+    this.line = line;
+    return this;
+  }
+
+  /**
+   * Get line
+   * @return line
+   */
+  @javax.annotation.Nullable
+  public Line getLine() {
+    return line;
+  }
+
+  public void setLine(@javax.annotation.Nullable Line line) {
+    this.line = line;
+  }
+
+
+  public V2MaintenanceWorkOrderSearchPostRequest startTime(@javax.annotation.Nullable OffsetDateTime startTime) {
+    this.startTime = startTime;
+    return this;
+  }
+
+  /**
+   * Get startTime
+   * @return startTime
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(@javax.annotation.Nullable OffsetDateTime startTime) {
+    this.startTime = startTime;
+  }
+
+
+  public V2MaintenanceWorkOrderSearchPostRequest endTime(@javax.annotation.Nullable OffsetDateTime endTime) {
+    this.endTime = endTime;
+    return this;
+  }
+
+  /**
+   * Get endTime
+   * @return endTime
+   */
+  @javax.annotation.Nullable
+  public OffsetDateTime getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(@javax.annotation.Nullable OffsetDateTime endTime) {
+    this.endTime = endTime;
+  }
+
+
+  public V2MaintenanceWorkOrderSearchPostRequest match(@javax.annotation.Nullable Match match) {
+    this.match = match;
+    return this;
+  }
+
+  /**
+   * Get match
+   * @return match
+   */
+  @javax.annotation.Nullable
+  public Match getMatch() {
+    return match;
+  }
+
+  public void setMatch(@javax.annotation.Nullable Match match) {
+    this.match = match;
   }
 
 
@@ -112,22 +210,30 @@ public class V2ScrapYieldSearchPostRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest = (V2ScrapYieldSearchPostRequest) o;
-    return Objects.equals(this.data, v2ScrapYieldSearchPostRequest.data) &&
-        Objects.equals(this.interval, v2ScrapYieldSearchPostRequest.interval);
+    V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest = (V2MaintenanceWorkOrderSearchPostRequest) o;
+    return Objects.equals(this.id, v2MaintenanceWorkOrderSearchPostRequest.id) &&
+        Objects.equals(this.externalId, v2MaintenanceWorkOrderSearchPostRequest.externalId) &&
+        Objects.equals(this.line, v2MaintenanceWorkOrderSearchPostRequest.line) &&
+        Objects.equals(this.startTime, v2MaintenanceWorkOrderSearchPostRequest.startTime) &&
+        Objects.equals(this.endTime, v2MaintenanceWorkOrderSearchPostRequest.endTime) &&
+        Objects.equals(this.match, v2MaintenanceWorkOrderSearchPostRequest.match);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, interval);
+    return Objects.hash(id, externalId, line, startTime, endTime, match);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class V2ScrapYieldSearchPostRequest {\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
-    sb.append("    interval: ").append(toIndentedString(interval)).append("\n");
+    sb.append("class V2MaintenanceWorkOrderSearchPostRequest {\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
+    sb.append("    line: ").append(toIndentedString(line)).append("\n");
+    sb.append("    startTime: ").append(toIndentedString(startTime)).append("\n");
+    sb.append("    endTime: ").append(toIndentedString(endTime)).append("\n");
+    sb.append("    match: ").append(toIndentedString(match)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -149,68 +255,69 @@ public class V2ScrapYieldSearchPostRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("data", "interval"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "external_id", "line", "start_time", "end_time", "match"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("interval"));
+    openapiRequiredFields = new HashSet<String>(0);
   }
 
   /**
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to V2ScrapYieldSearchPostRequest
+   * @throws IOException if the JSON Element is invalid with respect to V2MaintenanceWorkOrderSearchPostRequest
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!V2ScrapYieldSearchPostRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in V2ScrapYieldSearchPostRequest is not found in the empty JSON string", V2ScrapYieldSearchPostRequest.openapiRequiredFields.toString()));
+        if (!V2MaintenanceWorkOrderSearchPostRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in V2MaintenanceWorkOrderSearchPostRequest is not found in the empty JSON string", V2MaintenanceWorkOrderSearchPostRequest.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!V2ScrapYieldSearchPostRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `V2ScrapYieldSearchPostRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : V2ScrapYieldSearchPostRequest.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        if (!V2MaintenanceWorkOrderSearchPostRequest.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `V2MaintenanceWorkOrderSearchPostRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `data`
-      if (jsonObj.get("data") != null && !jsonObj.get("data").isJsonNull()) {
-        ScrapYieldData.validateJsonElement(jsonObj.get("data"));
+      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
-      // validate the required field `interval`
-      Interval.validateJsonElement(jsonObj.get("interval"));
+      if ((jsonObj.get("external_id") != null && !jsonObj.get("external_id").isJsonNull()) && !jsonObj.get("external_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `external_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_id").toString()));
+      }
+      // validate the optional field `line`
+      if (jsonObj.get("line") != null && !jsonObj.get("line").isJsonNull()) {
+        Line.validateJsonElement(jsonObj.get("line"));
+      }
+      // validate the optional field `match`
+      if (jsonObj.get("match") != null && !jsonObj.get("match").isJsonNull()) {
+        Match.validateJsonElement(jsonObj.get("match"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!V2ScrapYieldSearchPostRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'V2ScrapYieldSearchPostRequest' and its subtypes
+       if (!V2MaintenanceWorkOrderSearchPostRequest.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'V2MaintenanceWorkOrderSearchPostRequest' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<V2ScrapYieldSearchPostRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(V2ScrapYieldSearchPostRequest.class));
+       final TypeAdapter<V2MaintenanceWorkOrderSearchPostRequest> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(V2MaintenanceWorkOrderSearchPostRequest.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<V2ScrapYieldSearchPostRequest>() {
+       return (TypeAdapter<T>) new TypeAdapter<V2MaintenanceWorkOrderSearchPostRequest>() {
            @Override
-           public void write(JsonWriter out, V2ScrapYieldSearchPostRequest value) throws IOException {
+           public void write(JsonWriter out, V2MaintenanceWorkOrderSearchPostRequest value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public V2ScrapYieldSearchPostRequest read(JsonReader in) throws IOException {
+           public V2MaintenanceWorkOrderSearchPostRequest read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -221,18 +328,18 @@ public class V2ScrapYieldSearchPostRequest {
   }
 
   /**
-   * Create an instance of V2ScrapYieldSearchPostRequest given an JSON string
+   * Create an instance of V2MaintenanceWorkOrderSearchPostRequest given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of V2ScrapYieldSearchPostRequest
-   * @throws IOException if the JSON string is invalid with respect to V2ScrapYieldSearchPostRequest
+   * @return An instance of V2MaintenanceWorkOrderSearchPostRequest
+   * @throws IOException if the JSON string is invalid with respect to V2MaintenanceWorkOrderSearchPostRequest
    */
-  public static V2ScrapYieldSearchPostRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, V2ScrapYieldSearchPostRequest.class);
+  public static V2MaintenanceWorkOrderSearchPostRequest fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, V2MaintenanceWorkOrderSearchPostRequest.class);
   }
 
   /**
-   * Convert an instance of V2ScrapYieldSearchPostRequest to an JSON string
+   * Convert an instance of V2MaintenanceWorkOrderSearchPostRequest to an JSON string
    *
    * @return JSON string
    */

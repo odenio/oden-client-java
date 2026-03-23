@@ -27,12 +27,12 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import oden.model.Factory;
 import oden.model.GenericError;
-import oden.model.Line;
+import oden.model.MaintenanceWorkOrder;
 import oden.model.V2LineSearchPost400Response;
 import oden.model.V2LineSearchPost409Response;
 import oden.model.V2LineSearchPost500Response;
+import oden.model.V2MaintenanceWorkOrderSearchPostRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -40,16 +40,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MachineGroupsApi {
+public class MaintenanceWorkOrdersApi {
     private ApiClient localVarApiClient;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public MachineGroupsApi() {
+    public MaintenanceWorkOrdersApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public MachineGroupsApi(ApiClient apiClient) {
+    public MaintenanceWorkOrdersApi(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
     }
 
@@ -78,8 +78,8 @@ public class MachineGroupsApi {
     }
 
     /**
-     * Build call for v2FactorySearchPost
-     * @param factory  (required)
+     * Build call for v2MaintenanceWorkOrderDeletePost
+     * @param maintenanceWorkOrder  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -87,17 +87,17 @@ public class MachineGroupsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of factories. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2FactorySearchPostCall(@javax.annotation.Nonnull Factory factory, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call v2MaintenanceWorkOrderDeletePostCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -111,10 +111,10 @@ public class MachineGroupsApi {
             basePath = null;
         }
 
-        Object localVarPostBody = factory;
+        Object localVarPostBody = maintenanceWorkOrder;
 
         // create path and map variables
-        String localVarPath = "/v2/factory/search";
+        String localVarPath = "/v2/maintenance_work_order/delete";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -143,71 +143,71 @@ public class MachineGroupsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2FactorySearchPostValidateBeforeCall(@javax.annotation.Nonnull Factory factory, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'factory' is set
-        if (factory == null) {
-            throw new ApiException("Missing the required parameter 'factory' when calling v2FactorySearchPost(Async)");
+    private okhttp3.Call v2MaintenanceWorkOrderDeletePostValidateBeforeCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'maintenanceWorkOrder' is set
+        if (maintenanceWorkOrder == null) {
+            throw new ApiException("Missing the required parameter 'maintenanceWorkOrder' when calling v2MaintenanceWorkOrderDeletePost(Async)");
         }
 
-        return v2FactorySearchPostCall(factory, _callback);
+        return v2MaintenanceWorkOrderDeletePostCall(maintenanceWorkOrder, _callback);
 
     }
 
     /**
      * 
-     * Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
-     * @param factory  (required)
-     * @return List&lt;Factory&gt;
+     * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
+     * @param maintenanceWorkOrder  (required)
+     * @return List&lt;MaintenanceWorkOrder&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of factories. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public List<Factory> v2FactorySearchPost(@javax.annotation.Nonnull Factory factory) throws ApiException {
-        ApiResponse<List<Factory>> localVarResp = v2FactorySearchPostWithHttpInfo(factory);
+    public List<MaintenanceWorkOrder> v2MaintenanceWorkOrderDeletePost(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        ApiResponse<List<MaintenanceWorkOrder>> localVarResp = v2MaintenanceWorkOrderDeletePostWithHttpInfo(maintenanceWorkOrder);
         return localVarResp.getData();
     }
 
     /**
      * 
-     * Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
-     * @param factory  (required)
-     * @return ApiResponse&lt;List&lt;Factory&gt;&gt;
+     * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
+     * @param maintenanceWorkOrder  (required)
+     * @return ApiResponse&lt;List&lt;MaintenanceWorkOrder&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of factories. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Factory>> v2FactorySearchPostWithHttpInfo(@javax.annotation.Nonnull Factory factory) throws ApiException {
-        okhttp3.Call localVarCall = v2FactorySearchPostValidateBeforeCall(factory, null);
-        Type localVarReturnType = new TypeToken<List<Factory>>(){}.getType();
+    public ApiResponse<List<MaintenanceWorkOrder>> v2MaintenanceWorkOrderDeletePostWithHttpInfo(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        okhttp3.Call localVarCall = v2MaintenanceWorkOrderDeletePostValidateBeforeCall(maintenanceWorkOrder, null);
+        Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      *  (asynchronously)
-     * Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
-     * @param factory  (required)
+     * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
+     * @param maintenanceWorkOrder  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -215,26 +215,26 @@ public class MachineGroupsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of factories. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2FactorySearchPostAsync(@javax.annotation.Nonnull Factory factory, final ApiCallback<List<Factory>> _callback) throws ApiException {
+    public okhttp3.Call v2MaintenanceWorkOrderDeletePostAsync(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback<List<MaintenanceWorkOrder>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2FactorySearchPostValidateBeforeCall(factory, _callback);
-        Type localVarReturnType = new TypeToken<List<Factory>>(){}.getType();
+        okhttp3.Call localVarCall = v2MaintenanceWorkOrderDeletePostValidateBeforeCall(maintenanceWorkOrder, _callback);
+        Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2LineSearchPost
-     * @param line  (required)
+     * Build call for v2MaintenanceWorkOrderSearchPost
+     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -242,7 +242,7 @@ public class MachineGroupsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of maintenance work orders. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -252,7 +252,7 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2LineSearchPostCall(@javax.annotation.Nonnull Line line, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call v2MaintenanceWorkOrderSearchPostCall(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -266,10 +266,10 @@ public class MachineGroupsApi {
             basePath = null;
         }
 
-        Object localVarPostBody = line;
+        Object localVarPostBody = v2MaintenanceWorkOrderSearchPostRequest;
 
         // create path and map variables
-        String localVarPath = "/v2/line/search";
+        String localVarPath = "/v2/maintenance_work_order/search";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -298,27 +298,27 @@ public class MachineGroupsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2LineSearchPostValidateBeforeCall(@javax.annotation.Nonnull Line line, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'line' is set
-        if (line == null) {
-            throw new ApiException("Missing the required parameter 'line' when calling v2LineSearchPost(Async)");
+    private okhttp3.Call v2MaintenanceWorkOrderSearchPostValidateBeforeCall(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'v2MaintenanceWorkOrderSearchPostRequest' is set
+        if (v2MaintenanceWorkOrderSearchPostRequest == null) {
+            throw new ApiException("Missing the required parameter 'v2MaintenanceWorkOrderSearchPostRequest' when calling v2MaintenanceWorkOrderSearchPost(Async)");
         }
 
-        return v2LineSearchPostCall(line, _callback);
+        return v2MaintenanceWorkOrderSearchPostCall(v2MaintenanceWorkOrderSearchPostRequest, _callback);
 
     }
 
     /**
      * 
-     * Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
-     * @param line  (required)
-     * @return List&lt;Line&gt;
+     * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
+     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
+     * @return List&lt;MaintenanceWorkOrder&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of maintenance work orders. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -328,22 +328,22 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public List<Line> v2LineSearchPost(@javax.annotation.Nonnull Line line) throws ApiException {
-        ApiResponse<List<Line>> localVarResp = v2LineSearchPostWithHttpInfo(line);
+    public List<MaintenanceWorkOrder> v2MaintenanceWorkOrderSearchPost(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest) throws ApiException {
+        ApiResponse<List<MaintenanceWorkOrder>> localVarResp = v2MaintenanceWorkOrderSearchPostWithHttpInfo(v2MaintenanceWorkOrderSearchPostRequest);
         return localVarResp.getData();
     }
 
     /**
      * 
-     * Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
-     * @param line  (required)
-     * @return ApiResponse&lt;List&lt;Line&gt;&gt;
+     * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
+     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
+     * @return ApiResponse&lt;List&lt;MaintenanceWorkOrder&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of maintenance work orders. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -353,16 +353,16 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Line>> v2LineSearchPostWithHttpInfo(@javax.annotation.Nonnull Line line) throws ApiException {
-        okhttp3.Call localVarCall = v2LineSearchPostValidateBeforeCall(line, null);
-        Type localVarReturnType = new TypeToken<List<Line>>(){}.getType();
+    public ApiResponse<List<MaintenanceWorkOrder>> v2MaintenanceWorkOrderSearchPostWithHttpInfo(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest) throws ApiException {
+        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSearchPostValidateBeforeCall(v2MaintenanceWorkOrderSearchPostRequest, null);
+        Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
      *  (asynchronously)
-     * Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
-     * @param line  (required)
+     * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
+     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -370,7 +370,7 @@ public class MachineGroupsApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of lines. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> A list of maintenance work orders. </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
@@ -380,10 +380,165 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2LineSearchPostAsync(@javax.annotation.Nonnull Line line, final ApiCallback<List<Line>> _callback) throws ApiException {
+    public okhttp3.Call v2MaintenanceWorkOrderSearchPostAsync(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest, final ApiCallback<List<MaintenanceWorkOrder>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2LineSearchPostValidateBeforeCall(line, _callback);
-        Type localVarReturnType = new TypeToken<List<Line>>(){}.getType();
+        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSearchPostValidateBeforeCall(v2MaintenanceWorkOrderSearchPostRequest, _callback);
+        Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for v2MaintenanceWorkOrderSetPost
+     * @param maintenanceWorkOrder  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the created or updated maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call v2MaintenanceWorkOrderSetPostCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = maintenanceWorkOrder;
+
+        // create path and map variables
+        String localVarPath = "/v2/maintenance_work_order/set";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call v2MaintenanceWorkOrderSetPostValidateBeforeCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'maintenanceWorkOrder' is set
+        if (maintenanceWorkOrder == null) {
+            throw new ApiException("Missing the required parameter 'maintenanceWorkOrder' when calling v2MaintenanceWorkOrderSetPost(Async)");
+        }
+
+        return v2MaintenanceWorkOrderSetPostCall(maintenanceWorkOrder, _callback);
+
+    }
+
+    /**
+     * 
+     * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
+     * @param maintenanceWorkOrder  (required)
+     * @return MaintenanceWorkOrder
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the created or updated maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public MaintenanceWorkOrder v2MaintenanceWorkOrderSetPost(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        ApiResponse<MaintenanceWorkOrder> localVarResp = v2MaintenanceWorkOrderSetPostWithHttpInfo(maintenanceWorkOrder);
+        return localVarResp.getData();
+    }
+
+    /**
+     * 
+     * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
+     * @param maintenanceWorkOrder  (required)
+     * @return ApiResponse&lt;MaintenanceWorkOrder&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the created or updated maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<MaintenanceWorkOrder> v2MaintenanceWorkOrderSetPostWithHttpInfo(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSetPostValidateBeforeCall(maintenanceWorkOrder, null);
+        Type localVarReturnType = new TypeToken<MaintenanceWorkOrder>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     *  (asynchronously)
+     * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
+     * @param maintenanceWorkOrder  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the created or updated maintenance work order. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call v2MaintenanceWorkOrderSetPostAsync(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback<MaintenanceWorkOrder> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSetPostValidateBeforeCall(maintenanceWorkOrder, _callback);
+        Type localVarReturnType = new TypeToken<MaintenanceWorkOrder>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
