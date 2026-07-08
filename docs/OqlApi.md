@@ -4,14 +4,14 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2OqlQueryPost**](OqlApi.md#v2OqlQueryPost) | **POST** /v2/oql/query |  |
+| [**runOqlQuery**](OqlApi.md#runOqlQuery) | **POST** /v2/oql/query | Run an OQL query |
 
 
-<a id="v2OqlQueryPost"></a>
-# **v2OqlQueryPost**
-> v2OqlQueryPost(oqLQuery, format)
+<a id="runOqlQuery"></a>
+# **runOqlQuery**
+> runOqlQuery(oqLQuery, format)
 
-
+Run an OQL query
 
 Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
 
@@ -40,9 +40,9 @@ public class Example {
     OQLQuery oqLQuery = new OQLQuery(); // OQLQuery | 
     String format = "json"; // String | Format of the response. Can be `json`, `jsonextended` or `csv`. If unspecified, defaults to `jsonextended`. 
     try {
-      apiInstance.v2OqlQueryPost(oqLQuery, format);
+      apiInstance.runOqlQuery(oqLQuery, format);
     } catch (ApiException e) {
-      System.err.println("Exception when calling OqlApi#v2OqlQueryPost");
+      System.err.println("Exception when calling OqlApi#runOqlQuery");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -81,7 +81,7 @@ null (empty response body)
 | **403** | User has provided valid credentials but is not authorized to access the entity  |  -  |
 | **404** | Entity not found |  -  |
 | **409** | A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  |  -  |
-| **413** | Too many requests |  -  |
+| **429** | Too many requests |  -  |
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
 | **501** | Endpoint is not yet implemented |  -  |
 

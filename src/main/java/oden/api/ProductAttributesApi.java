@@ -29,9 +29,9 @@ import java.io.IOException;
 
 import oden.model.GenericError;
 import oden.model.ProductAttribute;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class ProductAttributesApi {
     }
 
     /**
-     * Build call for v2ProductAttributeSearchPost
+     * Build call for searchProductAttributes
      * @param productAttribute  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -94,7 +94,7 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductAttributeSearchPostCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchProductAttributesCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -140,18 +140,18 @@ public class ProductAttributesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ProductAttributeSearchPostValidateBeforeCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchProductAttributesValidateBeforeCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'productAttribute' is set
         if (productAttribute == null) {
-            throw new ApiException("Missing the required parameter 'productAttribute' when calling v2ProductAttributeSearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'productAttribute' when calling searchProductAttributes(Async)");
         }
 
-        return v2ProductAttributeSearchPostCall(productAttribute, _callback);
+        return searchProductAttributesCall(productAttribute, _callback);
 
     }
 
     /**
-     * 
+     * Search product attributes
      * Searches for Product Attributes  Product attributes may be searched by ID, product, or, display_name - in that order.  If an ID is supplied, it will be used to search for a Product Attribute, and display_name, product will be ignored.  If a product is supplied (and no ID), it will be used to search for a Product Attribute, and display_name will be ignored. 
      * @param productAttribute  (required)
      * @return List&lt;ProductAttribute&gt;
@@ -168,13 +168,13 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public List<ProductAttribute> v2ProductAttributeSearchPost(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
-        ApiResponse<List<ProductAttribute>> localVarResp = v2ProductAttributeSearchPostWithHttpInfo(productAttribute);
+    public List<ProductAttribute> searchProductAttributes(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
+        ApiResponse<List<ProductAttribute>> localVarResp = searchProductAttributesWithHttpInfo(productAttribute);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search product attributes
      * Searches for Product Attributes  Product attributes may be searched by ID, product, or, display_name - in that order.  If an ID is supplied, it will be used to search for a Product Attribute, and display_name, product will be ignored.  If a product is supplied (and no ID), it will be used to search for a Product Attribute, and display_name will be ignored. 
      * @param productAttribute  (required)
      * @return ApiResponse&lt;List&lt;ProductAttribute&gt;&gt;
@@ -191,14 +191,14 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<ProductAttribute>> v2ProductAttributeSearchPostWithHttpInfo(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
-        okhttp3.Call localVarCall = v2ProductAttributeSearchPostValidateBeforeCall(productAttribute, null);
+    public ApiResponse<List<ProductAttribute>> searchProductAttributesWithHttpInfo(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
+        okhttp3.Call localVarCall = searchProductAttributesValidateBeforeCall(productAttribute, null);
         Type localVarReturnType = new TypeToken<List<ProductAttribute>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search product attributes (asynchronously)
      * Searches for Product Attributes  Product attributes may be searched by ID, product, or, display_name - in that order.  If an ID is supplied, it will be used to search for a Product Attribute, and display_name, product will be ignored.  If a product is supplied (and no ID), it will be used to search for a Product Attribute, and display_name will be ignored. 
      * @param productAttribute  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -216,15 +216,15 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductAttributeSearchPostAsync(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback<List<ProductAttribute>> _callback) throws ApiException {
+    public okhttp3.Call searchProductAttributesAsync(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback<List<ProductAttribute>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ProductAttributeSearchPostValidateBeforeCall(productAttribute, _callback);
+        okhttp3.Call localVarCall = searchProductAttributesValidateBeforeCall(productAttribute, _callback);
         Type localVarReturnType = new TypeToken<List<ProductAttribute>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2ProductAttributeSetPost
+     * Build call for setProductAttribute
      * @param productAttribute  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -241,7 +241,7 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductAttributeSetPostCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setProductAttributeCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -287,18 +287,18 @@ public class ProductAttributesApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ProductAttributeSetPostValidateBeforeCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setProductAttributeValidateBeforeCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'productAttribute' is set
         if (productAttribute == null) {
-            throw new ApiException("Missing the required parameter 'productAttribute' when calling v2ProductAttributeSetPost(Async)");
+            throw new ApiException("Missing the required parameter 'productAttribute' when calling setProductAttribute(Async)");
         }
 
-        return v2ProductAttributeSetPostCall(productAttribute, _callback);
+        return setProductAttributeCall(productAttribute, _callback);
 
     }
 
     /**
-     * 
+     * Create or update a product attribute
      * Set a Product Attribute for a Product.  If the supplied Product Attribute doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value is already set for the Product, it will be updated.  If the supplied Product Attribute Value is not set for the Product, it will be added.  Supplied Product must exist already. 
      * @param productAttribute  (required)
      * @return List&lt;ProductAttribute&gt;
@@ -315,13 +315,13 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public List<ProductAttribute> v2ProductAttributeSetPost(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
-        ApiResponse<List<ProductAttribute>> localVarResp = v2ProductAttributeSetPostWithHttpInfo(productAttribute);
+    public List<ProductAttribute> setProductAttribute(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
+        ApiResponse<List<ProductAttribute>> localVarResp = setProductAttributeWithHttpInfo(productAttribute);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Create or update a product attribute
      * Set a Product Attribute for a Product.  If the supplied Product Attribute doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value is already set for the Product, it will be updated.  If the supplied Product Attribute Value is not set for the Product, it will be added.  Supplied Product must exist already. 
      * @param productAttribute  (required)
      * @return ApiResponse&lt;List&lt;ProductAttribute&gt;&gt;
@@ -338,14 +338,14 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<ProductAttribute>> v2ProductAttributeSetPostWithHttpInfo(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
-        okhttp3.Call localVarCall = v2ProductAttributeSetPostValidateBeforeCall(productAttribute, null);
+    public ApiResponse<List<ProductAttribute>> setProductAttributeWithHttpInfo(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
+        okhttp3.Call localVarCall = setProductAttributeValidateBeforeCall(productAttribute, null);
         Type localVarReturnType = new TypeToken<List<ProductAttribute>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Create or update a product attribute (asynchronously)
      * Set a Product Attribute for a Product.  If the supplied Product Attribute doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value is already set for the Product, it will be updated.  If the supplied Product Attribute Value is not set for the Product, it will be added.  Supplied Product must exist already. 
      * @param productAttribute  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -363,9 +363,9 @@ public class ProductAttributesApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductAttributeSetPostAsync(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback<List<ProductAttribute>> _callback) throws ApiException {
+    public okhttp3.Call setProductAttributeAsync(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback<List<ProductAttribute>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ProductAttributeSetPostValidateBeforeCall(productAttribute, _callback);
+        okhttp3.Call localVarCall = setProductAttributeValidateBeforeCall(productAttribute, _callback);
         Type localVarReturnType = new TypeToken<List<ProductAttribute>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

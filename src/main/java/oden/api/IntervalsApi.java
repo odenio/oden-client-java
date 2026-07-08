@@ -27,17 +27,18 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import oden.model.BulkDeleteIntervals200Response;
+import oden.model.BulkUpdateIntervals200Response;
 import oden.model.GenericError;
 import oden.model.Interval;
 import oden.model.IntervalBulkCreate;
 import oden.model.IntervalBulkDelete;
 import oden.model.IntervalBulkUpdate;
 import oden.model.IntervalType;
-import oden.model.V2IntervalsDeletePost200Response;
-import oden.model.V2IntervalsUpdatePost200Response;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.IntervalTypeSet;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -83,770 +84,7 @@ public class IntervalsApi {
     }
 
     /**
-     * Build call for v2IntervalDeletePost
-     * @param interval  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalDeletePostCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = interval;
-
-        // create path and map variables
-        String localVarPath = "/v2/interval/delete";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalDeletePostValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'interval' is set
-        if (interval == null) {
-            throw new ApiException("Missing the required parameter 'interval' when calling v2IntervalDeletePost(Async)");
-        }
-
-        return v2IntervalDeletePostCall(interval, _callback);
-
-    }
-
-    /**
-     * 
-     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
-     * @param interval  (required)
-     * @return List&lt;Interval&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Interval> v2IntervalDeletePost(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        ApiResponse<List<Interval>> localVarResp = v2IntervalDeletePostWithHttpInfo(interval);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
-     * @param interval  (required)
-     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Interval>> v2IntervalDeletePostWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalDeletePostValidateBeforeCall(interval, null);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
-     * @param interval  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalDeletePostAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = v2IntervalDeletePostValidateBeforeCall(interval, _callback);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for v2IntervalSearchPost
-     * @param interval  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalSearchPostCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = interval;
-
-        // create path and map variables
-        String localVarPath = "/v2/interval/search";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalSearchPostValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'interval' is set
-        if (interval == null) {
-            throw new ApiException("Missing the required parameter 'interval' when calling v2IntervalSearchPost(Async)");
-        }
-
-        return v2IntervalSearchPostCall(interval, _callback);
-
-    }
-
-    /**
-     * 
-     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
-     * @param interval  (required)
-     * @return List&lt;Interval&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Interval> v2IntervalSearchPost(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        ApiResponse<List<Interval>> localVarResp = v2IntervalSearchPostWithHttpInfo(interval);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
-     * @param interval  (required)
-     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Interval>> v2IntervalSearchPostWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalSearchPostValidateBeforeCall(interval, null);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
-     * @param interval  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalSearchPostAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = v2IntervalSearchPostValidateBeforeCall(interval, _callback);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for v2IntervalSetPost
-     * @param interval  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalSetPostCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = interval;
-
-        // create path and map variables
-        String localVarPath = "/v2/interval/set";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalSetPostValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'interval' is set
-        if (interval == null) {
-            throw new ApiException("Missing the required parameter 'interval' when calling v2IntervalSetPost(Async)");
-        }
-
-        return v2IntervalSetPostCall(interval, _callback);
-
-    }
-
-    /**
-     * 
-     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
-     * @param interval  (required)
-     * @return List&lt;Interval&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Interval> v2IntervalSetPost(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        ApiResponse<List<Interval>> localVarResp = v2IntervalSetPostWithHttpInfo(interval);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
-     * @param interval  (required)
-     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Interval>> v2IntervalSetPostWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalSetPostValidateBeforeCall(interval, null);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
-     * @param interval  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalSetPostAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = v2IntervalSetPostValidateBeforeCall(interval, _callback);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for v2IntervalTypeSearchPost
-     * @param intervalType  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalTypeSearchPostCall(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = intervalType;
-
-        // create path and map variables
-        String localVarPath = "/v2/interval_type/search";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalTypeSearchPostValidateBeforeCall(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'intervalType' is set
-        if (intervalType == null) {
-            throw new ApiException("Missing the required parameter 'intervalType' when calling v2IntervalTypeSearchPost(Async)");
-        }
-
-        return v2IntervalTypeSearchPostCall(intervalType, _callback);
-
-    }
-
-    /**
-     * 
-     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
-     * @param intervalType  (required)
-     * @return List&lt;IntervalType&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<IntervalType> v2IntervalTypeSearchPost(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
-        ApiResponse<List<IntervalType>> localVarResp = v2IntervalTypeSearchPostWithHttpInfo(intervalType);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
-     * @param intervalType  (required)
-     * @return ApiResponse&lt;List&lt;IntervalType&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<IntervalType>> v2IntervalTypeSearchPostWithHttpInfo(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalTypeSearchPostValidateBeforeCall(intervalType, null);
-        Type localVarReturnType = new TypeToken<List<IntervalType>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
-     * @param intervalType  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalTypeSearchPostAsync(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback<List<IntervalType>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = v2IntervalTypeSearchPostValidateBeforeCall(intervalType, _callback);
-        Type localVarReturnType = new TypeToken<List<IntervalType>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for v2IntervalUpdatePost
-     * @param interval  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalUpdatePostCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = interval;
-
-        // create path and map variables
-        String localVarPath = "/v2/interval/update";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalUpdatePostValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'interval' is set
-        if (interval == null) {
-            throw new ApiException("Missing the required parameter 'interval' when calling v2IntervalUpdatePost(Async)");
-        }
-
-        return v2IntervalUpdatePostCall(interval, _callback);
-
-    }
-
-    /**
-     * 
-     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
-     * @param interval  (required)
-     * @return List&lt;Interval&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-     </table>
-     */
-    public List<Interval> v2IntervalUpdatePost(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        ApiResponse<List<Interval>> localVarResp = v2IntervalUpdatePostWithHttpInfo(interval);
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
-     * @param interval  (required)
-     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<List<Interval>> v2IntervalUpdatePostWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalUpdatePostValidateBeforeCall(interval, null);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
-     * @param interval  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2IntervalUpdatePostAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = v2IntervalUpdatePostValidateBeforeCall(interval, _callback);
-        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for v2IntervalsDeletePost
+     * Build call for bulkDeleteIntervals
      * @param intervalBulkDelete  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -865,7 +103,7 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalsDeletePostCall(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call bulkDeleteIntervalsCall(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -911,21 +149,21 @@ public class IntervalsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalsDeletePostValidateBeforeCall(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call bulkDeleteIntervalsValidateBeforeCall(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'intervalBulkDelete' is set
         if (intervalBulkDelete == null) {
-            throw new ApiException("Missing the required parameter 'intervalBulkDelete' when calling v2IntervalsDeletePost(Async)");
+            throw new ApiException("Missing the required parameter 'intervalBulkDelete' when calling bulkDeleteIntervals(Async)");
         }
 
-        return v2IntervalsDeletePostCall(intervalBulkDelete, _callback);
+        return bulkDeleteIntervalsCall(intervalBulkDelete, _callback);
 
     }
 
     /**
-     * 
+     * Delete intervals in a time range
      * Delete a group of intervals by a single &#x60;type&#x60; and a single &#x60;line&#x60;, between &#x60;start_time&#x60; and &#x60;end_time&#x60;. Returns a list of intervals that were not deleted, and the number of intervals deleted.  Limitations: - Cannot exceed 15,000 intervals per request, or 30 days worth of data. - Currently does not support \&quot;batch\&quot; or \&quot;run\&quot; interval types. 
      * @param intervalBulkDelete  (required)
-     * @return V2IntervalsDeletePost200Response
+     * @return BulkDeleteIntervals200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -941,16 +179,16 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public V2IntervalsDeletePost200Response v2IntervalsDeletePost(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete) throws ApiException {
-        ApiResponse<V2IntervalsDeletePost200Response> localVarResp = v2IntervalsDeletePostWithHttpInfo(intervalBulkDelete);
+    public BulkDeleteIntervals200Response bulkDeleteIntervals(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete) throws ApiException {
+        ApiResponse<BulkDeleteIntervals200Response> localVarResp = bulkDeleteIntervalsWithHttpInfo(intervalBulkDelete);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Delete intervals in a time range
      * Delete a group of intervals by a single &#x60;type&#x60; and a single &#x60;line&#x60;, between &#x60;start_time&#x60; and &#x60;end_time&#x60;. Returns a list of intervals that were not deleted, and the number of intervals deleted.  Limitations: - Cannot exceed 15,000 intervals per request, or 30 days worth of data. - Currently does not support \&quot;batch\&quot; or \&quot;run\&quot; interval types. 
      * @param intervalBulkDelete  (required)
-     * @return ApiResponse&lt;V2IntervalsDeletePost200Response&gt;
+     * @return ApiResponse&lt;BulkDeleteIntervals200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -966,14 +204,14 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<V2IntervalsDeletePost200Response> v2IntervalsDeletePostWithHttpInfo(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalsDeletePostValidateBeforeCall(intervalBulkDelete, null);
-        Type localVarReturnType = new TypeToken<V2IntervalsDeletePost200Response>(){}.getType();
+    public ApiResponse<BulkDeleteIntervals200Response> bulkDeleteIntervalsWithHttpInfo(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete) throws ApiException {
+        okhttp3.Call localVarCall = bulkDeleteIntervalsValidateBeforeCall(intervalBulkDelete, null);
+        Type localVarReturnType = new TypeToken<BulkDeleteIntervals200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Delete intervals in a time range (asynchronously)
      * Delete a group of intervals by a single &#x60;type&#x60; and a single &#x60;line&#x60;, between &#x60;start_time&#x60; and &#x60;end_time&#x60;. Returns a list of intervals that were not deleted, and the number of intervals deleted.  Limitations: - Cannot exceed 15,000 intervals per request, or 30 days worth of data. - Currently does not support \&quot;batch\&quot; or \&quot;run\&quot; interval types. 
      * @param intervalBulkDelete  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -993,15 +231,15 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalsDeletePostAsync(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback<V2IntervalsDeletePost200Response> _callback) throws ApiException {
+    public okhttp3.Call bulkDeleteIntervalsAsync(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback<BulkDeleteIntervals200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2IntervalsDeletePostValidateBeforeCall(intervalBulkDelete, _callback);
-        Type localVarReturnType = new TypeToken<V2IntervalsDeletePost200Response>(){}.getType();
+        okhttp3.Call localVarCall = bulkDeleteIntervalsValidateBeforeCall(intervalBulkDelete, _callback);
+        Type localVarReturnType = new TypeToken<BulkDeleteIntervals200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2IntervalsSetPost
+     * Build call for bulkSetIntervals
      * @param intervalBulkCreate  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1020,7 +258,7 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalsSetPostCall(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call bulkSetIntervalsCall(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1066,18 +304,18 @@ public class IntervalsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalsSetPostValidateBeforeCall(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call bulkSetIntervalsValidateBeforeCall(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'intervalBulkCreate' is set
         if (intervalBulkCreate == null) {
-            throw new ApiException("Missing the required parameter 'intervalBulkCreate' when calling v2IntervalsSetPost(Async)");
+            throw new ApiException("Missing the required parameter 'intervalBulkCreate' when calling bulkSetIntervals(Async)");
         }
 
-        return v2IntervalsSetPostCall(intervalBulkCreate, _callback);
+        return bulkSetIntervalsCall(intervalBulkCreate, _callback);
 
     }
 
     /**
-     * 
+     * Create a set of intervals
      * Create (Does not update) a group of custom intervals, for the same &#x60;type&#x60; and &#x60;line&#x60;. Line and type do not need to be included in each individual interval, just once at the top level.  Limitations: - Cannot excees 2500 intervals per request. - Will not write over other intervals - Does not support \&quot;batch\&quot;, \&quot;run\&quot;, or \&quot;state\&quot; interval types. 
      * @param intervalBulkCreate  (required)
      * @return List&lt;String&gt;
@@ -1096,13 +334,13 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public List<String> v2IntervalsSetPost(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
-        ApiResponse<List<String>> localVarResp = v2IntervalsSetPostWithHttpInfo(intervalBulkCreate);
+    public List<String> bulkSetIntervals(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
+        ApiResponse<List<String>> localVarResp = bulkSetIntervalsWithHttpInfo(intervalBulkCreate);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Create a set of intervals
      * Create (Does not update) a group of custom intervals, for the same &#x60;type&#x60; and &#x60;line&#x60;. Line and type do not need to be included in each individual interval, just once at the top level.  Limitations: - Cannot excees 2500 intervals per request. - Will not write over other intervals - Does not support \&quot;batch\&quot;, \&quot;run\&quot;, or \&quot;state\&quot; interval types. 
      * @param intervalBulkCreate  (required)
      * @return ApiResponse&lt;List&lt;String&gt;&gt;
@@ -1121,14 +359,14 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<String>> v2IntervalsSetPostWithHttpInfo(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalsSetPostValidateBeforeCall(intervalBulkCreate, null);
+    public ApiResponse<List<String>> bulkSetIntervalsWithHttpInfo(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
+        okhttp3.Call localVarCall = bulkSetIntervalsValidateBeforeCall(intervalBulkCreate, null);
         Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Create a set of intervals (asynchronously)
      * Create (Does not update) a group of custom intervals, for the same &#x60;type&#x60; and &#x60;line&#x60;. Line and type do not need to be included in each individual interval, just once at the top level.  Limitations: - Cannot excees 2500 intervals per request. - Will not write over other intervals - Does not support \&quot;batch\&quot;, \&quot;run\&quot;, or \&quot;state\&quot; interval types. 
      * @param intervalBulkCreate  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1148,15 +386,15 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalsSetPostAsync(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback<List<String>> _callback) throws ApiException {
+    public okhttp3.Call bulkSetIntervalsAsync(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback<List<String>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2IntervalsSetPostValidateBeforeCall(intervalBulkCreate, _callback);
+        okhttp3.Call localVarCall = bulkSetIntervalsValidateBeforeCall(intervalBulkCreate, _callback);
         Type localVarReturnType = new TypeToken<List<String>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2IntervalsUpdatePost
+     * Build call for bulkUpdateIntervals
      * @param intervalBulkUpdate  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -1174,7 +412,7 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalsUpdatePostCall(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call bulkUpdateIntervalsCall(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1220,21 +458,21 @@ public class IntervalsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2IntervalsUpdatePostValidateBeforeCall(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call bulkUpdateIntervalsValidateBeforeCall(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'intervalBulkUpdate' is set
         if (intervalBulkUpdate == null) {
-            throw new ApiException("Missing the required parameter 'intervalBulkUpdate' when calling v2IntervalsUpdatePost(Async)");
+            throw new ApiException("Missing the required parameter 'intervalBulkUpdate' when calling bulkUpdateIntervals(Async)");
         }
 
-        return v2IntervalsUpdatePostCall(intervalBulkUpdate, _callback);
+        return bulkUpdateIntervalsCall(intervalBulkUpdate, _callback);
 
     }
 
     /**
-     * 
+     * Update a set of intervals
      * Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.  Each interval in the &#x60;intervals&#x60; array must include an &#x60;id&#x60; that references an existing interval.  Updatable fields for each interval: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  The endpoint will attempt to update all intervals and return information about successes and failures: - Successfully updated intervals are returned in the response - Failed intervals are listed with their IDs and error reasons  Limitations: - Cannot exceed 2500 intervals per request - All intervals must be of the same &#x60;type&#x60; and on the same &#x60;line&#x60;  **Note:** Interval IDs must be obtained from either: - The response when creating intervals via &#x60;/v2/interval/set&#x60; or &#x60;/v2/intervals/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
      * @param intervalBulkUpdate  (required)
-     * @return V2IntervalsUpdatePost200Response
+     * @return BulkUpdateIntervals200Response
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -1249,16 +487,16 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public V2IntervalsUpdatePost200Response v2IntervalsUpdatePost(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate) throws ApiException {
-        ApiResponse<V2IntervalsUpdatePost200Response> localVarResp = v2IntervalsUpdatePostWithHttpInfo(intervalBulkUpdate);
+    public BulkUpdateIntervals200Response bulkUpdateIntervals(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate) throws ApiException {
+        ApiResponse<BulkUpdateIntervals200Response> localVarResp = bulkUpdateIntervalsWithHttpInfo(intervalBulkUpdate);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Update a set of intervals
      * Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.  Each interval in the &#x60;intervals&#x60; array must include an &#x60;id&#x60; that references an existing interval.  Updatable fields for each interval: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  The endpoint will attempt to update all intervals and return information about successes and failures: - Successfully updated intervals are returned in the response - Failed intervals are listed with their IDs and error reasons  Limitations: - Cannot exceed 2500 intervals per request - All intervals must be of the same &#x60;type&#x60; and on the same &#x60;line&#x60;  **Note:** Interval IDs must be obtained from either: - The response when creating intervals via &#x60;/v2/interval/set&#x60; or &#x60;/v2/intervals/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
      * @param intervalBulkUpdate  (required)
-     * @return ApiResponse&lt;V2IntervalsUpdatePost200Response&gt;
+     * @return ApiResponse&lt;BulkUpdateIntervals200Response&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -1273,14 +511,14 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<V2IntervalsUpdatePost200Response> v2IntervalsUpdatePostWithHttpInfo(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate) throws ApiException {
-        okhttp3.Call localVarCall = v2IntervalsUpdatePostValidateBeforeCall(intervalBulkUpdate, null);
-        Type localVarReturnType = new TypeToken<V2IntervalsUpdatePost200Response>(){}.getType();
+    public ApiResponse<BulkUpdateIntervals200Response> bulkUpdateIntervalsWithHttpInfo(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate) throws ApiException {
+        okhttp3.Call localVarCall = bulkUpdateIntervalsValidateBeforeCall(intervalBulkUpdate, null);
+        Type localVarReturnType = new TypeToken<BulkUpdateIntervals200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Update a set of intervals (asynchronously)
      * Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.  Each interval in the &#x60;intervals&#x60; array must include an &#x60;id&#x60; that references an existing interval.  Updatable fields for each interval: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  The endpoint will attempt to update all intervals and return information about successes and failures: - Successfully updated intervals are returned in the response - Failed intervals are listed with their IDs and error reasons  Limitations: - Cannot exceed 2500 intervals per request - All intervals must be of the same &#x60;type&#x60; and on the same &#x60;line&#x60;  **Note:** Interval IDs must be obtained from either: - The response when creating intervals via &#x60;/v2/interval/set&#x60; or &#x60;/v2/intervals/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
      * @param intervalBulkUpdate  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -1299,10 +537,1075 @@ public class IntervalsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2IntervalsUpdatePostAsync(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback<V2IntervalsUpdatePost200Response> _callback) throws ApiException {
+    public okhttp3.Call bulkUpdateIntervalsAsync(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback<BulkUpdateIntervals200Response> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2IntervalsUpdatePostValidateBeforeCall(intervalBulkUpdate, _callback);
-        Type localVarReturnType = new TypeToken<V2IntervalsUpdatePost200Response>(){}.getType();
+        okhttp3.Call localVarCall = bulkUpdateIntervalsValidateBeforeCall(intervalBulkUpdate, _callback);
+        Type localVarReturnType = new TypeToken<BulkUpdateIntervals200Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteInterval
+     * @param interval  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteIntervalCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = interval;
+
+        // create path and map variables
+        String localVarPath = "/v2/interval/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteIntervalValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'interval' is set
+        if (interval == null) {
+            throw new ApiException("Missing the required parameter 'interval' when calling deleteInterval(Async)");
+        }
+
+        return deleteIntervalCall(interval, _callback);
+
+    }
+
+    /**
+     * Delete an interval
+     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
+     * @param interval  (required)
+     * @return List&lt;Interval&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<Interval> deleteInterval(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        ApiResponse<List<Interval>> localVarResp = deleteIntervalWithHttpInfo(interval);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Delete an interval
+     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
+     * @param interval  (required)
+     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<Interval>> deleteIntervalWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        okhttp3.Call localVarCall = deleteIntervalValidateBeforeCall(interval, null);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Delete an interval (asynchronously)
+     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
+     * @param interval  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list containing the deleted interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteIntervalAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteIntervalValidateBeforeCall(interval, _callback);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for deleteIntervalType
+     * @param intervalType  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteIntervalTypeCall(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = intervalType;
+
+        // create path and map variables
+        String localVarPath = "/v2/interval_type/delete";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteIntervalTypeValidateBeforeCall(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'intervalType' is set
+        if (intervalType == null) {
+            throw new ApiException("Missing the required parameter 'intervalType' when calling deleteIntervalType(Async)");
+        }
+
+        return deleteIntervalTypeCall(intervalType, _callback);
+
+    }
+
+    /**
+     * Delete a custom interval type
+     * Delete an existing custom Interval Type. &#x60;id&#x60; is required. Built-in types (RUN, BATCH, STATE) cannot be deleted. 
+     * @param intervalType  (required)
+     * @return IntervalType
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public IntervalType deleteIntervalType(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
+        ApiResponse<IntervalType> localVarResp = deleteIntervalTypeWithHttpInfo(intervalType);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Delete a custom interval type
+     * Delete an existing custom Interval Type. &#x60;id&#x60; is required. Built-in types (RUN, BATCH, STATE) cannot be deleted. 
+     * @param intervalType  (required)
+     * @return ApiResponse&lt;IntervalType&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<IntervalType> deleteIntervalTypeWithHttpInfo(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
+        okhttp3.Call localVarCall = deleteIntervalTypeValidateBeforeCall(intervalType, null);
+        Type localVarReturnType = new TypeToken<IntervalType>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Delete a custom interval type (asynchronously)
+     * Delete an existing custom Interval Type. &#x60;id&#x60; is required. Built-in types (RUN, BATCH, STATE) cannot be deleted. 
+     * @param intervalType  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call deleteIntervalTypeAsync(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback<IntervalType> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteIntervalTypeValidateBeforeCall(intervalType, _callback);
+        Type localVarReturnType = new TypeToken<IntervalType>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchIntervalTypes
+     * @param intervalType  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchIntervalTypesCall(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = intervalType;
+
+        // create path and map variables
+        String localVarPath = "/v2/interval_type/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchIntervalTypesValidateBeforeCall(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'intervalType' is set
+        if (intervalType == null) {
+            throw new ApiException("Missing the required parameter 'intervalType' when calling searchIntervalTypes(Async)");
+        }
+
+        return searchIntervalTypesCall(intervalType, _callback);
+
+    }
+
+    /**
+     * Search interval types
+     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
+     * @param intervalType  (required)
+     * @return List&lt;IntervalType&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<IntervalType> searchIntervalTypes(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
+        ApiResponse<List<IntervalType>> localVarResp = searchIntervalTypesWithHttpInfo(intervalType);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Search interval types
+     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
+     * @param intervalType  (required)
+     * @return ApiResponse&lt;List&lt;IntervalType&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<IntervalType>> searchIntervalTypesWithHttpInfo(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
+        okhttp3.Call localVarCall = searchIntervalTypesValidateBeforeCall(intervalType, null);
+        Type localVarReturnType = new TypeToken<List<IntervalType>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Search interval types (asynchronously)
+     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
+     * @param intervalType  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchIntervalTypesAsync(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback<List<IntervalType>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchIntervalTypesValidateBeforeCall(intervalType, _callback);
+        Type localVarReturnType = new TypeToken<List<IntervalType>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchIntervals
+     * @param interval  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchIntervalsCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = interval;
+
+        // create path and map variables
+        String localVarPath = "/v2/interval/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchIntervalsValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'interval' is set
+        if (interval == null) {
+            throw new ApiException("Missing the required parameter 'interval' when calling searchIntervals(Async)");
+        }
+
+        return searchIntervalsCall(interval, _callback);
+
+    }
+
+    /**
+     * Search intervals on a line
+     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
+     * @param interval  (required)
+     * @return List&lt;Interval&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<Interval> searchIntervals(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        ApiResponse<List<Interval>> localVarResp = searchIntervalsWithHttpInfo(interval);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Search intervals on a line
+     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
+     * @param interval  (required)
+     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<Interval>> searchIntervalsWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        okhttp3.Call localVarCall = searchIntervalsValidateBeforeCall(interval, null);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Search intervals on a line (asynchronously)
+     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
+     * @param interval  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of intervals. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchIntervalsAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchIntervalsValidateBeforeCall(interval, _callback);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for setInterval
+     * @param interval  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call setIntervalCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = interval;
+
+        // create path and map variables
+        String localVarPath = "/v2/interval/set";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call setIntervalValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'interval' is set
+        if (interval == null) {
+            throw new ApiException("Missing the required parameter 'interval' when calling setInterval(Async)");
+        }
+
+        return setIntervalCall(interval, _callback);
+
+    }
+
+    /**
+     * Create or update an interval
+     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
+     * @param interval  (required)
+     * @return List&lt;Interval&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<Interval> setInterval(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        ApiResponse<List<Interval>> localVarResp = setIntervalWithHttpInfo(interval);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create or update an interval
+     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
+     * @param interval  (required)
+     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<Interval>> setIntervalWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        okhttp3.Call localVarCall = setIntervalValidateBeforeCall(interval, null);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create or update an interval (asynchronously)
+     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
+     * @param interval  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call setIntervalAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = setIntervalValidateBeforeCall(interval, _callback);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for setIntervalType
+     * @param intervalTypeSet  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call setIntervalTypeCall(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = intervalTypeSet;
+
+        // create path and map variables
+        String localVarPath = "/v2/interval_type/set";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call setIntervalTypeValidateBeforeCall(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'intervalTypeSet' is set
+        if (intervalTypeSet == null) {
+            throw new ApiException("Missing the required parameter 'intervalTypeSet' when calling setIntervalType(Async)");
+        }
+
+        return setIntervalTypeCall(intervalTypeSet, _callback);
+
+    }
+
+    /**
+     * Create or update a custom interval type
+     * **Create** (no &#x60;id&#x60; in the body): send &#x60;name&#x60; (required) and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60;.  **Update** (with &#x60;id&#x60;): send the interval type’s &#x60;id&#x60; and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60; only. Do not send &#x60;name&#x60; for updates; including &#x60;name&#x60; returns 400. Renames are not supported.  **Patch (update only)**: &#x60;metadata_schema&#x60; — if the key is missing, the existing value is kept; if present, it replaces. &#x60;tags&#x60; — if the key is missing, tags are unchanged; &#x60;null&#x60; leaves tags unchanged; &#x60;[]&#x60; clears tags; a non-empty array replaces.  **Built-in types (RUN, BATCH, STATE) cannot be created, set, or deleted.** 
+     * @param intervalTypeSet  (required)
+     * @return IntervalType
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public IntervalType setIntervalType(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet) throws ApiException {
+        ApiResponse<IntervalType> localVarResp = setIntervalTypeWithHttpInfo(intervalTypeSet);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Create or update a custom interval type
+     * **Create** (no &#x60;id&#x60; in the body): send &#x60;name&#x60; (required) and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60;.  **Update** (with &#x60;id&#x60;): send the interval type’s &#x60;id&#x60; and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60; only. Do not send &#x60;name&#x60; for updates; including &#x60;name&#x60; returns 400. Renames are not supported.  **Patch (update only)**: &#x60;metadata_schema&#x60; — if the key is missing, the existing value is kept; if present, it replaces. &#x60;tags&#x60; — if the key is missing, tags are unchanged; &#x60;null&#x60; leaves tags unchanged; &#x60;[]&#x60; clears tags; a non-empty array replaces.  **Built-in types (RUN, BATCH, STATE) cannot be created, set, or deleted.** 
+     * @param intervalTypeSet  (required)
+     * @return ApiResponse&lt;IntervalType&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<IntervalType> setIntervalTypeWithHttpInfo(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet) throws ApiException {
+        okhttp3.Call localVarCall = setIntervalTypeValidateBeforeCall(intervalTypeSet, null);
+        Type localVarReturnType = new TypeToken<IntervalType>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Create or update a custom interval type (asynchronously)
+     * **Create** (no &#x60;id&#x60; in the body): send &#x60;name&#x60; (required) and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60;.  **Update** (with &#x60;id&#x60;): send the interval type’s &#x60;id&#x60; and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60; only. Do not send &#x60;name&#x60; for updates; including &#x60;name&#x60; returns 400. Renames are not supported.  **Patch (update only)**: &#x60;metadata_schema&#x60; — if the key is missing, the existing value is kept; if present, it replaces. &#x60;tags&#x60; — if the key is missing, tags are unchanged; &#x60;null&#x60; leaves tags unchanged; &#x60;[]&#x60; clears tags; a non-empty array replaces.  **Built-in types (RUN, BATCH, STATE) cannot be created, set, or deleted.** 
+     * @param intervalTypeSet  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call setIntervalTypeAsync(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet, final ApiCallback<IntervalType> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = setIntervalTypeValidateBeforeCall(intervalTypeSet, _callback);
+        Type localVarReturnType = new TypeToken<IntervalType>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for updateInterval
+     * @param interval  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateIntervalCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = interval;
+
+        // create path and map variables
+        String localVarPath = "/v2/interval/update";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateIntervalValidateBeforeCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'interval' is set
+        if (interval == null) {
+            throw new ApiException("Missing the required parameter 'interval' when calling updateInterval(Async)");
+        }
+
+        return updateIntervalCall(interval, _callback);
+
+    }
+
+    /**
+     * Update an interval
+     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
+     * @param interval  (required)
+     * @return List&lt;Interval&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public List<Interval> updateInterval(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        ApiResponse<List<Interval>> localVarResp = updateIntervalWithHttpInfo(interval);
+        return localVarResp.getData();
+    }
+
+    /**
+     * Update an interval
+     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
+     * @param interval  (required)
+     * @return ApiResponse&lt;List&lt;Interval&gt;&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<List<Interval>> updateIntervalWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
+        okhttp3.Call localVarCall = updateIntervalValidateBeforeCall(interval, null);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    /**
+     * Update an interval (asynchronously)
+     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
+     * @param interval  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call updateIntervalAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateIntervalValidateBeforeCall(interval, _callback);
+        Type localVarReturnType = new TypeToken<List<Interval>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

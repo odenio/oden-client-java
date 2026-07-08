@@ -30,9 +30,9 @@ import java.io.IOException;
 import oden.model.Factory;
 import oden.model.GenericError;
 import oden.model.Line;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class MachineGroupsApi {
     }
 
     /**
-     * Build call for v2FactorySearchPost
+     * Build call for searchFactories
      * @param factory  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -97,7 +97,7 @@ public class MachineGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2FactorySearchPostCall(@javax.annotation.Nonnull Factory factory, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchFactoriesCall(@javax.annotation.Nonnull Factory factory, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -143,18 +143,18 @@ public class MachineGroupsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2FactorySearchPostValidateBeforeCall(@javax.annotation.Nonnull Factory factory, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchFactoriesValidateBeforeCall(@javax.annotation.Nonnull Factory factory, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'factory' is set
         if (factory == null) {
-            throw new ApiException("Missing the required parameter 'factory' when calling v2FactorySearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'factory' when calling searchFactories(Async)");
         }
 
-        return v2FactorySearchPostCall(factory, _callback);
+        return searchFactoriesCall(factory, _callback);
 
     }
 
     /**
-     * 
+     * Search factories
      * Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
      * @param factory  (required)
      * @return List&lt;Factory&gt;
@@ -173,13 +173,13 @@ public class MachineGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public List<Factory> v2FactorySearchPost(@javax.annotation.Nonnull Factory factory) throws ApiException {
-        ApiResponse<List<Factory>> localVarResp = v2FactorySearchPostWithHttpInfo(factory);
+    public List<Factory> searchFactories(@javax.annotation.Nonnull Factory factory) throws ApiException {
+        ApiResponse<List<Factory>> localVarResp = searchFactoriesWithHttpInfo(factory);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search factories
      * Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
      * @param factory  (required)
      * @return ApiResponse&lt;List&lt;Factory&gt;&gt;
@@ -198,14 +198,14 @@ public class MachineGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Factory>> v2FactorySearchPostWithHttpInfo(@javax.annotation.Nonnull Factory factory) throws ApiException {
-        okhttp3.Call localVarCall = v2FactorySearchPostValidateBeforeCall(factory, null);
+    public ApiResponse<List<Factory>> searchFactoriesWithHttpInfo(@javax.annotation.Nonnull Factory factory) throws ApiException {
+        okhttp3.Call localVarCall = searchFactoriesValidateBeforeCall(factory, null);
         Type localVarReturnType = new TypeToken<List<Factory>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search factories (asynchronously)
      * Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
      * @param factory  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -225,15 +225,15 @@ public class MachineGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2FactorySearchPostAsync(@javax.annotation.Nonnull Factory factory, final ApiCallback<List<Factory>> _callback) throws ApiException {
+    public okhttp3.Call searchFactoriesAsync(@javax.annotation.Nonnull Factory factory, final ApiCallback<List<Factory>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2FactorySearchPostValidateBeforeCall(factory, _callback);
+        okhttp3.Call localVarCall = searchFactoriesValidateBeforeCall(factory, _callback);
         Type localVarReturnType = new TypeToken<List<Factory>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2LineSearchPost
+     * Build call for searchLines
      * @param line  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -252,7 +252,7 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2LineSearchPostCall(@javax.annotation.Nonnull Line line, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchLinesCall(@javax.annotation.Nonnull Line line, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -298,18 +298,18 @@ public class MachineGroupsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2LineSearchPostValidateBeforeCall(@javax.annotation.Nonnull Line line, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchLinesValidateBeforeCall(@javax.annotation.Nonnull Line line, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'line' is set
         if (line == null) {
-            throw new ApiException("Missing the required parameter 'line' when calling v2LineSearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'line' when calling searchLines(Async)");
         }
 
-        return v2LineSearchPostCall(line, _callback);
+        return searchLinesCall(line, _callback);
 
     }
 
     /**
-     * 
+     * Search production lines
      * Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
      * @param line  (required)
      * @return List&lt;Line&gt;
@@ -328,13 +328,13 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public List<Line> v2LineSearchPost(@javax.annotation.Nonnull Line line) throws ApiException {
-        ApiResponse<List<Line>> localVarResp = v2LineSearchPostWithHttpInfo(line);
+    public List<Line> searchLines(@javax.annotation.Nonnull Line line) throws ApiException {
+        ApiResponse<List<Line>> localVarResp = searchLinesWithHttpInfo(line);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search production lines
      * Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
      * @param line  (required)
      * @return ApiResponse&lt;List&lt;Line&gt;&gt;
@@ -353,14 +353,14 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Line>> v2LineSearchPostWithHttpInfo(@javax.annotation.Nonnull Line line) throws ApiException {
-        okhttp3.Call localVarCall = v2LineSearchPostValidateBeforeCall(line, null);
+    public ApiResponse<List<Line>> searchLinesWithHttpInfo(@javax.annotation.Nonnull Line line) throws ApiException {
+        okhttp3.Call localVarCall = searchLinesValidateBeforeCall(line, null);
         Type localVarReturnType = new TypeToken<List<Line>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search production lines (asynchronously)
      * Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
      * @param line  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -380,9 +380,9 @@ public class MachineGroupsApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2LineSearchPostAsync(@javax.annotation.Nonnull Line line, final ApiCallback<List<Line>> _callback) throws ApiException {
+    public okhttp3.Call searchLinesAsync(@javax.annotation.Nonnull Line line, final ApiCallback<List<Line>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2LineSearchPostValidateBeforeCall(line, _callback);
+        okhttp3.Call localVarCall = searchLinesValidateBeforeCall(line, _callback);
         Type localVarReturnType = new TypeToken<List<Line>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

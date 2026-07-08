@@ -28,11 +28,11 @@ import java.io.IOException;
 
 
 import oden.model.GenericError;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
-import oden.model.V2ScrapYieldSearchPostRequest;
-import oden.model.V2ScrapYieldSetPostRequest;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
+import oden.model.SearchScrapYieldRequest;
+import oden.model.SetScrapYieldRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -78,8 +78,8 @@ public class ScrapYieldDataApi {
     }
 
     /**
-     * Build call for v2ScrapYieldDeletePost
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * Build call for deleteScrapYield
+     * @param searchScrapYieldRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -97,7 +97,7 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ScrapYieldDeletePostCall(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deleteScrapYieldCall(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -111,7 +111,7 @@ public class ScrapYieldDataApi {
             basePath = null;
         }
 
-        Object localVarPostBody = v2ScrapYieldSearchPostRequest;
+        Object localVarPostBody = searchScrapYieldRequest;
 
         // create path and map variables
         String localVarPath = "/v2/scrap_yield/delete";
@@ -143,20 +143,20 @@ public class ScrapYieldDataApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ScrapYieldDeletePostValidateBeforeCall(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'v2ScrapYieldSearchPostRequest' is set
-        if (v2ScrapYieldSearchPostRequest == null) {
-            throw new ApiException("Missing the required parameter 'v2ScrapYieldSearchPostRequest' when calling v2ScrapYieldDeletePost(Async)");
+    private okhttp3.Call deleteScrapYieldValidateBeforeCall(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'searchScrapYieldRequest' is set
+        if (searchScrapYieldRequest == null) {
+            throw new ApiException("Missing the required parameter 'searchScrapYieldRequest' when calling deleteScrapYield(Async)");
         }
 
-        return v2ScrapYieldDeletePostCall(v2ScrapYieldSearchPostRequest, _callback);
+        return deleteScrapYieldCall(searchScrapYieldRequest, _callback);
 
     }
 
     /**
-     * 
+     * Delete a scrap/yield record
      * Deletes Scrap Yield record by ID and line 
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * @param searchScrapYieldRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -172,14 +172,14 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2ScrapYieldDeletePost(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest) throws ApiException {
-        v2ScrapYieldDeletePostWithHttpInfo(v2ScrapYieldSearchPostRequest);
+    public void deleteScrapYield(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest) throws ApiException {
+        deleteScrapYieldWithHttpInfo(searchScrapYieldRequest);
     }
 
     /**
-     * 
+     * Delete a scrap/yield record
      * Deletes Scrap Yield record by ID and line 
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * @param searchScrapYieldRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -196,15 +196,15 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2ScrapYieldDeletePostWithHttpInfo(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest) throws ApiException {
-        okhttp3.Call localVarCall = v2ScrapYieldDeletePostValidateBeforeCall(v2ScrapYieldSearchPostRequest, null);
+    public ApiResponse<Void> deleteScrapYieldWithHttpInfo(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest) throws ApiException {
+        okhttp3.Call localVarCall = deleteScrapYieldValidateBeforeCall(searchScrapYieldRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Delete a scrap/yield record (asynchronously)
      * Deletes Scrap Yield record by ID and line 
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * @param searchScrapYieldRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -222,15 +222,15 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ScrapYieldDeletePostAsync(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call deleteScrapYieldAsync(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ScrapYieldDeletePostValidateBeforeCall(v2ScrapYieldSearchPostRequest, _callback);
+        okhttp3.Call localVarCall = deleteScrapYieldValidateBeforeCall(searchScrapYieldRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2ScrapYieldSearchPost
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * Build call for searchScrapYield
+     * @param searchScrapYieldRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -248,7 +248,7 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ScrapYieldSearchPostCall(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchScrapYieldCall(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -262,7 +262,7 @@ public class ScrapYieldDataApi {
             basePath = null;
         }
 
-        Object localVarPostBody = v2ScrapYieldSearchPostRequest;
+        Object localVarPostBody = searchScrapYieldRequest;
 
         // create path and map variables
         String localVarPath = "/v2/scrap_yield/search";
@@ -294,20 +294,20 @@ public class ScrapYieldDataApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ScrapYieldSearchPostValidateBeforeCall(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'v2ScrapYieldSearchPostRequest' is set
-        if (v2ScrapYieldSearchPostRequest == null) {
-            throw new ApiException("Missing the required parameter 'v2ScrapYieldSearchPostRequest' when calling v2ScrapYieldSearchPost(Async)");
+    private okhttp3.Call searchScrapYieldValidateBeforeCall(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'searchScrapYieldRequest' is set
+        if (searchScrapYieldRequest == null) {
+            throw new ApiException("Missing the required parameter 'searchScrapYieldRequest' when calling searchScrapYield(Async)");
         }
 
-        return v2ScrapYieldSearchPostCall(v2ScrapYieldSearchPostRequest, _callback);
+        return searchScrapYieldCall(searchScrapYieldRequest, _callback);
 
     }
 
     /**
-     * 
+     * Search scrap/yield records
      * Searches for scrap/yield records for a given Interval 
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * @param searchScrapYieldRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -323,14 +323,14 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2ScrapYieldSearchPost(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest) throws ApiException {
-        v2ScrapYieldSearchPostWithHttpInfo(v2ScrapYieldSearchPostRequest);
+    public void searchScrapYield(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest) throws ApiException {
+        searchScrapYieldWithHttpInfo(searchScrapYieldRequest);
     }
 
     /**
-     * 
+     * Search scrap/yield records
      * Searches for scrap/yield records for a given Interval 
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * @param searchScrapYieldRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -347,15 +347,15 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2ScrapYieldSearchPostWithHttpInfo(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest) throws ApiException {
-        okhttp3.Call localVarCall = v2ScrapYieldSearchPostValidateBeforeCall(v2ScrapYieldSearchPostRequest, null);
+    public ApiResponse<Void> searchScrapYieldWithHttpInfo(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest) throws ApiException {
+        okhttp3.Call localVarCall = searchScrapYieldValidateBeforeCall(searchScrapYieldRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Search scrap/yield records (asynchronously)
      * Searches for scrap/yield records for a given Interval 
-     * @param v2ScrapYieldSearchPostRequest  (required)
+     * @param searchScrapYieldRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -373,15 +373,15 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ScrapYieldSearchPostAsync(@javax.annotation.Nonnull V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call searchScrapYieldAsync(@javax.annotation.Nonnull SearchScrapYieldRequest searchScrapYieldRequest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ScrapYieldSearchPostValidateBeforeCall(v2ScrapYieldSearchPostRequest, _callback);
+        okhttp3.Call localVarCall = searchScrapYieldValidateBeforeCall(searchScrapYieldRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2ScrapYieldSetPost
-     * @param v2ScrapYieldSetPostRequest  (required)
+     * Build call for setScrapYield
+     * @param setScrapYieldRequest  (required)
      * @param pattern Optional pattern type to use for matching: - &#x60;exact&#x60; for exact match - &#x60;contains&#x60; for the string to be contained in the query - &#x60;regex&#x60; to match based on a regular expression  (optional, default to exact)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -400,7 +400,7 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ScrapYieldSetPostCall(@javax.annotation.Nonnull V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest, @javax.annotation.Nullable String pattern, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setScrapYieldCall(@javax.annotation.Nonnull SetScrapYieldRequest setScrapYieldRequest, @javax.annotation.Nullable String pattern, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -414,7 +414,7 @@ public class ScrapYieldDataApi {
             basePath = null;
         }
 
-        Object localVarPostBody = v2ScrapYieldSetPostRequest;
+        Object localVarPostBody = setScrapYieldRequest;
 
         // create path and map variables
         String localVarPath = "/v2/scrap_yield/set";
@@ -450,20 +450,20 @@ public class ScrapYieldDataApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ScrapYieldSetPostValidateBeforeCall(@javax.annotation.Nonnull V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest, @javax.annotation.Nullable String pattern, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'v2ScrapYieldSetPostRequest' is set
-        if (v2ScrapYieldSetPostRequest == null) {
-            throw new ApiException("Missing the required parameter 'v2ScrapYieldSetPostRequest' when calling v2ScrapYieldSetPost(Async)");
+    private okhttp3.Call setScrapYieldValidateBeforeCall(@javax.annotation.Nonnull SetScrapYieldRequest setScrapYieldRequest, @javax.annotation.Nullable String pattern, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'setScrapYieldRequest' is set
+        if (setScrapYieldRequest == null) {
+            throw new ApiException("Missing the required parameter 'setScrapYieldRequest' when calling setScrapYield(Async)");
         }
 
-        return v2ScrapYieldSetPostCall(v2ScrapYieldSetPostRequest, pattern, _callback);
+        return setScrapYieldCall(setScrapYieldRequest, pattern, _callback);
 
     }
 
     /**
-     * 
+     * Create or update a scrap/yield record
      * Uploads scrap or yield raw data.  Notes:  - If &#x60;id&#x60; is provided the existing Scrap/Yield record will be updated.  - If &#x60;id&#x60; is omitted a new Scrap/Yield record will be created.  - The scrap yield for an interval is an aggregate of all scrap yield raw data records associated with that interval     - Therefore, multiple scrap yield records can exist for a single interval, each contributing to the \&quot;aggregate\&quot; (i.e. sum total) scrap/yield of that interval  - Changing an aggregate can be done by either adding another record with an offset, or updating an existing record.     - Example: If you have 3 scrap records in an interval: 50 50 50 &#x3D; 150 and want to make the aggregate 100 for a given interval, either update one of the existing scrap records from 50 -&gt; 0, or add a new one with value -50  - Duplicate keys should be avoided, see Schema docs above for details. 
-     * @param v2ScrapYieldSetPostRequest  (required)
+     * @param setScrapYieldRequest  (required)
      * @param pattern Optional pattern type to use for matching: - &#x60;exact&#x60; for exact match - &#x60;contains&#x60; for the string to be contained in the query - &#x60;regex&#x60; to match based on a regular expression  (optional, default to exact)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -480,14 +480,14 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2ScrapYieldSetPost(@javax.annotation.Nonnull V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest, @javax.annotation.Nullable String pattern) throws ApiException {
-        v2ScrapYieldSetPostWithHttpInfo(v2ScrapYieldSetPostRequest, pattern);
+    public void setScrapYield(@javax.annotation.Nonnull SetScrapYieldRequest setScrapYieldRequest, @javax.annotation.Nullable String pattern) throws ApiException {
+        setScrapYieldWithHttpInfo(setScrapYieldRequest, pattern);
     }
 
     /**
-     * 
+     * Create or update a scrap/yield record
      * Uploads scrap or yield raw data.  Notes:  - If &#x60;id&#x60; is provided the existing Scrap/Yield record will be updated.  - If &#x60;id&#x60; is omitted a new Scrap/Yield record will be created.  - The scrap yield for an interval is an aggregate of all scrap yield raw data records associated with that interval     - Therefore, multiple scrap yield records can exist for a single interval, each contributing to the \&quot;aggregate\&quot; (i.e. sum total) scrap/yield of that interval  - Changing an aggregate can be done by either adding another record with an offset, or updating an existing record.     - Example: If you have 3 scrap records in an interval: 50 50 50 &#x3D; 150 and want to make the aggregate 100 for a given interval, either update one of the existing scrap records from 50 -&gt; 0, or add a new one with value -50  - Duplicate keys should be avoided, see Schema docs above for details. 
-     * @param v2ScrapYieldSetPostRequest  (required)
+     * @param setScrapYieldRequest  (required)
      * @param pattern Optional pattern type to use for matching: - &#x60;exact&#x60; for exact match - &#x60;contains&#x60; for the string to be contained in the query - &#x60;regex&#x60; to match based on a regular expression  (optional, default to exact)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -505,15 +505,15 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2ScrapYieldSetPostWithHttpInfo(@javax.annotation.Nonnull V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest, @javax.annotation.Nullable String pattern) throws ApiException {
-        okhttp3.Call localVarCall = v2ScrapYieldSetPostValidateBeforeCall(v2ScrapYieldSetPostRequest, pattern, null);
+    public ApiResponse<Void> setScrapYieldWithHttpInfo(@javax.annotation.Nonnull SetScrapYieldRequest setScrapYieldRequest, @javax.annotation.Nullable String pattern) throws ApiException {
+        okhttp3.Call localVarCall = setScrapYieldValidateBeforeCall(setScrapYieldRequest, pattern, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Create or update a scrap/yield record (asynchronously)
      * Uploads scrap or yield raw data.  Notes:  - If &#x60;id&#x60; is provided the existing Scrap/Yield record will be updated.  - If &#x60;id&#x60; is omitted a new Scrap/Yield record will be created.  - The scrap yield for an interval is an aggregate of all scrap yield raw data records associated with that interval     - Therefore, multiple scrap yield records can exist for a single interval, each contributing to the \&quot;aggregate\&quot; (i.e. sum total) scrap/yield of that interval  - Changing an aggregate can be done by either adding another record with an offset, or updating an existing record.     - Example: If you have 3 scrap records in an interval: 50 50 50 &#x3D; 150 and want to make the aggregate 100 for a given interval, either update one of the existing scrap records from 50 -&gt; 0, or add a new one with value -50  - Duplicate keys should be avoided, see Schema docs above for details. 
-     * @param v2ScrapYieldSetPostRequest  (required)
+     * @param setScrapYieldRequest  (required)
      * @param pattern Optional pattern type to use for matching: - &#x60;exact&#x60; for exact match - &#x60;contains&#x60; for the string to be contained in the query - &#x60;regex&#x60; to match based on a regular expression  (optional, default to exact)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -532,9 +532,9 @@ public class ScrapYieldDataApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ScrapYieldSetPostAsync(@javax.annotation.Nonnull V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest, @javax.annotation.Nullable String pattern, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call setScrapYieldAsync(@javax.annotation.Nonnull SetScrapYieldRequest setScrapYieldRequest, @javax.annotation.Nullable String pattern, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ScrapYieldSetPostValidateBeforeCall(v2ScrapYieldSetPostRequest, pattern, _callback);
+        okhttp3.Call localVarCall = setScrapYieldValidateBeforeCall(setScrapYieldRequest, pattern, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

@@ -54,7 +54,7 @@ import oden.JSON;
 /**
  * An object representing a maintenance work order on a line.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-08T02:35:24.898947759Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-08T05:17:44.787119627Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class MaintenanceWorkOrder {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

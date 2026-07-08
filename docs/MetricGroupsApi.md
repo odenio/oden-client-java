@@ -4,14 +4,14 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2MetricGroupSearchPost**](MetricGroupsApi.md#v2MetricGroupSearchPost) | **POST** /v2/metric_group/search |  |
+| [**searchMetricGroups**](MetricGroupsApi.md#searchMetricGroups) | **POST** /v2/metric_group/search | Search metric groups |
 
 
-<a id="v2MetricGroupSearchPost"></a>
-# **v2MetricGroupSearchPost**
-> List&lt;MetricGroup&gt; v2MetricGroupSearchPost(metricGroup)
+<a id="searchMetricGroups"></a>
+# **searchMetricGroups**
+> List&lt;MetricGroup&gt; searchMetricGroups(metricGroup)
 
-
+Search metric groups
 
 Search for a specific Metric Group:  - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all Metric Groups: - &#x60;match: all&#x60; 
 
@@ -39,10 +39,10 @@ public class Example {
     MetricGroupsApi apiInstance = new MetricGroupsApi(defaultClient);
     MetricGroup metricGroup = new MetricGroup(); // MetricGroup | 
     try {
-      List<MetricGroup> result = apiInstance.v2MetricGroupSearchPost(metricGroup);
+      List<MetricGroup> result = apiInstance.searchMetricGroups(metricGroup);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling MetricGroupsApi#v2MetricGroupSearchPost");
+      System.err.println("Exception when calling MetricGroupsApi#searchMetricGroups");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

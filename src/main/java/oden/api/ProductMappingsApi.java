@@ -29,9 +29,9 @@ import java.io.IOException;
 
 import oden.model.GenericError;
 import oden.model.ProductMapping;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class ProductMappingsApi {
     }
 
     /**
-     * Build call for v2ProductMappingSearchPost
+     * Build call for searchProductMappings
      * @param productMapping  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -94,7 +94,7 @@ public class ProductMappingsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductMappingSearchPostCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchProductMappingsCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -140,18 +140,18 @@ public class ProductMappingsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ProductMappingSearchPostValidateBeforeCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchProductMappingsValidateBeforeCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'productMapping' is set
         if (productMapping == null) {
-            throw new ApiException("Missing the required parameter 'productMapping' when calling v2ProductMappingSearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'productMapping' when calling searchProductMappings(Async)");
         }
 
-        return v2ProductMappingSearchPostCall(productMapping, _callback);
+        return searchProductMappingsCall(productMapping, _callback);
 
     }
 
     /**
-     * 
+     * Search product-to-line mappings
      * Searches for Product Mappings.  May be used to confirm a Product Mapping exists.  Much like &#x60;product/search&#x60;, may be used to get &#x60;name&#x60;s of line or product from &#x60;id&#x60;s, or &#x60;id&#x60;s from &#x60;name&#x60;s. 
      * @param productMapping  (required)
      * @return List&lt;ProductMapping&gt;
@@ -168,13 +168,13 @@ public class ProductMappingsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public List<ProductMapping> v2ProductMappingSearchPost(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
-        ApiResponse<List<ProductMapping>> localVarResp = v2ProductMappingSearchPostWithHttpInfo(productMapping);
+    public List<ProductMapping> searchProductMappings(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
+        ApiResponse<List<ProductMapping>> localVarResp = searchProductMappingsWithHttpInfo(productMapping);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search product-to-line mappings
      * Searches for Product Mappings.  May be used to confirm a Product Mapping exists.  Much like &#x60;product/search&#x60;, may be used to get &#x60;name&#x60;s of line or product from &#x60;id&#x60;s, or &#x60;id&#x60;s from &#x60;name&#x60;s. 
      * @param productMapping  (required)
      * @return ApiResponse&lt;List&lt;ProductMapping&gt;&gt;
@@ -191,14 +191,14 @@ public class ProductMappingsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<ProductMapping>> v2ProductMappingSearchPostWithHttpInfo(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
-        okhttp3.Call localVarCall = v2ProductMappingSearchPostValidateBeforeCall(productMapping, null);
+    public ApiResponse<List<ProductMapping>> searchProductMappingsWithHttpInfo(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
+        okhttp3.Call localVarCall = searchProductMappingsValidateBeforeCall(productMapping, null);
         Type localVarReturnType = new TypeToken<List<ProductMapping>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search product-to-line mappings (asynchronously)
      * Searches for Product Mappings.  May be used to confirm a Product Mapping exists.  Much like &#x60;product/search&#x60;, may be used to get &#x60;name&#x60;s of line or product from &#x60;id&#x60;s, or &#x60;id&#x60;s from &#x60;name&#x60;s. 
      * @param productMapping  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -216,15 +216,15 @@ public class ProductMappingsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductMappingSearchPostAsync(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback<List<ProductMapping>> _callback) throws ApiException {
+    public okhttp3.Call searchProductMappingsAsync(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback<List<ProductMapping>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ProductMappingSearchPostValidateBeforeCall(productMapping, _callback);
+        okhttp3.Call localVarCall = searchProductMappingsValidateBeforeCall(productMapping, _callback);
         Type localVarReturnType = new TypeToken<List<ProductMapping>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2ProductMappingSetPost
+     * Build call for setProductMapping
      * @param productMapping  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -242,7 +242,7 @@ public class ProductMappingsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductMappingSetPostCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setProductMappingCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -288,18 +288,18 @@ public class ProductMappingsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ProductMappingSetPostValidateBeforeCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setProductMappingValidateBeforeCall(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'productMapping' is set
         if (productMapping == null) {
-            throw new ApiException("Missing the required parameter 'productMapping' when calling v2ProductMappingSetPost(Async)");
+            throw new ApiException("Missing the required parameter 'productMapping' when calling setProductMapping(Async)");
         }
 
-        return v2ProductMappingSetPostCall(productMapping, _callback);
+        return setProductMappingCall(productMapping, _callback);
 
     }
 
     /**
-     * 
+     * Map a product to a line
      * Map a Product to a Line - implying this Line can produce, or is producing this Product.  If the supplied Product doesn&#39;t exist, it will be created. 
      * @param productMapping  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -316,12 +316,12 @@ public class ProductMappingsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2ProductMappingSetPost(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
-        v2ProductMappingSetPostWithHttpInfo(productMapping);
+    public void setProductMapping(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
+        setProductMappingWithHttpInfo(productMapping);
     }
 
     /**
-     * 
+     * Map a product to a line
      * Map a Product to a Line - implying this Line can produce, or is producing this Product.  If the supplied Product doesn&#39;t exist, it will be created. 
      * @param productMapping  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -339,13 +339,13 @@ public class ProductMappingsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2ProductMappingSetPostWithHttpInfo(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
-        okhttp3.Call localVarCall = v2ProductMappingSetPostValidateBeforeCall(productMapping, null);
+    public ApiResponse<Void> setProductMappingWithHttpInfo(@javax.annotation.Nonnull ProductMapping productMapping) throws ApiException {
+        okhttp3.Call localVarCall = setProductMappingValidateBeforeCall(productMapping, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Map a product to a line (asynchronously)
      * Map a Product to a Line - implying this Line can produce, or is producing this Product.  If the supplied Product doesn&#39;t exist, it will be created. 
      * @param productMapping  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -364,9 +364,9 @@ public class ProductMappingsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductMappingSetPostAsync(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call setProductMappingAsync(@javax.annotation.Nonnull ProductMapping productMapping, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ProductMappingSetPostValidateBeforeCall(productMapping, _callback);
+        okhttp3.Call localVarCall = setProductMappingValidateBeforeCall(productMapping, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

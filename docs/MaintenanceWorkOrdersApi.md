@@ -4,16 +4,16 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2MaintenanceWorkOrderDeletePost**](MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderDeletePost) | **POST** /v2/maintenance_work_order/delete |  |
-| [**v2MaintenanceWorkOrderSearchPost**](MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderSearchPost) | **POST** /v2/maintenance_work_order/search |  |
-| [**v2MaintenanceWorkOrderSetPost**](MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderSetPost) | **POST** /v2/maintenance_work_order/set |  |
+| [**deleteMaintenanceWorkOrder**](MaintenanceWorkOrdersApi.md#deleteMaintenanceWorkOrder) | **POST** /v2/maintenance_work_order/delete | Delete a maintenance work order |
+| [**searchMaintenanceWorkOrders**](MaintenanceWorkOrdersApi.md#searchMaintenanceWorkOrders) | **POST** /v2/maintenance_work_order/search | Search maintenance work orders |
+| [**setMaintenanceWorkOrder**](MaintenanceWorkOrdersApi.md#setMaintenanceWorkOrder) | **POST** /v2/maintenance_work_order/set | Create or update a maintenance work order |
 
 
-<a id="v2MaintenanceWorkOrderDeletePost"></a>
-# **v2MaintenanceWorkOrderDeletePost**
-> List&lt;MaintenanceWorkOrder&gt; v2MaintenanceWorkOrderDeletePost(maintenanceWorkOrder)
+<a id="deleteMaintenanceWorkOrder"></a>
+# **deleteMaintenanceWorkOrder**
+> List&lt;MaintenanceWorkOrder&gt; deleteMaintenanceWorkOrder(maintenanceWorkOrder)
 
-
+Delete a maintenance work order
 
 Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
 
@@ -41,10 +41,10 @@ public class Example {
     MaintenanceWorkOrdersApi apiInstance = new MaintenanceWorkOrdersApi(defaultClient);
     MaintenanceWorkOrder maintenanceWorkOrder = new MaintenanceWorkOrder(); // MaintenanceWorkOrder | 
     try {
-      List<MaintenanceWorkOrder> result = apiInstance.v2MaintenanceWorkOrderDeletePost(maintenanceWorkOrder);
+      List<MaintenanceWorkOrder> result = apiInstance.deleteMaintenanceWorkOrder(maintenanceWorkOrder);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling MaintenanceWorkOrdersApi#v2MaintenanceWorkOrderDeletePost");
+      System.err.println("Exception when calling MaintenanceWorkOrdersApi#deleteMaintenanceWorkOrder");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -85,11 +85,11 @@ public class Example {
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
 | **501** | Endpoint is not yet implemented |  -  |
 
-<a id="v2MaintenanceWorkOrderSearchPost"></a>
-# **v2MaintenanceWorkOrderSearchPost**
-> List&lt;MaintenanceWorkOrder&gt; v2MaintenanceWorkOrderSearchPost(v2MaintenanceWorkOrderSearchPostRequest)
+<a id="searchMaintenanceWorkOrders"></a>
+# **searchMaintenanceWorkOrders**
+> List&lt;MaintenanceWorkOrder&gt; searchMaintenanceWorkOrders(searchMaintenanceWorkOrdersRequest)
 
-
+Search maintenance work orders
 
 Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
 
@@ -115,12 +115,12 @@ public class Example {
     //APIKeyAuth.setApiKeyPrefix("Token");
 
     MaintenanceWorkOrdersApi apiInstance = new MaintenanceWorkOrdersApi(defaultClient);
-    V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest = new V2MaintenanceWorkOrderSearchPostRequest(); // V2MaintenanceWorkOrderSearchPostRequest | 
+    SearchMaintenanceWorkOrdersRequest searchMaintenanceWorkOrdersRequest = new SearchMaintenanceWorkOrdersRequest(); // SearchMaintenanceWorkOrdersRequest | 
     try {
-      List<MaintenanceWorkOrder> result = apiInstance.v2MaintenanceWorkOrderSearchPost(v2MaintenanceWorkOrderSearchPostRequest);
+      List<MaintenanceWorkOrder> result = apiInstance.searchMaintenanceWorkOrders(searchMaintenanceWorkOrdersRequest);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling MaintenanceWorkOrdersApi#v2MaintenanceWorkOrderSearchPost");
+      System.err.println("Exception when calling MaintenanceWorkOrdersApi#searchMaintenanceWorkOrders");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -134,7 +134,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **v2MaintenanceWorkOrderSearchPostRequest** | [**V2MaintenanceWorkOrderSearchPostRequest**](V2MaintenanceWorkOrderSearchPostRequest.md)|  | |
+| **searchMaintenanceWorkOrdersRequest** | [**SearchMaintenanceWorkOrdersRequest**](SearchMaintenanceWorkOrdersRequest.md)|  | |
 
 ### Return type
 
@@ -161,11 +161,11 @@ public class Example {
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
 | **501** | Endpoint is not yet implemented |  -  |
 
-<a id="v2MaintenanceWorkOrderSetPost"></a>
-# **v2MaintenanceWorkOrderSetPost**
-> MaintenanceWorkOrder v2MaintenanceWorkOrderSetPost(maintenanceWorkOrder)
+<a id="setMaintenanceWorkOrder"></a>
+# **setMaintenanceWorkOrder**
+> MaintenanceWorkOrder setMaintenanceWorkOrder(maintenanceWorkOrder)
 
-
+Create or update a maintenance work order
 
 Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
 
@@ -193,10 +193,10 @@ public class Example {
     MaintenanceWorkOrdersApi apiInstance = new MaintenanceWorkOrdersApi(defaultClient);
     MaintenanceWorkOrder maintenanceWorkOrder = new MaintenanceWorkOrder(); // MaintenanceWorkOrder | 
     try {
-      MaintenanceWorkOrder result = apiInstance.v2MaintenanceWorkOrderSetPost(maintenanceWorkOrder);
+      MaintenanceWorkOrder result = apiInstance.setMaintenanceWorkOrder(maintenanceWorkOrder);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling MaintenanceWorkOrdersApi#v2MaintenanceWorkOrderSetPost");
+      System.err.println("Exception when calling MaintenanceWorkOrdersApi#setMaintenanceWorkOrder");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

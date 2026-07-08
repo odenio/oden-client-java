@@ -115,6 +115,7 @@ paths:
         - `factory`
           - `name` or `id`
         - `match: all`
+      operationId: search_lines
       requestBody:
         content:
           application/json:
@@ -155,7 +156,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -180,14 +181,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -196,6 +197,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Search production lines
       tags:
       - Machine Groups
       x-content-type: application/json
@@ -215,6 +217,7 @@ paths:
 
         Search for all factories:
         - `match: all`
+      operationId: search_factories
       requestBody:
         content:
           application/json:
@@ -248,7 +251,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -268,7 +271,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -281,7 +284,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -289,6 +292,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search factories
       tags:
       - Machine Groups
       x-content-type: application/json
@@ -309,6 +313,7 @@ paths:
 
         Search for all Metric Groups:
         - `match: all`
+      operationId: search_metric_groups
       requestBody:
         content:
           application/json:
@@ -333,7 +338,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -353,7 +358,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -366,7 +371,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -374,6 +379,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search metric groups
       tags:
       - Metric Groups
       x-content-type: application/json
@@ -392,6 +398,7 @@ paths:
         - `match: unique` or omit
 
         May be used to confirm a Product exists or to get a Product `id` if `name` is known, or `name` if `id` is known.
+      operationId: search_products
       requestBody:
         content:
           application/json:
@@ -411,7 +418,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -431,7 +438,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -444,8 +451,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
+      summary: Search products
       tags:
       - Products
       x-content-type: application/json
@@ -457,6 +465,7 @@ paths:
         To **create** a new Product, include `name`, and omit `id` field.
 
         To **update** an existing Product, include the `id` of the existing product the updated `name`.
+      operationId: set_product
       requestBody:
         content:
           application/json:
@@ -480,7 +489,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -493,7 +502,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -506,8 +515,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
+      summary: Create or update a product
       tags:
       - Products
       x-content-type: application/json
@@ -526,6 +536,7 @@ paths:
         - `match: unique` or omit
 
         A deleted Product will not show up in Product searches or dropdowns, but associated Intervals will still exist.
+      operationId: delete_product
       requestBody:
         content:
           application/json:
@@ -548,7 +559,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -561,7 +572,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -574,7 +585,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -582,6 +593,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Delete a product
       tags:
       - Products
       x-content-type: application/json
@@ -596,6 +608,7 @@ paths:
 
         Much like `product/search`, may be used to get `name`s of line or product from `id`s,
         or `id`s from `name`s.
+      operationId: search_product_mappings
       requestBody:
         content:
           application/json:
@@ -639,7 +652,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -652,7 +665,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -665,8 +678,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
+      summary: Search product-to-line mappings
       tags:
       - Product Mappings
       x-content-type: application/json
@@ -678,6 +692,7 @@ paths:
         Map a Product to a Line - implying this Line can produce, or is producing this Product.
 
         If the supplied Product doesn't exist, it will be created.
+      operationId: set_product_mapping
       requestBody:
         content:
           application/json:
@@ -709,7 +724,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -722,7 +737,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -735,7 +750,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -743,6 +758,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Map a product to a line
       tags:
       - Product Mappings
       x-content-type: application/json
@@ -758,6 +774,7 @@ paths:
         If an ID is supplied, it will be used to search for a Product Attribute, and display_name, product will be ignored.
 
         If a product is supplied (and no ID), it will be used to search for a Product Attribute, and display_name will be ignored.
+      operationId: search_product_attributes
       requestBody:
         content:
           application/json:
@@ -788,7 +805,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -801,7 +818,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -814,8 +831,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
+      summary: Search product attributes
       tags:
       - Product Attributes
       x-content-type: application/json
@@ -835,6 +853,7 @@ paths:
         If the supplied Product Attribute Value is not set for the Product, it will be added.
 
         Supplied Product must exist already.
+      operationId: set_product_attribute
       requestBody:
         content:
           application/json:
@@ -872,7 +891,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -885,7 +904,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -898,8 +917,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
+      summary: Create or update a product attribute
       tags:
       - Product Attributes
       x-content-type: application/json
@@ -910,6 +930,7 @@ paths:
       description: |
         Search for a Target by `line`, `metric_group`, and `product`. For each of these inputs, any of
         their unique indentifiers (as described in their `search` endpoint) may be used. See examples.
+      operationId: search_targets
       requestBody:
         content:
           application/json:
@@ -939,7 +960,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -959,7 +980,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -972,7 +993,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -980,6 +1001,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search metric targets
       tags:
       - Targets
       x-content-type: application/json
@@ -995,6 +1017,7 @@ paths:
         - If the product or its mapping to the given line does not exist, they will be created.
         - If a target exists but with different parameters, it will be updated.
         - If the target exists with all the same parameters nothing is done.
+      operationId: set_target
       requestBody:
         content:
           application/json:
@@ -1041,7 +1064,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -1061,7 +1084,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1074,7 +1097,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -1082,6 +1105,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Create or update a metric target
       tags:
       - Targets
       x-content-type: application/json
@@ -1111,6 +1135,7 @@ paths:
         AND/OR
 
         - `name` (only for Intervals with a matching name)
+      operationId: search_intervals
       requestBody:
         content:
           application/json:
@@ -1161,7 +1186,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -1181,7 +1206,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1194,7 +1219,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -1202,6 +1227,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search intervals on a line
       tags:
       - Intervals
       x-content-type: application/json
@@ -1228,6 +1254,7 @@ paths:
         may be set by adding a `target` to the metadata field. The `line` and `product` for this target will be the same as the interval.
 
         Please see examples for more specific information.
+      operationId: set_interval
       requestBody:
         content:
           application/json:
@@ -1374,7 +1401,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -1387,7 +1414,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1400,8 +1427,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
+      summary: Create or update an interval
       tags:
       - Intervals
       x-content-type: application/json
@@ -1425,6 +1453,7 @@ paths:
         **Note:** The `id` must be obtained from either:
         - The response when creating an interval via `/v2/interval/set`
         - Searching for intervals via `/v2/interval/search`
+      operationId: update_interval
       requestBody:
         content:
           application/json:
@@ -1505,7 +1534,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -1530,14 +1559,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1546,6 +1575,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Update an interval
       tags:
       - Intervals
       x-content-type: application/json
@@ -1561,6 +1591,7 @@ paths:
         - Searching for intervals via `/v2/interval/search`
 
         The examples below use placeholder IDs - replace with actual IDs from your system.
+      operationId: delete_interval
       requestBody:
         content:
           application/json:
@@ -1613,7 +1644,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -1633,7 +1664,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1646,7 +1677,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -1654,6 +1685,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Delete an interval
       tags:
       - Intervals
       x-content-type: application/json
@@ -1669,6 +1701,7 @@ paths:
         - Cannot excees 2500 intervals per request.
         - Will not write over other intervals
         - Does not support "batch", "run", or "state" interval types.
+      operationId: bulk_set_intervals
       requestBody:
         content:
           application/json:
@@ -1705,7 +1738,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -1730,14 +1763,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1746,6 +1779,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Create a set of intervals
       tags:
       - Intervals
       x-content-type: application/json
@@ -1775,6 +1809,7 @@ paths:
         **Note:** Interval IDs must be obtained from either:
         - The response when creating intervals via `/v2/interval/set` or `/v2/intervals/set`
         - Searching for intervals via `/v2/interval/search`
+      operationId: bulk_update_intervals
       requestBody:
         content:
           application/json:
@@ -1825,14 +1860,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_intervals_update_post_200_response"
+                $ref: "#/components/schemas/bulk_update_intervals_200_response"
           description: Response containing successfully updated intervals and any
             failures that occurred.
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -1851,14 +1886,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1867,6 +1902,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Update a set of intervals
       tags:
       - Intervals
       x-content-type: application/json
@@ -1880,6 +1916,7 @@ paths:
         Limitations:
         - Cannot exceed 15,000 intervals per request, or 30 days worth of data.
         - Currently does not support "batch" or "run" interval types.
+      operationId: bulk_delete_intervals
       requestBody:
         content:
           application/json:
@@ -1903,13 +1940,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_intervals_delete_post_200_response"
+                $ref: "#/components/schemas/bulk_delete_intervals_200_response"
           description: A list containing any intervals found but not deleted.
         "400":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -1934,14 +1971,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -1950,6 +1987,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Delete intervals in a time range
       tags:
       - Intervals
       x-content-type: application/json
@@ -1961,6 +1999,7 @@ paths:
         Search for Interval Types by `name`, `id`, or just `match: all` to return all Interval Types associated with the your organization.
         Basic Interval Types -- `RUN`, `BATCH`, and `STATE` -- are dedicated interval types that come out-of-the-box with Oden.
         Custom Interval Types may be created by users.
+      operationId: search_interval_types
       requestBody:
         content:
           application/json:
@@ -1990,7 +2029,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2003,7 +2042,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2016,7 +2055,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2024,6 +2063,154 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search interval types
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/interval_type/set:
+    post:
+      description: |
+        **Create** (no `id` in the body): send `name` (required) and optional `metadata_schema` / `tags`.
+
+        **Update** (with `id`): send the interval type’s `id` and optional `metadata_schema` / `tags` only. Do not send `name` for updates; including `name` returns 400. Renames are not supported.
+
+        **Patch (update only)**: `metadata_schema` — if the key is missing, the existing value is kept; if present, it replaces. `tags` — if the key is missing, tags are unchanged; `null` leaves tags unchanged; `[]` clears tags; a non-empty array replaces.
+
+        **Built-in types (RUN, BATCH, STATE) cannot be created, set, or deleted.**
+      operationId: set_interval_type
+      requestBody:
+        content:
+          application/json:
+            examples:
+              create:
+                summary: Create a custom interval type
+                value:
+                  name: operator id
+              update by id (metadata and tags only):
+                summary: Update an existing type by id
+                value:
+                  id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  metadata_schema: "{\"type\":\"object\"}"
+                  tags:
+                  - a
+            schema:
+              $ref: "#/components/schemas/IntervalTypeSet"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntervalType"
+          description: The interval type after set.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      summary: Create or update a custom interval type
+      tags:
+      - Intervals
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/interval_type/delete:
+    post:
+      description: |
+        Delete an existing custom Interval Type. `id` is required. Built-in types (RUN, BATCH, STATE) cannot be deleted.
+      operationId: delete_interval_type
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Delete a custom interval type by id:
+                summary: Delete a custom interval type by id
+                value:
+                  id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+            schema:
+              $ref: "#/components/schemas/IntervalType"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IntervalType"
+          description: The deleted interval type.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      summary: Delete a custom interval type
       tags:
       - Intervals
       x-content-type: application/json
@@ -2033,6 +2220,7 @@ paths:
     post:
       description: |
         Searches for scrap/yield records for a given Interval
+      operationId: search_scrap_yield
       requestBody:
         content:
           application/json:
@@ -2051,7 +2239,7 @@ paths:
                   data:
                     match: ALL
             schema:
-              $ref: "#/components/schemas/_v2_scrap_yield_search_post_request"
+              $ref: "#/components/schemas/search_scrap_yield_request"
         required: true
       responses:
         "200":
@@ -2060,7 +2248,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2080,7 +2268,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2093,7 +2281,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2101,6 +2289,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search scrap/yield records
       tags:
       - Scrap/Yield Data
       x-content-type: application/json
@@ -2124,6 +2313,7 @@ paths:
             - Example: If you have 3 scrap records in an interval: 50 50 50 = 150 and want to make the aggregate 100 for a given interval, either update one of the existing scrap records from 50 -> 0, or add a new one with value -50
 
         - Duplicate keys should be avoided, see Schema docs above for details.
+      operationId: set_scrap_yield
       parameters:
       - description: |
           Optional pattern type to use for matching:
@@ -2180,7 +2370,7 @@ paths:
                     type:
                       name: BATCH
             schema:
-              $ref: "#/components/schemas/_v2_scrap_yield_set_post_request"
+              $ref: "#/components/schemas/set_scrap_yield_request"
         required: true
       responses:
         "200":
@@ -2189,7 +2379,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2209,7 +2399,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2222,7 +2412,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2230,6 +2420,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Create or update a scrap/yield record
       tags:
       - Scrap/Yield Data
       x-content-type: application/json
@@ -2239,6 +2430,7 @@ paths:
     post:
       description: |
         Deletes Scrap Yield record by ID and line
+      operationId: delete_scrap_yield
       requestBody:
         content:
           application/json:
@@ -2254,7 +2446,7 @@ paths:
                       factory:
                         name: Factory A
             schema:
-              $ref: "#/components/schemas/_v2_scrap_yield_search_post_request"
+              $ref: "#/components/schemas/search_scrap_yield_request"
         required: true
       responses:
         "200":
@@ -2263,7 +2455,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2283,7 +2475,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2296,7 +2488,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2304,6 +2496,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Delete a scrap/yield record
       tags:
       - Scrap/Yield Data
       x-content-type: application/json
@@ -2315,6 +2508,7 @@ paths:
         Create or update a Quality Test record:
         - To update `id` must be supplied. Only the supplied fields will be updated, the rest will remain unchanged.
         - If `id` is not supplied, a new `quality_test_record` will be created.
+      operationId: set_quality_test
       requestBody:
         content:
           application/json:
@@ -2349,7 +2543,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2369,7 +2563,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2382,7 +2576,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2390,6 +2584,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Create or update a quality test result
       tags:
       - Quality Test
       x-content-type: application/json
@@ -2405,6 +2600,7 @@ paths:
         OR
 
         - `interval` (of type `RUN` or `BATCH`)
+      operationId: search_quality_tests
       requestBody:
         content:
           application/json:
@@ -2436,7 +2632,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2456,7 +2652,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2469,7 +2665,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2477,6 +2673,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search quality tests
       tags:
       - Quality Test
       x-content-type: application/json
@@ -2494,6 +2691,7 @@ paths:
         - `interval` (of type `RUN` or `BATCH`)*
 
         *This only work if there is a single quality test record for the interval.
+      operationId: delete_quality_test
       requestBody:
         content:
           application/json:
@@ -2513,7 +2711,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2533,7 +2731,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2546,7 +2744,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2554,6 +2752,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Delete a quality test
       tags:
       - Quality Test
       x-content-type: application/json
@@ -2568,11 +2767,12 @@ paths:
         - All quality tests whose `id` is supplied
 
         It will do one or the other, with a bias for `id`'s if both are supplied.
+      operationId: bulk_delete_quality_tests
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/_v2_quality_tests_delete_post_request"
+              $ref: "#/components/schemas/bulk_delete_quality_tests_request"
         required: true
       responses:
         "200":
@@ -2581,7 +2781,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2601,7 +2801,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2614,7 +2814,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2622,6 +2822,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Delete multiple quality tests
       tags:
       - Quality Test
       x-content-type: application/json
@@ -2633,6 +2834,7 @@ paths:
         Searches for Quality Schema[s] by:
 
         - `factory`
+      operationId: search_quality_schemas
       requestBody:
         content:
           application/json:
@@ -2652,7 +2854,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "401":
@@ -2672,7 +2874,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2685,7 +2887,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "404":
           content:
@@ -2693,6 +2895,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Entity not found
+      summary: Search quality schemas for a factory
       tags:
       - Quality Test
       x-content-type: application/json
@@ -2706,6 +2909,7 @@ paths:
         For reference on writing OQL queries, see:
 
         [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql)
+      operationId: run_oql_query
       parameters:
       - description: |
           Format of the response. Can be `json`, `jsonextended` or `csv`. If unspecified, defaults to `jsonextended`.
@@ -2734,7 +2938,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -2759,10 +2963,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
-        "413":
+        "429":
           content:
             application/json:
               schema:
@@ -2772,7 +2976,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2781,8 +2985,90 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Run an OQL query
       tags:
       - OQL
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/dashboard/execute:
+    post:
+      description: |
+        Execute every module in a dashboard with shared time-range and filter
+        overrides, returning the columns and rows produced by each module.
+
+        Modules execute in parallel and are reported in the dashboard's stored
+        module order. Per-module failures (parse, dispatch) land in the
+        `error` field of that module's result; siblings continue to run.
+
+        Known v1 limitations:
+        - Template variables (`{var_name}` in stored OQL) are not substituted
+          server-side. Modules containing unsubstituted placeholders will
+          fail at parse time.
+      operationId: execute_dashboard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DashboardExecuteRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/DashboardExecuteResult"
+                type: array
+          description: |
+            Dashboard loaded and each module executed. Individual modules may still report `error` in their result; this is not a 200/non-200 distinction.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Too many requests
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+        "501":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Endpoint is not yet implemented
+      summary: Execute a dashboard
+      tags:
+      - Dashboards
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2793,6 +3079,7 @@ paths:
         - `id`
         - `external_id`
         - `line_id` with required `start_time` and `end_time` filters
+      operationId: search_maintenance_work_orders
       requestBody:
         content:
           application/json:
@@ -2817,7 +3104,7 @@ paths:
                   end_time: 2021-04-10T08:00:04Z
                   match: all
             schema:
-              $ref: "#/components/schemas/_v2_maintenance_work_order_search_post_request"
+              $ref: "#/components/schemas/search_maintenance_work_orders_request"
         required: true
       responses:
         "200":
@@ -2832,7 +3119,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -2857,14 +3144,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2873,6 +3160,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Search maintenance work orders
       tags:
       - Maintenance Work Orders
       x-content-type: application/json
@@ -2893,6 +3181,7 @@ paths:
         - Include any fields to update
 
         NOTE: Any fields not included in an update request will be left unchanged.
+      operationId: set_maintenance_work_order
       requestBody:
         content:
           application/json:
@@ -2932,7 +3221,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -2957,14 +3246,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -2973,6 +3262,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Create or update a maintenance work order
       tags:
       - Maintenance Work Orders
       x-content-type: application/json
@@ -2984,6 +3274,7 @@ paths:
         Delete a Maintenance Work Order by unique identifier:
         - `id` OR `external_id`
         - `match: unique` or omit (only unique is supported)
+      operationId: delete_maintenance_work_order
       requestBody:
         content:
           application/json:
@@ -3015,7 +3306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_400_response"
+                $ref: "#/components/schemas/search_lines_400_response"
           description: An error occurred regarding one of the input parameters
         "401":
           content:
@@ -3040,14 +3331,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_409_response"
+                $ref: "#/components/schemas/search_lines_409_response"
           description: |
             A {match: "unique"} was requested, but multiple entities matched the search parameters.
         "500":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/_v2_line_search_post_500_response"
+                $ref: "#/components/schemas/search_lines_500_response"
           description: |
             An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
         "501":
@@ -3056,6 +3347,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GenericError"
           description: Endpoint is not yet implemented
+      summary: Delete a maintenance work order
       tags:
       - Maintenance Work Orders
       x-content-type: application/json
@@ -3101,14 +3393,14 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/_v2_line_search_post_409_response"
+            $ref: "#/components/schemas/search_lines_409_response"
       description: |
         A {match: "unique"} was requested, but multiple entities matched the search parameters.
     InternalError:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/_v2_line_search_post_500_response"
+            $ref: "#/components/schemas/search_lines_500_response"
       description: |
         An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
     UnauthorizedError:
@@ -3146,7 +3438,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/_v2_line_search_post_400_response"
+            $ref: "#/components/schemas/search_lines_400_response"
       description: An error occurred regarding one of the input parameters
   schemas:
     Match:
@@ -3415,6 +3707,31 @@ components:
           type: string
         match:
           $ref: "#/components/schemas/Match"
+      type: object
+    IntervalTypeSet:
+      description: |
+        Create or update a custom interval type. Omit `id` to create (requires `name`);
+        include `id` to update. On update, `name` (if present) is ignored. Use `null` for `tags` to leave tags unchanged; `[]` clears tags.
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        metadata_schema: metadata_schema
+        tags:
+        - tags
+        - tags
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+        metadata_schema:
+          type: string
+        tags:
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     IntervalBulkCreate:
       description: A set of intervals to create
@@ -3832,6 +4149,235 @@ components:
       required:
       - query
       type: object
+    DashboardExecuteRequest:
+      description: |
+        Request envelope for executing every module in a dashboard.
+      example:
+        dashboard:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        range:
+          start: 2000-01-23T04:56:07.000+00:00
+          end: 2000-01-23T04:56:07.000+00:00
+          anchor: anchor
+          offset: offset
+          timezone: timezone
+        filters:
+          lines:
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          shifts:
+          - 0
+          - 0
+          product_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          product_attribute_value_ids:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          scrap_categories:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          states:
+            state_types:
+            - state_types
+            - state_types
+            state_category_and_reasons:
+            - state_category: 6
+              state_reason: state_reason
+            - state_category: 6
+              state_reason: state_reason
+          custom_intervals:
+          - type: type
+            value_contains: value_contains
+          - type: type
+            value_contains: value_contains
+      properties:
+        dashboard:
+          $ref: "#/components/schemas/DashboardExecuteRequest_dashboard"
+        range:
+          $ref: "#/components/schemas/DashboardExecuteRange"
+        filters:
+          $ref: "#/components/schemas/DashboardExecuteFilters"
+      required:
+      - dashboard
+      type: object
+    DashboardExecuteRange:
+      description: |
+        Time window applied to every module. Either supply an absolute window (`start` and `end`) OR a relative window (`anchor` and `offset`, optionally with `timezone`), not both.
+      example:
+        start: 2000-01-23T04:56:07.000+00:00
+        end: 2000-01-23T04:56:07.000+00:00
+        anchor: anchor
+        offset: offset
+        timezone: timezone
+      properties:
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+        anchor:
+          description: "Anchor expression for a relative range, e.g. `now`."
+          type: string
+        offset:
+          description: "Offset expression for a relative range, e.g. `-7D`."
+          type: string
+        timezone:
+          description: IANA timezone identifier (defaults to UTC).
+          type: string
+      type: object
+    DashboardExecuteFilters:
+      description: |
+        Optional filter overrides applied to every module. Every field is optional; omitting one means "no override on that dimension".
+      example:
+        lines:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+        shifts:
+        - 0
+        - 0
+        product_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        product_attribute_value_ids:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        scrap_categories:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        states:
+          state_types:
+          - state_types
+          - state_types
+          state_category_and_reasons:
+          - state_category: 6
+            state_reason: state_reason
+          - state_category: 6
+            state_reason: state_reason
+        custom_intervals:
+        - type: type
+          value_contains: value_contains
+        - type: type
+          value_contains: value_contains
+      properties:
+        lines:
+          description: |
+            Lines to restrict to. Each entry must supply `id`, `name`, or both; entries that supply neither are rejected. Other Line fields (factory, secondary_name, match) are not used here and are intentionally omitted so generated clients don't suggest them as inputs.
+          items:
+            $ref: "#/components/schemas/DashboardExecuteFilters_lines_inner"
+          type: array
+        shifts:
+          items:
+            format: int32
+            type: integer
+          type: array
+        product_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+        product_attribute_value_ids:
+          items:
+            format: uuid
+            type: string
+          type: array
+        scrap_categories:
+          items:
+            format: uuid
+            type: string
+          type: array
+        states:
+          $ref: "#/components/schemas/DashboardExecuteFilters_states"
+        custom_intervals:
+          items:
+            $ref: "#/components/schemas/DashboardExecuteFilters_custom_intervals_inner"
+          type: array
+      type: object
+    DashboardExecuteResult:
+      description: Executed output of a single dashboard module.
+      example:
+        module_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        module_name: module_name
+        module_type: module_type
+        range:
+          start: 2000-01-23T04:56:07.000+00:00
+          end: 2000-01-23T04:56:07.000+00:00
+        filters_applied:
+          key: ""
+        columns:
+        - name: name
+          type: string
+        - name: name
+          type: string
+        rows:
+        - key: ""
+        - key: ""
+        error: error
+      properties:
+        module_id:
+          format: uuid
+          type: string
+        module_name:
+          type: string
+        module_type:
+          description: |
+            The module's stored visualization (e.g. `table`, `line_chart`, `bar_chart`). Type label only — does not change the response shape.
+          type: string
+        range:
+          $ref: "#/components/schemas/DashboardExecuteResult_range"
+        filters_applied:
+          additionalProperties: true
+          description: |
+            Echo of the filter dimensions that were applied, resolved to human-readable values where possible (e.g. line names instead of IDs).
+          type: object
+        columns:
+          description: |
+            Column metadata. `type` is derived from the first non-null cell in the column. Null when the module errored.
+          items:
+            $ref: "#/components/schemas/DashboardColumnSpec"
+          nullable: true
+          type: array
+        rows:
+          description: |
+            Row data as objects keyed by column name (not positional arrays). Values are typed JSON natively. Null when the module errored.
+          items:
+            additionalProperties: true
+            type: object
+          nullable: true
+          type: array
+        error:
+          description: |
+            Set to a short message when the module failed to parse or execute. Null on success.
+          nullable: true
+          type: string
+      required:
+      - module_id
+      - module_name
+      - module_type
+      type: object
+    DashboardColumnSpec:
+      example:
+        name: name
+        type: string
+      properties:
+        name:
+          type: string
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          - datetime
+          type: string
+      required:
+      - name
+      - type
+      type: object
     MaintenanceWorkOrder:
       description: An object representing a maintenance work order on a line.
       example:
@@ -3892,7 +4438,7 @@ components:
       - error
       - retryable
       type: object
-    _v2_line_search_post_400_response:
+    search_lines_400_response:
       example:
         error: error
         name: name
@@ -3909,7 +4455,7 @@ components:
       - name
       - retryable
       type: object
-    _v2_line_search_post_409_response:
+    search_lines_409_response:
       example:
         entity_name: entity_name
         num_matches: 0
@@ -3930,7 +4476,7 @@ components:
       - num_matches
       - retryable
       type: object
-    _v2_line_search_post_500_response:
+    search_lines_500_response:
       example:
         error: error
         retryable: true
@@ -3948,7 +4494,7 @@ components:
       - id
       - retryable
       type: object
-    _v2_intervals_update_post_200_response_failed_intervals_inner:
+    bulk_update_intervals_200_response_failed_intervals_inner:
       example:
         id: id
         error: error
@@ -3958,7 +4504,7 @@ components:
         error:
           type: string
       type: object
-    _v2_intervals_update_post_200_response:
+    bulk_update_intervals_200_response:
       example:
         num_updated: 0
         updated_intervals:
@@ -4025,10 +4571,10 @@ components:
           type: integer
         failed_intervals:
           items:
-            $ref: "#/components/schemas/_v2_intervals_update_post_200_response_failed_intervals_inner"
+            $ref: "#/components/schemas/bulk_update_intervals_200_response_failed_intervals_inner"
           type: array
       type: object
-    _v2_intervals_delete_post_200_response:
+    bulk_delete_intervals_200_response:
       example:
         num_deleted: 0
         failed_intervals:
@@ -4042,7 +4588,7 @@ components:
             type: string
           type: array
       type: object
-    _v2_scrap_yield_search_post_request:
+    search_scrap_yield_request:
       properties:
         data:
           $ref: "#/components/schemas/ScrapYieldData"
@@ -4051,7 +4597,7 @@ components:
       required:
       - interval
       type: object
-    _v2_scrap_yield_set_post_request:
+    set_scrap_yield_request:
       properties:
         data:
           $ref: "#/components/schemas/ScrapYieldData"
@@ -4061,7 +4607,7 @@ components:
       - data
       - interval
       type: object
-    _v2_quality_tests_delete_post_request:
+    bulk_delete_quality_tests_request:
       properties:
         ids:
           items:
@@ -4077,7 +4623,7 @@ components:
           format: date-time
           type: string
       type: object
-    _v2_maintenance_work_order_search_post_request:
+    search_maintenance_work_orders_request:
       properties:
         id:
           format: uuid
@@ -4110,6 +4656,89 @@ components:
       - $ref: "#/components/schemas/RunMetadata"
       - $ref: "#/components/schemas/StateMetadata"
       - $ref: "#/components/schemas/CustomMetadata"
+    DashboardExecuteRequest_dashboard:
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    DashboardExecuteFilters_lines_inner:
+      anyOf: []
+      example:
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+      nullable: true
+      properties:
+        id:
+          format: uuid
+          type: string
+        name:
+          type: string
+      type: object
+    DashboardExecuteFilters_states_state_category_and_reasons_inner:
+      example:
+        state_category: 6
+        state_reason: state_reason
+      properties:
+        state_category:
+          format: int32
+          type: integer
+        state_reason:
+          type: string
+      required:
+      - state_category
+      type: object
+    DashboardExecuteFilters_states:
+      example:
+        state_types:
+        - state_types
+        - state_types
+        state_category_and_reasons:
+        - state_category: 6
+          state_reason: state_reason
+        - state_category: 6
+          state_reason: state_reason
+      properties:
+        state_types:
+          items:
+            type: string
+          type: array
+        state_category_and_reasons:
+          items:
+            $ref: "#/components/schemas/DashboardExecuteFilters_states_state_category_and_reasons_inner"
+          type: array
+      type: object
+    DashboardExecuteFilters_custom_intervals_inner:
+      example:
+        type: type
+        value_contains: value_contains
+      properties:
+        type:
+          type: string
+        value_contains:
+          type: string
+      required:
+      - type
+      - value_contains
+      type: object
+    DashboardExecuteResult_range:
+      description: |
+        Resolved absolute time window the executed query actually covers. For relative requests this is the concrete window the anchor/offset resolved to.
+      example:
+        start: 2000-01-23T04:56:07.000+00:00
+        end: 2000-01-23T04:56:07.000+00:00
+      properties:
+        start:
+          format: date-time
+          type: string
+        end:
+          format: date-time
+          type: string
+      type: object
   securitySchemes:
     APIKeyAuth:
       description: Prefix the value with \"Token\" to indicate the custom authorization

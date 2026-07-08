@@ -110,7 +110,22 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
         gsonBuilder.registerTypeAdapterFactory(new oden.model.BatchMetadata.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.BulkDeleteIntervals200Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.BulkDeleteQualityTestsRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.BulkUpdateIntervals200Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.BulkUpdateIntervals200ResponseFailedIntervalsInner.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.CustomMetadata.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardColumnSpec.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteFilters.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteFiltersCustomIntervalsInner.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteFiltersLinesInner.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteFiltersStates.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteFiltersStatesStateCategoryAndReasonsInner.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteRange.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteRequestDashboard.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteResult.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.DashboardExecuteResultRange.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Factory.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.GenericError.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Interval.CustomTypeAdapterFactory());
@@ -119,6 +134,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalBulkUpdate.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalMetadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalType.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.IntervalTypeSet.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Line.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.MaintenanceWorkOrder.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.MetricGroup.CustomTypeAdapterFactory());
@@ -131,21 +147,17 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new oden.model.RunMetadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.ScrapYieldData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.ScrapYieldSchema.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.SearchLines400Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.SearchLines409Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.SearchLines500Response.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.SearchMaintenanceWorkOrdersRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.SearchScrapYieldRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.SetScrapYieldRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.StateCategory.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.StateMetadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.StateReason.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Target.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Unit.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsDeletePost200Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsUpdatePost200Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2IntervalsUpdatePost200ResponseFailedIntervalsInner.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost400Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost409Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2LineSearchPost500Response.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2MaintenanceWorkOrderSearchPostRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2QualityTestsDeletePostRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2ScrapYieldSearchPostRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new oden.model.V2ScrapYieldSetPostRequest.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();
     }
 

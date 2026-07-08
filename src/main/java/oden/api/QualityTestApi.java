@@ -27,13 +27,13 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import oden.model.BulkDeleteQualityTestsRequest;
 import oden.model.GenericError;
 import oden.model.QualitySchema;
 import oden.model.QualityTest;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
-import oden.model.V2QualityTestsDeletePostRequest;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -79,8 +79,8 @@ public class QualityTestApi {
     }
 
     /**
-     * Build call for v2QualitySchemaSearchPost
-     * @param qualitySchema  (required)
+     * Build call for bulkDeleteQualityTests
+     * @param bulkDeleteQualityTestsRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -98,7 +98,7 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualitySchemaSearchPostCall(@javax.annotation.Nonnull QualitySchema qualitySchema, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call bulkDeleteQualityTestsCall(@javax.annotation.Nonnull BulkDeleteQualityTestsRequest bulkDeleteQualityTestsRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -112,10 +112,10 @@ public class QualityTestApi {
             basePath = null;
         }
 
-        Object localVarPostBody = qualitySchema;
+        Object localVarPostBody = bulkDeleteQualityTestsRequest;
 
         // create path and map variables
-        String localVarPath = "/v2/quality_schema/search";
+        String localVarPath = "/v2/quality_tests/delete";
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -144,20 +144,20 @@ public class QualityTestApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2QualitySchemaSearchPostValidateBeforeCall(@javax.annotation.Nonnull QualitySchema qualitySchema, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'qualitySchema' is set
-        if (qualitySchema == null) {
-            throw new ApiException("Missing the required parameter 'qualitySchema' when calling v2QualitySchemaSearchPost(Async)");
+    private okhttp3.Call bulkDeleteQualityTestsValidateBeforeCall(@javax.annotation.Nonnull BulkDeleteQualityTestsRequest bulkDeleteQualityTestsRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'bulkDeleteQualityTestsRequest' is set
+        if (bulkDeleteQualityTestsRequest == null) {
+            throw new ApiException("Missing the required parameter 'bulkDeleteQualityTestsRequest' when calling bulkDeleteQualityTests(Async)");
         }
 
-        return v2QualitySchemaSearchPostCall(qualitySchema, _callback);
+        return bulkDeleteQualityTestsCall(bulkDeleteQualityTestsRequest, _callback);
 
     }
 
     /**
-     * 
-     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
-     * @param qualitySchema  (required)
+     * Delete multiple quality tests
+     * Bulk deletes quality tests, either: - All quality tests on a given &#x60;line&#x60; whose &#x60;timsetamp&#x60; is between &#x60;start_time&#x60; and &#x60;end_time&#x60; OR - All quality tests whose &#x60;id&#x60; is supplied  It will do one or the other, with a bias for &#x60;id&#x60;&#39;s if both are supplied. 
+     * @param bulkDeleteQualityTestsRequest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -173,14 +173,14 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2QualitySchemaSearchPost(@javax.annotation.Nonnull QualitySchema qualitySchema) throws ApiException {
-        v2QualitySchemaSearchPostWithHttpInfo(qualitySchema);
+    public void bulkDeleteQualityTests(@javax.annotation.Nonnull BulkDeleteQualityTestsRequest bulkDeleteQualityTestsRequest) throws ApiException {
+        bulkDeleteQualityTestsWithHttpInfo(bulkDeleteQualityTestsRequest);
     }
 
     /**
-     * 
-     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
-     * @param qualitySchema  (required)
+     * Delete multiple quality tests
+     * Bulk deletes quality tests, either: - All quality tests on a given &#x60;line&#x60; whose &#x60;timsetamp&#x60; is between &#x60;start_time&#x60; and &#x60;end_time&#x60; OR - All quality tests whose &#x60;id&#x60; is supplied  It will do one or the other, with a bias for &#x60;id&#x60;&#39;s if both are supplied. 
+     * @param bulkDeleteQualityTestsRequest  (required)
      * @return ApiResponse&lt;Void&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -197,15 +197,15 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2QualitySchemaSearchPostWithHttpInfo(@javax.annotation.Nonnull QualitySchema qualitySchema) throws ApiException {
-        okhttp3.Call localVarCall = v2QualitySchemaSearchPostValidateBeforeCall(qualitySchema, null);
+    public ApiResponse<Void> bulkDeleteQualityTestsWithHttpInfo(@javax.annotation.Nonnull BulkDeleteQualityTestsRequest bulkDeleteQualityTestsRequest) throws ApiException {
+        okhttp3.Call localVarCall = bulkDeleteQualityTestsValidateBeforeCall(bulkDeleteQualityTestsRequest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
-     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
-     * @param qualitySchema  (required)
+     * Delete multiple quality tests (asynchronously)
+     * Bulk deletes quality tests, either: - All quality tests on a given &#x60;line&#x60; whose &#x60;timsetamp&#x60; is between &#x60;start_time&#x60; and &#x60;end_time&#x60; OR - All quality tests whose &#x60;id&#x60; is supplied  It will do one or the other, with a bias for &#x60;id&#x60;&#39;s if both are supplied. 
+     * @param bulkDeleteQualityTestsRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -223,14 +223,14 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualitySchemaSearchPostAsync(@javax.annotation.Nonnull QualitySchema qualitySchema, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call bulkDeleteQualityTestsAsync(@javax.annotation.Nonnull BulkDeleteQualityTestsRequest bulkDeleteQualityTestsRequest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2QualitySchemaSearchPostValidateBeforeCall(qualitySchema, _callback);
+        okhttp3.Call localVarCall = bulkDeleteQualityTestsValidateBeforeCall(bulkDeleteQualityTestsRequest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2QualityTestDeletePost
+     * Build call for deleteQualityTest
      * @param qualityTest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -249,7 +249,7 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualityTestDeletePostCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deleteQualityTestCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -295,18 +295,18 @@ public class QualityTestApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2QualityTestDeletePostValidateBeforeCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteQualityTestValidateBeforeCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'qualityTest' is set
         if (qualityTest == null) {
-            throw new ApiException("Missing the required parameter 'qualityTest' when calling v2QualityTestDeletePost(Async)");
+            throw new ApiException("Missing the required parameter 'qualityTest' when calling deleteQualityTest(Async)");
         }
 
-        return v2QualityTestDeletePostCall(qualityTest, _callback);
+        return deleteQualityTestCall(qualityTest, _callback);
 
     }
 
     /**
-     * 
+     * Delete a quality test
      * Searches for uniqueQuality Test by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;)*  *This only work if there is a single quality test record for the interval. 
      * @param qualityTest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -324,12 +324,12 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2QualityTestDeletePost(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
-        v2QualityTestDeletePostWithHttpInfo(qualityTest);
+    public void deleteQualityTest(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
+        deleteQualityTestWithHttpInfo(qualityTest);
     }
 
     /**
-     * 
+     * Delete a quality test
      * Searches for uniqueQuality Test by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;)*  *This only work if there is a single quality test record for the interval. 
      * @param qualityTest  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -348,13 +348,13 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2QualityTestDeletePostWithHttpInfo(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
-        okhttp3.Call localVarCall = v2QualityTestDeletePostValidateBeforeCall(qualityTest, null);
+    public ApiResponse<Void> deleteQualityTestWithHttpInfo(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
+        okhttp3.Call localVarCall = deleteQualityTestValidateBeforeCall(qualityTest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Delete a quality test (asynchronously)
      * Searches for uniqueQuality Test by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;)*  *This only work if there is a single quality test record for the interval. 
      * @param qualityTest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -374,14 +374,165 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualityTestDeletePostAsync(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call deleteQualityTestAsync(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2QualityTestDeletePostValidateBeforeCall(qualityTest, _callback);
+        okhttp3.Call localVarCall = deleteQualityTestValidateBeforeCall(qualityTest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2QualityTestSearchPost
+     * Build call for searchQualitySchemas
+     * @param qualitySchema  (required)
+     * @param _callback Callback for upload/download progress
+     * @return Call to execute
+     * @throws ApiException If fail to serialize the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchQualitySchemasCall(@javax.annotation.Nonnull QualitySchema qualitySchema, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = qualitySchema;
+
+        // create path and map variables
+        String localVarPath = "/v2/quality_schema/search";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchQualitySchemasValidateBeforeCall(@javax.annotation.Nonnull QualitySchema qualitySchema, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'qualitySchema' is set
+        if (qualitySchema == null) {
+            throw new ApiException("Missing the required parameter 'qualitySchema' when calling searchQualitySchemas(Async)");
+        }
+
+        return searchQualitySchemasCall(qualitySchema, _callback);
+
+    }
+
+    /**
+     * Search quality schemas for a factory
+     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
+     * @param qualitySchema  (required)
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public void searchQualitySchemas(@javax.annotation.Nonnull QualitySchema qualitySchema) throws ApiException {
+        searchQualitySchemasWithHttpInfo(qualitySchema);
+    }
+
+    /**
+     * Search quality schemas for a factory
+     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
+     * @param qualitySchema  (required)
+     * @return ApiResponse&lt;Void&gt;
+     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public ApiResponse<Void> searchQualitySchemasWithHttpInfo(@javax.annotation.Nonnull QualitySchema qualitySchema) throws ApiException {
+        okhttp3.Call localVarCall = searchQualitySchemasValidateBeforeCall(qualitySchema, null);
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    /**
+     * Search quality schemas for a factory (asynchronously)
+     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
+     * @param qualitySchema  (required)
+     * @param _callback The callback to be executed when the API call finishes
+     * @return The request call
+     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+     * @http.response.details
+     <table border="1">
+       <caption>Response Details</caption>
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
+        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
+     </table>
+     */
+    public okhttp3.Call searchQualitySchemasAsync(@javax.annotation.Nonnull QualitySchema qualitySchema, final ApiCallback<Void> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchQualitySchemasValidateBeforeCall(qualitySchema, _callback);
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+    /**
+     * Build call for searchQualityTests
      * @param qualityTest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -400,7 +551,7 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualityTestSearchPostCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchQualityTestsCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -446,18 +597,18 @@ public class QualityTestApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2QualityTestSearchPostValidateBeforeCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchQualityTestsValidateBeforeCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'qualityTest' is set
         if (qualityTest == null) {
-            throw new ApiException("Missing the required parameter 'qualityTest' when calling v2QualityTestSearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'qualityTest' when calling searchQualityTests(Async)");
         }
 
-        return v2QualityTestSearchPostCall(qualityTest, _callback);
+        return searchQualityTestsCall(qualityTest, _callback);
 
     }
 
     /**
-     * 
+     * Search quality tests
      * Searches for Quality Test[s] by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;) 
      * @param qualityTest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -475,12 +626,12 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2QualityTestSearchPost(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
-        v2QualityTestSearchPostWithHttpInfo(qualityTest);
+    public void searchQualityTests(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
+        searchQualityTestsWithHttpInfo(qualityTest);
     }
 
     /**
-     * 
+     * Search quality tests
      * Searches for Quality Test[s] by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;) 
      * @param qualityTest  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -499,13 +650,13 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2QualityTestSearchPostWithHttpInfo(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
-        okhttp3.Call localVarCall = v2QualityTestSearchPostValidateBeforeCall(qualityTest, null);
+    public ApiResponse<Void> searchQualityTestsWithHttpInfo(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
+        okhttp3.Call localVarCall = searchQualityTestsValidateBeforeCall(qualityTest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Search quality tests (asynchronously)
      * Searches for Quality Test[s] by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;) 
      * @param qualityTest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -525,14 +676,14 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualityTestSearchPostAsync(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call searchQualityTestsAsync(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2QualityTestSearchPostValidateBeforeCall(qualityTest, _callback);
+        okhttp3.Call localVarCall = searchQualityTestsValidateBeforeCall(qualityTest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2QualityTestSetPost
+     * Build call for setQualityTest
      * @param qualityTest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -551,7 +702,7 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualityTestSetPostCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setQualityTestCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -597,18 +748,18 @@ public class QualityTestApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2QualityTestSetPostValidateBeforeCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setQualityTestValidateBeforeCall(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'qualityTest' is set
         if (qualityTest == null) {
-            throw new ApiException("Missing the required parameter 'qualityTest' when calling v2QualityTestSetPost(Async)");
+            throw new ApiException("Missing the required parameter 'qualityTest' when calling setQualityTest(Async)");
         }
 
-        return v2QualityTestSetPostCall(qualityTest, _callback);
+        return setQualityTestCall(qualityTest, _callback);
 
     }
 
     /**
-     * 
+     * Create or update a quality test result
      * Create or update a Quality Test record: - To update &#x60;id&#x60; must be supplied. Only the supplied fields will be updated, the rest will remain unchanged. - If &#x60;id&#x60; is not supplied, a new &#x60;quality_test_record&#x60; will be created. 
      * @param qualityTest  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -626,12 +777,12 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2QualityTestSetPost(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
-        v2QualityTestSetPostWithHttpInfo(qualityTest);
+    public void setQualityTest(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
+        setQualityTestWithHttpInfo(qualityTest);
     }
 
     /**
-     * 
+     * Create or update a quality test result
      * Create or update a Quality Test record: - To update &#x60;id&#x60; must be supplied. Only the supplied fields will be updated, the rest will remain unchanged. - If &#x60;id&#x60; is not supplied, a new &#x60;quality_test_record&#x60; will be created. 
      * @param qualityTest  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -650,13 +801,13 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2QualityTestSetPostWithHttpInfo(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
-        okhttp3.Call localVarCall = v2QualityTestSetPostValidateBeforeCall(qualityTest, null);
+    public ApiResponse<Void> setQualityTestWithHttpInfo(@javax.annotation.Nonnull QualityTest qualityTest) throws ApiException {
+        okhttp3.Call localVarCall = setQualityTestValidateBeforeCall(qualityTest, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Create or update a quality test result (asynchronously)
      * Create or update a Quality Test record: - To update &#x60;id&#x60; must be supplied. Only the supplied fields will be updated, the rest will remain unchanged. - If &#x60;id&#x60; is not supplied, a new &#x60;quality_test_record&#x60; will be created. 
      * @param qualityTest  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -676,160 +827,9 @@ public class QualityTestApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2QualityTestSetPostAsync(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call setQualityTestAsync(@javax.annotation.Nonnull QualityTest qualityTest, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2QualityTestSetPostValidateBeforeCall(qualityTest, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for v2QualityTestsDeletePost
-     * @param v2QualityTestsDeletePostRequest  (required)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2QualityTestsDeletePostCall(@javax.annotation.Nonnull V2QualityTestsDeletePostRequest v2QualityTestsDeletePostRequest, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = v2QualityTestsDeletePostRequest;
-
-        // create path and map variables
-        String localVarPath = "/v2/quality_tests/delete";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "APIKeyAuth" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2QualityTestsDeletePostValidateBeforeCall(@javax.annotation.Nonnull V2QualityTestsDeletePostRequest v2QualityTestsDeletePostRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'v2QualityTestsDeletePostRequest' is set
-        if (v2QualityTestsDeletePostRequest == null) {
-            throw new ApiException("Missing the required parameter 'v2QualityTestsDeletePostRequest' when calling v2QualityTestsDeletePost(Async)");
-        }
-
-        return v2QualityTestsDeletePostCall(v2QualityTestsDeletePostRequest, _callback);
-
-    }
-
-    /**
-     * 
-     * Bulk deletes quality tests, either: - All quality tests on a given &#x60;line&#x60; whose &#x60;timsetamp&#x60; is between &#x60;start_time&#x60; and &#x60;end_time&#x60; OR - All quality tests whose &#x60;id&#x60; is supplied  It will do one or the other, with a bias for &#x60;id&#x60;&#39;s if both are supplied. 
-     * @param v2QualityTestsDeletePostRequest  (required)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public void v2QualityTestsDeletePost(@javax.annotation.Nonnull V2QualityTestsDeletePostRequest v2QualityTestsDeletePostRequest) throws ApiException {
-        v2QualityTestsDeletePostWithHttpInfo(v2QualityTestsDeletePostRequest);
-    }
-
-    /**
-     * 
-     * Bulk deletes quality tests, either: - All quality tests on a given &#x60;line&#x60; whose &#x60;timsetamp&#x60; is between &#x60;start_time&#x60; and &#x60;end_time&#x60; OR - All quality tests whose &#x60;id&#x60; is supplied  It will do one or the other, with a bias for &#x60;id&#x60;&#39;s if both are supplied. 
-     * @param v2QualityTestsDeletePostRequest  (required)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> v2QualityTestsDeletePostWithHttpInfo(@javax.annotation.Nonnull V2QualityTestsDeletePostRequest v2QualityTestsDeletePostRequest) throws ApiException {
-        okhttp3.Call localVarCall = v2QualityTestsDeletePostValidateBeforeCall(v2QualityTestsDeletePostRequest, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     *  (asynchronously)
-     * Bulk deletes quality tests, either: - All quality tests on a given &#x60;line&#x60; whose &#x60;timsetamp&#x60; is between &#x60;start_time&#x60; and &#x60;end_time&#x60; OR - All quality tests whose &#x60;id&#x60; is supplied  It will do one or the other, with a bias for &#x60;id&#x60;&#39;s if both are supplied. 
-     * @param v2QualityTestsDeletePostRequest  (required)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table border="1">
-       <caption>Response Details</caption>
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
-        <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call v2QualityTestsDeletePostAsync(@javax.annotation.Nonnull V2QualityTestsDeletePostRequest v2QualityTestsDeletePostRequest, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = v2QualityTestsDeletePostValidateBeforeCall(v2QualityTestsDeletePostRequest, _callback);
+        okhttp3.Call localVarCall = setQualityTestValidateBeforeCall(qualityTest, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

@@ -4,16 +4,16 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2ScrapYieldDeletePost**](ScrapYieldDataApi.md#v2ScrapYieldDeletePost) | **POST** /v2/scrap_yield/delete |  |
-| [**v2ScrapYieldSearchPost**](ScrapYieldDataApi.md#v2ScrapYieldSearchPost) | **POST** /v2/scrap_yield/search |  |
-| [**v2ScrapYieldSetPost**](ScrapYieldDataApi.md#v2ScrapYieldSetPost) | **POST** /v2/scrap_yield/set |  |
+| [**deleteScrapYield**](ScrapYieldDataApi.md#deleteScrapYield) | **POST** /v2/scrap_yield/delete | Delete a scrap/yield record |
+| [**searchScrapYield**](ScrapYieldDataApi.md#searchScrapYield) | **POST** /v2/scrap_yield/search | Search scrap/yield records |
+| [**setScrapYield**](ScrapYieldDataApi.md#setScrapYield) | **POST** /v2/scrap_yield/set | Create or update a scrap/yield record |
 
 
-<a id="v2ScrapYieldDeletePost"></a>
-# **v2ScrapYieldDeletePost**
-> v2ScrapYieldDeletePost(v2ScrapYieldSearchPostRequest)
+<a id="deleteScrapYield"></a>
+# **deleteScrapYield**
+> deleteScrapYield(searchScrapYieldRequest)
 
-
+Delete a scrap/yield record
 
 Deletes Scrap Yield record by ID and line 
 
@@ -39,11 +39,11 @@ public class Example {
     //APIKeyAuth.setApiKeyPrefix("Token");
 
     ScrapYieldDataApi apiInstance = new ScrapYieldDataApi(defaultClient);
-    V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest = new V2ScrapYieldSearchPostRequest(); // V2ScrapYieldSearchPostRequest | 
+    SearchScrapYieldRequest searchScrapYieldRequest = new SearchScrapYieldRequest(); // SearchScrapYieldRequest | 
     try {
-      apiInstance.v2ScrapYieldDeletePost(v2ScrapYieldSearchPostRequest);
+      apiInstance.deleteScrapYield(searchScrapYieldRequest);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ScrapYieldDataApi#v2ScrapYieldDeletePost");
+      System.err.println("Exception when calling ScrapYieldDataApi#deleteScrapYield");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -57,7 +57,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **v2ScrapYieldSearchPostRequest** | [**V2ScrapYieldSearchPostRequest**](V2ScrapYieldSearchPostRequest.md)|  | |
+| **searchScrapYieldRequest** | [**SearchScrapYieldRequest**](SearchScrapYieldRequest.md)|  | |
 
 ### Return type
 
@@ -84,11 +84,11 @@ null (empty response body)
 | **400** | An error occurred regarding one of the input parameters |  -  |
 | **404** | Entity not found |  -  |
 
-<a id="v2ScrapYieldSearchPost"></a>
-# **v2ScrapYieldSearchPost**
-> v2ScrapYieldSearchPost(v2ScrapYieldSearchPostRequest)
+<a id="searchScrapYield"></a>
+# **searchScrapYield**
+> searchScrapYield(searchScrapYieldRequest)
 
-
+Search scrap/yield records
 
 Searches for scrap/yield records for a given Interval 
 
@@ -114,11 +114,11 @@ public class Example {
     //APIKeyAuth.setApiKeyPrefix("Token");
 
     ScrapYieldDataApi apiInstance = new ScrapYieldDataApi(defaultClient);
-    V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest = new V2ScrapYieldSearchPostRequest(); // V2ScrapYieldSearchPostRequest | 
+    SearchScrapYieldRequest searchScrapYieldRequest = new SearchScrapYieldRequest(); // SearchScrapYieldRequest | 
     try {
-      apiInstance.v2ScrapYieldSearchPost(v2ScrapYieldSearchPostRequest);
+      apiInstance.searchScrapYield(searchScrapYieldRequest);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ScrapYieldDataApi#v2ScrapYieldSearchPost");
+      System.err.println("Exception when calling ScrapYieldDataApi#searchScrapYield");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -132,7 +132,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **v2ScrapYieldSearchPostRequest** | [**V2ScrapYieldSearchPostRequest**](V2ScrapYieldSearchPostRequest.md)|  | |
+| **searchScrapYieldRequest** | [**SearchScrapYieldRequest**](SearchScrapYieldRequest.md)|  | |
 
 ### Return type
 
@@ -159,11 +159,11 @@ null (empty response body)
 | **400** | An error occurred regarding one of the input parameters |  -  |
 | **404** | Entity not found |  -  |
 
-<a id="v2ScrapYieldSetPost"></a>
-# **v2ScrapYieldSetPost**
-> v2ScrapYieldSetPost(v2ScrapYieldSetPostRequest, pattern)
+<a id="setScrapYield"></a>
+# **setScrapYield**
+> setScrapYield(setScrapYieldRequest, pattern)
 
-
+Create or update a scrap/yield record
 
 Uploads scrap or yield raw data.  Notes:  - If &#x60;id&#x60; is provided the existing Scrap/Yield record will be updated.  - If &#x60;id&#x60; is omitted a new Scrap/Yield record will be created.  - The scrap yield for an interval is an aggregate of all scrap yield raw data records associated with that interval     - Therefore, multiple scrap yield records can exist for a single interval, each contributing to the \&quot;aggregate\&quot; (i.e. sum total) scrap/yield of that interval  - Changing an aggregate can be done by either adding another record with an offset, or updating an existing record.     - Example: If you have 3 scrap records in an interval: 50 50 50 &#x3D; 150 and want to make the aggregate 100 for a given interval, either update one of the existing scrap records from 50 -&gt; 0, or add a new one with value -50  - Duplicate keys should be avoided, see Schema docs above for details. 
 
@@ -189,12 +189,12 @@ public class Example {
     //APIKeyAuth.setApiKeyPrefix("Token");
 
     ScrapYieldDataApi apiInstance = new ScrapYieldDataApi(defaultClient);
-    V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest = new V2ScrapYieldSetPostRequest(); // V2ScrapYieldSetPostRequest | 
+    SetScrapYieldRequest setScrapYieldRequest = new SetScrapYieldRequest(); // SetScrapYieldRequest | 
     String pattern = "exact"; // String | Optional pattern type to use for matching: - `exact` for exact match - `contains` for the string to be contained in the query - `regex` to match based on a regular expression 
     try {
-      apiInstance.v2ScrapYieldSetPost(v2ScrapYieldSetPostRequest, pattern);
+      apiInstance.setScrapYield(setScrapYieldRequest, pattern);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ScrapYieldDataApi#v2ScrapYieldSetPost");
+      System.err.println("Exception when calling ScrapYieldDataApi#setScrapYield");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -208,7 +208,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **v2ScrapYieldSetPostRequest** | [**V2ScrapYieldSetPostRequest**](V2ScrapYieldSetPostRequest.md)|  | |
+| **setScrapYieldRequest** | [**SetScrapYieldRequest**](SetScrapYieldRequest.md)|  | |
 | **pattern** | **String**| Optional pattern type to use for matching: - &#x60;exact&#x60; for exact match - &#x60;contains&#x60; for the string to be contained in the query - &#x60;regex&#x60; to match based on a regular expression  | [optional] [default to exact] [enum: exact, contains, regex] |
 
 ### Return type

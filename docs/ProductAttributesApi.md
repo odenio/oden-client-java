@@ -4,15 +4,15 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2ProductAttributeSearchPost**](ProductAttributesApi.md#v2ProductAttributeSearchPost) | **POST** /v2/product_attribute/search |  |
-| [**v2ProductAttributeSetPost**](ProductAttributesApi.md#v2ProductAttributeSetPost) | **POST** /v2/product_attribute/set |  |
+| [**searchProductAttributes**](ProductAttributesApi.md#searchProductAttributes) | **POST** /v2/product_attribute/search | Search product attributes |
+| [**setProductAttribute**](ProductAttributesApi.md#setProductAttribute) | **POST** /v2/product_attribute/set | Create or update a product attribute |
 
 
-<a id="v2ProductAttributeSearchPost"></a>
-# **v2ProductAttributeSearchPost**
-> List&lt;ProductAttribute&gt; v2ProductAttributeSearchPost(productAttribute)
+<a id="searchProductAttributes"></a>
+# **searchProductAttributes**
+> List&lt;ProductAttribute&gt; searchProductAttributes(productAttribute)
 
-
+Search product attributes
 
 Searches for Product Attributes  Product attributes may be searched by ID, product, or, display_name - in that order.  If an ID is supplied, it will be used to search for a Product Attribute, and display_name, product will be ignored.  If a product is supplied (and no ID), it will be used to search for a Product Attribute, and display_name will be ignored. 
 
@@ -40,10 +40,10 @@ public class Example {
     ProductAttributesApi apiInstance = new ProductAttributesApi(defaultClient);
     ProductAttribute productAttribute = new ProductAttribute(); // ProductAttribute | 
     try {
-      List<ProductAttribute> result = apiInstance.v2ProductAttributeSearchPost(productAttribute);
+      List<ProductAttribute> result = apiInstance.searchProductAttributes(productAttribute);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProductAttributesApi#v2ProductAttributeSearchPost");
+      System.err.println("Exception when calling ProductAttributesApi#searchProductAttributes");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -82,11 +82,11 @@ public class Example {
 | **501** | Endpoint is not yet implemented |  -  |
 | **400** | An error occurred regarding one of the input parameters |  -  |
 
-<a id="v2ProductAttributeSetPost"></a>
-# **v2ProductAttributeSetPost**
-> List&lt;ProductAttribute&gt; v2ProductAttributeSetPost(productAttribute)
+<a id="setProductAttribute"></a>
+# **setProductAttribute**
+> List&lt;ProductAttribute&gt; setProductAttribute(productAttribute)
 
-
+Create or update a product attribute
 
 Set a Product Attribute for a Product.  If the supplied Product Attribute doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value is already set for the Product, it will be updated.  If the supplied Product Attribute Value is not set for the Product, it will be added.  Supplied Product must exist already. 
 
@@ -114,10 +114,10 @@ public class Example {
     ProductAttributesApi apiInstance = new ProductAttributesApi(defaultClient);
     ProductAttribute productAttribute = new ProductAttribute(); // ProductAttribute | 
     try {
-      List<ProductAttribute> result = apiInstance.v2ProductAttributeSetPost(productAttribute);
+      List<ProductAttribute> result = apiInstance.setProductAttribute(productAttribute);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProductAttributesApi#v2ProductAttributeSetPost");
+      System.err.println("Exception when calling ProductAttributesApi#setProductAttribute");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

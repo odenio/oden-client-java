@@ -66,7 +66,7 @@ import com.google.gson.JsonParseException;
 
 import oden.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-08T02:35:24.898947759Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-08T05:17:44.787119627Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class IntervalMetadata extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(IntervalMetadata.class.getName());
 

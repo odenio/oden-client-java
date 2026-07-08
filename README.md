@@ -2,7 +2,7 @@
 
 Oden API
 - API version: 2.0.0
-  - Build date: 2026-07-08T02:35:24.898947759Z[Etc/UTC]
+  - Build date: 2026-07-08T05:17:44.787119627Z[Etc/UTC]
   - Generator version: 7.23.0
 
 The Oden Private Partner API exposes RESTful API endpoints for clients to get, create and update data on the Oden Platform.
@@ -181,7 +181,7 @@ import oden.ApiException;
 import oden.Configuration;
 import oden.auth.*;
 import oden.model.*;
-import oden.api.IntervalsApi;
+import oden.api.DashboardsApi;
 
 public class Example {
   public static void main(String[] args) {
@@ -194,13 +194,13 @@ public class Example {
     // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
     //APIKeyAuth.setApiKeyPrefix("Token");
 
-    IntervalsApi apiInstance = new IntervalsApi(defaultClient);
-    Interval interval = new Interval(); // Interval | 
+    DashboardsApi apiInstance = new DashboardsApi(defaultClient);
+    DashboardExecuteRequest dashboardExecuteRequest = new DashboardExecuteRequest(); // DashboardExecuteRequest | 
     try {
-      List<Interval> result = apiInstance.v2IntervalDeletePost(interval);
+      List<DashboardExecuteResult> result = apiInstance.executeDashboard(dashboardExecuteRequest);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling IntervalsApi#v2IntervalDeletePost");
+      System.err.println("Exception when calling DashboardsApi#executeDashboard");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -217,44 +217,62 @@ All URIs are relative to *https://api.oden.app*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*IntervalsApi* | [**v2IntervalDeletePost**](docs/IntervalsApi.md#v2IntervalDeletePost) | **POST** /v2/interval/delete | 
-*IntervalsApi* | [**v2IntervalSearchPost**](docs/IntervalsApi.md#v2IntervalSearchPost) | **POST** /v2/interval/search | 
-*IntervalsApi* | [**v2IntervalSetPost**](docs/IntervalsApi.md#v2IntervalSetPost) | **POST** /v2/interval/set | 
-*IntervalsApi* | [**v2IntervalTypeSearchPost**](docs/IntervalsApi.md#v2IntervalTypeSearchPost) | **POST** /v2/interval_type/search | 
-*IntervalsApi* | [**v2IntervalUpdatePost**](docs/IntervalsApi.md#v2IntervalUpdatePost) | **POST** /v2/interval/update | 
-*IntervalsApi* | [**v2IntervalsDeletePost**](docs/IntervalsApi.md#v2IntervalsDeletePost) | **POST** /v2/intervals/delete | 
-*IntervalsApi* | [**v2IntervalsSetPost**](docs/IntervalsApi.md#v2IntervalsSetPost) | **POST** /v2/intervals/set | 
-*IntervalsApi* | [**v2IntervalsUpdatePost**](docs/IntervalsApi.md#v2IntervalsUpdatePost) | **POST** /v2/intervals/update | 
-*MachineGroupsApi* | [**v2FactorySearchPost**](docs/MachineGroupsApi.md#v2FactorySearchPost) | **POST** /v2/factory/search | 
-*MachineGroupsApi* | [**v2LineSearchPost**](docs/MachineGroupsApi.md#v2LineSearchPost) | **POST** /v2/line/search | 
-*MaintenanceWorkOrdersApi* | [**v2MaintenanceWorkOrderDeletePost**](docs/MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderDeletePost) | **POST** /v2/maintenance_work_order/delete | 
-*MaintenanceWorkOrdersApi* | [**v2MaintenanceWorkOrderSearchPost**](docs/MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderSearchPost) | **POST** /v2/maintenance_work_order/search | 
-*MaintenanceWorkOrdersApi* | [**v2MaintenanceWorkOrderSetPost**](docs/MaintenanceWorkOrdersApi.md#v2MaintenanceWorkOrderSetPost) | **POST** /v2/maintenance_work_order/set | 
-*MetricGroupsApi* | [**v2MetricGroupSearchPost**](docs/MetricGroupsApi.md#v2MetricGroupSearchPost) | **POST** /v2/metric_group/search | 
-*OqlApi* | [**v2OqlQueryPost**](docs/OqlApi.md#v2OqlQueryPost) | **POST** /v2/oql/query | 
-*ProductAttributesApi* | [**v2ProductAttributeSearchPost**](docs/ProductAttributesApi.md#v2ProductAttributeSearchPost) | **POST** /v2/product_attribute/search | 
-*ProductAttributesApi* | [**v2ProductAttributeSetPost**](docs/ProductAttributesApi.md#v2ProductAttributeSetPost) | **POST** /v2/product_attribute/set | 
-*ProductMappingsApi* | [**v2ProductMappingSearchPost**](docs/ProductMappingsApi.md#v2ProductMappingSearchPost) | **POST** /v2/product_mapping/search | 
-*ProductMappingsApi* | [**v2ProductMappingSetPost**](docs/ProductMappingsApi.md#v2ProductMappingSetPost) | **POST** /v2/product_mapping/set | 
-*ProductsApi* | [**v2ProductDeletePost**](docs/ProductsApi.md#v2ProductDeletePost) | **POST** /v2/product/delete | 
-*ProductsApi* | [**v2ProductSearchPost**](docs/ProductsApi.md#v2ProductSearchPost) | **POST** /v2/product/search | 
-*ProductsApi* | [**v2ProductSetPost**](docs/ProductsApi.md#v2ProductSetPost) | **POST** /v2/product/set | 
-*QualityTestApi* | [**v2QualitySchemaSearchPost**](docs/QualityTestApi.md#v2QualitySchemaSearchPost) | **POST** /v2/quality_schema/search | 
-*QualityTestApi* | [**v2QualityTestDeletePost**](docs/QualityTestApi.md#v2QualityTestDeletePost) | **POST** /v2/quality_test/delete | 
-*QualityTestApi* | [**v2QualityTestSearchPost**](docs/QualityTestApi.md#v2QualityTestSearchPost) | **POST** /v2/quality_test/search | 
-*QualityTestApi* | [**v2QualityTestSetPost**](docs/QualityTestApi.md#v2QualityTestSetPost) | **POST** /v2/quality_test/set | 
-*QualityTestApi* | [**v2QualityTestsDeletePost**](docs/QualityTestApi.md#v2QualityTestsDeletePost) | **POST** /v2/quality_tests/delete | 
-*ScrapYieldDataApi* | [**v2ScrapYieldDeletePost**](docs/ScrapYieldDataApi.md#v2ScrapYieldDeletePost) | **POST** /v2/scrap_yield/delete | 
-*ScrapYieldDataApi* | [**v2ScrapYieldSearchPost**](docs/ScrapYieldDataApi.md#v2ScrapYieldSearchPost) | **POST** /v2/scrap_yield/search | 
-*ScrapYieldDataApi* | [**v2ScrapYieldSetPost**](docs/ScrapYieldDataApi.md#v2ScrapYieldSetPost) | **POST** /v2/scrap_yield/set | 
-*TargetsApi* | [**v2TargetSearchPost**](docs/TargetsApi.md#v2TargetSearchPost) | **POST** /v2/target/search | 
-*TargetsApi* | [**v2TargetSetPost**](docs/TargetsApi.md#v2TargetSetPost) | **POST** /v2/target/set | 
+*DashboardsApi* | [**executeDashboard**](docs/DashboardsApi.md#executeDashboard) | **POST** /v2/dashboard/execute | Execute a dashboard
+*IntervalsApi* | [**bulkDeleteIntervals**](docs/IntervalsApi.md#bulkDeleteIntervals) | **POST** /v2/intervals/delete | Delete intervals in a time range
+*IntervalsApi* | [**bulkSetIntervals**](docs/IntervalsApi.md#bulkSetIntervals) | **POST** /v2/intervals/set | Create a set of intervals
+*IntervalsApi* | [**bulkUpdateIntervals**](docs/IntervalsApi.md#bulkUpdateIntervals) | **POST** /v2/intervals/update | Update a set of intervals
+*IntervalsApi* | [**deleteInterval**](docs/IntervalsApi.md#deleteInterval) | **POST** /v2/interval/delete | Delete an interval
+*IntervalsApi* | [**deleteIntervalType**](docs/IntervalsApi.md#deleteIntervalType) | **POST** /v2/interval_type/delete | Delete a custom interval type
+*IntervalsApi* | [**searchIntervalTypes**](docs/IntervalsApi.md#searchIntervalTypes) | **POST** /v2/interval_type/search | Search interval types
+*IntervalsApi* | [**searchIntervals**](docs/IntervalsApi.md#searchIntervals) | **POST** /v2/interval/search | Search intervals on a line
+*IntervalsApi* | [**setInterval**](docs/IntervalsApi.md#setInterval) | **POST** /v2/interval/set | Create or update an interval
+*IntervalsApi* | [**setIntervalType**](docs/IntervalsApi.md#setIntervalType) | **POST** /v2/interval_type/set | Create or update a custom interval type
+*IntervalsApi* | [**updateInterval**](docs/IntervalsApi.md#updateInterval) | **POST** /v2/interval/update | Update an interval
+*MachineGroupsApi* | [**searchFactories**](docs/MachineGroupsApi.md#searchFactories) | **POST** /v2/factory/search | Search factories
+*MachineGroupsApi* | [**searchLines**](docs/MachineGroupsApi.md#searchLines) | **POST** /v2/line/search | Search production lines
+*MaintenanceWorkOrdersApi* | [**deleteMaintenanceWorkOrder**](docs/MaintenanceWorkOrdersApi.md#deleteMaintenanceWorkOrder) | **POST** /v2/maintenance_work_order/delete | Delete a maintenance work order
+*MaintenanceWorkOrdersApi* | [**searchMaintenanceWorkOrders**](docs/MaintenanceWorkOrdersApi.md#searchMaintenanceWorkOrders) | **POST** /v2/maintenance_work_order/search | Search maintenance work orders
+*MaintenanceWorkOrdersApi* | [**setMaintenanceWorkOrder**](docs/MaintenanceWorkOrdersApi.md#setMaintenanceWorkOrder) | **POST** /v2/maintenance_work_order/set | Create or update a maintenance work order
+*MetricGroupsApi* | [**searchMetricGroups**](docs/MetricGroupsApi.md#searchMetricGroups) | **POST** /v2/metric_group/search | Search metric groups
+*OqlApi* | [**runOqlQuery**](docs/OqlApi.md#runOqlQuery) | **POST** /v2/oql/query | Run an OQL query
+*ProductAttributesApi* | [**searchProductAttributes**](docs/ProductAttributesApi.md#searchProductAttributes) | **POST** /v2/product_attribute/search | Search product attributes
+*ProductAttributesApi* | [**setProductAttribute**](docs/ProductAttributesApi.md#setProductAttribute) | **POST** /v2/product_attribute/set | Create or update a product attribute
+*ProductMappingsApi* | [**searchProductMappings**](docs/ProductMappingsApi.md#searchProductMappings) | **POST** /v2/product_mapping/search | Search product-to-line mappings
+*ProductMappingsApi* | [**setProductMapping**](docs/ProductMappingsApi.md#setProductMapping) | **POST** /v2/product_mapping/set | Map a product to a line
+*ProductsApi* | [**deleteProduct**](docs/ProductsApi.md#deleteProduct) | **POST** /v2/product/delete | Delete a product
+*ProductsApi* | [**searchProducts**](docs/ProductsApi.md#searchProducts) | **POST** /v2/product/search | Search products
+*ProductsApi* | [**setProduct**](docs/ProductsApi.md#setProduct) | **POST** /v2/product/set | Create or update a product
+*QualityTestApi* | [**bulkDeleteQualityTests**](docs/QualityTestApi.md#bulkDeleteQualityTests) | **POST** /v2/quality_tests/delete | Delete multiple quality tests
+*QualityTestApi* | [**deleteQualityTest**](docs/QualityTestApi.md#deleteQualityTest) | **POST** /v2/quality_test/delete | Delete a quality test
+*QualityTestApi* | [**searchQualitySchemas**](docs/QualityTestApi.md#searchQualitySchemas) | **POST** /v2/quality_schema/search | Search quality schemas for a factory
+*QualityTestApi* | [**searchQualityTests**](docs/QualityTestApi.md#searchQualityTests) | **POST** /v2/quality_test/search | Search quality tests
+*QualityTestApi* | [**setQualityTest**](docs/QualityTestApi.md#setQualityTest) | **POST** /v2/quality_test/set | Create or update a quality test result
+*ScrapYieldDataApi* | [**deleteScrapYield**](docs/ScrapYieldDataApi.md#deleteScrapYield) | **POST** /v2/scrap_yield/delete | Delete a scrap/yield record
+*ScrapYieldDataApi* | [**searchScrapYield**](docs/ScrapYieldDataApi.md#searchScrapYield) | **POST** /v2/scrap_yield/search | Search scrap/yield records
+*ScrapYieldDataApi* | [**setScrapYield**](docs/ScrapYieldDataApi.md#setScrapYield) | **POST** /v2/scrap_yield/set | Create or update a scrap/yield record
+*TargetsApi* | [**searchTargets**](docs/TargetsApi.md#searchTargets) | **POST** /v2/target/search | Search metric targets
+*TargetsApi* | [**setTarget**](docs/TargetsApi.md#setTarget) | **POST** /v2/target/set | Create or update a metric target
 
 
 ## Documentation for Models
 
  - [BatchMetadata](docs/BatchMetadata.md)
+ - [BulkDeleteIntervals200Response](docs/BulkDeleteIntervals200Response.md)
+ - [BulkDeleteQualityTestsRequest](docs/BulkDeleteQualityTestsRequest.md)
+ - [BulkUpdateIntervals200Response](docs/BulkUpdateIntervals200Response.md)
+ - [BulkUpdateIntervals200ResponseFailedIntervalsInner](docs/BulkUpdateIntervals200ResponseFailedIntervalsInner.md)
  - [CustomMetadata](docs/CustomMetadata.md)
+ - [DashboardColumnSpec](docs/DashboardColumnSpec.md)
+ - [DashboardExecuteFilters](docs/DashboardExecuteFilters.md)
+ - [DashboardExecuteFiltersCustomIntervalsInner](docs/DashboardExecuteFiltersCustomIntervalsInner.md)
+ - [DashboardExecuteFiltersLinesInner](docs/DashboardExecuteFiltersLinesInner.md)
+ - [DashboardExecuteFiltersStates](docs/DashboardExecuteFiltersStates.md)
+ - [DashboardExecuteFiltersStatesStateCategoryAndReasonsInner](docs/DashboardExecuteFiltersStatesStateCategoryAndReasonsInner.md)
+ - [DashboardExecuteRange](docs/DashboardExecuteRange.md)
+ - [DashboardExecuteRequest](docs/DashboardExecuteRequest.md)
+ - [DashboardExecuteRequestDashboard](docs/DashboardExecuteRequestDashboard.md)
+ - [DashboardExecuteResult](docs/DashboardExecuteResult.md)
+ - [DashboardExecuteResultRange](docs/DashboardExecuteResultRange.md)
  - [Factory](docs/Factory.md)
  - [GenericError](docs/GenericError.md)
  - [Interval](docs/Interval.md)
@@ -263,6 +281,7 @@ Class | Method | HTTP request | Description
  - [IntervalBulkUpdate](docs/IntervalBulkUpdate.md)
  - [IntervalMetadata](docs/IntervalMetadata.md)
  - [IntervalType](docs/IntervalType.md)
+ - [IntervalTypeSet](docs/IntervalTypeSet.md)
  - [Line](docs/Line.md)
  - [MaintenanceWorkOrder](docs/MaintenanceWorkOrder.md)
  - [Match](docs/Match.md)
@@ -276,21 +295,17 @@ Class | Method | HTTP request | Description
  - [RunMetadata](docs/RunMetadata.md)
  - [ScrapYieldData](docs/ScrapYieldData.md)
  - [ScrapYieldSchema](docs/ScrapYieldSchema.md)
+ - [SearchLines400Response](docs/SearchLines400Response.md)
+ - [SearchLines409Response](docs/SearchLines409Response.md)
+ - [SearchLines500Response](docs/SearchLines500Response.md)
+ - [SearchMaintenanceWorkOrdersRequest](docs/SearchMaintenanceWorkOrdersRequest.md)
+ - [SearchScrapYieldRequest](docs/SearchScrapYieldRequest.md)
+ - [SetScrapYieldRequest](docs/SetScrapYieldRequest.md)
  - [StateCategory](docs/StateCategory.md)
  - [StateMetadata](docs/StateMetadata.md)
  - [StateReason](docs/StateReason.md)
  - [Target](docs/Target.md)
  - [Unit](docs/Unit.md)
- - [V2IntervalsDeletePost200Response](docs/V2IntervalsDeletePost200Response.md)
- - [V2IntervalsUpdatePost200Response](docs/V2IntervalsUpdatePost200Response.md)
- - [V2IntervalsUpdatePost200ResponseFailedIntervalsInner](docs/V2IntervalsUpdatePost200ResponseFailedIntervalsInner.md)
- - [V2LineSearchPost400Response](docs/V2LineSearchPost400Response.md)
- - [V2LineSearchPost409Response](docs/V2LineSearchPost409Response.md)
- - [V2LineSearchPost500Response](docs/V2LineSearchPost500Response.md)
- - [V2MaintenanceWorkOrderSearchPostRequest](docs/V2MaintenanceWorkOrderSearchPostRequest.md)
- - [V2QualityTestsDeletePostRequest](docs/V2QualityTestsDeletePostRequest.md)
- - [V2ScrapYieldSearchPostRequest](docs/V2ScrapYieldSearchPostRequest.md)
- - [V2ScrapYieldSetPostRequest](docs/V2ScrapYieldSetPostRequest.md)
 
 
 <a id="documentation-for-authorization"></a>

@@ -29,9 +29,9 @@ import java.io.IOException;
 
 import oden.model.GenericError;
 import oden.model.Product;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class ProductsApi {
     }
 
     /**
-     * Build call for v2ProductDeletePost
+     * Build call for deleteProduct
      * @param product  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -95,7 +95,7 @@ public class ProductsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductDeletePostCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deleteProductCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -141,18 +141,18 @@ public class ProductsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ProductDeletePostValidateBeforeCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteProductValidateBeforeCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'product' is set
         if (product == null) {
-            throw new ApiException("Missing the required parameter 'product' when calling v2ProductDeletePost(Async)");
+            throw new ApiException("Missing the required parameter 'product' when calling deleteProduct(Async)");
         }
 
-        return v2ProductDeletePostCall(product, _callback);
+        return deleteProductCall(product, _callback);
 
     }
 
     /**
-     * 
+     * Delete a product
      * Delete a Product by unique identifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  A deleted Product will not show up in Product searches or dropdowns, but associated Intervals will still exist. 
      * @param product  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -169,12 +169,12 @@ public class ProductsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public void v2ProductDeletePost(@javax.annotation.Nonnull Product product) throws ApiException {
-        v2ProductDeletePostWithHttpInfo(product);
+    public void deleteProduct(@javax.annotation.Nonnull Product product) throws ApiException {
+        deleteProductWithHttpInfo(product);
     }
 
     /**
-     * 
+     * Delete a product
      * Delete a Product by unique identifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  A deleted Product will not show up in Product searches or dropdowns, but associated Intervals will still exist. 
      * @param product  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -192,13 +192,13 @@ public class ProductsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2ProductDeletePostWithHttpInfo(@javax.annotation.Nonnull Product product) throws ApiException {
-        okhttp3.Call localVarCall = v2ProductDeletePostValidateBeforeCall(product, null);
+    public ApiResponse<Void> deleteProductWithHttpInfo(@javax.annotation.Nonnull Product product) throws ApiException {
+        okhttp3.Call localVarCall = deleteProductValidateBeforeCall(product, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Delete a product (asynchronously)
      * Delete a Product by unique identifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  A deleted Product will not show up in Product searches or dropdowns, but associated Intervals will still exist. 
      * @param product  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -217,14 +217,14 @@ public class ProductsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductDeletePostAsync(@javax.annotation.Nonnull Product product, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call deleteProductAsync(@javax.annotation.Nonnull Product product, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ProductDeletePostValidateBeforeCall(product, _callback);
+        okhttp3.Call localVarCall = deleteProductValidateBeforeCall(product, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2ProductSearchPost
+     * Build call for searchProducts
      * @param product  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -242,7 +242,7 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductSearchPostCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchProductsCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -288,18 +288,18 @@ public class ProductsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ProductSearchPostValidateBeforeCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchProductsValidateBeforeCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'product' is set
         if (product == null) {
-            throw new ApiException("Missing the required parameter 'product' when calling v2ProductSearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'product' when calling searchProducts(Async)");
         }
 
-        return v2ProductSearchPostCall(product, _callback);
+        return searchProductsCall(product, _callback);
 
     }
 
     /**
-     * 
+     * Search products
      * Search for specific Product: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  May be used to confirm a Product exists or to get a Product &#x60;id&#x60; if &#x60;name&#x60; is known, or &#x60;name&#x60; if &#x60;id&#x60; is known. 
      * @param product  (required)
      * @return List&lt;Product&gt;
@@ -317,13 +317,13 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public List<Product> v2ProductSearchPost(@javax.annotation.Nonnull Product product) throws ApiException {
-        ApiResponse<List<Product>> localVarResp = v2ProductSearchPostWithHttpInfo(product);
+    public List<Product> searchProducts(@javax.annotation.Nonnull Product product) throws ApiException {
+        ApiResponse<List<Product>> localVarResp = searchProductsWithHttpInfo(product);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search products
      * Search for specific Product: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  May be used to confirm a Product exists or to get a Product &#x60;id&#x60; if &#x60;name&#x60; is known, or &#x60;name&#x60; if &#x60;id&#x60; is known. 
      * @param product  (required)
      * @return ApiResponse&lt;List&lt;Product&gt;&gt;
@@ -341,14 +341,14 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Product>> v2ProductSearchPostWithHttpInfo(@javax.annotation.Nonnull Product product) throws ApiException {
-        okhttp3.Call localVarCall = v2ProductSearchPostValidateBeforeCall(product, null);
+    public ApiResponse<List<Product>> searchProductsWithHttpInfo(@javax.annotation.Nonnull Product product) throws ApiException {
+        okhttp3.Call localVarCall = searchProductsValidateBeforeCall(product, null);
         Type localVarReturnType = new TypeToken<List<Product>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search products (asynchronously)
      * Search for specific Product: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  May be used to confirm a Product exists or to get a Product &#x60;id&#x60; if &#x60;name&#x60; is known, or &#x60;name&#x60; if &#x60;id&#x60; is known. 
      * @param product  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -367,15 +367,15 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductSearchPostAsync(@javax.annotation.Nonnull Product product, final ApiCallback<List<Product>> _callback) throws ApiException {
+    public okhttp3.Call searchProductsAsync(@javax.annotation.Nonnull Product product, final ApiCallback<List<Product>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ProductSearchPostValidateBeforeCall(product, _callback);
+        okhttp3.Call localVarCall = searchProductsValidateBeforeCall(product, _callback);
         Type localVarReturnType = new TypeToken<List<Product>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2ProductSetPost
+     * Build call for setProduct
      * @param product  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -392,7 +392,7 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductSetPostCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setProductCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -438,18 +438,18 @@ public class ProductsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2ProductSetPostValidateBeforeCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setProductValidateBeforeCall(@javax.annotation.Nonnull Product product, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'product' is set
         if (product == null) {
-            throw new ApiException("Missing the required parameter 'product' when calling v2ProductSetPost(Async)");
+            throw new ApiException("Missing the required parameter 'product' when calling setProduct(Async)");
         }
 
-        return v2ProductSetPostCall(product, _callback);
+        return setProductCall(product, _callback);
 
     }
 
     /**
-     * 
+     * Create or update a product
      * To **create** a new Product, include &#x60;name&#x60;, and omit &#x60;id&#x60; field.  To **update** an existing Product, include the &#x60;id&#x60; of the existing product the updated &#x60;name&#x60;. 
      * @param product  (required)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -465,12 +465,12 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public void v2ProductSetPost(@javax.annotation.Nonnull Product product) throws ApiException {
-        v2ProductSetPostWithHttpInfo(product);
+    public void setProduct(@javax.annotation.Nonnull Product product) throws ApiException {
+        setProductWithHttpInfo(product);
     }
 
     /**
-     * 
+     * Create or update a product
      * To **create** a new Product, include &#x60;name&#x60;, and omit &#x60;id&#x60; field.  To **update** an existing Product, include the &#x60;id&#x60; of the existing product the updated &#x60;name&#x60;. 
      * @param product  (required)
      * @return ApiResponse&lt;Void&gt;
@@ -487,13 +487,13 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2ProductSetPostWithHttpInfo(@javax.annotation.Nonnull Product product) throws ApiException {
-        okhttp3.Call localVarCall = v2ProductSetPostValidateBeforeCall(product, null);
+    public ApiResponse<Void> setProductWithHttpInfo(@javax.annotation.Nonnull Product product) throws ApiException {
+        okhttp3.Call localVarCall = setProductValidateBeforeCall(product, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Create or update a product (asynchronously)
      * To **create** a new Product, include &#x60;name&#x60;, and omit &#x60;id&#x60; field.  To **update** an existing Product, include the &#x60;id&#x60; of the existing product the updated &#x60;name&#x60;. 
      * @param product  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -511,9 +511,9 @@ public class ProductsApi {
         <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2ProductSetPostAsync(@javax.annotation.Nonnull Product product, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call setProductAsync(@javax.annotation.Nonnull Product product, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2ProductSetPostValidateBeforeCall(product, _callback);
+        okhttp3.Call localVarCall = setProductValidateBeforeCall(product, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

@@ -29,9 +29,9 @@ import java.io.IOException;
 
 import oden.model.GenericError;
 import oden.model.MetricGroup;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class MetricGroupsApi {
     }
 
     /**
-     * Build call for v2MetricGroupSearchPost
+     * Build call for searchMetricGroups
      * @param metricGroup  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -96,7 +96,7 @@ public class MetricGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MetricGroupSearchPostCall(@javax.annotation.Nonnull MetricGroup metricGroup, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchMetricGroupsCall(@javax.annotation.Nonnull MetricGroup metricGroup, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -142,18 +142,18 @@ public class MetricGroupsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2MetricGroupSearchPostValidateBeforeCall(@javax.annotation.Nonnull MetricGroup metricGroup, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchMetricGroupsValidateBeforeCall(@javax.annotation.Nonnull MetricGroup metricGroup, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'metricGroup' is set
         if (metricGroup == null) {
-            throw new ApiException("Missing the required parameter 'metricGroup' when calling v2MetricGroupSearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'metricGroup' when calling searchMetricGroups(Async)");
         }
 
-        return v2MetricGroupSearchPostCall(metricGroup, _callback);
+        return searchMetricGroupsCall(metricGroup, _callback);
 
     }
 
     /**
-     * 
+     * Search metric groups
      * Search for a specific Metric Group:  - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all Metric Groups: - &#x60;match: all&#x60; 
      * @param metricGroup  (required)
      * @return List&lt;MetricGroup&gt;
@@ -172,13 +172,13 @@ public class MetricGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public List<MetricGroup> v2MetricGroupSearchPost(@javax.annotation.Nonnull MetricGroup metricGroup) throws ApiException {
-        ApiResponse<List<MetricGroup>> localVarResp = v2MetricGroupSearchPostWithHttpInfo(metricGroup);
+    public List<MetricGroup> searchMetricGroups(@javax.annotation.Nonnull MetricGroup metricGroup) throws ApiException {
+        ApiResponse<List<MetricGroup>> localVarResp = searchMetricGroupsWithHttpInfo(metricGroup);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search metric groups
      * Search for a specific Metric Group:  - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all Metric Groups: - &#x60;match: all&#x60; 
      * @param metricGroup  (required)
      * @return ApiResponse&lt;List&lt;MetricGroup&gt;&gt;
@@ -197,14 +197,14 @@ public class MetricGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<MetricGroup>> v2MetricGroupSearchPostWithHttpInfo(@javax.annotation.Nonnull MetricGroup metricGroup) throws ApiException {
-        okhttp3.Call localVarCall = v2MetricGroupSearchPostValidateBeforeCall(metricGroup, null);
+    public ApiResponse<List<MetricGroup>> searchMetricGroupsWithHttpInfo(@javax.annotation.Nonnull MetricGroup metricGroup) throws ApiException {
+        okhttp3.Call localVarCall = searchMetricGroupsValidateBeforeCall(metricGroup, null);
         Type localVarReturnType = new TypeToken<List<MetricGroup>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search metric groups (asynchronously)
      * Search for a specific Metric Group:  - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all Metric Groups: - &#x60;match: all&#x60; 
      * @param metricGroup  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -224,9 +224,9 @@ public class MetricGroupsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MetricGroupSearchPostAsync(@javax.annotation.Nonnull MetricGroup metricGroup, final ApiCallback<List<MetricGroup>> _callback) throws ApiException {
+    public okhttp3.Call searchMetricGroupsAsync(@javax.annotation.Nonnull MetricGroup metricGroup, final ApiCallback<List<MetricGroup>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2MetricGroupSearchPostValidateBeforeCall(metricGroup, _callback);
+        okhttp3.Call localVarCall = searchMetricGroupsValidateBeforeCall(metricGroup, _callback);
         Type localVarReturnType = new TypeToken<List<MetricGroup>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

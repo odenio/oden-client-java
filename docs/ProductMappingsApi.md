@@ -4,15 +4,15 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2ProductMappingSearchPost**](ProductMappingsApi.md#v2ProductMappingSearchPost) | **POST** /v2/product_mapping/search |  |
-| [**v2ProductMappingSetPost**](ProductMappingsApi.md#v2ProductMappingSetPost) | **POST** /v2/product_mapping/set |  |
+| [**searchProductMappings**](ProductMappingsApi.md#searchProductMappings) | **POST** /v2/product_mapping/search | Search product-to-line mappings |
+| [**setProductMapping**](ProductMappingsApi.md#setProductMapping) | **POST** /v2/product_mapping/set | Map a product to a line |
 
 
-<a id="v2ProductMappingSearchPost"></a>
-# **v2ProductMappingSearchPost**
-> List&lt;ProductMapping&gt; v2ProductMappingSearchPost(productMapping)
+<a id="searchProductMappings"></a>
+# **searchProductMappings**
+> List&lt;ProductMapping&gt; searchProductMappings(productMapping)
 
-
+Search product-to-line mappings
 
 Searches for Product Mappings.  May be used to confirm a Product Mapping exists.  Much like &#x60;product/search&#x60;, may be used to get &#x60;name&#x60;s of line or product from &#x60;id&#x60;s, or &#x60;id&#x60;s from &#x60;name&#x60;s. 
 
@@ -40,10 +40,10 @@ public class Example {
     ProductMappingsApi apiInstance = new ProductMappingsApi(defaultClient);
     ProductMapping productMapping = new ProductMapping(); // ProductMapping | 
     try {
-      List<ProductMapping> result = apiInstance.v2ProductMappingSearchPost(productMapping);
+      List<ProductMapping> result = apiInstance.searchProductMappings(productMapping);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProductMappingsApi#v2ProductMappingSearchPost");
+      System.err.println("Exception when calling ProductMappingsApi#searchProductMappings");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -82,11 +82,11 @@ public class Example {
 | **501** | Endpoint is not yet implemented |  -  |
 | **400** | An error occurred regarding one of the input parameters |  -  |
 
-<a id="v2ProductMappingSetPost"></a>
-# **v2ProductMappingSetPost**
-> v2ProductMappingSetPost(productMapping)
+<a id="setProductMapping"></a>
+# **setProductMapping**
+> setProductMapping(productMapping)
 
-
+Map a product to a line
 
 Map a Product to a Line - implying this Line can produce, or is producing this Product.  If the supplied Product doesn&#39;t exist, it will be created. 
 
@@ -114,9 +114,9 @@ public class Example {
     ProductMappingsApi apiInstance = new ProductMappingsApi(defaultClient);
     ProductMapping productMapping = new ProductMapping(); // ProductMapping | 
     try {
-      apiInstance.v2ProductMappingSetPost(productMapping);
+      apiInstance.setProductMapping(productMapping);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProductMappingsApi#v2ProductMappingSetPost");
+      System.err.println("Exception when calling ProductMappingsApi#setProductMapping");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

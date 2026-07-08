@@ -29,9 +29,9 @@ import java.io.IOException;
 
 import oden.model.GenericError;
 import oden.model.OQLQuery;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class OqlApi {
     }
 
     /**
-     * Build call for v2OqlQueryPost
+     * Build call for runOqlQuery
      * @param oqLQuery  (required)
      * @param format Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;.  (optional, default to json)
      * @param _callback Callback for upload/download progress
@@ -93,12 +93,12 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 413 </td><td> Too many requests </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2OqlQueryPostCall(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call runOqlQueryCall(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -148,18 +148,18 @@ public class OqlApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2OqlQueryPostValidateBeforeCall(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call runOqlQueryValidateBeforeCall(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'oqLQuery' is set
         if (oqLQuery == null) {
-            throw new ApiException("Missing the required parameter 'oqLQuery' when calling v2OqlQueryPost(Async)");
+            throw new ApiException("Missing the required parameter 'oqLQuery' when calling runOqlQuery(Async)");
         }
 
-        return v2OqlQueryPostCall(oqLQuery, format, _callback);
+        return runOqlQueryCall(oqLQuery, format, _callback);
 
     }
 
     /**
-     * 
+     * Run an OQL query
      * Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
      * @param oqLQuery  (required)
      * @param format Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;.  (optional, default to json)
@@ -174,17 +174,17 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 413 </td><td> Too many requests </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public void v2OqlQueryPost(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format) throws ApiException {
-        v2OqlQueryPostWithHttpInfo(oqLQuery, format);
+    public void runOqlQuery(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format) throws ApiException {
+        runOqlQueryWithHttpInfo(oqLQuery, format);
     }
 
     /**
-     * 
+     * Run an OQL query
      * Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
      * @param oqLQuery  (required)
      * @param format Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;.  (optional, default to json)
@@ -200,18 +200,18 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 413 </td><td> Too many requests </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Void> v2OqlQueryPostWithHttpInfo(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format) throws ApiException {
-        okhttp3.Call localVarCall = v2OqlQueryPostValidateBeforeCall(oqLQuery, format, null);
+    public ApiResponse<Void> runOqlQueryWithHttpInfo(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format) throws ApiException {
+        okhttp3.Call localVarCall = runOqlQueryValidateBeforeCall(oqLQuery, format, null);
         return localVarApiClient.execute(localVarCall);
     }
 
     /**
-     *  (asynchronously)
+     * Run an OQL query (asynchronously)
      * Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
      * @param oqLQuery  (required)
      * @param format Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;.  (optional, default to json)
@@ -228,14 +228,14 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
-        <tr><td> 413 </td><td> Too many requests </td><td>  -  </td></tr>
+        <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2OqlQueryPostAsync(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback<Void> _callback) throws ApiException {
+    public okhttp3.Call runOqlQueryAsync(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2OqlQueryPostValidateBeforeCall(oqLQuery, format, _callback);
+        okhttp3.Call localVarCall = runOqlQueryValidateBeforeCall(oqLQuery, format, _callback);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }

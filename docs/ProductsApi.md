@@ -4,16 +4,16 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2ProductDeletePost**](ProductsApi.md#v2ProductDeletePost) | **POST** /v2/product/delete |  |
-| [**v2ProductSearchPost**](ProductsApi.md#v2ProductSearchPost) | **POST** /v2/product/search |  |
-| [**v2ProductSetPost**](ProductsApi.md#v2ProductSetPost) | **POST** /v2/product/set |  |
+| [**deleteProduct**](ProductsApi.md#deleteProduct) | **POST** /v2/product/delete | Delete a product |
+| [**searchProducts**](ProductsApi.md#searchProducts) | **POST** /v2/product/search | Search products |
+| [**setProduct**](ProductsApi.md#setProduct) | **POST** /v2/product/set | Create or update a product |
 
 
-<a id="v2ProductDeletePost"></a>
-# **v2ProductDeletePost**
-> v2ProductDeletePost(product)
+<a id="deleteProduct"></a>
+# **deleteProduct**
+> deleteProduct(product)
 
-
+Delete a product
 
 Delete a Product by unique identifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  A deleted Product will not show up in Product searches or dropdowns, but associated Intervals will still exist. 
 
@@ -41,9 +41,9 @@ public class Example {
     ProductsApi apiInstance = new ProductsApi(defaultClient);
     Product product = new Product(); // Product | 
     try {
-      apiInstance.v2ProductDeletePost(product);
+      apiInstance.deleteProduct(product);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProductsApi#v2ProductDeletePost");
+      System.err.println("Exception when calling ProductsApi#deleteProduct");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -83,11 +83,11 @@ null (empty response body)
 | **400** | An error occurred regarding one of the input parameters |  -  |
 | **404** | Entity not found |  -  |
 
-<a id="v2ProductSearchPost"></a>
-# **v2ProductSearchPost**
-> List&lt;Product&gt; v2ProductSearchPost(product)
+<a id="searchProducts"></a>
+# **searchProducts**
+> List&lt;Product&gt; searchProducts(product)
 
-
+Search products
 
 Search for specific Product: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  May be used to confirm a Product exists or to get a Product &#x60;id&#x60; if &#x60;name&#x60; is known, or &#x60;name&#x60; if &#x60;id&#x60; is known. 
 
@@ -115,10 +115,10 @@ public class Example {
     ProductsApi apiInstance = new ProductsApi(defaultClient);
     Product product = new Product(); // Product | 
     try {
-      List<Product> result = apiInstance.v2ProductSearchPost(product);
+      List<Product> result = apiInstance.searchProducts(product);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProductsApi#v2ProductSearchPost");
+      System.err.println("Exception when calling ProductsApi#searchProducts");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -158,11 +158,11 @@ public class Example {
 | **501** | Endpoint is not yet implemented |  -  |
 | **400** | An error occurred regarding one of the input parameters |  -  |
 
-<a id="v2ProductSetPost"></a>
-# **v2ProductSetPost**
-> v2ProductSetPost(product)
+<a id="setProduct"></a>
+# **setProduct**
+> setProduct(product)
 
-
+Create or update a product
 
 To **create** a new Product, include &#x60;name&#x60;, and omit &#x60;id&#x60; field.  To **update** an existing Product, include the &#x60;id&#x60; of the existing product the updated &#x60;name&#x60;. 
 
@@ -190,9 +190,9 @@ public class Example {
     ProductsApi apiInstance = new ProductsApi(defaultClient);
     Product product = new Product(); // Product | 
     try {
-      apiInstance.v2ProductSetPost(product);
+      apiInstance.setProduct(product);
     } catch (ApiException e) {
-      System.err.println("Exception when calling ProductsApi#v2ProductSetPost");
+      System.err.println("Exception when calling ProductsApi#setProduct");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

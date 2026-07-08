@@ -4,15 +4,15 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2FactorySearchPost**](MachineGroupsApi.md#v2FactorySearchPost) | **POST** /v2/factory/search |  |
-| [**v2LineSearchPost**](MachineGroupsApi.md#v2LineSearchPost) | **POST** /v2/line/search |  |
+| [**searchFactories**](MachineGroupsApi.md#searchFactories) | **POST** /v2/factory/search | Search factories |
+| [**searchLines**](MachineGroupsApi.md#searchLines) | **POST** /v2/line/search | Search production lines |
 
 
-<a id="v2FactorySearchPost"></a>
-# **v2FactorySearchPost**
-> List&lt;Factory&gt; v2FactorySearchPost(factory)
+<a id="searchFactories"></a>
+# **searchFactories**
+> List&lt;Factory&gt; searchFactories(factory)
 
-
+Search factories
 
 Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
 
@@ -40,10 +40,10 @@ public class Example {
     MachineGroupsApi apiInstance = new MachineGroupsApi(defaultClient);
     Factory factory = new Factory(); // Factory | 
     try {
-      List<Factory> result = apiInstance.v2FactorySearchPost(factory);
+      List<Factory> result = apiInstance.searchFactories(factory);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling MachineGroupsApi#v2FactorySearchPost");
+      System.err.println("Exception when calling MachineGroupsApi#searchFactories");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -84,11 +84,11 @@ public class Example {
 | **400** | An error occurred regarding one of the input parameters |  -  |
 | **404** | Entity not found |  -  |
 
-<a id="v2LineSearchPost"></a>
-# **v2LineSearchPost**
-> List&lt;Line&gt; v2LineSearchPost(line)
+<a id="searchLines"></a>
+# **searchLines**
+> List&lt;Line&gt; searchLines(line)
 
-
+Search production lines
 
 Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
 
@@ -116,10 +116,10 @@ public class Example {
     MachineGroupsApi apiInstance = new MachineGroupsApi(defaultClient);
     Line line = new Line(); // Line | 
     try {
-      List<Line> result = apiInstance.v2LineSearchPost(line);
+      List<Line> result = apiInstance.searchLines(line);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling MachineGroupsApi#v2LineSearchPost");
+      System.err.println("Exception when calling MachineGroupsApi#searchLines");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

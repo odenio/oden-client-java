@@ -4,15 +4,15 @@ All URIs are relative to *https://api.oden.app*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**v2TargetSearchPost**](TargetsApi.md#v2TargetSearchPost) | **POST** /v2/target/search |  |
-| [**v2TargetSetPost**](TargetsApi.md#v2TargetSetPost) | **POST** /v2/target/set |  |
+| [**searchTargets**](TargetsApi.md#searchTargets) | **POST** /v2/target/search | Search metric targets |
+| [**setTarget**](TargetsApi.md#setTarget) | **POST** /v2/target/set | Create or update a metric target |
 
 
-<a id="v2TargetSearchPost"></a>
-# **v2TargetSearchPost**
-> List&lt;Target&gt; v2TargetSearchPost(target)
+<a id="searchTargets"></a>
+# **searchTargets**
+> List&lt;Target&gt; searchTargets(target)
 
-
+Search metric targets
 
 Search for a Target by &#x60;line&#x60;, &#x60;metric_group&#x60;, and &#x60;product&#x60;. For each of these inputs, any of their unique indentifiers (as described in their &#x60;search&#x60; endpoint) may be used. See examples. 
 
@@ -40,10 +40,10 @@ public class Example {
     TargetsApi apiInstance = new TargetsApi(defaultClient);
     Target target = new Target(); // Target | 
     try {
-      List<Target> result = apiInstance.v2TargetSearchPost(target);
+      List<Target> result = apiInstance.searchTargets(target);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling TargetsApi#v2TargetSearchPost");
+      System.err.println("Exception when calling TargetsApi#searchTargets");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -84,11 +84,11 @@ public class Example {
 | **400** | An error occurred regarding one of the input parameters |  -  |
 | **404** | Entity not found |  -  |
 
-<a id="v2TargetSetPost"></a>
-# **v2TargetSetPost**
-> Target v2TargetSetPost(target)
+<a id="setTarget"></a>
+# **setTarget**
+> Target setTarget(target)
 
-
+Create or update a metric target
 
 Create or update a Target.  First the endpoint will search for a Target by &#x60;metric_group&#x60;, &#x60;product&#x60;, and &#x60;line&#x60;: - If the target does not exist a new target is created. - If the product or its mapping to the given line does not exist, they will be created. - If a target exists but with different parameters, it will be updated. - If the target exists with all the same parameters nothing is done. 
 
@@ -116,10 +116,10 @@ public class Example {
     TargetsApi apiInstance = new TargetsApi(defaultClient);
     Target target = new Target(); // Target | 
     try {
-      Target result = apiInstance.v2TargetSetPost(target);
+      Target result = apiInstance.setTarget(target);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling TargetsApi#v2TargetSetPost");
+      System.err.println("Exception when calling TargetsApi#setTarget");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());

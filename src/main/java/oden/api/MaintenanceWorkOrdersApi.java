@@ -29,10 +29,10 @@ import java.io.IOException;
 
 import oden.model.GenericError;
 import oden.model.MaintenanceWorkOrder;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
-import oden.model.V2MaintenanceWorkOrderSearchPostRequest;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
+import oden.model.SearchMaintenanceWorkOrdersRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -78,7 +78,7 @@ public class MaintenanceWorkOrdersApi {
     }
 
     /**
-     * Build call for v2MaintenanceWorkOrderDeletePost
+     * Build call for deleteMaintenanceWorkOrder
      * @param maintenanceWorkOrder  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -97,7 +97,7 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MaintenanceWorkOrderDeletePostCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call deleteMaintenanceWorkOrderCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -143,18 +143,18 @@ public class MaintenanceWorkOrdersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2MaintenanceWorkOrderDeletePostValidateBeforeCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteMaintenanceWorkOrderValidateBeforeCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'maintenanceWorkOrder' is set
         if (maintenanceWorkOrder == null) {
-            throw new ApiException("Missing the required parameter 'maintenanceWorkOrder' when calling v2MaintenanceWorkOrderDeletePost(Async)");
+            throw new ApiException("Missing the required parameter 'maintenanceWorkOrder' when calling deleteMaintenanceWorkOrder(Async)");
         }
 
-        return v2MaintenanceWorkOrderDeletePostCall(maintenanceWorkOrder, _callback);
+        return deleteMaintenanceWorkOrderCall(maintenanceWorkOrder, _callback);
 
     }
 
     /**
-     * 
+     * Delete a maintenance work order
      * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
      * @param maintenanceWorkOrder  (required)
      * @return List&lt;MaintenanceWorkOrder&gt;
@@ -173,13 +173,13 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public List<MaintenanceWorkOrder> v2MaintenanceWorkOrderDeletePost(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
-        ApiResponse<List<MaintenanceWorkOrder>> localVarResp = v2MaintenanceWorkOrderDeletePostWithHttpInfo(maintenanceWorkOrder);
+    public List<MaintenanceWorkOrder> deleteMaintenanceWorkOrder(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        ApiResponse<List<MaintenanceWorkOrder>> localVarResp = deleteMaintenanceWorkOrderWithHttpInfo(maintenanceWorkOrder);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Delete a maintenance work order
      * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
      * @param maintenanceWorkOrder  (required)
      * @return ApiResponse&lt;List&lt;MaintenanceWorkOrder&gt;&gt;
@@ -198,14 +198,14 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<MaintenanceWorkOrder>> v2MaintenanceWorkOrderDeletePostWithHttpInfo(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
-        okhttp3.Call localVarCall = v2MaintenanceWorkOrderDeletePostValidateBeforeCall(maintenanceWorkOrder, null);
+    public ApiResponse<List<MaintenanceWorkOrder>> deleteMaintenanceWorkOrderWithHttpInfo(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        okhttp3.Call localVarCall = deleteMaintenanceWorkOrderValidateBeforeCall(maintenanceWorkOrder, null);
         Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Delete a maintenance work order (asynchronously)
      * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
      * @param maintenanceWorkOrder  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -225,16 +225,16 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MaintenanceWorkOrderDeletePostAsync(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback<List<MaintenanceWorkOrder>> _callback) throws ApiException {
+    public okhttp3.Call deleteMaintenanceWorkOrderAsync(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback<List<MaintenanceWorkOrder>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2MaintenanceWorkOrderDeletePostValidateBeforeCall(maintenanceWorkOrder, _callback);
+        okhttp3.Call localVarCall = deleteMaintenanceWorkOrderValidateBeforeCall(maintenanceWorkOrder, _callback);
         Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2MaintenanceWorkOrderSearchPost
-     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
+     * Build call for searchMaintenanceWorkOrders
+     * @param searchMaintenanceWorkOrdersRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -252,7 +252,7 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MaintenanceWorkOrderSearchPostCall(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchMaintenanceWorkOrdersCall(@javax.annotation.Nonnull SearchMaintenanceWorkOrdersRequest searchMaintenanceWorkOrdersRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -266,7 +266,7 @@ public class MaintenanceWorkOrdersApi {
             basePath = null;
         }
 
-        Object localVarPostBody = v2MaintenanceWorkOrderSearchPostRequest;
+        Object localVarPostBody = searchMaintenanceWorkOrdersRequest;
 
         // create path and map variables
         String localVarPath = "/v2/maintenance_work_order/search";
@@ -298,20 +298,20 @@ public class MaintenanceWorkOrdersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2MaintenanceWorkOrderSearchPostValidateBeforeCall(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'v2MaintenanceWorkOrderSearchPostRequest' is set
-        if (v2MaintenanceWorkOrderSearchPostRequest == null) {
-            throw new ApiException("Missing the required parameter 'v2MaintenanceWorkOrderSearchPostRequest' when calling v2MaintenanceWorkOrderSearchPost(Async)");
+    private okhttp3.Call searchMaintenanceWorkOrdersValidateBeforeCall(@javax.annotation.Nonnull SearchMaintenanceWorkOrdersRequest searchMaintenanceWorkOrdersRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'searchMaintenanceWorkOrdersRequest' is set
+        if (searchMaintenanceWorkOrdersRequest == null) {
+            throw new ApiException("Missing the required parameter 'searchMaintenanceWorkOrdersRequest' when calling searchMaintenanceWorkOrders(Async)");
         }
 
-        return v2MaintenanceWorkOrderSearchPostCall(v2MaintenanceWorkOrderSearchPostRequest, _callback);
+        return searchMaintenanceWorkOrdersCall(searchMaintenanceWorkOrdersRequest, _callback);
 
     }
 
     /**
-     * 
+     * Search maintenance work orders
      * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
-     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
+     * @param searchMaintenanceWorkOrdersRequest  (required)
      * @return List&lt;MaintenanceWorkOrder&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -328,15 +328,15 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public List<MaintenanceWorkOrder> v2MaintenanceWorkOrderSearchPost(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest) throws ApiException {
-        ApiResponse<List<MaintenanceWorkOrder>> localVarResp = v2MaintenanceWorkOrderSearchPostWithHttpInfo(v2MaintenanceWorkOrderSearchPostRequest);
+    public List<MaintenanceWorkOrder> searchMaintenanceWorkOrders(@javax.annotation.Nonnull SearchMaintenanceWorkOrdersRequest searchMaintenanceWorkOrdersRequest) throws ApiException {
+        ApiResponse<List<MaintenanceWorkOrder>> localVarResp = searchMaintenanceWorkOrdersWithHttpInfo(searchMaintenanceWorkOrdersRequest);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search maintenance work orders
      * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
-     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
+     * @param searchMaintenanceWorkOrdersRequest  (required)
      * @return ApiResponse&lt;List&lt;MaintenanceWorkOrder&gt;&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -353,16 +353,16 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<MaintenanceWorkOrder>> v2MaintenanceWorkOrderSearchPostWithHttpInfo(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest) throws ApiException {
-        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSearchPostValidateBeforeCall(v2MaintenanceWorkOrderSearchPostRequest, null);
+    public ApiResponse<List<MaintenanceWorkOrder>> searchMaintenanceWorkOrdersWithHttpInfo(@javax.annotation.Nonnull SearchMaintenanceWorkOrdersRequest searchMaintenanceWorkOrdersRequest) throws ApiException {
+        okhttp3.Call localVarCall = searchMaintenanceWorkOrdersValidateBeforeCall(searchMaintenanceWorkOrdersRequest, null);
         Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search maintenance work orders (asynchronously)
      * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
-     * @param v2MaintenanceWorkOrderSearchPostRequest  (required)
+     * @param searchMaintenanceWorkOrdersRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -380,15 +380,15 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MaintenanceWorkOrderSearchPostAsync(@javax.annotation.Nonnull V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest, final ApiCallback<List<MaintenanceWorkOrder>> _callback) throws ApiException {
+    public okhttp3.Call searchMaintenanceWorkOrdersAsync(@javax.annotation.Nonnull SearchMaintenanceWorkOrdersRequest searchMaintenanceWorkOrdersRequest, final ApiCallback<List<MaintenanceWorkOrder>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSearchPostValidateBeforeCall(v2MaintenanceWorkOrderSearchPostRequest, _callback);
+        okhttp3.Call localVarCall = searchMaintenanceWorkOrdersValidateBeforeCall(searchMaintenanceWorkOrdersRequest, _callback);
         Type localVarReturnType = new TypeToken<List<MaintenanceWorkOrder>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2MaintenanceWorkOrderSetPost
+     * Build call for setMaintenanceWorkOrder
      * @param maintenanceWorkOrder  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -407,7 +407,7 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MaintenanceWorkOrderSetPostCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setMaintenanceWorkOrderCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -453,18 +453,18 @@ public class MaintenanceWorkOrdersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2MaintenanceWorkOrderSetPostValidateBeforeCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setMaintenanceWorkOrderValidateBeforeCall(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'maintenanceWorkOrder' is set
         if (maintenanceWorkOrder == null) {
-            throw new ApiException("Missing the required parameter 'maintenanceWorkOrder' when calling v2MaintenanceWorkOrderSetPost(Async)");
+            throw new ApiException("Missing the required parameter 'maintenanceWorkOrder' when calling setMaintenanceWorkOrder(Async)");
         }
 
-        return v2MaintenanceWorkOrderSetPostCall(maintenanceWorkOrder, _callback);
+        return setMaintenanceWorkOrderCall(maintenanceWorkOrder, _callback);
 
     }
 
     /**
-     * 
+     * Create or update a maintenance work order
      * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
      * @param maintenanceWorkOrder  (required)
      * @return MaintenanceWorkOrder
@@ -483,13 +483,13 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public MaintenanceWorkOrder v2MaintenanceWorkOrderSetPost(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
-        ApiResponse<MaintenanceWorkOrder> localVarResp = v2MaintenanceWorkOrderSetPostWithHttpInfo(maintenanceWorkOrder);
+    public MaintenanceWorkOrder setMaintenanceWorkOrder(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        ApiResponse<MaintenanceWorkOrder> localVarResp = setMaintenanceWorkOrderWithHttpInfo(maintenanceWorkOrder);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Create or update a maintenance work order
      * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
      * @param maintenanceWorkOrder  (required)
      * @return ApiResponse&lt;MaintenanceWorkOrder&gt;
@@ -508,14 +508,14 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<MaintenanceWorkOrder> v2MaintenanceWorkOrderSetPostWithHttpInfo(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
-        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSetPostValidateBeforeCall(maintenanceWorkOrder, null);
+    public ApiResponse<MaintenanceWorkOrder> setMaintenanceWorkOrderWithHttpInfo(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder) throws ApiException {
+        okhttp3.Call localVarCall = setMaintenanceWorkOrderValidateBeforeCall(maintenanceWorkOrder, null);
         Type localVarReturnType = new TypeToken<MaintenanceWorkOrder>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Create or update a maintenance work order (asynchronously)
      * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
      * @param maintenanceWorkOrder  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -535,9 +535,9 @@ public class MaintenanceWorkOrdersApi {
         <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2MaintenanceWorkOrderSetPostAsync(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback<MaintenanceWorkOrder> _callback) throws ApiException {
+    public okhttp3.Call setMaintenanceWorkOrderAsync(@javax.annotation.Nonnull MaintenanceWorkOrder maintenanceWorkOrder, final ApiCallback<MaintenanceWorkOrder> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2MaintenanceWorkOrderSetPostValidateBeforeCall(maintenanceWorkOrder, _callback);
+        okhttp3.Call localVarCall = setMaintenanceWorkOrderValidateBeforeCall(maintenanceWorkOrder, _callback);
         Type localVarReturnType = new TypeToken<MaintenanceWorkOrder>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;

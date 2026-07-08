@@ -28,10 +28,10 @@ import java.io.IOException;
 
 
 import oden.model.GenericError;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import oden.model.Target;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class TargetsApi {
     }
 
     /**
-     * Build call for v2TargetSearchPost
+     * Build call for searchTargets
      * @param target  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -96,7 +96,7 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2TargetSearchPostCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call searchTargetsCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -142,18 +142,18 @@ public class TargetsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2TargetSearchPostValidateBeforeCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call searchTargetsValidateBeforeCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'target' is set
         if (target == null) {
-            throw new ApiException("Missing the required parameter 'target' when calling v2TargetSearchPost(Async)");
+            throw new ApiException("Missing the required parameter 'target' when calling searchTargets(Async)");
         }
 
-        return v2TargetSearchPostCall(target, _callback);
+        return searchTargetsCall(target, _callback);
 
     }
 
     /**
-     * 
+     * Search metric targets
      * Search for a Target by &#x60;line&#x60;, &#x60;metric_group&#x60;, and &#x60;product&#x60;. For each of these inputs, any of their unique indentifiers (as described in their &#x60;search&#x60; endpoint) may be used. See examples. 
      * @param target  (required)
      * @return List&lt;Target&gt;
@@ -172,13 +172,13 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public List<Target> v2TargetSearchPost(@javax.annotation.Nonnull Target target) throws ApiException {
-        ApiResponse<List<Target>> localVarResp = v2TargetSearchPostWithHttpInfo(target);
+    public List<Target> searchTargets(@javax.annotation.Nonnull Target target) throws ApiException {
+        ApiResponse<List<Target>> localVarResp = searchTargetsWithHttpInfo(target);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Search metric targets
      * Search for a Target by &#x60;line&#x60;, &#x60;metric_group&#x60;, and &#x60;product&#x60;. For each of these inputs, any of their unique indentifiers (as described in their &#x60;search&#x60; endpoint) may be used. See examples. 
      * @param target  (required)
      * @return ApiResponse&lt;List&lt;Target&gt;&gt;
@@ -197,14 +197,14 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<List<Target>> v2TargetSearchPostWithHttpInfo(@javax.annotation.Nonnull Target target) throws ApiException {
-        okhttp3.Call localVarCall = v2TargetSearchPostValidateBeforeCall(target, null);
+    public ApiResponse<List<Target>> searchTargetsWithHttpInfo(@javax.annotation.Nonnull Target target) throws ApiException {
+        okhttp3.Call localVarCall = searchTargetsValidateBeforeCall(target, null);
         Type localVarReturnType = new TypeToken<List<Target>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Search metric targets (asynchronously)
      * Search for a Target by &#x60;line&#x60;, &#x60;metric_group&#x60;, and &#x60;product&#x60;. For each of these inputs, any of their unique indentifiers (as described in their &#x60;search&#x60; endpoint) may be used. See examples. 
      * @param target  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -224,15 +224,15 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2TargetSearchPostAsync(@javax.annotation.Nonnull Target target, final ApiCallback<List<Target>> _callback) throws ApiException {
+    public okhttp3.Call searchTargetsAsync(@javax.annotation.Nonnull Target target, final ApiCallback<List<Target>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2TargetSearchPostValidateBeforeCall(target, _callback);
+        okhttp3.Call localVarCall = searchTargetsValidateBeforeCall(target, _callback);
         Type localVarReturnType = new TypeToken<List<Target>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for v2TargetSetPost
+     * Build call for setTarget
      * @param target  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -251,7 +251,7 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2TargetSetPostCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call setTargetCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -297,18 +297,18 @@ public class TargetsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call v2TargetSetPostValidateBeforeCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setTargetValidateBeforeCall(@javax.annotation.Nonnull Target target, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'target' is set
         if (target == null) {
-            throw new ApiException("Missing the required parameter 'target' when calling v2TargetSetPost(Async)");
+            throw new ApiException("Missing the required parameter 'target' when calling setTarget(Async)");
         }
 
-        return v2TargetSetPostCall(target, _callback);
+        return setTargetCall(target, _callback);
 
     }
 
     /**
-     * 
+     * Create or update a metric target
      * Create or update a Target.  First the endpoint will search for a Target by &#x60;metric_group&#x60;, &#x60;product&#x60;, and &#x60;line&#x60;: - If the target does not exist a new target is created. - If the product or its mapping to the given line does not exist, they will be created. - If a target exists but with different parameters, it will be updated. - If the target exists with all the same parameters nothing is done. 
      * @param target  (required)
      * @return Target
@@ -327,13 +327,13 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public Target v2TargetSetPost(@javax.annotation.Nonnull Target target) throws ApiException {
-        ApiResponse<Target> localVarResp = v2TargetSetPostWithHttpInfo(target);
+    public Target setTarget(@javax.annotation.Nonnull Target target) throws ApiException {
+        ApiResponse<Target> localVarResp = setTargetWithHttpInfo(target);
         return localVarResp.getData();
     }
 
     /**
-     * 
+     * Create or update a metric target
      * Create or update a Target.  First the endpoint will search for a Target by &#x60;metric_group&#x60;, &#x60;product&#x60;, and &#x60;line&#x60;: - If the target does not exist a new target is created. - If the product or its mapping to the given line does not exist, they will be created. - If a target exists but with different parameters, it will be updated. - If the target exists with all the same parameters nothing is done. 
      * @param target  (required)
      * @return ApiResponse&lt;Target&gt;
@@ -352,14 +352,14 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<Target> v2TargetSetPostWithHttpInfo(@javax.annotation.Nonnull Target target) throws ApiException {
-        okhttp3.Call localVarCall = v2TargetSetPostValidateBeforeCall(target, null);
+    public ApiResponse<Target> setTargetWithHttpInfo(@javax.annotation.Nonnull Target target) throws ApiException {
+        okhttp3.Call localVarCall = setTargetValidateBeforeCall(target, null);
         Type localVarReturnType = new TypeToken<Target>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     *  (asynchronously)
+     * Create or update a metric target (asynchronously)
      * Create or update a Target.  First the endpoint will search for a Target by &#x60;metric_group&#x60;, &#x60;product&#x60;, and &#x60;line&#x60;: - If the target does not exist a new target is created. - If the product or its mapping to the given line does not exist, they will be created. - If a target exists but with different parameters, it will be updated. - If the target exists with all the same parameters nothing is done. 
      * @param target  (required)
      * @param _callback The callback to be executed when the API call finishes
@@ -379,9 +379,9 @@ public class TargetsApi {
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call v2TargetSetPostAsync(@javax.annotation.Nonnull Target target, final ApiCallback<Target> _callback) throws ApiException {
+    public okhttp3.Call setTargetAsync(@javax.annotation.Nonnull Target target, final ApiCallback<Target> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = v2TargetSetPostValidateBeforeCall(target, _callback);
+        okhttp3.Call localVarCall = setTargetValidateBeforeCall(target, _callback);
         Type localVarReturnType = new TypeToken<Target>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
