@@ -54,7 +54,7 @@ import oden.JSON;
 /**
  * Optional filter overrides applied to every module. Every field is optional; omitting one means \&quot;no override on that dimension\&quot;. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-08T05:17:44.787119627Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-28T22:53:26.223599085Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class DashboardExecuteFilters {
   public static final String SERIALIZED_NAME_LINES = "lines";
   @SerializedName(SERIALIZED_NAME_LINES)

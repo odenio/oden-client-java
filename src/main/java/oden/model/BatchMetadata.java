@@ -49,7 +49,7 @@ import oden.JSON;
 /**
  * Metadata associated with a batch interval
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-08T05:17:44.787119627Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-28T22:53:26.223599085Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class BatchMetadata {
   /**
    * Gets or Sets metadataType
@@ -103,7 +103,7 @@ public class BatchMetadata {
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   private MetadataTypeEnum metadataType;
 
   public static final String SERIALIZED_NAME_RUN = "run";
@@ -125,7 +125,7 @@ public class BatchMetadata {
    * Get metadataType
    * @return metadataType
    */
-  @javax.annotation.Nullable
+  @javax.annotation.Nonnull
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
@@ -243,7 +243,7 @@ public class BatchMetadata {
     openapiFields = new HashSet<String>(Arrays.asList("metadata_type", "run"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(0);
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
   }
 
   /**
@@ -258,14 +258,19 @@ public class BatchMetadata {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in BatchMetadata is not found in the empty JSON string", BatchMetadata.openapiRequiredFields.toString()));
         }
       }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : BatchMetadata.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
+        }
+      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) && !jsonObj.get("metadata_type").isJsonPrimitive()) {
+      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
-      // validate the optional field `metadata_type`
-      if (jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) {
-        MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
-      }
+      // validate the required field `metadata_type`
+      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
       // validate the optional field `run`
       if (jsonObj.get("run") != null && !jsonObj.get("run").isJsonNull()) {
         Interval.validateJsonElement(jsonObj.get("run"));

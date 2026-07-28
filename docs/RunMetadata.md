@@ -8,7 +8,7 @@ Metadata associated with a run interval
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  [optional] [readonly] |
+|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  [readonly] |
 |**product** | [**Product**](Product.md) |  |  [optional] |
 |**target** | [**Target**](Target.md) |  |  [optional] |
 

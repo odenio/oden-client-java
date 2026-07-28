@@ -8,7 +8,7 @@ Metadata associated with a custom interval type
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  [optional] [readonly] |
+|**metadataType** | [**MetadataTypeEnum**](#MetadataTypeEnum) |  |  [readonly] |
 
 
 
