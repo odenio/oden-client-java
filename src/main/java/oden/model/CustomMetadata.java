@@ -48,7 +48,7 @@ import oden.JSON;
 /**
  * Metadata associated with a custom interval type
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-28T22:53:26.223599085Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T22:48:33.214484013Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class CustomMetadata {
   /**
    * Gets or Sets metadataType
@@ -102,7 +102,7 @@ public class CustomMetadata {
 
   public static final String SERIALIZED_NAME_METADATA_TYPE = "metadata_type";
   @SerializedName(SERIALIZED_NAME_METADATA_TYPE)
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   private MetadataTypeEnum metadataType;
 
   public CustomMetadata() {
@@ -119,7 +119,7 @@ public class CustomMetadata {
    * Get metadataType
    * @return metadataType
    */
-  @javax.annotation.Nonnull
+  @javax.annotation.Nullable
   public MetadataTypeEnum getMetadataType() {
     return metadataType;
   }
@@ -216,7 +216,7 @@ public class CustomMetadata {
     openapiFields = new HashSet<String>(Arrays.asList("metadata_type"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("metadata_type"));
+    openapiRequiredFields = new HashSet<String>(0);
   }
 
   /**
@@ -231,19 +231,14 @@ public class CustomMetadata {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in CustomMetadata is not found in the empty JSON string", CustomMetadata.openapiRequiredFields.toString()));
         }
       }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CustomMetadata.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("metadata_type").isJsonPrimitive()) {
+      if ((jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) && !jsonObj.get("metadata_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `metadata_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("metadata_type").toString()));
       }
-      // validate the required field `metadata_type`
-      MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
+      // validate the optional field `metadata_type`
+      if (jsonObj.get("metadata_type") != null && !jsonObj.get("metadata_type").isJsonNull()) {
+        MetadataTypeEnum.validateJsonElement(jsonObj.get("metadata_type"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

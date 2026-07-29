@@ -52,7 +52,7 @@ import oden.JSON;
 /**
  * Create or update a custom interval type. Omit &#x60;id&#x60; to create (requires &#x60;name&#x60;); include &#x60;id&#x60; to update. On update, &#x60;name&#x60; (if present) is ignored. Use &#x60;null&#x60; for &#x60;tags&#x60; to leave tags unchanged; &#x60;[]&#x60; clears tags. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-28T22:53:26.223599085Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T22:48:33.214484013Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class IntervalTypeSet {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

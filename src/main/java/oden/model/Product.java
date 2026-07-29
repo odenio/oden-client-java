@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * An entity representing a product
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-28T22:53:26.223599085Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-29T22:48:33.214484013Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class Product {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
