@@ -154,8 +154,14 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new oden.model.SearchScrapYieldRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.SetScrapYieldRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.StateCategory.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.StateCategoryDetail.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.StateCategorySearch.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.StateCategorySet.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.StateMetadata.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.StateReason.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.StateReasonDetail.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.StateReasonSearch.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.StateReasonSet.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Target.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Unit.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();

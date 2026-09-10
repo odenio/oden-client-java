@@ -2216,6 +2216,315 @@ paths:
       x-content-type: application/json
       x-accepts:
       - application/json
+  /v2/state_category/search:
+    post:
+      description: |
+        Returns the state categories available to your organization, including
+        Oden's built-in ones. Filter by `id` or `name`; omit both to list all.
+        Built-in categories have no `organization` and cannot be modified.
+
+        `type` summarises how the platform treats time in the category:
+        - `uptime`: producing good product
+        - `scrapping`: running but not producing good product
+        - `planned_downtime`, `unplanned_downtime`: not running
+      operationId: search_state_categories
+      requestBody:
+        content:
+          application/json:
+            examples:
+              All categories:
+                summary: List every category
+                value: {}
+              By name:
+                summary: One category by name
+                value:
+                  name: Unplanned Downtime
+            schema:
+              $ref: "#/components/schemas/StateCategorySearch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/StateCategoryDetail"
+                type: array
+          description: The matching state categories.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+      summary: Search state categories
+      tags:
+      - States
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/state_category/set:
+    post:
+      description: |
+        **Create** (no `id`): `name` and `type` are required. If a category with
+        that `name` already exists for your organization and has the same `type`,
+        it is returned unchanged; a different `type` is a 409.
+
+        **Update** (with `id`): fields you omit keep their current value. Built-in
+        categories (no organization) cannot be updated.
+
+        Requires an organization admin token.
+      operationId: set_state_category
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create:
+                summary: Create an unplanned downtime category
+                value:
+                  name: Unplanned Downtime
+                  type: unplanned_downtime
+              Deactivate:
+                summary: Deactivate a category by id
+                value:
+                  id: 42
+                  active: false
+            schema:
+              $ref: "#/components/schemas/StateCategorySet"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StateCategoryDetail"
+          description: The state category after set.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            The entity already exists in a shape that conflicts with the request, or a concurrent request created it and the conflict did not resolve on retry. The message says which.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+      summary: Create or update a state category
+      tags:
+      - States
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/state_reason/search:
+    post:
+      description: |
+        Returns the state reasons defined on every line in `lines` (required; each
+        by `id`, or by `name` plus `factory`), optionally restricted to one
+        `category` (by `id` or `name`). Each result names its line, so one request
+        can audit a whole fleet. Inactive reasons are included, with
+        `active: false`.
+      operationId: search_state_reasons
+      requestBody:
+        content:
+          application/json:
+            examples:
+              All reasons on a line:
+                summary: Every reason on a line
+                value:
+                  lines:
+                  - id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+              Downtime reasons across two lines:
+                summary: Reasons under one category on several lines
+                value:
+                  lines:
+                  - id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  - id: 5f1e9c0a-2b7d-4c3e-9a1f-7d2b8e4c6a10
+                  category:
+                    name: Unplanned Downtime
+            schema:
+              $ref: "#/components/schemas/StateReasonSearch"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/StateReasonDetail"
+                type: array
+          description: The matching state reasons.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+      summary: Search state reasons on one or more lines
+      tags:
+      - States
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /v2/state_reason/set:
+    post:
+      description: |
+        Ensures the reason `name` exists under `category` on every line in
+        `lines`. Lines that already have it are returned as they are; the rest
+        are created in one transaction. The response has one entry per line, in
+        request order, so calling this again is a no-op.
+
+        `category` may be given by `id` or `name` and must be one of your
+        organization's own categories; Oden's built-in categories are read-only.
+        `active` defaults to true and also re-activates an existing inactive
+        reason (or deactivates with `false`).
+
+        Requires an organization admin token.
+      operationId: set_state_reasons
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create on two lines:
+                summary: Ensure a reason exists on two lines
+                value:
+                  lines:
+                  - id: 2fc8b5e5-fb88-48a7-9c35-4a763206608c
+                  - id: 5f1e9c0a-2b7d-4c3e-9a1f-7d2b8e4c6a10
+                  category:
+                    name: Unplanned Downtime
+                  name: "U108: Equipment - Work Order"
+            schema:
+              $ref: "#/components/schemas/StateReasonSet"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/StateReasonDetail"
+                type: array
+          description: The state reason on each requested line.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_400_response"
+          description: An error occurred regarding one of the input parameters
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: User has provided either no credentials or invalid credentials
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            User has provided valid credentials but is not authorized to access the entity
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: Entity not found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenericError"
+          description: |
+            The entity already exists in a shape that conflicts with the request, or a concurrent request created it and the conflict did not resolve on retry. The message says which.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/search_lines_500_response"
+          description: |
+            An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.
+      summary: Create a state reason on one or more lines
+      tags:
+      - States
+      x-content-type: application/json
+      x-accepts:
+      - application/json
   /v2/scrap_yield/search:
     post:
       description: |
@@ -3396,6 +3705,13 @@ components:
             $ref: "#/components/schemas/search_lines_409_response"
       description: |
         A {match: "unique"} was requested, but multiple entities matched the search parameters.
+    ConflictError:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GenericError"
+      description: |
+        The entity already exists in a shape that conflicts with the request, or a concurrent request created it and the conflict did not resolve on retry. The message says which.
     InternalError:
       content:
         application/json:
@@ -3580,6 +3896,9 @@ components:
     StateCategory:
       description: "An entity representing a state category. During search, ID will\
         \ take precedence over name."
+      example:
+        id: 6
+        name: name
       properties:
         id:
           type: integer
@@ -3732,6 +4051,188 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    StateCategoryType:
+      description: |
+        How the platform treats time spent in a state category. Maps onto the
+        category's utilization and producing weights.
+      enum:
+      - uptime
+      - scrapping
+      - planned_downtime
+      - unplanned_downtime
+      type: string
+    StateCategorySearch:
+      description: Filters for a state category search. Omit both to list all categories.
+      example:
+        id: 0
+        name: name
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+      type: object
+    StateCategoryDetail:
+      description: A state category with its configuration.
+      example:
+        id: 0
+        name: name
+        type: uptime
+        active: true
+        builtin: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/StateCategoryType"
+        active:
+          type: boolean
+        builtin:
+          description: "True for Oden's global categories, which have no organization\
+            \ and cannot be modified."
+          type: boolean
+      type: object
+    StateCategorySet:
+      description: |
+        Create (omit `id`; `name` and `type` required) or update (with `id`;
+        omitted fields are preserved) a state category.
+      example:
+        id: 0
+        name: name
+        type: uptime
+        active: true
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/StateCategoryType"
+        active:
+          default: true
+          type: boolean
+      type: object
+    StateReasonSearch:
+      description: Filters for a state reason search. `lines` is required and needs
+        at least one entry.
+      example:
+        lines:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          secondary_name: secondary_name
+          factory:
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            secondary_name: secondary_name
+            timezone: timezone
+            match: unique
+          match: null
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          secondary_name: secondary_name
+          factory:
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            secondary_name: secondary_name
+            timezone: timezone
+            match: unique
+          match: null
+        category:
+          id: 6
+          name: name
+      properties:
+        lines:
+          items:
+            $ref: "#/components/schemas/Line"
+          minItems: 1
+          type: array
+        category:
+          $ref: "#/components/schemas/StateCategory"
+      required:
+      - lines
+      type: object
+    StateReasonDetail:
+      description: A state reason as defined on one line.
+      example:
+        id: 0
+        name: name
+        active: true
+        category:
+          id: 6
+          name: name
+        line:
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          secondary_name: secondary_name
+          factory:
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            secondary_name: secondary_name
+            timezone: timezone
+            match: unique
+          match: null
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        active:
+          type: boolean
+        category:
+          $ref: "#/components/schemas/StateCategory"
+        line:
+          $ref: "#/components/schemas/Line"
+      type: object
+    StateReasonSet:
+      description: Ensure a state reason exists under `category` on every line in
+        `lines`.
+      example:
+        lines:
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          secondary_name: secondary_name
+          factory:
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            secondary_name: secondary_name
+            timezone: timezone
+            match: unique
+          match: null
+        - id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          secondary_name: secondary_name
+          factory:
+            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            secondary_name: secondary_name
+            timezone: timezone
+            match: unique
+          match: null
+        category:
+          id: 6
+          name: name
+        name: name
+        active: true
+      properties:
+        lines:
+          items:
+            $ref: "#/components/schemas/Line"
+          minItems: 1
+          type: array
+        category:
+          $ref: "#/components/schemas/StateCategory"
+        name:
+          type: string
+        active:
+          default: true
+          type: boolean
+      required:
+      - category
+      - lines
+      - name
       type: object
     IntervalBulkCreate:
       description: A set of intervals to create

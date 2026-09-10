@@ -2,7 +2,7 @@
 
 Oden API
 - API version: 2.0.0
-  - Build date: 2026-07-29T22:48:33.214484013Z[Etc/UTC]
+  - Build date: 2026-09-10T01:08:49.852387129Z[Etc/UTC]
   - Generator version: 7.23.0
 
 The Oden Private Partner API exposes RESTful API endpoints for clients to get, create and update data on the Oden Platform.
@@ -250,6 +250,10 @@ Class | Method | HTTP request | Description
 *ScrapYieldDataApi* | [**deleteScrapYield**](docs/ScrapYieldDataApi.md#deleteScrapYield) | **POST** /v2/scrap_yield/delete | Delete a scrap/yield record
 *ScrapYieldDataApi* | [**searchScrapYield**](docs/ScrapYieldDataApi.md#searchScrapYield) | **POST** /v2/scrap_yield/search | Search scrap/yield records
 *ScrapYieldDataApi* | [**setScrapYield**](docs/ScrapYieldDataApi.md#setScrapYield) | **POST** /v2/scrap_yield/set | Create or update a scrap/yield record
+*StatesApi* | [**searchStateCategories**](docs/StatesApi.md#searchStateCategories) | **POST** /v2/state_category/search | Search state categories
+*StatesApi* | [**searchStateReasons**](docs/StatesApi.md#searchStateReasons) | **POST** /v2/state_reason/search | Search state reasons on one or more lines
+*StatesApi* | [**setStateCategory**](docs/StatesApi.md#setStateCategory) | **POST** /v2/state_category/set | Create or update a state category
+*StatesApi* | [**setStateReasons**](docs/StatesApi.md#setStateReasons) | **POST** /v2/state_reason/set | Create a state reason on one or more lines
 *TargetsApi* | [**searchTargets**](docs/TargetsApi.md#searchTargets) | **POST** /v2/target/search | Search metric targets
 *TargetsApi* | [**setTarget**](docs/TargetsApi.md#setTarget) | **POST** /v2/target/set | Create or update a metric target
 
@@ -302,8 +306,15 @@ Class | Method | HTTP request | Description
  - [SearchScrapYieldRequest](docs/SearchScrapYieldRequest.md)
  - [SetScrapYieldRequest](docs/SetScrapYieldRequest.md)
  - [StateCategory](docs/StateCategory.md)
+ - [StateCategoryDetail](docs/StateCategoryDetail.md)
+ - [StateCategorySearch](docs/StateCategorySearch.md)
+ - [StateCategorySet](docs/StateCategorySet.md)
+ - [StateCategoryType](docs/StateCategoryType.md)
  - [StateMetadata](docs/StateMetadata.md)
  - [StateReason](docs/StateReason.md)
+ - [StateReasonDetail](docs/StateReasonDetail.md)
+ - [StateReasonSearch](docs/StateReasonSearch.md)
+ - [StateReasonSet](docs/StateReasonSet.md)
  - [Target](docs/Target.md)
  - [Unit](docs/Unit.md)
 
