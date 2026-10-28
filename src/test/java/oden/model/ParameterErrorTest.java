@@ -20,39 +20,45 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import oden.model.Interval;
-import oden.model.ScrapYieldData;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
- * Model tests for V2ScrapYieldSetPostRequest
+ * Model tests for ParameterError
  */
-public class V2ScrapYieldSetPostRequestTest {
-    private final V2ScrapYieldSetPostRequest model = new V2ScrapYieldSetPostRequest();
+public class ParameterErrorTest {
+    private final ParameterError model = new ParameterError();
 
     /**
-     * Model tests for V2ScrapYieldSetPostRequest
+     * Model tests for ParameterError
      */
     @Test
-    public void testV2ScrapYieldSetPostRequest() {
-        // TODO: test V2ScrapYieldSetPostRequest
+    public void testParameterError() {
+        // TODO: test ParameterError
     }
 
     /**
-     * Test the property 'data'
+     * Test the property 'error'
      */
     @Test
-    public void dataTest() {
-        // TODO: test data
+    public void errorTest() {
+        // TODO: test error
     }
 
     /**
-     * Test the property 'interval'
+     * Test the property 'name'
      */
     @Test
-    public void intervalTest() {
-        // TODO: test interval
+    public void nameTest() {
+        // TODO: test name
+    }
+
+    /**
+     * Test the property 'retryable'
+     */
+    @Test
+    public void retryableTest() {
+        // TODO: test retryable
     }
 
 }

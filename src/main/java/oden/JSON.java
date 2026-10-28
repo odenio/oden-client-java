@@ -139,6 +139,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new oden.model.MaintenanceWorkOrder.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.MetricGroup.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.OQLQuery.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new oden.model.ParameterError.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.Product.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.ProductAttribute.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new oden.model.ProductMapping.CustomTypeAdapterFactory());

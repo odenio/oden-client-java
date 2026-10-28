@@ -48,7 +48,7 @@ import oden.JSON;
 /**
  * An entity representing a state reason. During search, ID will take precedence over name.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-10T01:08:49.852387129Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-28T19:38:57.436439102Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class StateReason {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

@@ -16,9 +16,9 @@ package oden.api;
 import oden.ApiException;
 import oden.model.GenericError;
 import oden.model.OQLQuery;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -36,15 +36,17 @@ public class OqlApiTest {
     private final OqlApi api = new OqlApi();
 
     /**
+     * Run an OQL query
+     *
      * Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2OqlQueryPostTest() throws ApiException {
+    public void runOqlQueryTest() throws ApiException {
         OQLQuery oqLQuery = null;
         String format = null;
-        api.v2OqlQueryPost(oqLQuery, format);
+        api.runOqlQuery(oqLQuery, format);
         // TODO: test validations
     }
 

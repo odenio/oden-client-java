@@ -14,13 +14,13 @@
 package oden.api;
 
 import oden.ApiException;
+import oden.model.BulkDeleteQualityTestsRequest;
 import oden.model.GenericError;
 import oden.model.QualitySchema;
 import oden.model.QualityTest;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
-import oden.model.V2QualityTestsDeletePostRequest;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -38,62 +38,72 @@ public class QualityTestApiTest {
     private final QualityTestApi api = new QualityTestApi();
 
     /**
-     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
+     * Delete multiple quality tests
      *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2QualitySchemaSearchPostTest() throws ApiException {
-        QualitySchema qualitySchema = null;
-        api.v2QualitySchemaSearchPost(qualitySchema);
-        // TODO: test validations
-    }
-
-    /**
-     * Searches for uniqueQuality Test by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;)*  *This only work if there is a single quality test record for the interval. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2QualityTestDeletePostTest() throws ApiException {
-        QualityTest qualityTest = null;
-        api.v2QualityTestDeletePost(qualityTest);
-        // TODO: test validations
-    }
-
-    /**
-     * Searches for Quality Test[s] by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;) 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2QualityTestSearchPostTest() throws ApiException {
-        QualityTest qualityTest = null;
-        api.v2QualityTestSearchPost(qualityTest);
-        // TODO: test validations
-    }
-
-    /**
-     * Create or update a Quality Test record: - To update &#x60;id&#x60; must be supplied. Only the supplied fields will be updated, the rest will remain unchanged. - If &#x60;id&#x60; is not supplied, a new &#x60;quality_test_record&#x60; will be created. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2QualityTestSetPostTest() throws ApiException {
-        QualityTest qualityTest = null;
-        api.v2QualityTestSetPost(qualityTest);
-        // TODO: test validations
-    }
-
-    /**
      * Bulk deletes quality tests, either: - All quality tests on a given &#x60;line&#x60; whose &#x60;timsetamp&#x60; is between &#x60;start_time&#x60; and &#x60;end_time&#x60; OR - All quality tests whose &#x60;id&#x60; is supplied  It will do one or the other, with a bias for &#x60;id&#x60;&#39;s if both are supplied. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2QualityTestsDeletePostTest() throws ApiException {
-        V2QualityTestsDeletePostRequest v2QualityTestsDeletePostRequest = null;
-        api.v2QualityTestsDeletePost(v2QualityTestsDeletePostRequest);
+    public void bulkDeleteQualityTestsTest() throws ApiException {
+        BulkDeleteQualityTestsRequest bulkDeleteQualityTestsRequest = null;
+        api.bulkDeleteQualityTests(bulkDeleteQualityTestsRequest);
+        // TODO: test validations
+    }
+
+    /**
+     * Delete a quality test
+     *
+     * Searches for uniqueQuality Test by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;)*  *This only work if there is a single quality test record for the interval. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteQualityTestTest() throws ApiException {
+        QualityTest qualityTest = null;
+        api.deleteQualityTest(qualityTest);
+        // TODO: test validations
+    }
+
+    /**
+     * Search quality schemas for a factory
+     *
+     * Searches for Quality Schema[s] by:  - &#x60;factory&#x60; 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchQualitySchemasTest() throws ApiException {
+        QualitySchema qualitySchema = null;
+        api.searchQualitySchemas(qualitySchema);
+        // TODO: test validations
+    }
+
+    /**
+     * Search quality tests
+     *
+     * Searches for Quality Test[s] by:  - &#x60;id&#x60;  OR  - &#x60;interval&#x60; (of type &#x60;RUN&#x60; or &#x60;BATCH&#x60;) 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchQualityTestsTest() throws ApiException {
+        QualityTest qualityTest = null;
+        api.searchQualityTests(qualityTest);
+        // TODO: test validations
+    }
+
+    /**
+     * Create or update a quality test result
+     *
+     * Create or update a Quality Test record: - To update &#x60;id&#x60; must be supplied. Only the supplied fields will be updated, the rest will remain unchanged. - If &#x60;id&#x60; is not supplied, a new &#x60;quality_test_record&#x60; will be created. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void setQualityTestTest() throws ApiException {
+        QualityTest qualityTest = null;
+        api.setQualityTest(qualityTest);
         // TODO: test validations
     }
 

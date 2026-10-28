@@ -90,8 +90,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call searchProductAttributesCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
@@ -164,8 +163,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public List<ProductAttribute> searchProductAttributes(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
@@ -187,8 +185,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<List<ProductAttribute>> searchProductAttributesWithHttpInfo(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
@@ -212,8 +209,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call searchProductAttributesAsync(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback<List<ProductAttribute>> _callback) throws ApiException {
@@ -237,8 +233,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call setProductAttributeCall(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback _callback) throws ApiException {
@@ -311,8 +306,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public List<ProductAttribute> setProductAttribute(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
@@ -334,8 +328,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<List<ProductAttribute>> setProductAttributeWithHttpInfo(@javax.annotation.Nonnull ProductAttribute productAttribute) throws ApiException {
@@ -359,8 +352,7 @@ public class ProductAttributesApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call setProductAttributeAsync(@javax.annotation.Nonnull ProductAttribute productAttribute, final ApiCallback<List<ProductAttribute>> _callback) throws ApiException {

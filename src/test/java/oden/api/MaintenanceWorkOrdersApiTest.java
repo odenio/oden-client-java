@@ -16,10 +16,10 @@ package oden.api;
 import oden.ApiException;
 import oden.model.GenericError;
 import oden.model.MaintenanceWorkOrder;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
-import oden.model.V2MaintenanceWorkOrderSearchPostRequest;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
+import oden.model.SearchMaintenanceWorkOrdersRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -37,38 +37,44 @@ public class MaintenanceWorkOrdersApiTest {
     private final MaintenanceWorkOrdersApi api = new MaintenanceWorkOrdersApi();
 
     /**
+     * Delete a maintenance work order
+     *
      * Delete a Maintenance Work Order by unique identifier: - &#x60;id&#x60; OR &#x60;external_id&#x60; - &#x60;match: unique&#x60; or omit (only unique is supported) 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2MaintenanceWorkOrderDeletePostTest() throws ApiException {
+    public void deleteMaintenanceWorkOrderTest() throws ApiException {
         MaintenanceWorkOrder maintenanceWorkOrder = null;
-        List<MaintenanceWorkOrder> response = api.v2MaintenanceWorkOrderDeletePost(maintenanceWorkOrder);
+        List<MaintenanceWorkOrder> response = api.deleteMaintenanceWorkOrder(maintenanceWorkOrder);
         // TODO: test validations
     }
 
     /**
+     * Search maintenance work orders
+     *
      * Search for Maintenance Work Orders by: - &#x60;id&#x60; - &#x60;external_id&#x60; - &#x60;line_id&#x60; with required &#x60;start_time&#x60; and &#x60;end_time&#x60; filters 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2MaintenanceWorkOrderSearchPostTest() throws ApiException {
-        V2MaintenanceWorkOrderSearchPostRequest v2MaintenanceWorkOrderSearchPostRequest = null;
-        List<MaintenanceWorkOrder> response = api.v2MaintenanceWorkOrderSearchPost(v2MaintenanceWorkOrderSearchPostRequest);
+    public void searchMaintenanceWorkOrdersTest() throws ApiException {
+        SearchMaintenanceWorkOrdersRequest searchMaintenanceWorkOrdersRequest = null;
+        List<MaintenanceWorkOrder> response = api.searchMaintenanceWorkOrders(searchMaintenanceWorkOrdersRequest);
         // TODO: test validations
     }
 
     /**
+     * Create or update a maintenance work order
+     *
      * Create or update a Maintenance Work Order.  To **create** a new Maintenance Work Order: - Include &#x60;name&#x60; and &#x60;line&#x60;, &#x60;external_id&#x60;, &#x60;started_at&#x60; (required) - Omit &#x60;id&#x60; field - include &#x60;completed_at&#x60;, &#x60;description&#x60;, &#x60;metadata&#x60;  To **update** an existing Maintenance Work Order: - Include the &#x60;id&#x60; of the existing work order - Include any fields to update  NOTE: Any fields not included in an update request will be left unchanged. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2MaintenanceWorkOrderSetPostTest() throws ApiException {
+    public void setMaintenanceWorkOrderTest() throws ApiException {
         MaintenanceWorkOrder maintenanceWorkOrder = null;
-        MaintenanceWorkOrder response = api.v2MaintenanceWorkOrderSetPost(maintenanceWorkOrder);
+        MaintenanceWorkOrder response = api.setMaintenanceWorkOrder(maintenanceWorkOrder);
         // TODO: test validations
     }
 

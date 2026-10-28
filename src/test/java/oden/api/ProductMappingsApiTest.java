@@ -16,9 +16,9 @@ package oden.api;
 import oden.ApiException;
 import oden.model.GenericError;
 import oden.model.ProductMapping;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -36,26 +36,30 @@ public class ProductMappingsApiTest {
     private final ProductMappingsApi api = new ProductMappingsApi();
 
     /**
+     * Search product-to-line mappings
+     *
      * Searches for Product Mappings.  May be used to confirm a Product Mapping exists.  Much like &#x60;product/search&#x60;, may be used to get &#x60;name&#x60;s of line or product from &#x60;id&#x60;s, or &#x60;id&#x60;s from &#x60;name&#x60;s. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ProductMappingSearchPostTest() throws ApiException {
+    public void searchProductMappingsTest() throws ApiException {
         ProductMapping productMapping = null;
-        List<ProductMapping> response = api.v2ProductMappingSearchPost(productMapping);
+        List<ProductMapping> response = api.searchProductMappings(productMapping);
         // TODO: test validations
     }
 
     /**
+     * Map a product to a line
+     *
      * Map a Product to a Line - implying this Line can produce, or is producing this Product.  If the supplied Product doesn&#39;t exist, it will be created. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ProductMappingSetPostTest() throws ApiException {
+    public void setProductMappingTest() throws ApiException {
         ProductMapping productMapping = null;
-        api.v2ProductMappingSetPost(productMapping);
+        api.setProductMapping(productMapping);
         // TODO: test validations
     }
 

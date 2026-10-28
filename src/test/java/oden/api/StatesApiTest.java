@@ -16,7 +16,6 @@ package oden.api;
 import oden.ApiException;
 import oden.model.GenericError;
 import oden.model.SearchLines400Response;
-import oden.model.SearchLines409Response;
 import oden.model.SearchLines500Response;
 import oden.model.StateCategoryDetail;
 import oden.model.StateCategorySearch;

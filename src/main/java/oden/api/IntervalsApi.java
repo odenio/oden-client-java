@@ -94,13 +94,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list containing any intervals found but not deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call bulkDeleteIntervalsCall(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback _callback) throws ApiException {
@@ -170,13 +169,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list containing any intervals found but not deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public BulkDeleteIntervals200Response bulkDeleteIntervals(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete) throws ApiException {
@@ -195,13 +193,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list containing any intervals found but not deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<BulkDeleteIntervals200Response> bulkDeleteIntervalsWithHttpInfo(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete) throws ApiException {
@@ -222,13 +219,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list containing any intervals found but not deleted. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call bulkDeleteIntervalsAsync(@javax.annotation.Nonnull IntervalBulkDelete intervalBulkDelete, final ApiCallback<BulkDeleteIntervals200Response> _callback) throws ApiException {
@@ -249,13 +245,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call bulkSetIntervalsCall(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback _callback) throws ApiException {
@@ -325,13 +320,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public List<String> bulkSetIntervals(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
@@ -350,13 +344,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<List<String>> bulkSetIntervalsWithHttpInfo(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate) throws ApiException {
@@ -377,13 +370,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> A list of created interval IDs. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call bulkSetIntervalsAsync(@javax.annotation.Nonnull IntervalBulkCreate intervalBulkCreate, final ApiCallback<List<String>> _callback) throws ApiException {
@@ -404,12 +396,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Response containing successfully updated intervals and any failures that occurred. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call bulkUpdateIntervalsCall(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback _callback) throws ApiException {
@@ -479,12 +470,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Response containing successfully updated intervals and any failures that occurred. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public BulkUpdateIntervals200Response bulkUpdateIntervals(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate) throws ApiException {
@@ -503,12 +493,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Response containing successfully updated intervals and any failures that occurred. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<BulkUpdateIntervals200Response> bulkUpdateIntervalsWithHttpInfo(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate) throws ApiException {
@@ -529,12 +518,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Response containing successfully updated intervals and any failures that occurred. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call bulkUpdateIntervalsAsync(@javax.annotation.Nonnull IntervalBulkUpdate intervalBulkUpdate, final ApiCallback<BulkUpdateIntervals200Response> _callback) throws ApiException {
@@ -559,8 +547,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -635,8 +622,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -660,8 +646,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -687,8 +672,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -710,12 +694,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deleteIntervalTypeCall(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback _callback) throws ApiException {
@@ -785,12 +768,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public IntervalType deleteIntervalType(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
@@ -809,12 +791,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<IntervalType> deleteIntervalTypeWithHttpInfo(@javax.annotation.Nonnull IntervalType intervalType) throws ApiException {
@@ -835,12 +816,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The deleted interval type. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call deleteIntervalTypeAsync(@javax.annotation.Nonnull IntervalType intervalType, final ApiCallback<IntervalType> _callback) throws ApiException {
@@ -864,8 +844,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -939,8 +918,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -963,8 +941,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -989,8 +966,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -1016,8 +992,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -1092,8 +1067,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -1117,8 +1091,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -1144,8 +1117,7 @@ public class IntervalsApi {
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
      </table>
      */
@@ -1170,8 +1142,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call setIntervalCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
@@ -1244,8 +1215,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public List<Interval> setInterval(@javax.annotation.Nonnull Interval interval) throws ApiException {
@@ -1267,8 +1237,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<List<Interval>> setIntervalWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
@@ -1292,8 +1261,7 @@ public class IntervalsApi {
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call setIntervalAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {
@@ -1314,12 +1282,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call setIntervalTypeCall(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet, final ApiCallback _callback) throws ApiException {
@@ -1389,12 +1356,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public IntervalType setIntervalType(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet) throws ApiException {
@@ -1413,12 +1379,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<IntervalType> setIntervalTypeWithHttpInfo(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet) throws ApiException {
@@ -1439,12 +1404,11 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> The interval type after set. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call setIntervalTypeAsync(@javax.annotation.Nonnull IntervalTypeSet intervalTypeSet, final ApiCallback<IntervalType> _callback) throws ApiException {
@@ -1465,13 +1429,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call updateIntervalCall(@javax.annotation.Nonnull Interval interval, final ApiCallback _callback) throws ApiException {
@@ -1541,13 +1504,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public List<Interval> updateInterval(@javax.annotation.Nonnull Interval interval) throws ApiException {
@@ -1566,13 +1528,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<List<Interval>> updateIntervalWithHttpInfo(@javax.annotation.Nonnull Interval interval) throws ApiException {
@@ -1593,13 +1554,12 @@ public class IntervalsApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Updated interval. </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call updateIntervalAsync(@javax.annotation.Nonnull Interval interval, final ApiCallback<List<Interval>> _callback) throws ApiException {

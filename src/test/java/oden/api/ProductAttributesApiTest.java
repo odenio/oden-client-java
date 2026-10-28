@@ -16,9 +16,9 @@ package oden.api;
 import oden.ApiException;
 import oden.model.GenericError;
 import oden.model.ProductAttribute;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -36,26 +36,30 @@ public class ProductAttributesApiTest {
     private final ProductAttributesApi api = new ProductAttributesApi();
 
     /**
+     * Search product attributes
+     *
      * Searches for Product Attributes  Product attributes may be searched by ID, product, or, display_name - in that order.  If an ID is supplied, it will be used to search for a Product Attribute, and display_name, product will be ignored.  If a product is supplied (and no ID), it will be used to search for a Product Attribute, and display_name will be ignored. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ProductAttributeSearchPostTest() throws ApiException {
+    public void searchProductAttributesTest() throws ApiException {
         ProductAttribute productAttribute = null;
-        List<ProductAttribute> response = api.v2ProductAttributeSearchPost(productAttribute);
+        List<ProductAttribute> response = api.searchProductAttributes(productAttribute);
         // TODO: test validations
     }
 
     /**
+     * Create or update a product attribute
+     *
      * Set a Product Attribute for a Product.  If the supplied Product Attribute doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value doesn&#39;t exist, it will be created.  If the supplied Product Attribute Value is already set for the Product, it will be updated.  If the supplied Product Attribute Value is not set for the Product, it will be added.  Supplied Product must exist already. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ProductAttributeSetPostTest() throws ApiException {
+    public void setProductAttributeTest() throws ApiException {
         ProductAttribute productAttribute = null;
-        List<ProductAttribute> response = api.v2ProductAttributeSetPost(productAttribute);
+        List<ProductAttribute> response = api.setProductAttribute(productAttribute);
         // TODO: test validations
     }
 

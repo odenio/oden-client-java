@@ -16,9 +16,9 @@ package oden.api;
 import oden.ApiException;
 import oden.model.GenericError;
 import oden.model.Product;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -36,38 +36,44 @@ public class ProductsApiTest {
     private final ProductsApi api = new ProductsApi();
 
     /**
+     * Delete a product
+     *
      * Delete a Product by unique identifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  A deleted Product will not show up in Product searches or dropdowns, but associated Intervals will still exist. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ProductDeletePostTest() throws ApiException {
+    public void deleteProductTest() throws ApiException {
         Product product = null;
-        api.v2ProductDeletePost(product);
+        api.deleteProduct(product);
         // TODO: test validations
     }
 
     /**
+     * Search products
+     *
      * Search for specific Product: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  May be used to confirm a Product exists or to get a Product &#x60;id&#x60; if &#x60;name&#x60; is known, or &#x60;name&#x60; if &#x60;id&#x60; is known. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ProductSearchPostTest() throws ApiException {
+    public void searchProductsTest() throws ApiException {
         Product product = null;
-        List<Product> response = api.v2ProductSearchPost(product);
+        List<Product> response = api.searchProducts(product);
         // TODO: test validations
     }
 
     /**
+     * Create or update a product
+     *
      * To **create** a new Product, include &#x60;name&#x60;, and omit &#x60;id&#x60; field.  To **update** an existing Product, include the &#x60;id&#x60; of the existing product the updated &#x60;name&#x60;. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ProductSetPostTest() throws ApiException {
+    public void setProductTest() throws ApiException {
         Product product = null;
-        api.v2ProductSetPost(product);
+        api.setProduct(product);
         // TODO: test validations
     }
 

@@ -88,14 +88,13 @@ public class OqlApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call runOqlQueryCall(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback _callback) throws ApiException {
@@ -169,14 +168,13 @@ public class OqlApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public void runOqlQuery(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format) throws ApiException {
@@ -195,14 +193,13 @@ public class OqlApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public ApiResponse<Void> runOqlQueryWithHttpInfo(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format) throws ApiException {
@@ -223,14 +220,13 @@ public class OqlApi {
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Successful response </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> An error occurred regarding one of the input parameters </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  </td><td>  -  </td></tr>
         <tr><td> 401 </td><td> User has provided either no credentials or invalid credentials </td><td>  -  </td></tr>
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
-        <tr><td> 501 </td><td> Endpoint is not yet implemented </td><td>  -  </td></tr>
      </table>
      */
     public okhttp3.Call runOqlQueryAsync(@javax.annotation.Nonnull OQLQuery oqLQuery, @javax.annotation.Nullable String format, final ApiCallback<Void> _callback) throws ApiException {

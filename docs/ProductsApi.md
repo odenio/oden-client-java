@@ -79,8 +79,7 @@ null (empty response body)
 | **409** | A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  |  -  |
 | **401** | User has provided either no credentials or invalid credentials |  -  |
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
-| **501** | Endpoint is not yet implemented |  -  |
-| **400** | An error occurred regarding one of the input parameters |  -  |
+| **400** | The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  |  -  |
 | **404** | Entity not found |  -  |
 
 <a id="searchProducts"></a>
@@ -155,8 +154,7 @@ public class Example {
 | **401** | User has provided either no credentials or invalid credentials |  -  |
 | **403** | User has provided valid credentials but is not authorized to access the entity  |  -  |
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
-| **501** | Endpoint is not yet implemented |  -  |
-| **400** | An error occurred regarding one of the input parameters |  -  |
+| **400** | The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  |  -  |
 
 <a id="setProduct"></a>
 # **setProduct**
@@ -228,6 +226,5 @@ null (empty response body)
 | **409** | A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  |  -  |
 | **401** | User has provided either no credentials or invalid credentials |  -  |
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
-| **501** | Endpoint is not yet implemented |  -  |
-| **400** | An error occurred regarding one of the input parameters |  -  |
+| **400** | The request is malformed. Either one of the input parameters is invalid (ParameterError body), or this endpoint does not support the combination of inputs supplied (GenericError body, error message prefixed \&quot;Unimplemented:\&quot;).  |  -  |
 

@@ -16,9 +16,9 @@ package oden.api;
 import oden.ApiException;
 import oden.model.GenericError;
 import oden.model.MetricGroup;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -36,14 +36,16 @@ public class MetricGroupsApiTest {
     private final MetricGroupsApi api = new MetricGroupsApi();
 
     /**
+     * Search metric groups
+     *
      * Search for a specific Metric Group:  - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all Metric Groups: - &#x60;match: all&#x60; 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2MetricGroupSearchPostTest() throws ApiException {
+    public void searchMetricGroupsTest() throws ApiException {
         MetricGroup metricGroup = null;
-        List<MetricGroup> response = api.v2MetricGroupSearchPost(metricGroup);
+        List<MetricGroup> response = api.searchMetricGroups(metricGroup);
         // TODO: test validations
     }
 

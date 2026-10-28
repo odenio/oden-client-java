@@ -21,244 +21,247 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import oden.model.GenericError;
+import oden.model.ParameterError;
+
+
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.annotations.JsonAdapter;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 import oden.JSON;
 
-/**
- * SearchLines400Response
- */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-10T01:08:49.852387129Z[Etc/UTC]", comments = "Generator version: 7.23.0")
-public class SearchLines400Response {
-  public static final String SERIALIZED_NAME_ERROR = "error";
-  @SerializedName(SERIALIZED_NAME_ERROR)
-  @javax.annotation.Nonnull
-  private String error;
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-28T19:38:57.436439102Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+public class SearchLines400Response extends AbstractOpenApiSchema {
+    private static final Logger log = Logger.getLogger(SearchLines400Response.class.getName());
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  @javax.annotation.Nonnull
-  private String name;
+    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+        @SuppressWarnings("unchecked")
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+            if (!SearchLines400Response.class.isAssignableFrom(type.getRawType())) {
+                return null; // this class only serializes 'SearchLines400Response' and its subtypes
+            }
+            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
+            final TypeAdapter<ParameterError> adapterParameterError = gson.getDelegateAdapter(this, TypeToken.get(ParameterError.class));
+            final TypeAdapter<GenericError> adapterGenericError = gson.getDelegateAdapter(this, TypeToken.get(GenericError.class));
 
-  public static final String SERIALIZED_NAME_RETRYABLE = "retryable";
-  @SerializedName(SERIALIZED_NAME_RETRYABLE)
-  @javax.annotation.Nonnull
-  private Boolean retryable;
+            return (TypeAdapter<T>) new TypeAdapter<SearchLines400Response>() {
+                @Override
+                public void write(JsonWriter out, SearchLines400Response value) throws IOException {
+                    if (value == null || value.getActualInstance() == null) {
+                        elementAdapter.write(out, null);
+                        return;
+                    }
 
-  public SearchLines400Response() {
-  }
+                    // check if the actual instance is of the type `ParameterError`
+                    if (value.getActualInstance() instanceof ParameterError) {
+                        JsonElement element = adapterParameterError.toJsonTree((ParameterError)value.getActualInstance());
+                        elementAdapter.write(out, element);
+                        return;
+                    }
+                    // check if the actual instance is of the type `GenericError`
+                    if (value.getActualInstance() instanceof GenericError) {
+                        JsonElement element = adapterGenericError.toJsonTree((GenericError)value.getActualInstance());
+                        elementAdapter.write(out, element);
+                        return;
+                    }
+                    throw new IOException("Failed to serialize as the type doesn't match anyOf schemas: GenericError, ParameterError");
+                }
 
-  public SearchLines400Response error(@javax.annotation.Nonnull String error) {
-    this.error = error;
-    return this;
-  }
+                @Override
+                public SearchLines400Response read(JsonReader in) throws IOException {
+                    Object deserialized = null;
+                    JsonElement jsonElement = elementAdapter.read(in);
 
-  /**
-   * Get error
-   * @return error
-   */
-  @javax.annotation.Nonnull
-  public String getError() {
-    return error;
-  }
+                    ArrayList<String> errorMessages = new ArrayList<>();
+                    TypeAdapter actualAdapter = elementAdapter;
 
-  public void setError(@javax.annotation.Nonnull String error) {
-    this.error = error;
-  }
+                    // deserialize ParameterError
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        ParameterError.validateJsonElement(jsonElement);
+                        actualAdapter = adapterParameterError;
+                        SearchLines400Response ret = new SearchLines400Response();
+                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
+                        return ret;
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for ParameterError failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'ParameterError'", e);
+                    }
+                    // deserialize GenericError
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        GenericError.validateJsonElement(jsonElement);
+                        actualAdapter = adapterGenericError;
+                        SearchLines400Response ret = new SearchLines400Response();
+                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
+                        return ret;
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for GenericError failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'GenericError'", e);
+                    }
 
-
-  public SearchLines400Response name(@javax.annotation.Nonnull String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Get name
-   * @return name
-   */
-  @javax.annotation.Nonnull
-  public String getName() {
-    return name;
-  }
-
-  public void setName(@javax.annotation.Nonnull String name) {
-    this.name = name;
-  }
-
-
-  public SearchLines400Response retryable(@javax.annotation.Nonnull Boolean retryable) {
-    this.retryable = retryable;
-    return this;
-  }
-
-  /**
-   * Get retryable
-   * @return retryable
-   */
-  @javax.annotation.Nonnull
-  public Boolean getRetryable() {
-    return retryable;
-  }
-
-  public void setRetryable(@javax.annotation.Nonnull Boolean retryable) {
-    this.retryable = retryable;
-  }
-
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+                    throw new IOException(String.format(java.util.Locale.ROOT, "Failed deserialization for SearchLines400Response: no class matches result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
+                }
+            }.nullSafe();
+        }
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    // store a list of schema names defined in anyOf
+    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
+
+    public SearchLines400Response() {
+        super("anyOf", Boolean.FALSE);
     }
-    SearchLines400Response searchLines400Response = (SearchLines400Response) o;
-    return Objects.equals(this.error, searchLines400Response.error) &&
-        Objects.equals(this.name, searchLines400Response.name) &&
-        Objects.equals(this.retryable, searchLines400Response.retryable);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(error, name, retryable);
-  }
+    public SearchLines400Response(Object o) {
+        super("anyOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class SearchLines400Response {\n");
-    sb.append("    error: ").append(toIndentedString(error)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    retryable: ").append(toIndentedString(retryable)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
+    static {
+        schemas.put("ParameterError", ParameterError.class);
+        schemas.put("GenericError", GenericError.class);
+    }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    return o == null ? "null" : o.toString().replace("\n", "\n    ");
-  }
+    @Override
+    public Map<String, Class<?>> getSchemas() {
+        return SearchLines400Response.schemas;
+    }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("error", "name", "retryable"));
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("error", "name", "retryable"));
-  }
-
-  /**
-   * Validates the JSON Element and throws an exception if issues found
-   *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to SearchLines400Response
-   */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!SearchLines400Response.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in SearchLines400Response is not found in the empty JSON string", SearchLines400Response.openapiRequiredFields.toString()));
+    /**
+     * Set the instance that matches the anyOf child schema, check
+     * the instance parameter is valid against the anyOf child schemas:
+     * GenericError, ParameterError
+     *
+     * It could be an instance of the 'anyOf' schemas.
+     */
+    @Override
+    public void setActualInstance(Object instance) {
+        if (instance instanceof ParameterError) {
+            super.setActualInstance(instance);
+            return;
         }
-      }
 
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!SearchLines400Response.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `SearchLines400Response` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (instance instanceof GenericError) {
+            super.setActualInstance(instance);
+            return;
         }
-      }
 
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : SearchLines400Response.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("error").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
-      }
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-  }
+        throw new RuntimeException("Invalid instance type. Must be GenericError, ParameterError");
+    }
 
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
+    /**
+     * Get the actual instance, which can be the following:
+     * GenericError, ParameterError
+     *
+     * @return The actual instance (GenericError, ParameterError)
+     */
     @SuppressWarnings("unchecked")
     @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!SearchLines400Response.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'SearchLines400Response' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<SearchLines400Response> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(SearchLines400Response.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<SearchLines400Response>() {
-           @Override
-           public void write(JsonWriter out, SearchLines400Response value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public SearchLines400Response read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
+    public Object getActualInstance() {
+        return super.getActualInstance();
     }
-  }
 
-  /**
-   * Create an instance of SearchLines400Response given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of SearchLines400Response
-   * @throws IOException if the JSON string is invalid with respect to SearchLines400Response
-   */
-  public static SearchLines400Response fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, SearchLines400Response.class);
-  }
+    /**
+     * Get the actual instance of `ParameterError`. If the actual instance is not `ParameterError`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `ParameterError`
+     * @throws ClassCastException if the instance is not `ParameterError`
+     */
+    public ParameterError getParameterError() throws ClassCastException {
+        return (ParameterError)super.getActualInstance();
+    }
 
-  /**
-   * Convert an instance of SearchLines400Response to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
-  }
+    /**
+     * Get the actual instance of `GenericError`. If the actual instance is not `GenericError`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `GenericError`
+     * @throws ClassCastException if the instance is not `GenericError`
+     */
+    public GenericError getGenericError() throws ClassCastException {
+        return (GenericError)super.getActualInstance();
+    }
+
+    /**
+     * Validates the JSON Element and throws an exception if issues found
+     *
+     * @param jsonElement JSON Element
+     * @throws IOException if the JSON Element is invalid with respect to SearchLines400Response
+     */
+    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
+        // validate anyOf schemas one by one
+        ArrayList<String> errorMessages = new ArrayList<>();
+        // validate the json string with ParameterError
+        try {
+            ParameterError.validateJsonElement(jsonElement);
+            return;
+        } catch (Exception e) {
+            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for ParameterError failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        // validate the json string with GenericError
+        try {
+            GenericError.validateJsonElement(jsonElement);
+            return;
+        } catch (Exception e) {
+            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for GenericError failed with `%s`.", e.getMessage()));
+            // continue to the next one
+        }
+        throw new IOException(String.format(java.util.Locale.ROOT, "The JSON string is invalid for SearchLines400Response with anyOf schemas: GenericError, ParameterError. no class match the result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
+    }
+
+    /**
+     * Create an instance of SearchLines400Response given an JSON string
+     *
+     * @param jsonString JSON string
+     * @return An instance of SearchLines400Response
+     * @throws IOException if the JSON string is invalid with respect to SearchLines400Response
+     */
+    public static SearchLines400Response fromJson(String jsonString) throws IOException {
+        return JSON.getGson().fromJson(jsonString, SearchLines400Response.class);
+    }
+
+    /**
+     * Convert an instance of SearchLines400Response to an JSON string
+     *
+     * @return JSON string
+     */
+    public String toJson() {
+        return JSON.getGson().toJson(this);
+    }
 }
 

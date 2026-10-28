@@ -21,8 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import oden.model.Interval;
-import oden.model.ScrapYieldData;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -48,58 +46,82 @@ import java.util.Set;
 import oden.JSON;
 
 /**
- * V2ScrapYieldSetPostRequest
+ * ParameterError
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-07-08T02:35:24.898947759Z[Etc/UTC]", comments = "Generator version: 7.23.0")
-public class V2ScrapYieldSetPostRequest {
-  public static final String SERIALIZED_NAME_DATA = "data";
-  @SerializedName(SERIALIZED_NAME_DATA)
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-28T19:38:57.436439102Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+public class ParameterError {
+  public static final String SERIALIZED_NAME_ERROR = "error";
+  @SerializedName(SERIALIZED_NAME_ERROR)
   @javax.annotation.Nonnull
-  private ScrapYieldData data;
+  private String error;
 
-  public static final String SERIALIZED_NAME_INTERVAL = "interval";
-  @SerializedName(SERIALIZED_NAME_INTERVAL)
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
   @javax.annotation.Nonnull
-  private Interval interval;
+  private String name;
 
-  public V2ScrapYieldSetPostRequest() {
+  public static final String SERIALIZED_NAME_RETRYABLE = "retryable";
+  @SerializedName(SERIALIZED_NAME_RETRYABLE)
+  @javax.annotation.Nonnull
+  private Boolean retryable;
+
+  public ParameterError() {
   }
 
-  public V2ScrapYieldSetPostRequest data(@javax.annotation.Nonnull ScrapYieldData data) {
-    this.data = data;
+  public ParameterError error(@javax.annotation.Nonnull String error) {
+    this.error = error;
     return this;
   }
 
   /**
-   * Get data
-   * @return data
+   * Get error
+   * @return error
    */
   @javax.annotation.Nonnull
-  public ScrapYieldData getData() {
-    return data;
+  public String getError() {
+    return error;
   }
 
-  public void setData(@javax.annotation.Nonnull ScrapYieldData data) {
-    this.data = data;
+  public void setError(@javax.annotation.Nonnull String error) {
+    this.error = error;
   }
 
 
-  public V2ScrapYieldSetPostRequest interval(@javax.annotation.Nonnull Interval interval) {
-    this.interval = interval;
+  public ParameterError name(@javax.annotation.Nonnull String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get interval
-   * @return interval
+   * Get name
+   * @return name
    */
   @javax.annotation.Nonnull
-  public Interval getInterval() {
-    return interval;
+  public String getName() {
+    return name;
   }
 
-  public void setInterval(@javax.annotation.Nonnull Interval interval) {
-    this.interval = interval;
+  public void setName(@javax.annotation.Nonnull String name) {
+    this.name = name;
+  }
+
+
+  public ParameterError retryable(@javax.annotation.Nonnull Boolean retryable) {
+    this.retryable = retryable;
+    return this;
+  }
+
+  /**
+   * Get retryable
+   * @return retryable
+   */
+  @javax.annotation.Nonnull
+  public Boolean getRetryable() {
+    return retryable;
+  }
+
+  public void setRetryable(@javax.annotation.Nonnull Boolean retryable) {
+    this.retryable = retryable;
   }
 
 
@@ -112,22 +134,24 @@ public class V2ScrapYieldSetPostRequest {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest = (V2ScrapYieldSetPostRequest) o;
-    return Objects.equals(this.data, v2ScrapYieldSetPostRequest.data) &&
-        Objects.equals(this.interval, v2ScrapYieldSetPostRequest.interval);
+    ParameterError parameterError = (ParameterError) o;
+    return Objects.equals(this.error, parameterError.error) &&
+        Objects.equals(this.name, parameterError.name) &&
+        Objects.equals(this.retryable, parameterError.retryable);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, interval);
+    return Objects.hash(error, name, retryable);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class V2ScrapYieldSetPostRequest {\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
-    sb.append("    interval: ").append(toIndentedString(interval)).append("\n");
+    sb.append("class ParameterError {\n");
+    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    retryable: ").append(toIndentedString(retryable)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -146,66 +170,68 @@ public class V2ScrapYieldSetPostRequest {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("data", "interval"));
+    openapiFields = new HashSet<String>(Arrays.asList("error", "name", "retryable"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("data", "interval"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("error", "name", "retryable"));
   }
 
   /**
    * Validates the JSON Element and throws an exception if issues found
    *
    * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to V2ScrapYieldSetPostRequest
+   * @throws IOException if the JSON Element is invalid with respect to ParameterError
    */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!V2ScrapYieldSetPostRequest.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in V2ScrapYieldSetPostRequest is not found in the empty JSON string", V2ScrapYieldSetPostRequest.openapiRequiredFields.toString()));
+        if (!ParameterError.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field(s) %s in ParameterError is not found in the empty JSON string", ParameterError.openapiRequiredFields.toString()));
         }
       }
 
       Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
       // check to see if the JSON string contains additional fields
       for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!V2ScrapYieldSetPostRequest.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `V2ScrapYieldSetPostRequest` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
+        if (!ParameterError.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The field `%s` in the JSON string is not defined in the `ParameterError` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : V2ScrapYieldSetPostRequest.openapiRequiredFields) {
+      for (String requiredField : ParameterError.openapiRequiredFields) {
         if (jsonElement.getAsJsonObject().get(requiredField) == null) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `data`
-      ScrapYieldData.validateJsonElement(jsonObj.get("data"));
-      // validate the required field `interval`
-      Interval.validateJsonElement(jsonObj.get("interval"));
+      if (!jsonObj.get("error").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `error` to be a primitive type in the JSON string but got `%s`", jsonObj.get("error").toString()));
+      }
+      if (!jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!V2ScrapYieldSetPostRequest.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'V2ScrapYieldSetPostRequest' and its subtypes
+       if (!ParameterError.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'ParameterError' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<V2ScrapYieldSetPostRequest> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(V2ScrapYieldSetPostRequest.class));
+       final TypeAdapter<ParameterError> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(ParameterError.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<V2ScrapYieldSetPostRequest>() {
+       return (TypeAdapter<T>) new TypeAdapter<ParameterError>() {
            @Override
-           public void write(JsonWriter out, V2ScrapYieldSetPostRequest value) throws IOException {
+           public void write(JsonWriter out, ParameterError value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public V2ScrapYieldSetPostRequest read(JsonReader in) throws IOException {
+           public ParameterError read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -216,18 +242,18 @@ public class V2ScrapYieldSetPostRequest {
   }
 
   /**
-   * Create an instance of V2ScrapYieldSetPostRequest given an JSON string
+   * Create an instance of ParameterError given an JSON string
    *
    * @param jsonString JSON string
-   * @return An instance of V2ScrapYieldSetPostRequest
-   * @throws IOException if the JSON string is invalid with respect to V2ScrapYieldSetPostRequest
+   * @return An instance of ParameterError
+   * @throws IOException if the JSON string is invalid with respect to ParameterError
    */
-  public static V2ScrapYieldSetPostRequest fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, V2ScrapYieldSetPostRequest.class);
+  public static ParameterError fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, ParameterError.class);
   }
 
   /**
-   * Convert an instance of V2ScrapYieldSetPostRequest to an JSON string
+   * Convert an instance of ParameterError to an JSON string
    *
    * @return JSON string
    */

@@ -15,11 +15,11 @@ package oden.api;
 
 import oden.ApiException;
 import oden.model.GenericError;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
-import oden.model.V2ScrapYieldSearchPostRequest;
-import oden.model.V2ScrapYieldSetPostRequest;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
+import oden.model.SearchScrapYieldRequest;
+import oden.model.SetScrapYieldRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -37,39 +37,45 @@ public class ScrapYieldDataApiTest {
     private final ScrapYieldDataApi api = new ScrapYieldDataApi();
 
     /**
+     * Delete a scrap/yield record
+     *
      * Deletes Scrap Yield record by ID and line 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ScrapYieldDeletePostTest() throws ApiException {
-        V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest = null;
-        api.v2ScrapYieldDeletePost(v2ScrapYieldSearchPostRequest);
+    public void deleteScrapYieldTest() throws ApiException {
+        SearchScrapYieldRequest searchScrapYieldRequest = null;
+        api.deleteScrapYield(searchScrapYieldRequest);
         // TODO: test validations
     }
 
     /**
+     * Search scrap/yield records
+     *
      * Searches for scrap/yield records for a given Interval 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ScrapYieldSearchPostTest() throws ApiException {
-        V2ScrapYieldSearchPostRequest v2ScrapYieldSearchPostRequest = null;
-        api.v2ScrapYieldSearchPost(v2ScrapYieldSearchPostRequest);
+    public void searchScrapYieldTest() throws ApiException {
+        SearchScrapYieldRequest searchScrapYieldRequest = null;
+        api.searchScrapYield(searchScrapYieldRequest);
         // TODO: test validations
     }
 
     /**
+     * Create or update a scrap/yield record
+     *
      * Uploads scrap or yield raw data.  Notes:  - If &#x60;id&#x60; is provided the existing Scrap/Yield record will be updated.  - If &#x60;id&#x60; is omitted a new Scrap/Yield record will be created.  - The scrap yield for an interval is an aggregate of all scrap yield raw data records associated with that interval     - Therefore, multiple scrap yield records can exist for a single interval, each contributing to the \&quot;aggregate\&quot; (i.e. sum total) scrap/yield of that interval  - Changing an aggregate can be done by either adding another record with an offset, or updating an existing record.     - Example: If you have 3 scrap records in an interval: 50 50 50 &#x3D; 150 and want to make the aggregate 100 for a given interval, either update one of the existing scrap records from 50 -&gt; 0, or add a new one with value -50  - Duplicate keys should be avoided, see Schema docs above for details. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2ScrapYieldSetPostTest() throws ApiException {
-        V2ScrapYieldSetPostRequest v2ScrapYieldSetPostRequest = null;
+    public void setScrapYieldTest() throws ApiException {
+        SetScrapYieldRequest setScrapYieldRequest = null;
         String pattern = null;
-        api.v2ScrapYieldSetPost(v2ScrapYieldSetPostRequest, pattern);
+        api.setScrapYield(setScrapYieldRequest, pattern);
         // TODO: test validations
     }
 

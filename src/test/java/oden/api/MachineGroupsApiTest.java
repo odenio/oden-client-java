@@ -17,9 +17,9 @@ import oden.ApiException;
 import oden.model.Factory;
 import oden.model.GenericError;
 import oden.model.Line;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -37,26 +37,30 @@ public class MachineGroupsApiTest {
     private final MachineGroupsApi api = new MachineGroupsApi();
 
     /**
+     * Search factories
+     *
      * Search for a specific Factory by a unique indentifier: - &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  OR  - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  Search for all factories: - &#x60;match: all&#x60; 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2FactorySearchPostTest() throws ApiException {
+    public void searchFactoriesTest() throws ApiException {
         Factory factory = null;
-        List<Factory> response = api.v2FactorySearchPost(factory);
+        List<Factory> response = api.searchFactories(factory);
         // TODO: test validations
     }
 
     /**
+     * Search production lines
+     *
      * Search for specific Line by any Line identifier. Either: - &#x60;id&#x60; - &#x60;match: unique&#x60; or omit  OR - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - line &#x60;name&#x60; - &#x60;match: unique&#x60; or omit  Search for all Lines for a given Factory: - &#x60;factory&#x60;   - &#x60;name&#x60; or &#x60;id&#x60; - &#x60;match: all&#x60; 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2LineSearchPostTest() throws ApiException {
+    public void searchLinesTest() throws ApiException {
         Line line = null;
-        List<Line> response = api.v2LineSearchPost(line);
+        List<Line> response = api.searchLines(line);
         // TODO: test validations
     }
 

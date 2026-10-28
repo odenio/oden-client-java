@@ -15,10 +15,10 @@ package oden.api;
 
 import oden.ApiException;
 import oden.model.GenericError;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import oden.model.Target;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -36,26 +36,30 @@ public class TargetsApiTest {
     private final TargetsApi api = new TargetsApi();
 
     /**
+     * Search metric targets
+     *
      * Search for a Target by &#x60;line&#x60;, &#x60;metric_group&#x60;, and &#x60;product&#x60;. For each of these inputs, any of their unique indentifiers (as described in their &#x60;search&#x60; endpoint) may be used. See examples. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2TargetSearchPostTest() throws ApiException {
+    public void searchTargetsTest() throws ApiException {
         Target target = null;
-        List<Target> response = api.v2TargetSearchPost(target);
+        List<Target> response = api.searchTargets(target);
         // TODO: test validations
     }
 
     /**
+     * Create or update a metric target
+     *
      * Create or update a Target.  First the endpoint will search for a Target by &#x60;metric_group&#x60;, &#x60;product&#x60;, and &#x60;line&#x60;: - If the target does not exist a new target is created. - If the product or its mapping to the given line does not exist, they will be created. - If a target exists but with different parameters, it will be updated. - If the target exists with all the same parameters nothing is done. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2TargetSetPostTest() throws ApiException {
+    public void setTargetTest() throws ApiException {
         Target target = null;
-        Target response = api.v2TargetSetPost(target);
+        Target response = api.setTarget(target);
         // TODO: test validations
     }
 

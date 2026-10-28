@@ -14,17 +14,18 @@
 package oden.api;
 
 import oden.ApiException;
+import oden.model.BulkDeleteIntervals200Response;
+import oden.model.BulkUpdateIntervals200Response;
 import oden.model.GenericError;
 import oden.model.Interval;
 import oden.model.IntervalBulkCreate;
 import oden.model.IntervalBulkDelete;
 import oden.model.IntervalBulkUpdate;
 import oden.model.IntervalType;
-import oden.model.V2IntervalsDeletePost200Response;
-import oden.model.V2IntervalsUpdatePost200Response;
-import oden.model.V2LineSearchPost400Response;
-import oden.model.V2LineSearchPost409Response;
-import oden.model.V2LineSearchPost500Response;
+import oden.model.IntervalTypeSet;
+import oden.model.SearchLines400Response;
+import oden.model.SearchLines409Response;
+import oden.model.SearchLines500Response;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -42,98 +43,142 @@ public class IntervalsApiTest {
     private final IntervalsApi api = new IntervalsApi();
 
     /**
-     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
+     * Delete intervals in a time range
      *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2IntervalDeletePostTest() throws ApiException {
-        Interval interval = null;
-        List<Interval> response = api.v2IntervalDeletePost(interval);
-        // TODO: test validations
-    }
-
-    /**
-     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2IntervalSearchPostTest() throws ApiException {
-        Interval interval = null;
-        List<Interval> response = api.v2IntervalSearchPost(interval);
-        // TODO: test validations
-    }
-
-    /**
-     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2IntervalSetPostTest() throws ApiException {
-        Interval interval = null;
-        List<Interval> response = api.v2IntervalSetPost(interval);
-        // TODO: test validations
-    }
-
-    /**
-     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2IntervalTypeSearchPostTest() throws ApiException {
-        IntervalType intervalType = null;
-        List<IntervalType> response = api.v2IntervalTypeSearchPost(intervalType);
-        // TODO: test validations
-    }
-
-    /**
-     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void v2IntervalUpdatePostTest() throws ApiException {
-        Interval interval = null;
-        List<Interval> response = api.v2IntervalUpdatePost(interval);
-        // TODO: test validations
-    }
-
-    /**
      * Delete a group of intervals by a single &#x60;type&#x60; and a single &#x60;line&#x60;, between &#x60;start_time&#x60; and &#x60;end_time&#x60;. Returns a list of intervals that were not deleted, and the number of intervals deleted.  Limitations: - Cannot exceed 15,000 intervals per request, or 30 days worth of data. - Currently does not support \&quot;batch\&quot; or \&quot;run\&quot; interval types. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2IntervalsDeletePostTest() throws ApiException {
+    public void bulkDeleteIntervalsTest() throws ApiException {
         IntervalBulkDelete intervalBulkDelete = null;
-        V2IntervalsDeletePost200Response response = api.v2IntervalsDeletePost(intervalBulkDelete);
+        BulkDeleteIntervals200Response response = api.bulkDeleteIntervals(intervalBulkDelete);
         // TODO: test validations
     }
 
     /**
+     * Create a set of intervals
+     *
      * Create (Does not update) a group of custom intervals, for the same &#x60;type&#x60; and &#x60;line&#x60;. Line and type do not need to be included in each individual interval, just once at the top level.  Limitations: - Cannot excees 2500 intervals per request. - Will not write over other intervals - Does not support \&quot;batch\&quot;, \&quot;run\&quot;, or \&quot;state\&quot; interval types. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2IntervalsSetPostTest() throws ApiException {
+    public void bulkSetIntervalsTest() throws ApiException {
         IntervalBulkCreate intervalBulkCreate = null;
-        List<String> response = api.v2IntervalsSetPost(intervalBulkCreate);
+        List<String> response = api.bulkSetIntervals(intervalBulkCreate);
         // TODO: test validations
     }
 
     /**
+     * Update a set of intervals
+     *
      * Update multiple existing intervals. This endpoint only updates intervals and will not create new ones.  Each interval in the &#x60;intervals&#x60; array must include an &#x60;id&#x60; that references an existing interval.  Updatable fields for each interval: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  The endpoint will attempt to update all intervals and return information about successes and failures: - Successfully updated intervals are returned in the response - Failed intervals are listed with their IDs and error reasons  Limitations: - Cannot exceed 2500 intervals per request - All intervals must be of the same &#x60;type&#x60; and on the same &#x60;line&#x60;  **Note:** Interval IDs must be obtained from either: - The response when creating intervals via &#x60;/v2/interval/set&#x60; or &#x60;/v2/intervals/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void v2IntervalsUpdatePostTest() throws ApiException {
+    public void bulkUpdateIntervalsTest() throws ApiException {
         IntervalBulkUpdate intervalBulkUpdate = null;
-        V2IntervalsUpdatePost200Response response = api.v2IntervalsUpdatePost(intervalBulkUpdate);
+        BulkUpdateIntervals200Response response = api.bulkUpdateIntervals(intervalBulkUpdate);
+        // TODO: test validations
+    }
+
+    /**
+     * Delete an interval
+     *
+     * Delete an interval by &#x60;type&#x60;, &#x60;line&#x60;, and &#x60;id&#x60;  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60;  The examples below use placeholder IDs - replace with actual IDs from your system. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteIntervalTest() throws ApiException {
+        Interval interval = null;
+        List<Interval> response = api.deleteInterval(interval);
+        // TODO: test validations
+    }
+
+    /**
+     * Delete a custom interval type
+     *
+     * Delete an existing custom Interval Type. &#x60;id&#x60; is required. Built-in types (RUN, BATCH, STATE) cannot be deleted. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteIntervalTypeTest() throws ApiException {
+        IntervalType intervalType = null;
+        IntervalType response = api.deleteIntervalType(intervalType);
+        // TODO: test validations
+    }
+
+    /**
+     * Search interval types
+     *
+     * Search for Interval Types by &#x60;name&#x60;, &#x60;id&#x60;, or just &#x60;match: all&#x60; to return all Interval Types associated with the your organization. Basic Interval Types -- &#x60;RUN&#x60;, &#x60;BATCH&#x60;, and &#x60;STATE&#x60; -- are dedicated interval types that come out-of-the-box with Oden. Custom Interval Types may be created by users. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchIntervalTypesTest() throws ApiException {
+        IntervalType intervalType = null;
+        List<IntervalType> response = api.searchIntervalTypes(intervalType);
+        // TODO: test validations
+    }
+
+    /**
+     * Search intervals on a line
+     *
+     * Searches for intervals by &#x60;type&#x60;, &#x60;line&#x60; and other optional parameters:  - &#x60;id&#x60; (for a specific Interval) - &#x60;match: unique&#x60; or omit  OR  - &#x60;match : last&#x60; for the most recent Interval of the given type on the given line  OR  - &#x60;start_time&#x60; and &#x60;end_time&#x60; (for a range of Intervals over a period of time) - &#x60;match: all&#x60; for more than one result  OR  - match all intervals for all lines in a given factory  AND/OR  - &#x60;name&#x60; (only for Intervals with a matching name) 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchIntervalsTest() throws ApiException {
+        Interval interval = null;
+        List<Interval> response = api.searchIntervals(interval);
+        // TODO: test validations
+    }
+
+    /**
+     * Create or update an interval
+     *
+     * Create or update an Interval.  Must include &#x60;line&#x60; and &#x60;type&#x60;. &#x60;match&#x60; must be omitted, &#x60;unique&#x60; or &#x60;last&#x60;   - If &#x60;id&#x60; is not supplied, a new Interval will be created.   - If &#x60;id&#x60; is supplied, existing Interval will be updated. This interval&#39;s start time can be modified using &#x60;start_time&#x60; field.  To update a specific interval supply the &#x60;id&#x60; of that interval.  If the interval exists with all the same parameters nothing is done.  To update the most recent Interval of a given &#x60;type&#x60; on a &#x60;line&#x60; one may use &#x60;match: last&#x60; and omit &#x60;id&#x60;  For &#x60;RUN&#x60; type: if &#x60;product&#x60; and/or &#x60;product_mapping&#x60; does not exist a new one will be created. Further a &#x60;target&#x60; may be set by adding a &#x60;target&#x60; to the metadata field. The &#x60;line&#x60; and &#x60;product&#x60; for this target will be the same as the interval.  Please see examples for more specific information. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void setIntervalTest() throws ApiException {
+        Interval interval = null;
+        List<Interval> response = api.setInterval(interval);
+        // TODO: test validations
+    }
+
+    /**
+     * Create or update a custom interval type
+     *
+     * **Create** (no &#x60;id&#x60; in the body): send &#x60;name&#x60; (required) and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60;.  **Update** (with &#x60;id&#x60;): send the interval type’s &#x60;id&#x60; and optional &#x60;metadata_schema&#x60; / &#x60;tags&#x60; only. Do not send &#x60;name&#x60; for updates; including &#x60;name&#x60; returns 400. Renames are not supported.  **Patch (update only)**: &#x60;metadata_schema&#x60; — if the key is missing, the existing value is kept; if present, it replaces. &#x60;tags&#x60; — if the key is missing, tags are unchanged; &#x60;null&#x60; leaves tags unchanged; &#x60;[]&#x60; clears tags; a non-empty array replaces.  **Built-in types (RUN, BATCH, STATE) cannot be created, set, or deleted.** 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void setIntervalTypeTest() throws ApiException {
+        IntervalTypeSet intervalTypeSet = null;
+        IntervalType response = api.setIntervalType(intervalTypeSet);
+        // TODO: test validations
+    }
+
+    /**
+     * Update an interval
+     *
+     * Update an existing Interval. This endpoint only updates intervals and will not create new ones.  Must include &#x60;line&#x60;, &#x60;type&#x60;, and &#x60;id&#x60;. The &#x60;id&#x60; must reference an existing interval.  This interval&#39;s properties can be modified using the following fields: - &#x60;name&#x60;: Update the interval name - &#x60;start_time&#x60;: Modify the start time - &#x60;end_time&#x60;: Modify the end time - &#x60;metadata&#x60;: Update metadata (product, target, category, reason, etc.)  If the interval does not exist, a 404 error will be returned.  **Note:** The &#x60;id&#x60; must be obtained from either: - The response when creating an interval via &#x60;/v2/interval/set&#x60; - Searching for intervals via &#x60;/v2/interval/search&#x60; 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void updateIntervalTest() throws ApiException {
+        Interval interval = null;
+        List<Interval> response = api.updateInterval(interval);
         // TODO: test validations
     }
 
