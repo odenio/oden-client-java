@@ -195,6 +195,9 @@ paths:
       summary: Search production lines
       tags:
       - Machine Groups
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -285,6 +288,9 @@ paths:
       summary: Search factories
       tags:
       - Machine Groups
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -367,6 +373,9 @@ paths:
       summary: Search metric groups
       tags:
       - Metric Groups
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -436,6 +445,9 @@ paths:
       summary: Search products
       tags:
       - Products
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -495,6 +507,11 @@ paths:
       summary: Create or update a product
       tags:
       - Products
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -566,6 +583,11 @@ paths:
       summary: Delete a product
       tags:
       - Products
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -648,6 +670,9 @@ paths:
       summary: Search product-to-line mappings
       tags:
       - Product Mappings
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -721,6 +746,11 @@ paths:
       summary: Map a product to a line
       tags:
       - Product Mappings
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: false
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -791,6 +821,9 @@ paths:
       summary: Search product attributes
       tags:
       - Product Attributes
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -872,6 +905,11 @@ paths:
       summary: Create or update a product attribute
       tags:
       - Product Attributes
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -949,6 +987,9 @@ paths:
       summary: Search metric targets
       tags:
       - Targets
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1048,6 +1089,11 @@ paths:
       summary: Create or update a metric target
       tags:
       - Targets
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1165,6 +1211,9 @@ paths:
       summary: Search intervals on a line
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1362,6 +1411,11 @@ paths:
       summary: Create or update an interval
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1503,6 +1557,11 @@ paths:
       summary: Update an interval
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1608,6 +1667,11 @@ paths:
       summary: Delete an interval
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1697,6 +1761,11 @@ paths:
       summary: Create a set of intervals
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1815,6 +1884,11 @@ paths:
       summary: Update a set of intervals
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1895,6 +1969,11 @@ paths:
       summary: Delete intervals in a time range
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -1966,6 +2045,9 @@ paths:
       summary: Search interval types
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2041,6 +2123,11 @@ paths:
       summary: Create or update a custom interval type
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2103,6 +2190,11 @@ paths:
       summary: Delete a custom interval type
       tags:
       - Intervals
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2171,6 +2263,9 @@ paths:
       summary: Search state categories
       tags:
       - States
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2253,6 +2348,11 @@ paths:
       summary: Create or update a state category
       tags:
       - States
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2330,6 +2430,9 @@ paths:
       summary: Search state reasons on one or more lines
       tags:
       - States
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2416,6 +2519,11 @@ paths:
       summary: Create a state reason on one or more lines
       tags:
       - States
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2490,6 +2598,9 @@ paths:
       summary: Search scrap/yield records
       tags:
       - Scrap/Yield Data
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2616,6 +2727,11 @@ paths:
       summary: Create or update a scrap/yield record
       tags:
       - Scrap/Yield Data
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2687,6 +2803,11 @@ paths:
       summary: Delete a scrap/yield record
       tags:
       - Scrap/Yield Data
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2770,6 +2891,11 @@ paths:
       summary: Create or update a quality test result
       tags:
       - Quality Test
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2854,6 +2980,9 @@ paths:
       summary: Search quality tests
       tags:
       - Quality Test
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2928,6 +3057,11 @@ paths:
       summary: Delete a quality test
       tags:
       - Quality Test
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -2993,6 +3127,11 @@ paths:
       summary: Delete multiple quality tests
       tags:
       - Quality Test
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -3061,6 +3200,9 @@ paths:
       summary: Search quality schemas for a factory
       tags:
       - Quality Test
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -3146,6 +3288,9 @@ paths:
       summary: Run an OQL query
       tags:
       - OQL
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -3222,6 +3367,9 @@ paths:
       summary: Execute a dashboard
       tags:
       - Dashboards
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -3311,6 +3459,9 @@ paths:
       summary: Search maintenance work orders
       tags:
       - Maintenance Work Orders
+      x-mcp-annotations:
+        readOnlyHint: true
+        openWorldHint: false
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -3408,6 +3559,11 @@ paths:
       summary: Create or update a maintenance work order
       tags:
       - Maintenance Work Orders
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: false
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -3488,6 +3644,11 @@ paths:
       summary: Delete a maintenance work order
       tags:
       - Maintenance Work Orders
+      x-mcp-annotations:
+        readOnlyHint: false
+        destructiveHint: true
+        idempotentHint: true
+        openWorldHint: true
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -5075,4 +5236,38 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-mcp-annotation-presets:
+  read-only:
+    readOnlyHint: true
+    openWorldHint: false
+  additive-write:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: false
+  overwrite:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+    openWorldHint: false
+  overwrite-or-create:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: false
+    openWorldHint: false
+  overwrite-event:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: true
+    openWorldHint: true
+  overwrite-or-create-event:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: false
+    openWorldHint: true
+  cascading-delete-event:
+    readOnlyHint: false
+    destructiveHint: true
+    idempotentHint: false
+    openWorldHint: true
 

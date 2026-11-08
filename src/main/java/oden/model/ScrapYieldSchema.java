@@ -51,7 +51,7 @@ import oden.JSON;
 /**
  * Scrap yield schema represents a factory&#39;s scrap/yield data ingestion configuration. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-28T19:38:57.436439102Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-08T04:37:28.473198300Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class ScrapYieldSchema {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

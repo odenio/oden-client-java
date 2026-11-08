@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * An object representing a metric group; a grouping of like metrics across lines, factories.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-10-28T19:38:57.436439102Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-08T04:37:28.473198300Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class MetricGroup {
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
