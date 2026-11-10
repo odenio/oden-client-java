@@ -13,7 +13,7 @@ All URIs are relative to *https://api.oden.app*
 
 Run an OQL query
 
-Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
+Run an OQL (Oden Query Language) query.  A 400 means the query itself is wrong: it does not parse, uses an unknown macro or column, has invalid settings, or exceeds the complexity budget. The &#x60;error&#x60; field says why; fix the query rather than retrying it. A 403 means the caller may not query the lines it touches, and a 412 means the data the query needs is not available yet.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
 
 ### Example
 ```java
@@ -81,6 +81,7 @@ null (empty response body)
 | **403** | User has provided valid credentials but is not authorized to access the entity  |  -  |
 | **404** | Entity not found |  -  |
 | **409** | A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  |  -  |
+| **412** | The request is valid, but the data it needs is not available yet.  |  -  |
 | **429** | Too many requests |  -  |
 | **500** | An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  |  -  |
 

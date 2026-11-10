@@ -93,6 +93,7 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 412 </td><td> The request is valid, but the data it needs is not available yet.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
      </table>
@@ -159,7 +160,7 @@ public class OqlApi {
 
     /**
      * Run an OQL query
-     * Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
+     * Run an OQL (Oden Query Language) query.  A 400 means the query itself is wrong: it does not parse, uses an unknown macro or column, has invalid settings, or exceeds the complexity budget. The &#x60;error&#x60; field says why; fix the query rather than retrying it. A 403 means the caller may not query the lines it touches, and a 412 means the data the query needs is not available yet.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
      * @param oqLQuery  (required)
      * @param format Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;.  (optional, default to json)
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -173,6 +174,7 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 412 </td><td> The request is valid, but the data it needs is not available yet.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
      </table>
@@ -183,7 +185,7 @@ public class OqlApi {
 
     /**
      * Run an OQL query
-     * Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
+     * Run an OQL (Oden Query Language) query.  A 400 means the query itself is wrong: it does not parse, uses an unknown macro or column, has invalid settings, or exceeds the complexity budget. The &#x60;error&#x60; field says why; fix the query rather than retrying it. A 403 means the caller may not query the lines it touches, and a 412 means the data the query needs is not available yet.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
      * @param oqLQuery  (required)
      * @param format Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;.  (optional, default to json)
      * @return ApiResponse&lt;Void&gt;
@@ -198,6 +200,7 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 412 </td><td> The request is valid, but the data it needs is not available yet.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
      </table>
@@ -209,7 +212,7 @@ public class OqlApi {
 
     /**
      * Run an OQL query (asynchronously)
-     * Run an OQL (Oden Query Language) query.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
+     * Run an OQL (Oden Query Language) query.  A 400 means the query itself is wrong: it does not parse, uses an unknown macro or column, has invalid settings, or exceeds the complexity budget. The &#x60;error&#x60; field says why; fix the query rather than retrying it. A 403 means the caller may not query the lines it touches, and a 412 means the data the query needs is not available yet.  For reference on writing OQL queries, see:  [https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql](https://platform.oden.app/knowledge/how-do-i-write-queries-in-oden-query-language-oql) 
      * @param oqLQuery  (required)
      * @param format Format of the response. Can be &#x60;json&#x60;, &#x60;jsonextended&#x60; or &#x60;csv&#x60;. If unspecified, defaults to &#x60;jsonextended&#x60;.  (optional, default to json)
      * @param _callback The callback to be executed when the API call finishes
@@ -225,6 +228,7 @@ public class OqlApi {
         <tr><td> 403 </td><td> User has provided valid credentials but is not authorized to access the entity  </td><td>  -  </td></tr>
         <tr><td> 404 </td><td> Entity not found </td><td>  -  </td></tr>
         <tr><td> 409 </td><td> A {match: \&quot;unique\&quot;} was requested, but multiple entities matched the search parameters.  </td><td>  -  </td></tr>
+        <tr><td> 412 </td><td> The request is valid, but the data it needs is not available yet.  </td><td>  -  </td></tr>
         <tr><td> 429 </td><td> Too many requests </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> An internal server error has occurred. If reporting the error to Oden, include the ID returned in this response to aid in debugging.  </td><td>  -  </td></tr>
      </table>
