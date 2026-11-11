@@ -52,7 +52,7 @@ import oden.JSON;
 /**
  * Ensure a state reason exists under &#x60;category&#x60; on every line in &#x60;lines&#x60;.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-10T18:25:11.366185201Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-11T03:43:26.765109921Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class StateReasonSet {
   public static final String SERIALIZED_NAME_LINES = "lines";
   @SerializedName(SERIALIZED_NAME_LINES)

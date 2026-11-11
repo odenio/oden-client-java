@@ -50,7 +50,7 @@ import oden.JSON;
 /**
  * A schema for quality tests. Note: the id is currently implemented as a string, but that string should be a stringified integer. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-10T18:25:11.366185201Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-11T03:43:26.765109921Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class QualitySchema {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

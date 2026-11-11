@@ -51,7 +51,7 @@ import oden.JSON;
 /**
  * An entity representing a single line of production.
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-10T18:25:11.366185201Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-11T03:43:26.765109921Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class Line {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)

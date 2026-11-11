@@ -49,7 +49,7 @@ import oden.JSON;
 /**
  * Time window applied to every module. Either supply an absolute window (&#x60;start&#x60; and &#x60;end&#x60;) OR a relative window (&#x60;anchor&#x60; and &#x60;offset&#x60;, optionally with &#x60;timezone&#x60;), not both. 
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-10T18:25:11.366185201Z[Etc/UTC]", comments = "Generator version: 7.23.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-11-11T03:43:26.765109921Z[Etc/UTC]", comments = "Generator version: 7.23.0")
 public class DashboardExecuteRange {
   public static final String SERIALIZED_NAME_START = "start";
   @SerializedName(SERIALIZED_NAME_START)
